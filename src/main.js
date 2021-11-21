@@ -10,6 +10,7 @@ import store from "@/store";
 //Imports Unicon
 import Unicon from 'vue-unicons/dist/vue-unicons-vue2.es'
 import * as uc from 'vue-unicons/dist/icons'
+
 const objArray = [];
 Object.keys(uc).forEach(key => objArray.push(
     uc[key]
@@ -21,6 +22,10 @@ Vue.use(Unicon)
 Vue.config.productionTip = false
 
 Vue.mixin({
+    props: {
+        color: String,
+    },
+
     methods: {
         processColor(color) {
             let colorOut = '';
@@ -31,7 +36,7 @@ Vue.mixin({
             }
             if (!colorOut) {
                 return color
-            }else {
+            } else {
                 return colorOut
             }
         },
@@ -55,7 +60,16 @@ Vue.mixin({
             return (yiq >= 128) ? 'black' : 'white';
 
         }
-    }
+    },
+    computed: {
+        themeClass() {
+            return {'theme--dark': this.$store.state.theme.dark, 'theme--light': !this.$store.state.theme.dark}
+        },
+        stylesObject() {
+            return {color: this.processColor(this.color)}
+        }
+    },
+
 })
 
 new Vue({

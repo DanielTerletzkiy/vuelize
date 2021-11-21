@@ -1,6 +1,6 @@
 <template>
-  <div class="d-checkbox" @click="$emit('input', value = !value)">
-    <div class="d-checkbox__box" :class="classesObject" :style="stylesObject">
+  <div class="d-checkbox" @click.prevent="changeValue" :class="themeClass">
+    <div class="d-checkbox__box" :class="classesObject" :style="checkboxStylesObject">
       <d-icon :name="value ? onIcon : offIcon" :size="size" :color="value ? getContrast() : 'currentColor'"/>
     </div>
     <div class="d-checkbox__label">
@@ -24,11 +24,19 @@ export default {
   },
 
   computed: {
-    stylesObject() {
+    checkboxStylesObject() {
       return {color: this.value ? this.processColor(this.color) : this.processColor('currentColor')}
     },
     classesObject() {
       return {'d-checkbox--checked': this.value}
+    }
+  },
+
+  methods: {
+    changeValue(){
+      let value = this.value;
+      value = !value;
+      this.$emit('input', value)
     }
   }
 }
@@ -51,6 +59,14 @@ export default {
 
     &.d-checkbox--checked {
       background: currentColor;
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      &:active {
+        opacity: 0.75;
+      }
     }
   }
 

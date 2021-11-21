@@ -1,16 +1,15 @@
 <template>
   <div style="padding: 24px">
     <d-card class="rounded-lg elevation">
-      <d-checkbox size="24" on-icon="sunset" off-icon="moonset" v-model="$store.state.theme.dark">
+
+      <d-card-title class="font-size-large font-weight-light pa-0" color="primary">Hello, this is a test ;)</d-card-title>
+
+      <d-checkbox class="pa-2 px-0" size="24" on-icon="sunset" off-icon="moonset" v-model="$store.state.theme.dark">
         Darkmode
       </d-checkbox>
 
-      <d-card-title class="font-size-small">Hello, this is a test ;)</d-card-title>
-      <d-card-title class="font-size-medium">Hello, this is a test ;)</d-card-title>
-      <d-card-title class="font-size-large font-weight-light" color="primary">Hello, this is a test ;)</d-card-title>
-
       <d-card color="error" class="rounded-lg" block>
-        <d-card-title color="white">
+        <d-card-title color="#fff">
           <d-btn @click="openGithub">
             <d-icon name="github-alt"/>
             Github
@@ -38,11 +37,11 @@
       </div>
 
       <div style="display: flex; gap: 8px; margin: 8px 0; flex-flow: row wrap;">
-        <d-btn color="success">
+        <d-btn color="success" outlined depressed>
           <d-icon name="check"/>
           Success
         </d-btn>
-        <d-btn color="error">
+        <d-btn color="error" outlined>
           <d-icon name="exclamation-triangle"/>
           Error
         </d-btn>

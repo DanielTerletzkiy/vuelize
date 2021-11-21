@@ -1,23 +1,23 @@
-@import "../colors";
+@import "../variables";
 
 .theme--dark {
-    @for $i from 1 through 24 {
-      $brightness: $i + 0.5%;
-      .elevation-#{$i} {
-        background: lighten($dark_sheet, $brightness);
-      }
+  @for $i from 1 through 24 {
+    $brightness: $i + 0.5%;
+    .elevation-#{$i} {
+      background: lighten($dark_sheet, $brightness);
     }
+  }
 
-    @for $i from 1 through 24 {
-      $brightness: $i + 0.5%;
-      .elevation-n#{$i} {
-        background-color: darken($dark_sheet, $brightness);
-      }
+  @for $i from 1 through 24 {
+    $brightness: $i + 0.5%;
+    .elevation-n#{$i} {
+      background-color: darken($dark_sheet, $brightness);
+    }
   }
 }
 
 .theme--light {
-  .elevation{
+  .elevation {
     box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
   }
 }

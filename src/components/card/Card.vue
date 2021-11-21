@@ -1,5 +1,5 @@
 <template>
-  <div class="d-card" :style="{background: this.processColor(this.color)}" :class="classesObject">
+  <div class="d-card" :style="{background: this.processColor(this.color)}" :class="Object.assign(classesObject,themeClass)">
     <slot></slot>
   </div>
 </template>
@@ -21,11 +21,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../styles/colors";
+@import "../../styles/variables";
 
 .d-card {
   padding: 4px;
-  width: max-content;
 
   &.d-card--block{
     width: auto;

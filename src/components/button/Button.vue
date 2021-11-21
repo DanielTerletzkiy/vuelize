@@ -1,5 +1,5 @@
 <template>
-  <button class="d-btn" :style="stylesObject" :class="classesObject" @click="$emit('click')">
+  <button class="d-btn" :style="stylesObject" :class="Object.assign(classesObject,themeClass)" @click="$emit('click')">
     <span class="d-btn__content" :style="{color: this.filled ? getContrast():''}">
       <slot></slot>
     </span>
@@ -11,18 +11,15 @@ export default {
   name: "d-btn",
 
   props: {
-    color: String,
     filled: Boolean,
     outlined: Boolean,
-    block: Boolean
+    block: Boolean,
+    depressed: Boolean,
   },
 
   computed: {
-    stylesObject() {
-      return {color: this.processColor(this.color)}
-    },
     classesObject() {
-      return {'d-btn--filled': this.filled, 'd-btn--outlined': this.outlined, 'd-btn--block': this.block}
+      return {'d-btn--filled': this.filled, 'd-btn--outlined': this.outlined, 'd-btn--block': this.block, 'd-btn--depressed': this.depressed}
     },
   }
 }
@@ -30,10 +27,10 @@ export default {
 
 <style scoped lang="scss">
 .d-btn {
+  user-select: none;
   position: relative;
   background: none;
   color: inherit;
-  //border: 2px solid currentColor;
   border: none;
   font: inherit;
   cursor: pointer;
@@ -115,6 +112,16 @@ export default {
     align-items: center;
     justify-content: center;
     gap: 4px
+  }
+
+  &.d-btn--outlined {
+    box-shadow: inset 0 0 0 1.4px currentColor;
+    &.d-btn--depressed.theme--dark {
+      box-shadow: inset 0 0 0 1.4px rgba(255, 255, 255, 0.12);
+    }
+    &.d-btn--depressed.theme--light {
+      box-shadow: inset 0 0 0 1.4px rgba(0, 0, 0, 0.12);
+    }
   }
 }
 

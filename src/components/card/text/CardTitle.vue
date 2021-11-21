@@ -1,5 +1,5 @@
 <template>
-<span class="d-card__title" :style="stylesObject">
+<span class="d-card__title" :style="stylesObject" :class="themeClass">
   <slot></slot>
 </span>
 </template>
@@ -9,13 +9,9 @@ export default {
   name: "d-card-title",
 
   props: {
-    color: String
   },
 
   computed: {
-    stylesObject(){
-      return {color: this.processColor(this.color)}
-    }
   }
 }
 </script>
