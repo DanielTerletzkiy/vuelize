@@ -1,5 +1,5 @@
 <template>
-  <div class="d-card" :style="{background: this.processColor(this.color)}">
+  <div class="d-card" :style="{background: this.processColor(this.color)}" :class="classesObject">
     <slot></slot>
   </div>
 </template>
@@ -8,19 +8,31 @@
 export default {
   name: "d-card",
   props: {
-    color: String
+    color: String,
+    block: Boolean
+  },
+
+  computed: {
+    classesObject() {
+      return {'d-card--block': this.block}
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
+@import "../../styles/colors";
 
 .d-card {
   padding: 4px;
+  width: max-content;
+
+  &.d-card--block{
+    width: auto;
+  }
 }
 
 .theme--dark {
-  $dark_sheet: #242731;
   .d-card {
     background: $dark_sheet;
     color: #bdbdbd;
@@ -28,9 +40,8 @@ export default {
 }
 
 .theme--light {
-  $dark_sheet: #ffff;
   .d-card {
-    background: $dark_sheet;
+    background: $light_sheet;
     color: #46474a;
   }
 }

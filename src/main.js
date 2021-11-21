@@ -34,6 +34,26 @@ Vue.mixin({
             }else {
                 return colorOut
             }
+        },
+        getContrast() {
+            let hexColor = this.processColor(this.color);
+            if (hexColor.slice(0, 1) === '#') {
+                hexColor = hexColor.slice(1);
+            }
+            if (hexColor.length === 3) {
+                hexColor = hexColor.split('').map(function (hex) {
+                    return hex + hex;
+                }).join('');
+            }
+            // Convert to RGB value
+            let r = parseInt(hexColor.substr(0, 2), 16);
+            let g = parseInt(hexColor.substr(2, 2), 16);
+            let b = parseInt(hexColor.substr(4, 2), 16);
+            // Get YIQ ratio
+            let yiq = ((r * 299) + (g * 395) + (b * 114)) / 1000;
+            // Check contrast
+            return (yiq >= 128) ? 'black' : 'white';
+
         }
     }
 })

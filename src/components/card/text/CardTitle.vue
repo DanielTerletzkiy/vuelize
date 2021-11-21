@@ -30,7 +30,7 @@ export default {
 .d-card {
   .d-card__title {
     display: flex;
-    width: 100%;
+    width: auto;
   }
 }
 
