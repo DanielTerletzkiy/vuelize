@@ -1,28 +1,37 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+  <div id="app" :class="themeMode">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './DEMO/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+
+  data: ()=> ({
+    themeMode: 'theme--light'
+  }),
+
+  watch: {
+    '$store.state.theme.dark'(){
+      this.themeMode = this.$store.state.theme.dark ? 'theme--dark' : 'theme--light'
+    }
+  },
+
+  mounted() {
+    this.themeMode = this.$store.state.theme.dark ? 'theme--dark' : 'theme--light'
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

@@ -1,0 +1,29 @@
+@import "./directives/rounded";
+@import "./directives/font";
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Source%20Sans%20Pro:200,300,400,600,700');
+
+#app {
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  width: 100%;
+  height: 100%;
+  &.theme--dark {
+    $dark_background: #1f2128;
+    background: $dark_background;
+  }
+
+  &.theme--light {
+    $dark_background: #fafafa;
+    background: $dark_background;
+  }
+}

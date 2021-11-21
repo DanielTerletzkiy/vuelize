@@ -1,0 +1,24 @@
+.font-{
+  &weight-{
+    &light{
+      font-weight: 300;
+    }
+    &medium{
+      font-weight: 400;
+    }
+    &thicc{
+      font-weight: 900;
+    }
+  }
+  &size-{
+    &small {
+      font-size: 1rem !important;
+    }
+    &medium {
+      font-size: 1.5rem !important;
+    }
+    &large {
+       font-size: 3rem !important;
+     }
+  }
+}
