@@ -46,7 +46,7 @@
           <d-icon name="exclamation-triangle"/>
           Error
         </d-btn>
-        <d-btn color="warning" @click="changeColor('warning')">
+        <d-btn color="warning" glow @click="changeColor('warning')">
           <d-icon name="exclamation-octagon"/>
           Warning
         </d-btn>
@@ -56,7 +56,7 @@
         </d-btn>
       </div>
 
-      <d-btn color="primary" filled block @click="changeColor('primary')">
+      <d-btn color="primary" glow block @click="changeColor('primary')">
         <d-icon name="angle-left" size="32"/>
         This is full width
         <d-icon name="angle-right" size="32"/>

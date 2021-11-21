@@ -15,11 +15,18 @@ export default {
     outlined: Boolean,
     block: Boolean,
     depressed: Boolean,
+    glow: Boolean
   },
 
   computed: {
     classesObject() {
-      return {'d-btn--filled': this.filled, 'outlined': this.outlined, 'depressed': this.depressed, 'd-btn--block': this.block,}
+      return {
+        'd-btn--filled': this.filled,
+        'd-btn--block': this.block,
+        'd-btn--glow': this.glow,
+        'outlined': this.outlined,
+        'depressed': this.depressed,
+      }
     },
   }
 }
@@ -68,14 +75,12 @@ export default {
 
   &:active {
     &::before {
-      background-color: currentColor;
       opacity: 0.2 !important;
     }
   }
 
   &:hover {
     &::before {
-      background: currentColor;
       opacity: 0.1;
       transition-duration: 0.15s;
     }
@@ -83,19 +88,34 @@ export default {
 
   &.d-btn--filled {
     &::before {
-      background: currentColor;
       opacity: 1;
     }
+
     &:active {
       &::before {
-        background-color: currentColor;
         opacity: 0.75 !important;
       }
     }
+
     &:hover {
       &::before {
-        background: currentColor;
         opacity: 0.9;
+      }
+    }
+  }
+
+  &.d-btn--glow {
+    &::before {
+      opacity: 0.1;
+    }
+    &:hover {
+      &::before {
+        opacity: 0.15;
+      }
+    }
+    &:active {
+      &::before {
+        opacity: 0.2;
       }
     }
   }
