@@ -34,14 +34,14 @@ export default {
 .theme--dark {
   .d-card {
     background: $dark_sheet;
-    color: #bdbdbd;
+    color: $dark_card_text;
   }
 }
 
 .theme--light {
   .d-card {
     background: $light_sheet;
-    color: #46474a;
+    color: $light_card_text;
   }
 }
 

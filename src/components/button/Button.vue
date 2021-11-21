@@ -19,7 +19,7 @@ export default {
 
   computed: {
     classesObject() {
-      return {'d-btn--filled': this.filled, 'd-btn--outlined': this.outlined, 'd-btn--block': this.block, 'd-btn--depressed': this.depressed}
+      return {'d-btn--filled': this.filled, 'outlined': this.outlined, 'depressed': this.depressed, 'd-btn--block': this.block,}
     },
   }
 }
@@ -112,16 +112,6 @@ export default {
     align-items: center;
     justify-content: center;
     gap: 4px
-  }
-
-  &.d-btn--outlined {
-    box-shadow: inset 0 0 0 1.4px currentColor;
-    &.d-btn--depressed.theme--dark {
-      box-shadow: inset 0 0 0 1.4px rgba(255, 255, 255, 0.12);
-    }
-    &.d-btn--depressed.theme--light {
-      box-shadow: inset 0 0 0 1.4px rgba(0, 0, 0, 0.12);
-    }
   }
 }
 

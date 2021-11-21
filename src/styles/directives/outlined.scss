@@ -1,0 +1,9 @@
+.outlined {
+  box-shadow: inset 0 0 0 1.4px currentColor;
+  &.depressed.theme--dark {
+    box-shadow: inset 0 0 0 1.4px rgba(255, 255, 255, 0.12);
+  }
+  &.depressed.theme--light {
+    box-shadow: inset 0 0 0 1.4px rgba(0, 0, 0, 0.12);
+  }
+}
