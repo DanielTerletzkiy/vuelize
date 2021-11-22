@@ -1,5 +1,5 @@
 <template>
-  <div class="d-text-field outlined" :class="Object.assign(classesObject, themeClass)" :style="textFieldStylesObject"
+  <div class="d-text-field outlined elevation depressed" :class="Object.assign(classesObject, themeClass)" :style="textFieldStylesObject"
        @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
     <input :type="type" :id="label+type" class="d-text-field__input" autocomplete="off" placeholder=" " :value="value" @input="onInput"
            @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
@@ -88,6 +88,10 @@ export default {
     cursor: text;
     transition-duration: 0.2s;
     background: inherit;
+  }
+
+  &--active {
+    box-shadow: inset 0 -0 0 1.4px currentColor !important;
   }
 
   &::before {

@@ -71,9 +71,9 @@
       </d-card-title>
 
       <div class="mb-4">
-        <d-text-field class="rounded-lg elevation" color="primary" label="Number" type="number" v-model="number"/>
+        <d-text-field class="rounded-lg" color="primary" label="Number" type="number" v-model="number"/>
       </div>
-      <d-text-field class="mt-4 rounded-md elevation" color="primary" label="Date" type="date" v-model="date"/>
+      <d-text-field class="mt-4 rounded-md" color="primary" label="Date" type="date" v-model="date"/>
     </d-card>
 
     <div class="my-4"/>
