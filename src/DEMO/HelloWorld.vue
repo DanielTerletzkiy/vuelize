@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 24px">
+  <d-root style="padding: 24px">
     <d-card class="rounded-lg elevation">
 
       <d-card-title class="font-size-large font-weight-light pa-0" color="primary">Hello, this is a test ;)
@@ -67,6 +67,19 @@
 
     <d-card class="elevation rounded-lg">
       <d-card-title>
+        Text fields!
+      </d-card-title>
+
+      <div class="mb-4">
+        <d-text-field class="rounded-lg elevation" color="primary" label="Number" type="number" v-model="number"/>
+      </div>
+      <d-text-field class="mt-4 rounded-md elevation" color="primary" label="Date" type="date" v-model="date"/>
+    </d-card>
+
+    <div class="my-4"/>
+
+    <d-card class="elevation rounded-lg">
+      <d-card-title>
         List with List items!
       </d-card-title>
       <d-list class="rounded-lg elevation-n2 ma-2" color="primary" v-model="listItem">
@@ -76,7 +89,7 @@
         </d-list-item>
       </d-list>
     </d-card>
-  </div>
+  </d-root>
 </template>
 
 <script>
@@ -87,16 +100,21 @@ import DIcon from "@/components/icon/Icon";
 import DCheckbox from "@/components/checkbox/Checkbox";
 import DList from "@/components/list/List";
 import DListItem from "@/components/list/ListItem";
+import DRoot from "@/components/Root";
+import DTextField from "@/components/textfield/Textfield";
 
 export default {
   name: 'HelloWorld',
-  components: {DListItem, DList, DCheckbox, DIcon, DBtn, DCard, DCardTitle},
+  components: {DTextField, DRoot, DListItem, DList, DCheckbox, DIcon, DBtn, DCard, DCardTitle},
   props: {
     msg: String
   },
 
   data: () => ({
-    listItem: 0
+    listItem: 0,
+
+    number: 2,
+    date: undefined
   }),
 
   methods: {
