@@ -5,7 +5,7 @@
       <d-card-title class="font-size-large font-weight-light pa-0" color="primary">Hello, this is a test ;)
       </d-card-title>
 
-      <d-checkbox class="pa-2 px-0" size="24" on-icon="sunset" off-icon="moonset" v-model="$store.state.theme.dark">
+      <d-checkbox class="pa-2 px-0" :size="24" on-icon="sunset" off-icon="moonset" v-model="$store.state.theme.dark">
         Dark mode
       </d-checkbox>
 
@@ -57,9 +57,9 @@
       </div>
 
       <d-btn color="primary" glow block @click="changeColor('primary')">
-        <d-icon name="angle-left" size="32"/>
+        <d-icon name="angle-left" :size="32"/>
         This is full width
-        <d-icon name="angle-right" size="32"/>
+        <d-icon name="angle-right" :size="32"/>
       </d-btn>
     </d-card>
 
@@ -70,10 +70,10 @@
         Text fields!
       </d-card-title>
 
-      <div class="mb-4">
+      <div class="ma-4" style="display: flex; gap: 12px; flex-wrap: wrap">
         <d-text-field class="rounded-lg" color="primary" label="Number" type="number" v-model="number"/>
+        <d-text-field class="rounded-md" color="primary" label="Date" type="date" v-model="date"/>
       </div>
-      <d-text-field class="mt-4 rounded-md" color="primary" label="Date" type="date" v-model="date"/>
     </d-card>
 
     <div class="my-4"/>
@@ -84,13 +84,13 @@
       </d-card-title>
 
       <div style="display: flex; gap: 8px">
-        <d-avatar class="rounded-lg" color="primary" size="50">
-          <d-icon size="34" :color="getContrast('primary')" name="vuejs"/>
+        <d-avatar class="rounded-lg" color="primary" :size="50">
+          <d-icon :size="34" :color="getContrast('primary')" name="vuejs"/>
         </d-avatar>
-        <d-avatar class="rounded-circle" color="info" size="50">
-          <d-icon size="34" :color="getContrast('info')" name="info-circle"/>
+        <d-avatar class="rounded-circle" color="info" :size="50">
+          <d-icon :size="34" :color="getContrast('info')" name="info-circle"/>
         </d-avatar>
-        <d-avatar class="rounded-lg elevation" color="transparent" size="50" src="https://picsum.photos/50"></d-avatar>
+        <d-avatar class="rounded-lg elevation" color="transparent" :size="50" src="https://picsum.photos/50"></d-avatar>
       </div>
     </d-card>
 

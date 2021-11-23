@@ -9,8 +9,8 @@ export default {
   props: {
     name: String,
     color: String,
-    size: String,
-    iconStyle: String
+    iconStyle: String,
+    size: Number,
   }
 }
 </script>

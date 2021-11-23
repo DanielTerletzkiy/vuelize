@@ -53,10 +53,11 @@ export default {
 
 .d-text-field {
   position: relative;
-  min-width: 20rem;
+  min-width: 264px;
   height: 3rem;
   background: inherit;
   caret-color: currentColor;
+  transition-duration: 0.15s;
 
   &__input {
     position: absolute;
@@ -91,7 +92,7 @@ export default {
   }
 
   &--active {
-    box-shadow: inset 0 -0 0 1.4px currentColor !important;
+    box-shadow: inset 0 0 0 1.8px currentColor !important;
   }
 
   &::before {
