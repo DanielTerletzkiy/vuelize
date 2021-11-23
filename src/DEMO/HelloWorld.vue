@@ -6,7 +6,7 @@
       </d-card-title>
 
       <d-checkbox class="pa-2 px-0" size="24" on-icon="sunset" off-icon="moonset" v-model="$store.state.theme.dark">
-        Darkmode
+        Dark mode
       </d-checkbox>
 
       <d-card color="error" class="rounded-lg" block>
@@ -66,7 +66,7 @@
     <div class="my-4"/>
 
     <d-card class="elevation rounded-lg">
-      <d-card-title>
+      <d-card-title class="pa-0">
         Text fields!
       </d-card-title>
 
@@ -74,6 +74,24 @@
         <d-text-field class="rounded-lg" color="primary" label="Number" type="number" v-model="number"/>
       </div>
       <d-text-field class="mt-4 rounded-md" color="primary" label="Date" type="date" v-model="date"/>
+    </d-card>
+
+    <div class="my-4"/>
+
+    <d-card class="elevation rounded-lg">
+      <d-card-title class="pa-0">
+        Avatars!
+      </d-card-title>
+
+      <div style="display: flex; gap: 8px">
+        <d-avatar class="rounded-lg" color="primary" size="50">
+          <d-icon size="34" :color="getContrast('primary')" name="vuejs"/>
+        </d-avatar>
+        <d-avatar class="rounded-circle" color="info" size="50">
+          <d-icon size="34" :color="getContrast('info')" name="info-circle"/>
+        </d-avatar>
+        <d-avatar class="rounded-lg elevation" color="transparent" size="50" src="https://picsum.photos/50"></d-avatar>
+      </div>
     </d-card>
 
     <div class="my-4"/>
@@ -102,10 +120,11 @@ import DList from "@/components/list/List";
 import DListItem from "@/components/list/ListItem";
 import DRoot from "@/components/Root";
 import DTextField from "@/components/textfield/Textfield";
+import DAvatar from "@/components/avatar/Avatar";
 
 export default {
   name: 'HelloWorld',
-  components: {DTextField, DRoot, DListItem, DList, DCheckbox, DIcon, DBtn, DCard, DCardTitle},
+  components: {DAvatar, DTextField, DRoot, DListItem, DList, DCheckbox, DIcon, DBtn, DCard, DCardTitle},
   props: {
     msg: String
   },

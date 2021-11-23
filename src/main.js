@@ -40,8 +40,8 @@ Vue.mixin({
                 return colorOut
             }
         },
-        getContrast() {
-            let hexColor = this.processColor(this.color);
+        getContrast(color) {
+            let hexColor = this.processColor(color??this.color);
             if (hexColor.slice(0, 1) === '#') {
                 hexColor = hexColor.slice(1);
             }

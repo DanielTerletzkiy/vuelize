@@ -1,11 +1,17 @@
-.rounded- {
-  &xl {
+.rounded {
+  &-circle {
+    border-radius: 50%;
+  }
+  &-pill {
+    border-radius: 99999px;
+  }
+  &-xl {
     border-radius: 20px;
   }
-  &lg {
+  &-lg {
     border-radius: 8px;
   }
-  &md {
+  &-md {
     border-radius: 4px;
   }
 }
