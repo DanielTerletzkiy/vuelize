@@ -10,6 +10,12 @@ export default {
 
   props: {
     value: Number
+  },
+
+  watch: {
+    value(val){
+      console.log(val)
+    }
   }
 }
 </script>

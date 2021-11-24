@@ -72,21 +72,21 @@
 
       <div class="ma-4" style="display: flex; gap: 12px; flex-wrap: wrap">
         <d-text-field color="primary" outlined depressed label="Text" type="text" v-model="text" placeholder="Input Text pls"/>
-        <d-text-field color="primary" outlined depressed label="Number" type="number" v-model="number"/>
+        <d-text-field color="primary" outlined depressed label="Number" type="number" v-model="number" tp="d-select"/>
         <d-text-field color="primary" outlined depressed label="Date" type="date" v-model="date"/>
       </div>
 
       <div class="ma-4" style="display: flex; gap: 12px; flex-wrap: wrap">
         <d-card-title class="font-size-medium" outlined depressed elevation="n2" rounded="lg">
-          <d-icon size="34" color="primary" name="text"/>
+          <d-icon :size="34" color="primary" name="text"/>
           {{ text }}
         </d-card-title>
         <d-card-title class="font-size-medium" outlined depressed elevation="n2" rounded="lg">
-          <d-icon size="34" color="primary" name="list-ol"/>
+          <d-icon :size="34" color="primary" name="list-ol"/>
           {{ number }}
         </d-card-title>
         <d-card-title class="font-size-medium" outlined depressed elevation="n2" rounded="lg">
-          <d-icon size="34" color="primary" name="calendar-alt"/>
+          <d-icon :size="34" color="primary" name="calendar-alt"/>
           {{ date }}
         </d-card-title>
       </div>
@@ -149,7 +149,7 @@ export default {
     listItem: 0,
 
     text: '',
-    number: null,
+    number: 1,
     date: undefined
   }),
 

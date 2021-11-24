@@ -24,6 +24,7 @@ export default {
       } else {
         this.$emit('input', this.$vnode.key)
       }
+      this.$emit('click')
     }
   }
 }
