@@ -71,7 +71,7 @@
       </d-card-title>
 
       <div class="ma-4" style="display: flex; gap: 12px; flex-wrap: wrap">
-        <d-text-field color="primary" outlined depressed label="Text" type="text" v-model="text"/>
+        <d-text-field color="primary" outlined depressed label="Text" type="text" v-model="text" placeholder="Input Text pls"/>
         <d-text-field color="primary" outlined depressed label="Number" type="number" v-model="number"/>
         <d-text-field color="primary" outlined depressed label="Date" type="date" v-model="date"/>
       </div>

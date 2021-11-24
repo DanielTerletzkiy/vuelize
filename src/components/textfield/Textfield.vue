@@ -1,11 +1,12 @@
 <template>
   <d-function-wrapper :classes="['d-text-field', ...classesObject]" v-bind="{...$props, ...$attrs}"
-         :style="textFieldStylesObject"
-         @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
-      <input v-bind="$attrs" :id="label" class="d-text-field__input" autocomplete="off" placeholder=" "
-             :value="value" @input="onInput"
-             @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
-      <label :for="label" class="d-text-field__label">{{ label }}</label>
+                      :style="textFieldStylesObject"
+                      @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
+    <input v-bind="$attrs" :id="label" class="d-text-field__input" autocomplete="off"
+           :placeholder="placeholderActive ? placeholder : ' '"
+           :value="value" @input="onInput"
+           @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
+    <label :for="label" class="d-text-field__label">{{ label }}</label>
   </d-function-wrapper>
 </template>
 
@@ -15,11 +16,12 @@ export default {
   props: {
     value: undefined,
     label: String,
+    placeholder: String
   },
 
   data: () => ({
     hover: false,
-    selected: false
+    selected: false,
   }),
 
   methods: {
@@ -34,7 +36,15 @@ export default {
     },
 
     classesObject() {
-      return {'d-text-field--active': (this.hover || this.selected), elevation: true}
+      return {
+        'd-text-field--active': (this.hover || this.selected),
+        elevation: true,
+        'd-text-field--placeholder':this.placeholderActive
+      }
+    },
+
+    placeholderActive(){
+      return this.placeholder && !this.value;
     }
   }
 }
@@ -129,7 +139,7 @@ reduce the size of the label and move upwards
 2. Keep label state when content is in input field
 */
 
-.d-text-field__input:focus ~ .d-text-field__label,
+.d-text-field__input:focus ~ .d-text-field__label, .d-text-field--placeholder .d-text-field__input ~ .d-text-field__label,
 .d-text-field__input:not(:placeholder-shown).d-text-field__input:not(:focus) ~ .d-text-field__label {
   font-size: 1rem;
   padding: 0 0.3rem;
