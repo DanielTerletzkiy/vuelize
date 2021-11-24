@@ -103,11 +103,10 @@ export default {
     height: 100%;
     content: '';
     border-radius: inherit;
-    transition-duration: 0.2s;
   }
 
   &:focus-within::before {
-    box-shadow: inset 0 -3px 0 1.4px currentColor;
+    box-shadow: inset 0 0 0 2px currentColor;
   }
 
   &.theme--dark {
@@ -132,10 +131,10 @@ reduce the size of the label and move upwards
 
 .d-text-field__input:focus ~ .d-text-field__label,
 .d-text-field__input:not(:placeholder-shown).d-text-field__input:not(:focus) ~ .d-text-field__label {
-  font-size: 0.9rem;
-  padding: 0 0.1rem;
-  top: -0.5rem;
-  left: 0.7rem;
+  font-size: 1rem;
+  padding: 0 0.3rem;
+  top: -0.6rem;
+  left: 0.5rem;
 }
 
 </style>
