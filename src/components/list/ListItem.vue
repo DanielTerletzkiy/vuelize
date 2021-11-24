@@ -1,9 +1,9 @@
 <template>
-  <div class="d-list__item" :class="Object.assign(classesObject ,themeClass)" :style="stylesObject" @click="click">
+  <d-function-wrapper :classes="['d-list__item', ...classesObject]" v-bind="{...$props, ...$attrs}" @click="click">
     <div class="d-list__item__content">
       <slot></slot>
     </div>
-  </div>
+  </d-function-wrapper>
 </template>
 
 <script>
@@ -12,15 +12,15 @@ export default {
 
   computed: {
     classesObject() {
-      return {'d-list__item--active /*outlined depressed*/': this.$parent.$props.value === this.$vnode.key}
+      return {'d-list__item--active': this.$parent.$parent.$props.value === this.$vnode.key}
     }
   },
 
   methods: {
     click() {
       //check if listItem is under d-list
-      if (this.$parent._vnode.data.staticClass === 'd-list') {
-        this.$parent.$emit('input', this.$vnode.key)
+      if (this.$parent.$parent.$options._componentTag === 'd-list') {
+        this.$parent.$parent.$emit('input', this.$vnode.key)
       } else {
         this.$emit('input', this.$vnode.key)
       }

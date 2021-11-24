@@ -1,8 +1,7 @@
 <template>
-  <div class="d-avatar" :class="Object.assign(classesObject, themeClass)"
-       :style="{...avatarStylesObject,...stylesObject}">
+  <d-function-wrapper :classes="['d-avatar', ...classesObject]" v-bind="{...$props, ...$attrs}" :style="avatarStylesObject">
     <slot><img class="d-avatar__image" :src="src" alt=""/></slot>
-  </div>
+  </d-function-wrapper>
 </template>
 
 <script>

@@ -1,20 +1,20 @@
 <template>
-  <div class="d-text-field outlined elevation depressed" :class="Object.assign(classesObject, themeClass)" :style="textFieldStylesObject"
-       @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
-    <input :type="type" :id="label+type" class="d-text-field__input" autocomplete="off" placeholder=" " :value="value" @input="onInput"
-           @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
-    <label :for="label+type" class="d-text-field__label">{{ label }}</label>
-  </div>
+  <d-function-wrapper :classes="['d-text-field', ...classesObject]" v-bind="{...$props, ...$attrs}"
+         :style="textFieldStylesObject"
+         @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
+      <input v-bind="$attrs" :id="label" class="d-text-field__input" autocomplete="off" placeholder=" "
+             :value="value" @input="onInput"
+             @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
+      <label :for="label" class="d-text-field__label">{{ label }}</label>
+  </d-function-wrapper>
 </template>
 
 <script>
 export default {
   name: "d-text-field",
-
   props: {
     value: undefined,
     label: String,
-    type: {type: String, default: 'text'},
   },
 
   data: () => ({
@@ -23,18 +23,18 @@ export default {
   }),
 
   methods: {
-    onInput(e){
+    onInput(e) {
       this.$emit('input', e.target.value)
     }
   },
 
   computed: {
     textFieldStylesObject() {
-      return {color: (this.hover || this.selected) ? this.processColor(this.color) : ''}
+      return {color: (this.hover || this.selected) ? this.processColor(this.$attrs.color) : ''}
     },
 
     classesObject() {
-      return {'d-text-field--active': (this.hover || this.selected)}
+      return {'d-text-field--active': (this.hover || this.selected), elevation: true}
     }
   }
 }

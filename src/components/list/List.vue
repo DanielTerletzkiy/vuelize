@@ -1,7 +1,7 @@
 <template>
-<div class="d-list" :style="stylesObject" :class="themeClass">
-  <slot></slot>
-</div>
+  <d-function-wrapper :classes="['d-list']" v-bind="{...$props, ...$attrs}">
+    <slot></slot>
+  </d-function-wrapper>
 </template>
 
 <script>
@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.d-list{
+.d-list {
   display: flex;
   flex-direction: column;
   padding: 8px;

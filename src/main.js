@@ -19,12 +19,13 @@ Unicon.add(objArray)
 Vue.use(Unicon)
 
 
+//Imports FunctionWrapper
+import DFunctionWrapper from "@/components/FunctionWrapper";
+Vue.component('d-function-wrapper', DFunctionWrapper)
+
 Vue.config.productionTip = false
 
 Vue.mixin({
-    props: {
-        color: String,
-    },
 
     methods: {
         processColor(color) {
@@ -59,14 +60,6 @@ Vue.mixin({
             // Check contrast
             return (yiq >= 128) ? 'black' : 'white';
 
-        }
-    },
-    computed: {
-        themeClass() {
-            return {'theme--dark': this.$store.state.theme.dark, 'theme--light': !this.$store.state.theme.dark}
-        },
-        stylesObject() {
-            return {color: this.processColor(this.color)}
         }
     },
 

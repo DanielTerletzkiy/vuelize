@@ -1,7 +1,7 @@
 <template>
-<span class="d-card__title" :style="stylesObject" :class="themeClass">
+<d-function-wrapper :classes="['d-card__title']" v-bind="{...$props, ...$attrs}">
   <slot></slot>
-</span>
+</d-function-wrapper>
 </template>
 
 <script>
@@ -19,13 +19,16 @@ export default {
 <style scoped lang="scss">
 
 .d-card__title {
-  padding: 8px;
+  min-height: 34px;
   font-size: 2rem;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .d-card {
   .d-card__title {
-    display: flex;
     width: auto;
   }
 }

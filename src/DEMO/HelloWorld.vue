@@ -1,6 +1,6 @@
 <template>
   <d-root style="padding: 24px">
-    <d-card class="rounded-lg elevation">
+    <d-card elevation rounded="lg">
 
       <d-card-title class="font-size-large font-weight-light pa-0" color="primary">Hello, this is a test ;)
       </d-card-title>
@@ -65,38 +65,54 @@
 
     <div class="my-4"/>
 
-    <d-card class="elevation rounded-lg">
+    <d-card elevation rounded="lg">
       <d-card-title class="pa-0">
         Text fields!
       </d-card-title>
 
       <div class="ma-4" style="display: flex; gap: 12px; flex-wrap: wrap">
-        <d-text-field class="rounded-lg" color="primary" label="Number" type="number" v-model="number"/>
-        <d-text-field class="rounded-md" color="primary" label="Date" type="date" v-model="date"/>
+        <d-text-field color="primary" outlined depressed label="Text" type="text" v-model="text"/>
+        <d-text-field color="primary" outlined depressed label="Number" type="number" v-model="number"/>
+        <d-text-field color="primary" outlined depressed label="Date" type="date" v-model="date"/>
+      </div>
+
+      <div class="ma-4" style="display: flex; gap: 12px; flex-wrap: wrap">
+        <d-card-title class="font-size-medium" outlined depressed elevation="n2" rounded="lg">
+          <d-icon size="34" color="primary" name="text"/>
+          {{ text }}
+        </d-card-title>
+        <d-card-title class="font-size-medium" outlined depressed elevation="n2" rounded="lg">
+          <d-icon size="34" color="primary" name="list-ol"/>
+          {{ number }}
+        </d-card-title>
+        <d-card-title class="font-size-medium" outlined depressed elevation="n2" rounded="lg">
+          <d-icon size="34" color="primary" name="calendar-alt"/>
+          {{ date }}
+        </d-card-title>
       </div>
     </d-card>
 
     <div class="my-4"/>
 
-    <d-card class="elevation rounded-lg">
+    <d-card elevation rounded="lg">
       <d-card-title class="pa-0">
         Avatars!
       </d-card-title>
 
       <div style="display: flex; gap: 8px">
-        <d-avatar class="rounded-lg" color="primary" :size="50">
+        <d-avatar rounded="lg" color="primary" :size="50">
           <d-icon :size="34" :color="getContrast('primary')" name="vuejs"/>
         </d-avatar>
-        <d-avatar class="rounded-circle" color="info" :size="50">
+        <d-avatar rounded="circle" color="info" :size="50">
           <d-icon :size="34" :color="getContrast('info')" name="info-circle"/>
         </d-avatar>
-        <d-avatar class="rounded-lg elevation" color="transparent" :size="50" src="https://picsum.photos/50"></d-avatar>
+        <d-avatar rounded="lg" elevation color="transparent" :size="50" src="https://picsum.photos/100"></d-avatar>
       </div>
     </d-card>
 
     <div class="my-4"/>
 
-    <d-card class="elevation rounded-lg">
+    <d-card elevation rounded="lg">
       <d-card-title>
         List with List items!
       </d-card-title>
@@ -132,7 +148,8 @@ export default {
   data: () => ({
     listItem: 0,
 
-    number: 2,
+    text: '',
+    number: null,
     date: undefined
   }),
 

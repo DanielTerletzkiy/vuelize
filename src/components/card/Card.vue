@@ -1,7 +1,7 @@
 <template>
-  <div class="d-card" :style="{background: this.processColor(this.color)}" :class="Object.assign(classesObject,themeClass)">
+  <d-function-wrapper :classes="['d-card', ...classesObject]" v-bind="{...$props, ...$attrs}" :style="{background: this.processColor(this.color)}">
     <slot></slot>
-  </div>
+  </d-function-wrapper>
 </template>
 
 <script>

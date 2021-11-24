@@ -1,9 +1,11 @@
 <template>
-  <button class="d-btn" :style="stylesObject" :class="Object.assign(classesObject,themeClass)" @click="$emit('click')">
-    <span class="d-btn__content" :style="{color: this.filled ? getContrast():''}">
+  <d-function-wrapper :classes="['d-btn']" v-bind="{...$props, ...$attrs}">
+    <button @click="$emit('click')" :class="classesObject">
+    <span class="d-btn__content" :style="{color: this.filled ? getContrast(this.$attrs.color):''}">
       <slot></slot>
     </span>
-  </button>
+    </button>
+  </d-function-wrapper>
 </template>
 
 <script>
@@ -12,9 +14,7 @@ export default {
 
   props: {
     filled: Boolean,
-    outlined: Boolean,
     block: Boolean,
-    depressed: Boolean,
     glow: Boolean
   },
 
@@ -24,8 +24,6 @@ export default {
         'd-btn--filled': this.filled,
         'd-btn--block': this.block,
         'd-btn--glow': this.glow,
-        'outlined': this.outlined,
-        'depressed': this.depressed,
       }
     },
   }
@@ -33,7 +31,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.d-btn {
+.d-btn > button {
   user-select: none;
   position: relative;
   background: none;
@@ -108,11 +106,13 @@ export default {
     &::before {
       opacity: 0.1;
     }
+
     &:hover {
       &::before {
         opacity: 0.15;
       }
     }
+
     &:active {
       &::before {
         opacity: 0.2;

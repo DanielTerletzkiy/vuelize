@@ -1,12 +1,12 @@
 <template>
-  <div class="d-checkbox" @click.prevent="changeValue" :class="themeClass">
-    <div class="d-checkbox__box" :class="classesObject" :style="checkboxStylesObject">
+  <d-function-wrapper :classes="['d-checkbox']" v-bind="{...$props, ...$attrs}" :style="checkboxStylesObject" @click="changeValue">
+    <div class="d-checkbox__box" :class="classesObject">
       <d-icon :name="value ? onIcon : offIcon" :size="size" :color="value ? getContrast() : 'currentColor'"/>
     </div>
     <div class="d-checkbox__label">
       <slot></slot>
     </div>
-  </div>
+  </d-function-wrapper>
 </template>
 
 <script>
@@ -43,6 +43,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../styles/variables";
 .d-checkbox {
   user-select: none;
 
@@ -68,6 +69,14 @@ export default {
         opacity: 0.75;
       }
     }
+  }
+
+  &.theme--dark > .d-checkbox__label {
+    color: $dark_card_text
+  }
+
+  &.theme--light > .d-checkbox__label {
+    color: $light_card_text
   }
 
 }
