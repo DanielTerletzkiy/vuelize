@@ -96,7 +96,7 @@
 
     <d-card elevation rounded="lg">
       <d-card-title class="pa-0">
-        Avatars!
+        <d-icon name="user-circle" color="primary" size="30" class="ml-2"/>Avatars!
       </d-card-title>
 
       <div style="display: flex; gap: 8px">

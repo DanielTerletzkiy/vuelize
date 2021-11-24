@@ -9,9 +9,9 @@
   }
 
   @for $i from 1 through 24 {
-    $brightness: $i + 0.5%;
+    $darkness: $i + 0.5%;
     .elevation-n#{$i} {
-      background-color: darken($dark_sheet, $brightness);
+      background-color: darken($dark_sheet, $darkness);
     }
   }
 
@@ -21,6 +21,20 @@
 }
 
 .theme--light {
+  @for $i from 1 through 24 {
+    $elevation: $i + 0.5px;
+    .elevation-#{$i} {
+      box-shadow: rgba(99, 99, 99, 0.2) 0 2px $elevation 1px;
+    }
+  }
+
+  @for $i from 1 through 24 {
+    $elevation: $i + 0.5px;
+    .elevation-n#{$i} {
+      box-shadow: inset rgba(99, 99, 99, 0.2) 0 2px $elevation 1px;
+    }
+  }
+
   .elevation {
     background-color: $light_sheet;
     box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
