@@ -78,7 +78,7 @@
                       :items="iconItems">
 
           <template slot="item" slot-scope="{item}">
-            <d-card-title class="pa-0 font-size-small">
+            <d-card-title class="pa-0 font-size-small" color="inherit">
               <d-icon :name="item.icon" :icon-style="item.iconStyle" color="primary"/>
               {{ item.name }}
             </d-card-title>
