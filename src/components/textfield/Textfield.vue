@@ -2,7 +2,8 @@
   <d-function-wrapper :classes="['d-text-field', ...classesObject]" v-bind="{...$props, ...$attrs}"
                       :style="textFieldStylesObject"
                       @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
-    <component :is="tp" v-bind="{...$props, ...$attrs}" :id="label" class="d-text-field__input" autocomplete="off"
+    <component :is="componentType" v-bind="{...$props, ...$attrs}" :id="label" class="d-text-field__input"
+               autocomplete="off"
                :placeholder="placeholderActive ? placeholder : ' '"
                :value="value" @input="onInput"
                @removeFocus="removeFocus"
@@ -25,7 +26,7 @@ export default {
     value: undefined,
     label: String,
     placeholder: String,
-    tp: {type: String, default: 'input'}
+    select: Boolean,
   },
 
   data: () => ({
@@ -55,6 +56,10 @@ export default {
         elevation: true,
         'd-text-field--placeholder': this.placeholderActive
       }
+    },
+
+    componentType() {
+      return this.select ? 'd-select' : 'input'
     },
 
     placeholderActive() {

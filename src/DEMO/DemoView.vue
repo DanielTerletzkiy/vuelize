@@ -1,18 +1,19 @@
 <template>
   <d-root style="padding: 24px">
-    <d-card elevation rounded="lg">
+    <d-card elevation rounded="lg" block>
 
       <d-card-title class="font-weight-light" color="primary">Demo page
       </d-card-title>
       <d-card-subtitle>
-        Everything in this Lib <d-icon name="download-alt" color="primary" icon-style="monochrome"/>
+        Everything in this Lib
+        <d-icon name="download-alt" color="primary" icon-style="monochrome"/>
       </d-card-subtitle>
 
       <d-checkbox class="pa-2 px-0" :size="24" on-icon="sunset" off-icon="moonset" v-model="$store.state.theme.dark">
         Dark mode
       </d-checkbox>
 
-      <d-card color="error" class="rounded-lg" block>
+      <d-card color="error" class="rounded-lg">
         <d-card-title color="#fff">
           <d-btn @click="openGithub">
             <d-icon name="github-alt"/>
@@ -68,8 +69,9 @@
 
     <div class="my-4"/>
 
-    <d-card elevation rounded="lg">
-      <d-card-title class="pa-0">
+    <d-card elevation rounded="lg" block>
+      <d-card-title>
+        <d-icon name="clipboard-alt" color="primary" :size="30"/>
         Text fields!
       </d-card-title>
 
@@ -78,8 +80,7 @@
         <d-text-field color="primary" outlined depressed label="Text with placeholder" type="text" v-model="text"
                       placeholder="This is a placeholder"/>
 
-        <d-text-field color="primary" outlined depressed label="Icon Select" type="number" v-model="selectedIcon"
-                      tp="d-select"
+        <d-text-field color="primary" outlined depressed label="Icon Select" v-model="selectedIcon" select
                       :items="iconItems">
           <template slot="item" slot-scope="{item}">
             <d-card-title class="pa-0 font-size-small" color="inherit">
@@ -89,8 +90,7 @@
           </template>
         </d-text-field>
 
-        <d-text-field color="primary" outlined depressed label="User Select" type="number" v-model="selectedUser"
-                      tp="d-select"
+        <d-text-field color="primary" outlined depressed label="User Select" v-model="selectedUser" select
                       :items="userItems">
           <template slot="item" slot-scope="{item}">
             <d-card-title class="pa-0 font-size-small" color="inherit">
@@ -121,9 +121,36 @@
 
     <div class="my-4"/>
 
-    <d-card elevation rounded="lg">
-      <d-card-title class="pa-0">
-        <d-icon name="user-circle" color="primary" :size="30" class="ml-2"/>
+    <d-card elevation rounded="lg" block>
+      <d-card-title>
+        <d-icon name="layer-group" icon-style="monochrome" color="primary" :size="30"/>
+        Menus!
+      </d-card-title>
+
+      <div style="display: flex; gap: 8px">
+        <d-btn color="primary" glow @click="()=>openSelectMenu=!openSelectMenu" class="pa-3">
+          <template slot="default">
+            Select Icon
+          </template>
+          <template slot="misc">
+            <d-select-menu :open.sync="openSelectMenu" v-model="selectedIcon" :items="iconItems">
+              <template slot="item" slot-scope="{item}">
+                <d-card-title class="pa-0 font-size-small" color="inherit">
+                  <d-icon :name="item.icon" :icon-style="item.iconStyle" color="primary"/>
+                  {{ item.name }}
+                </d-card-title>
+              </template>
+            </d-select-menu>
+          </template>
+        </d-btn>
+      </div>
+    </d-card>
+
+    <div class="my-4"/>
+
+    <d-card elevation rounded="lg" block>
+      <d-card-title>
+        <d-icon name="user-circle" color="primary" :size="30"/>
         Avatars!
       </d-card-title>
 
@@ -140,7 +167,7 @@
 
     <div class="my-4"/>
 
-    <d-card elevation rounded="lg">
+    <d-card elevation rounded="lg" block>
       <d-card-title>
         List with List items!
       </d-card-title>
@@ -166,10 +193,14 @@ import DRoot from "@/components/Root";
 import DTextField from "@/components/textfield/Textfield";
 import DAvatar from "@/components/avatar/Avatar";
 import DCardSubtitle from "@/components/card/text/CardSubtitle";
+import DSelectMenu from "@/components/menu/SelectMenu";
 
 export default {
   name: 'DemoView',
-  components: {DCardSubtitle, DAvatar, DTextField, DRoot, DListItem, DList, DCheckbox, DIcon, DBtn, DCard, DCardTitle},
+  components: {
+    DSelectMenu,
+    DCardSubtitle, DAvatar, DTextField, DRoot, DListItem, DList, DCheckbox, DIcon, DBtn, DCard, DCardTitle
+  },
 
   data: () => ({
     listItem: 0,
@@ -188,7 +219,9 @@ export default {
         name: 'Daniel Terletzkiy'
       }, {profilePic: 'https://picsum.photos/200/200', name: 'Random Guy'}
     ],
-    date: undefined
+    date: undefined,
+
+    openSelectMenu: false
   }),
 
   methods: {

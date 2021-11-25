@@ -25,6 +25,7 @@ export default {
 
 .d-card {
   padding: 4px;
+  width: max-content;
 
   &.d-card--block{
     width: auto;

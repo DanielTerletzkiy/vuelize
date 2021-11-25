@@ -1,6 +1,6 @@
 <template>
   <d-function-wrapper :classes="['d-select-menu']" v-bind="{...$props, ...$attrs}">
-    <d-card v-if="open" class="d-select-menu__dropdown pa-0" elevation="4">
+    <d-card v-if="open" class="d-select-menu__dropdown pa-0" elevation="4" v-click-outside="hideSelectMenu">
       <d-list v-model="value" color="primary" class="pa-0" rounded="none">
         <d-list-item v-for="(item, index) in items" :key="index">
           <slot name="item" :item="item" :index="index">
@@ -27,6 +27,12 @@ export default {
     items: Array
   },
 
+  methods: {
+    hideSelectMenu() {
+      this.$emit('update:open', false)
+    }
+  },
+
   watch: {
     value(value) {
       this.$emit('input', value)
@@ -40,9 +46,13 @@ export default {
   &__dropdown {
     position: absolute;
     z-index: 1;
+
     box-sizing: inherit;
-    width: 100%;
-    top: 54px;
+    min-width: 100%;
+    max-height: calc(54px * 5);
+    overflow: auto;
+
+    top: calc(100% + 6px);
     left: 0;
   }
 

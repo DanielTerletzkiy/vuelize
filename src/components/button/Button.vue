@@ -1,10 +1,9 @@
 <template>
-  <d-function-wrapper :classes="['d-btn']" v-bind="{...$props, ...$attrs}">
-    <button @click="$emit('click')" :class="classesObject">
+  <d-function-wrapper root-div="button" :classes="['d-btn', ...classesObject]" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
     <span class="d-btn__content" :style="{color: this.filled ? getContrast(this.$attrs.color):''}">
-      <slot></slot>
+      <slot name="default"></slot>
     </span>
-    </button>
+    <slot name="misc"></slot>
   </d-function-wrapper>
 </template>
 
@@ -31,7 +30,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.d-btn > button {
+.d-btn {
   user-select: none;
   position: relative;
   background: none;
