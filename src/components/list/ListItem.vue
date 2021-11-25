@@ -1,5 +1,6 @@
 <template>
-  <d-function-wrapper :classes="['d-list__item', ...classesObject]" v-bind="{...$props, ...$attrs}" @click="click">
+  <d-function-wrapper root-div="li" tabindex="0" :classes="['d-list__item', ...classesObject]"
+                      v-bind="{...$props, ...$attrs}" @click="click">
     <div class="d-list__item__content">
       <slot></slot>
     </div>
@@ -38,6 +39,8 @@ export default {
 
   border-radius: inherit;
   min-height: 36px;
+
+  list-style: none;
 
   &::before {
     position: absolute;

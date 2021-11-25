@@ -73,12 +73,14 @@
       <div class="ma-4" style="display: flex; gap: 12px; flex-wrap: wrap">
         <d-text-field color="primary" outlined depressed label="Text" type="text" v-model="text"
                       placeholder="Input Text pls"/>
-        <d-text-field color="primary" outlined depressed label="Number" type="number" v-model="number" tp="d-select"
-                      :items="[{icon: 'cube', name: 'Cube'},{icon: 'anchor', name: 'Anchor'}]">
+        <d-text-field color="primary" outlined depressed label="Number" type="number" v-model="selectedIcon"
+                      tp="d-select"
+                      :items="iconItems">
 
           <template slot="item" slot-scope="{item}">
             <d-card-title class="pa-0 font-size-small">
-              <d-icon :name="item.icon" color="primary"/> {{item.name}}
+              <d-icon :name="item.icon" :icon-style="item.iconStyle" color="primary"/>
+              {{ item.name }}
             </d-card-title>
           </template>
         </d-text-field>
@@ -92,7 +94,7 @@
         </d-card-title>
         <d-card-title class="font-size-medium" outlined depressed elevation="n2" rounded="lg">
           <d-icon :size="34" color="primary" name="list-ol"/>
-          {{ number }}
+          <d-icon :size="34" :name="iconItems[selectedIcon].icon" :icon-style="iconItems[selectedIcon].iconStyle"/>
         </d-card-title>
         <d-card-title class="font-size-medium" outlined depressed elevation="n2" rounded="lg">
           <d-icon :size="34" color="primary" name="calendar-alt"/>
@@ -159,7 +161,12 @@ export default {
     listItem: 0,
 
     text: '',
-    number: 0,
+    selectedIcon: 0,
+    iconItems: [
+      {icon: 'cube', name: 'Cube', iconStyle: 'line'},
+      {icon: 'anchor', name: 'Anchor', iconStyle: 'line'},
+      {icon: 'layers-alt', name: 'Layers Alt', iconStyle: 'monochrome'},
+    ],
     date: undefined
   }),
 

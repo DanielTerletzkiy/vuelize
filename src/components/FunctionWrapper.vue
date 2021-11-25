@@ -1,8 +1,8 @@
 <template>
-  <div :class="[...this.classes, themeClass, ...classAttributes]" :style="stylesObject" @click="()=>$emit('click')"
+  <component :is="rootDiv" :class="[...this.classes, themeClass, ...classAttributes]" :style="stylesObject" @click="()=>$emit('click')"
        @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
-  </div>
+  </component>
 </template>
 
 <script>
@@ -10,6 +10,7 @@ export default {
   name: "d-function-wrapper",
 
   props: {
+    rootDiv: {type: String, default: 'div'},
     classes: Array,
     color: String,
 

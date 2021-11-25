@@ -5,7 +5,7 @@
     <component :is="tp" v-bind="{...$props, ...$attrs}" :id="label" class="d-text-field__input" autocomplete="off"
                :placeholder="placeholderActive ? placeholder : ' '"
                :value="value" @input="onInput"
-               @removeFocus="()=>{this.selected = false; this.hover = false}"
+               @removeFocus="removeFocus"
                @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
       <template slot="item" slot-scope="props">
         <slot name="item" v-bind="props"></slot>
@@ -36,6 +36,11 @@ export default {
   methods: {
     onInput(e) {
       this.$emit('input', typeof e === 'object' ? e.target.value : e)
+    },
+    removeFocus() {
+      this.selected = false;
+      this.hover = false;
+      document.activeElement.blur();
     }
   },
 
