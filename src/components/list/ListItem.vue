@@ -36,7 +36,7 @@ export default {
 .d-list__item {
   position: relative;
 
-  border-radius: 8px;
+  border-radius: inherit;
   min-height: 36px;
 
   &::before {
@@ -86,7 +86,7 @@ export default {
   }
 
   .d-list__item__content {
-    padding: 8px;
+    padding: 10px 12px;
     display: flex;
     align-items: center;
     gap: $gap;

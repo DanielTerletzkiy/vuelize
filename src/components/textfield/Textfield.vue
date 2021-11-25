@@ -3,16 +3,21 @@
                       :style="textFieldStylesObject"
                       @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
     <component :is="tp" v-bind="{...$props, ...$attrs}" :id="label" class="d-text-field__input" autocomplete="off"
-           :placeholder="placeholderActive ? placeholder : ' '"
-           :value="value" @input="onInput"
-           @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
-     </component>
+               :placeholder="placeholderActive ? placeholder : ' '"
+               :value="value" @input="onInput"
+               @removeFocus="()=>{this.selected = false; this.hover = false}"
+               @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
+      <template slot="item" slot-scope="props">
+        <slot name="item" v-bind="props"></slot>
+      </template>
+    </component>
     <label :for="label" class="d-text-field__label">{{ label }}</label>
   </d-function-wrapper>
 </template>
 
 <script>
 import DSelect from "@/components/textfield/Select";
+
 export default {
   name: "d-text-field",
   components: {DSelect},
@@ -30,7 +35,7 @@ export default {
 
   methods: {
     onInput(e) {
-      this.$emit('input', e.target.value)
+      this.$emit('input', typeof e === 'object' ? e.target.value : e)
     }
   },
 

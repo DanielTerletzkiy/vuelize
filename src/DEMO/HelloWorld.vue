@@ -71,8 +71,17 @@
       </d-card-title>
 
       <div class="ma-4" style="display: flex; gap: 12px; flex-wrap: wrap">
-        <d-text-field color="primary" outlined depressed label="Text" type="text" v-model="text" placeholder="Input Text pls"/>
-        <d-text-field color="primary" outlined depressed label="Number" type="number" v-model="number" tp="d-select"/>
+        <d-text-field color="primary" outlined depressed label="Text" type="text" v-model="text"
+                      placeholder="Input Text pls"/>
+        <d-text-field color="primary" outlined depressed label="Number" type="number" v-model="number" tp="d-select"
+                      :items="[{icon: 'cube', name: 'Cube'},{icon: 'anchor', name: 'Anchor'}]">
+
+          <template slot="item" slot-scope="{item}">
+            <d-card-title class="pa-0 font-size-small">
+              <d-icon :name="item.icon" color="primary"/> {{item.name}}
+            </d-card-title>
+          </template>
+        </d-text-field>
         <d-text-field color="primary" outlined depressed label="Date" type="date" v-model="date"/>
       </div>
 
@@ -96,7 +105,8 @@
 
     <d-card elevation rounded="lg">
       <d-card-title class="pa-0">
-        <d-icon name="user-circle" color="primary" size="30" class="ml-2"/>Avatars!
+        <d-icon name="user-circle" color="primary" :size="30" class="ml-2"/>
+        Avatars!
       </d-card-title>
 
       <div style="display: flex; gap: 8px">
@@ -149,7 +159,7 @@ export default {
     listItem: 0,
 
     text: '',
-    number: 1,
+    number: 0,
     date: undefined
   }),
 
