@@ -2,8 +2,11 @@
   <d-root style="padding: 24px">
     <d-card elevation rounded="lg">
 
-      <d-card-title class="font-size-large font-weight-light pa-0" color="primary">Hello, this is a test ;)
+      <d-card-title class="font-weight-light" color="primary">Demo page
       </d-card-title>
+      <d-card-subtitle>
+        Everything in this Lib <d-icon name="download-alt" color="primary" icon-style="monochrome"/>
+      </d-card-subtitle>
 
       <d-checkbox class="pa-2 px-0" :size="24" on-icon="sunset" off-icon="moonset" v-model="$store.state.theme.dark">
         Dark mode
@@ -71,12 +74,13 @@
       </d-card-title>
 
       <div class="ma-4" style="display: flex; gap: 12px; flex-wrap: wrap">
-        <d-text-field color="primary" outlined depressed label="Text" type="text" v-model="text"
-                      placeholder="Input Text pls"/>
-        <d-text-field color="primary" outlined depressed label="Number" type="number" v-model="selectedIcon"
+        <d-text-field color="primary" outlined depressed label="Text" type="text" v-model="text"/>
+        <d-text-field color="primary" outlined depressed label="Text with placeholder" type="text" v-model="text"
+                      placeholder="This is a placeholder"/>
+
+        <d-text-field color="primary" outlined depressed label="Icon Select" type="number" v-model="selectedIcon"
                       tp="d-select"
                       :items="iconItems">
-
           <template slot="item" slot-scope="{item}">
             <d-card-title class="pa-0 font-size-small" color="inherit">
               <d-icon :name="item.icon" :icon-style="item.iconStyle" color="primary"/>
@@ -84,6 +88,18 @@
             </d-card-title>
           </template>
         </d-text-field>
+
+        <d-text-field color="primary" outlined depressed label="User Select" type="number" v-model="selectedUser"
+                      tp="d-select"
+                      :items="userItems">
+          <template slot="item" slot-scope="{item}">
+            <d-card-title class="pa-0 font-size-small" color="inherit">
+              <d-avatar :size="30" :src="item.profilePic"/>
+              {{ item.name }}
+            </d-card-title>
+          </template>
+        </d-text-field>
+
         <d-text-field color="primary" outlined depressed label="Date" type="date" v-model="date"/>
       </div>
 
@@ -149,13 +165,11 @@ import DListItem from "@/components/list/ListItem";
 import DRoot from "@/components/Root";
 import DTextField from "@/components/textfield/Textfield";
 import DAvatar from "@/components/avatar/Avatar";
+import DCardSubtitle from "@/components/card/text/CardSubtitle";
 
 export default {
-  name: 'HelloWorld',
-  components: {DAvatar, DTextField, DRoot, DListItem, DList, DCheckbox, DIcon, DBtn, DCard, DCardTitle},
-  props: {
-    msg: String
-  },
+  name: 'DemoView',
+  components: {DCardSubtitle, DAvatar, DTextField, DRoot, DListItem, DList, DCheckbox, DIcon, DBtn, DCard, DCardTitle},
 
   data: () => ({
     listItem: 0,
@@ -166,6 +180,13 @@ export default {
       {icon: 'cube', name: 'Cube', iconStyle: 'line'},
       {icon: 'anchor', name: 'Anchor', iconStyle: 'line'},
       {icon: 'layers-alt', name: 'Layers Alt', iconStyle: 'monochrome'},
+    ],
+    selectedUser: 0,
+    userItems: [
+      {
+        profilePic: 'https://picsum.photos/100/100',
+        name: 'Daniel Terletzkiy'
+      }, {profilePic: 'https://picsum.photos/200/200', name: 'Random Guy'}
     ],
     date: undefined
   }),

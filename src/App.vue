@@ -1,16 +1,16 @@
 <template>
   <div id="app" :class="themeMode">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <DemoView/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './DEMO/HelloWorld.vue'
+import DemoView from './DEMO/DemoView.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    DemoView
   },
 
   data: ()=> ({

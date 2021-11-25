@@ -67,14 +67,6 @@ export default {
 <style scoped lang="scss">
 @import "../../styles/variables";
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 .d-text-field {
   position: relative;
   min-width: 264px;
@@ -94,7 +86,7 @@ export default {
     font-family: inherit;
     font-size: inherit;
     outline: none;
-    padding: 1.25rem;
+    padding: 0 1.25em;
     background: none;
 
     color: currentColor;
@@ -150,7 +142,7 @@ export default {
 .d-text-field__input:not(:placeholder-shown).d-text-field__input:not(:focus) ~ .d-text-field__label {
   font-size: 1rem;
   padding: 0 0.3rem;
-  top: -0.6rem;
+  top: -0.685rem;
   left: 0.5rem;
 }
 
