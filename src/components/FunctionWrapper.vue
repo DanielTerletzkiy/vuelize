@@ -1,5 +1,6 @@
 <template>
-  <div :class="[...this.classes, themeClass, ...classAttributes]" :style="stylesObject" @click="()=>$emit('click')">
+  <div :class="[...this.classes, themeClass, ...classAttributes]" :style="stylesObject" @click="()=>$emit('click')"
+       @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
   </div>
 </template>
@@ -19,7 +20,7 @@ export default {
   },
 
   computed: {
-    classAttributes(){
+    classAttributes() {
       return {
         [`rounded-${this.rounded}`]: this.rounded,
         [`elevation-${this.elevation}`]: this.elevation,
@@ -32,7 +33,7 @@ export default {
       return {'theme--dark': this.$store.state.theme.dark, 'theme--light': !this.$store.state.theme.dark}
     },
     stylesObject() {
-      console.log(this.color)
+      //console.log(this.color)
       return {color: this.processColor(this.color)}
     }
   },

@@ -10,6 +10,13 @@ export default {
 
   props: {
     value: Number
+  },
+
+  watch: {
+    value(val){
+      console.log(val)
+      this.$emit('input', val)
+    }
   }
 }
 </script>
