@@ -17,6 +17,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../../styles/variables";
 
 .d-card__title {
   min-height: 34px;
@@ -35,14 +36,14 @@ export default {
 
 .theme--dark {
   .d-card__title {
-    color: #bdbdbd;
+    color: $dark_card_text;
   }
 }
 
 .theme--light {
 
   .d-card__title {
-    color: #46474a;
+    color: $light_card_text;
   }
 }
 </style>

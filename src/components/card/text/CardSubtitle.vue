@@ -15,6 +15,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../../styles/variables";
 
 .d-card__subtitle {
   font-size: 1rem;
@@ -38,14 +39,14 @@ export default {
 
 .theme--dark {
   .d-card__subtitle {
-    color: #bdbdbd;
+    color: darken($dark_card_text, 16);
   }
 }
 
 .theme--light {
 
   .d-card__subtitle {
-    color: #46474a;
+    color: lighten($light_card_text, 36);
   }
 }
 </style>
