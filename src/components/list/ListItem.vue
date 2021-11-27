@@ -41,6 +41,7 @@ export default {
   min-height: 36px;
 
   list-style: none;
+  margin: 0;
 
   &::before {
     position: absolute;

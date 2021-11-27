@@ -24,7 +24,6 @@ export default {
 @import "../../styles/variables";
 
 .d-card {
-  padding: 4px;
   width: max-content;
 
   &.d-card--block{

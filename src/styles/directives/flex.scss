@@ -1,0 +1,19 @@
+@import "../variables";
+
+.flex {
+  display: flex;
+
+  gap: $gap * 3;
+
+  &.no-gap {
+    gap: normal;
+  }
+
+  &.wrap{
+    flex-wrap: wrap;
+  }
+
+  &.column {
+    flex-direction: column;
+  }
+}

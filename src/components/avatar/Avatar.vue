@@ -1,13 +1,14 @@
 <template>
   <d-function-wrapper :classes="['d-avatar', ...classesObject]" v-bind="{...$props, ...$attrs}" :style="avatarStylesObject">
-    <slot><img class="d-avatar__image" :src="src" alt=""/></slot>
+    <slot><d-image class="d-avatar__image" :src="src"/></slot>
   </d-function-wrapper>
 </template>
 
 <script>
+import DImage from "@/components/image/Image";
 export default {
   name: "d-avatar",
-
+  components: {DImage},
   props: {
     src: String,
     size: {type: Number, default: 40},
