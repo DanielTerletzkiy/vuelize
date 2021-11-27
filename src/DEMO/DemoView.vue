@@ -10,8 +10,9 @@
         <d-icon name="download-alt" color="primary" icon-style="monochrome"/>
       </d-card-subtitle>
 
-      <d-card-content>
+      <d-divider :spacing="2" color="primary" height="2px"/>
 
+      <d-card-content>
         <d-card-subtitle>
           Checkbox
         </d-card-subtitle>
@@ -25,7 +26,7 @@
           No Color
         </d-card-subtitle>
         <d-card-content>
-          <d-btn @click="openGithub">
+          <d-btn @click="openGithub" glow>
             <d-icon name="github-alt"/>
             Github
           </d-btn>
@@ -269,10 +270,12 @@ import DCardSubtitle from "@/components/card/text/CardSubtitle";
 import DSelectMenu from "@/components/menu/SelectMenu";
 import DImage from "@/components/image/Image";
 import DCardContent from "@/components/card/content/CardContent";
+import DDivider from "@/components/divider/Divider";
 
 export default {
   name: 'DemoView',
   components: {
+    DDivider,
     DCardContent,
     DImage,
     DSelectMenu,
