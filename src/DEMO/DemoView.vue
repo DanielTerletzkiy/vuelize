@@ -12,20 +12,29 @@
 
       <d-card-content>
 
-        <d-checkbox class="pa-2 px-0" :size="24" on-icon="sunset" off-icon="moonset" v-model="$store.state.theme.dark">
-          Dark mode
-        </d-checkbox>
+        <d-card-subtitle>
+          Checkbox
+        </d-card-subtitle>
+        <d-card-content>
+          <d-checkbox :size="24" on-icon="sunset" off-icon="moonset" v-model="$store.state.theme.dark">
+            Dark mode
+          </d-checkbox>
+        </d-card-content>
 
-        <d-card color="error" class="rounded-lg">
-          <d-card-title color="#fff">
-            <d-btn @click="openGithub">
-              <d-icon name="github-alt"/>
-              Github
-            </d-btn>
-          </d-card-title>
-        </d-card>
+        <d-card-subtitle>
+          No Color
+        </d-card-subtitle>
+        <d-card-content>
+          <d-btn @click="openGithub">
+            <d-icon name="github-alt"/>
+            Github
+          </d-btn>
+        </d-card-content>
 
-        <div style="display: flex; gap: 8px; margin: 8px 0; flex-flow: row wrap;">
+        <d-card-subtitle>
+          Colored and filled
+        </d-card-subtitle>
+        <d-card-content flex wrap>
           <d-btn color="success" filled @click="changeColor('success')">
             <d-icon name="check"/>
             Success
@@ -42,9 +51,14 @@
             <d-icon name="info-circle"/>
             Info
           </d-btn>
-        </div>
+        </d-card-content>
 
-        <div style="display: flex; gap: 8px; margin: 8px 0; flex-flow: row wrap;">
+        <d-card-subtitle>
+          Colored and
+          <d-icon name="angle-right" size="18"/>
+          <d-card-subtitle class="pl-0" color="primary">sad and outlined | outlined | glowing | camo</d-card-subtitle>
+        </d-card-subtitle>
+        <d-card-content flex wrap>
           <d-btn color="success" outlined depressed @click="changeColor('success')">
             <d-icon name="check"/>
             Success
@@ -61,13 +75,18 @@
             <d-icon name="info-circle"/>
             Info
           </d-btn>
-        </div>
+        </d-card-content>
 
-        <d-btn color="primary" glow block @click="changeColor('primary')">
-          <d-icon name="angle-left" :size="32"/>
-          This is full width
-          <d-icon name="angle-right" :size="32"/>
-        </d-btn>
+        <d-card-subtitle>
+          Full width Button
+        </d-card-subtitle>
+        <d-card-content>
+          <d-btn color="primary" glow block @click="changeColor('primary')">
+            <d-icon name="angle-left" :size="32"/>
+            This is full width
+            <d-icon name="angle-right" :size="32"/>
+          </d-btn>
+        </d-card-content>
       </d-card-content>
     </d-card>
 
@@ -220,7 +239,8 @@
 
         <d-card-content style="flex: 1" elevation="n1">
           <d-card-title>
-            <d-icon name="sad-crying" color="primary" :size="34"/> & Outlined
+            <d-icon name="sad-crying" color="primary" :size="34"/>
+            & Outlined
           </d-card-title>
           <d-list class="rounded-lg elevation-n2" color="primary" v-model="listItem">
             <d-list-item v-for="i in 6" :key="i-1" :outlined="listItem === i-1" depressed>
