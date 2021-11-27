@@ -56,7 +56,7 @@
         <d-card-subtitle>
           Colored and
           <d-icon name="angle-right" size="18"/>
-          <d-card-subtitle class="pl-0" color="primary">sad and outlined | outlined | glowing | camo</d-card-subtitle>
+          <d-card-subtitle class="pl-0 py-0" color="primary">sad and outlined | outlined | glowing | camo</d-card-subtitle>
         </d-card-subtitle>
         <d-card-content flex wrap>
           <d-btn color="success" outlined depressed @click="changeColor('success')">
