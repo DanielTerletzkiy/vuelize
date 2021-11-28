@@ -1,5 +1,6 @@
 <template>
-  <d-function-wrapper :classes="['d-checkbox']" v-bind="{...$props, ...$attrs}" :style="checkboxStylesObject" @click="changeValue">
+  <d-function-wrapper :classes="['d-checkbox']" v-bind="{...$props, ...$attrs}" :style="checkboxStylesObject"
+                      @click="changeValue">
     <div class="d-checkbox__box" :class="classesObject">
       <d-icon :name="value ? onIcon : offIcon" :size="size" :color="value ? getContrast() : 'currentColor'"/>
     </div>
@@ -31,7 +32,7 @@ export default {
   },
 
   methods: {
-    changeValue(){
+    changeValue() {
       let value = this.value;
       value = !value;
       this.$emit('input', value)
@@ -42,6 +43,7 @@ export default {
 
 <style scoped lang="scss">
 @import "../../styles/variables";
+
 .d-checkbox {
   user-select: none;
 
@@ -50,9 +52,10 @@ export default {
   gap: 8px;
 
   .d-checkbox__box {
-    border-radius: 6px;
-    border: 2px solid currentColor;
+    border-radius: 8px;
+    box-shadow: inset 0 0 0 1.8px currentColor !important;
     width: min-content;
+    padding: 2px;
 
     transition-duration: 0.1s;
 
@@ -69,12 +72,22 @@ export default {
     }
   }
 
-  &.theme--dark > .d-checkbox__label {
-    color: $dark_card_text
+  &.theme--dark {
+    .d-checkbox__label {
+      color: $dark_card_text
+    }
+    .d-checkbox__box:not(.d-checkbox--checked) {
+      color: darken($dark_card_text, 16);
+    }
   }
 
-  &.theme--light > .d-checkbox__label {
-    color: $light_card_text
+  &.theme--light {
+    .d-checkbox__label {
+      color: $light_card_text
+    }
+    .d-checkbox__box:not(.d-checkbox--checked) {
+      color: lighten($light_card_text, 24) !important;
+    }
   }
 
 }
