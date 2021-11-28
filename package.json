@@ -1,25 +1,23 @@
 {
   "name": "vuelize",
-  "version": "0.0.42",
+  "version": "0.0.46",
   "private": false,
   "description": "A Vue component Library, with the most common Material UI styled components",
   "author": "Daniel Terletzkiy",
   "license": "MIT",
-  "main": "src/index.js",
-  "main2": "dist/vue-materialize.umd.js",
-  "module": "dist/vue-materialize.esm.js",
-  "unpkg": "dist/vue-materialize.min.js",
+  "main": "dist/vuelize.umd.js",
+  "module": "dist/vuelize.esm.js",
+  "unpkg": "dist/vuelize.min.js",
   "files": [
-    "src",
-    "*.json"
+    "dist"
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
-    "build": "npm run build:copy && npm run build:umd && npm run build:es && npm run build:unpkg",
-    "build:umd": "rollup --config rollup.config.js --format umd --file dist/vue-materialize.umd.js",
-    "build:es": "rollup --config rollup.config.js --format es --file dist/vue-materialize.esm.js",
-    "build:unpkg": "rollup --config rollup.config.js --format iife --file dist/vue-materialize.min.js",
+    "build": "npm run build:umd && npm run build:es && npm run build:unpkg",
+    "build:umd": "rollup --config rollup.config.js --format umd --file dist/vuelize.umd.js",
+    "build:es": "rollup --config rollup.config.js --format es --file dist/vuelize.esm.js",
+    "build:unpkg": "rollup --config rollup.config.js --format iife --file dist/vuelize.min.js",
     "build:copy": "Xcopy /E src\\components dist\\src\\components"
   },
   "dependencies": {

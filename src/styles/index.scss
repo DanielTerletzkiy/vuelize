@@ -28,7 +28,7 @@ body, html {
 #app {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   &.theme--dark {
     $dark_background: #1f2128;
     background: $dark_background;

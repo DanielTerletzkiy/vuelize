@@ -5,10 +5,8 @@
 </template>
 
 <script>
-import DImage from "@/components/image/Image";
 export default {
   name: "d-avatar",
-  components: {DImage},
   props: {
     src: String,
     size: {type: Number, default: 40},

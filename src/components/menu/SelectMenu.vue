@@ -13,13 +13,9 @@
 </template>
 
 <script>
-import DCard from "@/components/card/Card";
-import DList from "@/components/list/List";
-import DListItem from "@/components/list/ListItem";
 
 export default {
   name: "d-select-menu",
-  components: {DCard, DList, DListItem},
 
   props: {
     value: Number,

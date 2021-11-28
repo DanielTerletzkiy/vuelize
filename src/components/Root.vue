@@ -8,12 +8,12 @@
 export default {
   name: "d-root",
 
-  data: ()=> ({
+  data: () => ({
     themeMode: 'theme--light'
   }),
 
   watch: {
-    '$store.state.theme.dark'(){
+    '$store.state.theme.dark'() {
       this.themeMode = this.$store.state.theme.dark ? 'theme--dark' : 'theme--light'
     }
   },
@@ -43,7 +43,7 @@ export default {
 
       return "#" + RR + GG + BB;
     },
-    createStyle(attr){
+    createStyle(attr) {
       const style = document.createElement('style');
       style.type = 'text/css';
       style.innerHTML = attr;
@@ -53,6 +53,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+@import "../styles/index";
 </style>

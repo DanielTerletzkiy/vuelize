@@ -10,11 +10,9 @@
 </template>
 
 <script>
-import DIcon from "@/components/icon/Icon";
 
 export default {
   name: "d-checkbox",
-  components: {DIcon},
   props: {
     value: Boolean,
     color: {type: String, default: 'primary'},

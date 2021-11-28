@@ -1,6 +1,3 @@
-//Imports SCSS
-import "./styles/index.scss"
-
 //Imports store
 import store from "./store";
 
@@ -20,6 +17,7 @@ import DList from "./components/list/List.vue";
 import DListItem from "./components/list/ListItem.vue";
 import DRoot from "./components/Root.vue";
 import DTextField from "./components/textfield/Textfield.vue";
+import DSelect from "./components/textfield/Select.vue";
 import DAvatar from "./components/avatar/Avatar.vue";
 import DCardSubtitle from "./components/card/text/CardSubtitle.vue";
 import DSelectMenu from "./components/menu/SelectMenu.vue";
@@ -40,6 +38,7 @@ export default Vue => {
     Vue.component("d-list-item", DListItem);
     Vue.component("d-root", DRoot);
     Vue.component("d-text-field", DTextField);
+    Vue.component("d-select", DSelect);
     Vue.component("d-avatar", DAvatar);
     Vue.component("d-select-menu", DSelectMenu);
     Vue.component("d-image", DImage);

@@ -14,13 +14,8 @@
 </template>
 
 <script>
-
-import DSelectMenu from "@/components/menu/SelectMenu";
-import DIcon from "@/components/icon/Icon";
-
 export default {
   name: "d-select",
-  components: {DIcon, DSelectMenu},
 
   props: {
     value: Number,
@@ -53,7 +48,6 @@ export default {
 <style scoped lang="scss">
 .d-text-field__input {
   position: relative;
-  padding: inherit;
   padding-top: 0.5em !important;
   padding-bottom: 0.5em !important;
   display: flex;
