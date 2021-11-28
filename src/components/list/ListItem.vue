@@ -71,7 +71,7 @@ export default {
   &:hover {
     &::before {
       background: currentColor;
-      opacity: 0.1;
+      opacity: 0.08;
     }
   }
 
@@ -89,6 +89,12 @@ export default {
     &::before {
       background: currentColor;
       opacity: 0.1;
+    }
+    &:hover {
+      &::before {
+        background: currentColor;
+        opacity: 0.15;
+      }
     }
   }
 

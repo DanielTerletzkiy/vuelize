@@ -56,7 +56,7 @@
 
         <d-card-subtitle>
           Colored and
-          <d-icon name="angle-right" size="18"/>
+          <d-icon name="angle-right" :size="18"/>
           <d-card-subtitle class="pl-0 py-0" color="primary">sad and outlined | outlined | glowing | camo</d-card-subtitle>
         </d-card-subtitle>
         <d-card-content flex wrap>
@@ -256,31 +256,9 @@
 </template>
 
 <script>
-import DCard from "@/components/card/Card";
-import DCardTitle from "@/components/card/text/CardTitle";
-import DBtn from "@/components/button/Button";
-import DIcon from "@/components/icon/Icon";
-import DCheckbox from "@/components/checkbox/Checkbox";
-import DList from "@/components/list/List";
-import DListItem from "@/components/list/ListItem";
-import DRoot from "@/components/Root";
-import DTextField from "@/components/textfield/Textfield";
-import DAvatar from "@/components/avatar/Avatar";
-import DCardSubtitle from "@/components/card/text/CardSubtitle";
-import DSelectMenu from "@/components/menu/SelectMenu";
-import DImage from "@/components/image/Image";
-import DCardContent from "@/components/card/content/CardContent";
-import DDivider from "@/components/divider/Divider";
 
 export default {
   name: 'DemoView',
-  components: {
-    DDivider,
-    DCardContent,
-    DImage,
-    DSelectMenu,
-    DCardSubtitle, DAvatar, DTextField, DRoot, DListItem, DList, DCheckbox, DIcon, DBtn, DCard, DCardTitle
-  },
 
   data: () => ({
     listItem: 0,

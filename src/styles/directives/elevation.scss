@@ -16,7 +16,7 @@
   }
 
   .elevation {
-    background-color: $dark_sheet;
+    background-color: $dark_sheet !important;
   }
 }
 
@@ -36,7 +36,7 @@
   }
 
   .elevation {
-    background-color: $light_sheet;
+    background-color: $light_sheet !important;
     box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
   }
 }

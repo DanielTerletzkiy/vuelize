@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="themeMode">
+  <div>
     <DemoView/>
   </div>
 </template>
@@ -12,20 +12,6 @@ export default {
   components: {
     DemoView
   },
-
-  data: ()=> ({
-    themeMode: 'theme--light'
-  }),
-
-  watch: {
-    '$store.state.theme.dark'(){
-      this.themeMode = this.$store.state.theme.dark ? 'theme--dark' : 'theme--light'
-    }
-  },
-
-  mounted() {
-    this.themeMode = this.$store.state.theme.dark ? 'theme--dark' : 'theme--light'
-  }
 }
 </script>
 

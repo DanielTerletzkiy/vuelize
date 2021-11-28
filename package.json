@@ -1,11 +1,26 @@
 {
-  "name": "component-lib",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vuelize",
+  "version": "0.0.42",
+  "private": false,
+  "description": "A Vue component Library, with the most common Material UI styled components",
+  "author": "Daniel Terletzkiy",
+  "license": "MIT",
+  "main": "src/index.js",
+  "main2": "dist/vue-materialize.umd.js",
+  "module": "dist/vue-materialize.esm.js",
+  "unpkg": "dist/vue-materialize.min.js",
+  "files": [
+    "src",
+    "*.json"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build": "npm run build:copy && npm run build:umd && npm run build:es && npm run build:unpkg",
+    "build:umd": "rollup --config rollup.config.js --format umd --file dist/vue-materialize.umd.js",
+    "build:es": "rollup --config rollup.config.js --format es --file dist/vue-materialize.esm.js",
+    "build:unpkg": "rollup --config rollup.config.js --format iife --file dist/vue-materialize.min.js",
+    "build:copy": "Xcopy /E src\\components dist\\src\\components"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -16,16 +31,23 @@
     "vuex": "^3.6.2"
   },
   "devDependencies": {
+    "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-commonjs": "^11.1.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "bili": "^5.0.5",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "jss-preset-default": "^10.8.2",
     "node-sass": "^6.0.1",
+    "rollup": "^1.17.0",
+    "rollup-plugin-scss": "^3.0.0",
+    "rollup-plugin-vue": "^5.0.0",
+    "sass": "^1.43.5",
     "sass-loader": "^10",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
     "root": true,
