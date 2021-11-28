@@ -2,7 +2,7 @@
   <div v-bind="{...$props, ...$attrs}" @focusin="$emit('focusin')"
        @focusout="$emit('focusout')" @click="toggleDropdown" @keypress.enter="toggleDropdown" tabindex="0">
     <slot name="item" :item="items[value]" :index="value">
-      {{ item }}
+      <span class="d-text-field__input__default">{{ items[value] }}</span>
     </slot>
     <d-icon :name="angleIcon" class="d-text-field__input__icon"/>
     <d-select-menu v-bind="{...$props, ...$attrs}" :value="value" @input="onInput" :open.sync="dropdownOpen">
@@ -51,6 +51,10 @@ export default {
   padding-top: 0.5em !important;
   padding-bottom: 0.5em !important;
   display: flex;
+
+  .d-text-field__input__default {
+    align-self: center;
+  }
 
   .d-text-field__input__icon {
     margin-left: auto;

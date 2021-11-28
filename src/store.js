@@ -27,11 +27,6 @@ const store = new Vuex.Store({
             },
         },
     },
-    mutations: {
-        increment (state) {
-            state.count++
-        }
-    }
 })
 
 export default store

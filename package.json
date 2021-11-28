@@ -1,6 +1,6 @@
 {
   "name": "vuelize",
-  "version": "0.0.46",
+  "version": "0.0.48",
   "private": false,
   "description": "A Vue component Library, with the most common Material UI styled components",
   "author": "Daniel Terletzkiy",
@@ -15,6 +15,7 @@
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "build": "npm run build:umd && npm run build:es && npm run build:unpkg",
+    "build:publish": "npm run build && npm publish",
     "build:umd": "rollup --config rollup.config.js --format umd --file dist/vuelize.umd.js",
     "build:es": "rollup --config rollup.config.js --format es --file dist/vuelize.esm.js",
     "build:unpkg": "rollup --config rollup.config.js --format iife --file dist/vuelize.min.js",

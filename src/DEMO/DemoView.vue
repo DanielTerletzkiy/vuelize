@@ -17,7 +17,7 @@
           Checkbox
         </d-card-subtitle>
         <d-card-content>
-          <d-checkbox :size="24" on-icon="sunset" off-icon="moonset" v-model="$store.state.theme.dark">
+          <d-checkbox :size="24" on-icon="sunset" off-icon="moonset" v-model="$vuelize.theme.dark">
             Dark mode
           </d-checkbox>
         </d-card-content>
@@ -103,6 +103,9 @@
         <d-text-field color="primary" outlined depressed label="Text" type="text" v-model="text"/>
         <d-text-field color="primary" outlined depressed label="Text with placeholder" type="text" v-model="text"
                       placeholder="This is a placeholder"/>
+
+        <d-text-field color="primary" outlined depressed label="Default Select" v-model="selectedIcon" select
+                      :items="['Cube', 'Anchor', 'Layers Alt']"/>
 
         <d-text-field color="primary" outlined depressed label="Icon Select" v-model="selectedIcon" select
                       :items="iconItems">
@@ -287,10 +290,10 @@ export default {
       window.open('https://github.com/DanielTerletzkiy/vue-materialize')
     },
     changeColor(color) {
-      if (this.$store.state.theme.dark) {
-        this.$store.state.theme.themes.dark.primary = this.processColor(color)
+      if (this.$vuelize.theme.dark) {
+        this.$vuelize.theme.themes.dark.primary = this.processColor(color)
       } else {
-        this.$store.state.theme.themes.light.primary = this.processColor(color)
+        this.$vuelize.theme.themes.light.primary = this.processColor(color)
 
       }
     }

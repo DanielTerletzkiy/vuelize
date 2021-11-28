@@ -13,13 +13,13 @@ export default {
   }),
 
   watch: {
-    '$store.state.theme.dark'() {
-      this.themeMode = this.$store.state.theme.dark ? 'theme--dark' : 'theme--light'
+    '$vuelize.theme.dark'() {
+      this.themeMode = this.$vuelize.theme.dark ? 'theme--dark' : 'theme--light'
     }
   },
 
   mounted() {
-    this.themeMode = this.$store.state.theme.dark ? 'theme--dark' : 'theme--light'
+    this.themeMode = this.$vuelize.theme.dark ? 'theme--dark' : 'theme--light'
   },
 
   methods: {

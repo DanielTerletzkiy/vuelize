@@ -31,7 +31,7 @@ export default {
       }
     },
     themeClass() {
-      return {'theme--dark': this.$store.state.theme.dark, 'theme--light': !this.$store.state.theme.dark}
+      return {'theme--dark': this.$vuelize.theme.dark, 'theme--light': !this.$vuelize.theme.dark}
     },
     stylesObject() {
       //console.log(this.color)

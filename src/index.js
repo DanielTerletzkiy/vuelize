@@ -49,7 +49,7 @@ export default Vue => {
     //-----------------------
 
     //Implement store
-    Vue.prototype.$store = store
+    Vue.prototype.$vuelize = store.state
 
     //Register Unicons
     const objArray = [];
@@ -84,10 +84,10 @@ export default Vue => {
     //Color process functions
     Vue.prototype.processColor = function (color) {
         let colorOut = '';
-        if (this.$store.state.theme.dark) {
-            colorOut = this.$store.state.theme.themes.dark[color]
+        if (this.$vuelize.theme.dark) {
+            colorOut = this.$vuelize.theme.themes.dark[color]
         } else {
-            colorOut = this.$store.state.theme.themes.light[color]
+            colorOut = this.$vuelize.theme.themes.light[color]
         }
         if (!colorOut) {
             return color
