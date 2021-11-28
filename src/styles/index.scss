@@ -24,6 +24,17 @@ body, html {
   padding: 0;
 }
 
+a {
+  color: inherit;
+  text-decoration: inherit;
+  display: inherit;
+
+  &.d-btn{
+    display: flex;
+    width: min-content;
+  }
+}
+
 @import url('https://fonts.googleapis.com/css?family=Source%20Sans%20Pro:200,300,400,600,700');
 
 #app {
@@ -31,6 +42,7 @@ body, html {
   width: 100%;
   height: 100vh;
   overflow: auto;
+
   &.theme--dark {
     $dark_background: #1f2128;
     background: $dark_background;

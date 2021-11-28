@@ -11,6 +11,7 @@ import DFunctionWrapper from "./components/FunctionWrapper.vue";
 import DCard from "./components/card/Card.vue";
 import DCardTitle from "./components/card/text/CardTitle.vue";
 import DBtn from "./components/button/Button.vue";
+import DIconButton from "./components/button/IconButton.vue";
 import DIcon from "./components/icon/Icon.vue";
 import DCheckbox from "./components/checkbox/Checkbox.vue";
 import DList from "./components/list/List.vue";
@@ -24,6 +25,8 @@ import DSelectMenu from "./components/menu/SelectMenu.vue";
 import DImage from "./components/image/Image.vue";
 import DCardContent from "./components/card/content/CardContent.vue";
 import DDivider from "./components/divider/Divider.vue";
+import DToolbar from "./components/app/toolbar/Toolbar.vue";
+import DNavigationBar from "./components/app/navigation/NavigationBar.vue";
 
 export default Vue => {
 
@@ -32,6 +35,7 @@ export default Vue => {
     Vue.component("d-card-title", DCardTitle);
     Vue.component("d-card-subtitle", DCardSubtitle);
     Vue.component("d-btn", DBtn);
+    Vue.component("d-icon-button", DIconButton);
     Vue.component("d-icon", DIcon);
     Vue.component("d-checkbox", DCheckbox);
     Vue.component("d-list", DList);
@@ -44,6 +48,8 @@ export default Vue => {
     Vue.component("d-image", DImage);
     Vue.component("d-card-content", DCardContent);
     Vue.component("d-divider", DDivider);
+    Vue.component("d-toolbar", DToolbar);
+    Vue.component("d-navigation-bar", DNavigationBar);
 
 
     //-----------------------
@@ -83,7 +89,7 @@ export default Vue => {
 
     //Color process functions
     Vue.prototype.processColor = function (color) {
-        let colorOut = '';
+        let colorOut;
         if (this.$vuelize.theme.dark) {
             colorOut = this.$vuelize.theme.themes.dark[color]
         } else {

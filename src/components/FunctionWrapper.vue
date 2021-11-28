@@ -1,5 +1,5 @@
 <template>
-  <component :is="rootDiv" :class="[...this.classes, themeClass, ...classAttributes]" :style="stylesObject" @click="()=>$emit('click')"
+  <component :is="root" :to="link" :class="[...this.classes, themeClass, ...classAttributes]" :style="stylesObject" @click="()=>$emit('click')"
        @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
   </component>
@@ -17,7 +17,9 @@ export default {
     rounded: {type: String, default: 'lg'},
     elevation: String,
     outlined: Boolean,
-    depressed: Boolean
+    depressed: Boolean,
+
+    link: {type: String, default: null}
   },
 
   computed: {
@@ -29,6 +31,9 @@ export default {
         outlined: this.outlined,
         depressed: this.depressed,
       }
+    },
+    root(){
+      return this.link ? 'router-link' : this.rootDiv
     },
     themeClass() {
       return {'theme--dark': this.$vuelize.theme.dark, 'theme--light': !this.$vuelize.theme.dark}
