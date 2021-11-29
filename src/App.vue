@@ -1,16 +1,13 @@
 <template>
   <d-root>
-    <d-toolbar show-hamburger elevation @hamburgerClick="navDrawer = !navDrawer">
+    <d-toolbar show-hamburger @hamburgerClick="navDrawer = !navDrawer">
       <div>
-        <d-card-title class="font-size-medium pt-0" color="primary">Demo page</d-card-title>
-        <d-card-subtitle class="pb-0 pl-2">Everything in this Lib
-          <d-icon name="download-alt" color="primary" icon-style="monochrome"/>
-        </d-card-subtitle>
+        <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>
       </div>
     </d-toolbar>
 
     <div style="display: flex">
-      <d-navigation-bar permanent v-model="navDrawer">
+      <d-navigation-bar :permanent="!this.$isMobile()" :temporary="this.$isMobile()" v-model="navDrawer">
         <d-list :value="currentNavigation" color="primary">
           <d-list-item :key="'/'" link="/">
             <d-icon name="estate"/>

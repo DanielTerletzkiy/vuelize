@@ -10,7 +10,7 @@ export default {
     name: String,
     color: String,
     iconStyle: String,
-    size: Number,
+    size: [String, Number],
   }
 }
 </script>

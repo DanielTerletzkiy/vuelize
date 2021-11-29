@@ -13,8 +13,8 @@ export default {
   name: "d-navigation-bar",
 
   props: {
-    value: {type: Boolean,default: true},
-    permanent: {type: Boolean,default: true},
+    value: {type: Boolean, default: true},
+    permanent: Boolean,
     temporary: Boolean,
   },
 
@@ -43,8 +43,8 @@ export default {
 
   &--permanent {
     position: sticky;
-    top: 57px;
-    height: calc(100vh - 57px);
+    top: 54px;
+    height: calc(100vh - 54px) !important;
   }
 
   &__content {

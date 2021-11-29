@@ -1,10 +1,14 @@
 {
   "name": "vuelize",
-  "version": "0.0.49",
+  "version": "0.0.51",
   "private": false,
   "description": "A Vue component Library, with the most common Material UI styled components",
   "author": "Daniel Terletzkiy",
   "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/DanielTerletzkiy/vuelize"
+  },
   "main": "dist/vuelize.umd.js",
   "module": "dist/vuelize.esm.js",
   "unpkg": "dist/vuelize.min.js",
@@ -18,8 +22,7 @@
     "build:publish": "npm run build && npm publish",
     "build:umd": "rollup --config rollup.config.js --format umd --file dist/vuelize.umd.js",
     "build:es": "rollup --config rollup.config.js --format es --file dist/vuelize.esm.js",
-    "build:unpkg": "rollup --config rollup.config.js --format iife --file dist/vuelize.min.js",
-    "build:copy": "Xcopy /E src\\components dist\\src\\components"
+    "build:unpkg": "rollup --config rollup.config.js --format iife --file dist/vuelize.min.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",

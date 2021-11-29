@@ -54,15 +54,15 @@
           <d-card-subtitle>
             Colored and
             <d-icon name="angle-right" :size="18"/>
-            <d-card-subtitle class="pl-0 py-0" color="primary">sad and outlined | outlined | glowing | camo
+            <d-card-subtitle class="pl-0 py-0" color="primary">sad and inlined | inlined | glowing | camo
             </d-card-subtitle>
           </d-card-subtitle>
           <d-card-content flex wrap>
-            <d-btn color="success" outlined depressed @click="changeColor('success')">
+            <d-btn color="success" inlined depressed @click="changeColor('success')">
               <d-icon name="check"/>
               Success
             </d-btn>
-            <d-btn color="error" outlined @click="changeColor('error')">
+            <d-btn color="error" inlined @click="changeColor('error')">
               <d-icon name="exclamation-triangle"/>
               Error
             </d-btn>
@@ -98,14 +98,14 @@
         </d-card-title>
 
         <d-card-content flex wrap>
-          <d-text-field color="primary" outlined depressed label="Text" type="text" v-model="text"/>
-          <d-text-field color="primary" outlined depressed label="Text with placeholder" type="text" v-model="text"
+          <d-text-field color="primary" inlined depressed label="Text" type="text" v-model="text"/>
+          <d-text-field color="primary" inlined depressed label="Text with placeholder" type="text" v-model="text"
                         placeholder="This is a placeholder"/>
 
-          <d-text-field color="primary" outlined depressed label="Default Select" v-model="selectedIcon" select
+          <d-text-field color="primary" inlined depressed label="Default Select" v-model="selectedIcon" select
                         :items="['Cube', 'Anchor', 'Layers Alt']"/>
 
-          <d-text-field color="primary" outlined depressed label="Icon Select" v-model="selectedIcon" select
+          <d-text-field color="primary" inlined depressed label="Icon Select" v-model="selectedIcon" select
                         :items="iconItems">
             <template slot="item" slot-scope="{item}">
               <d-card-title class="pa-0 font-size-small" color="inherit">
@@ -115,7 +115,7 @@
             </template>
           </d-text-field>
 
-          <d-text-field color="primary" outlined depressed label="User Select" v-model="selectedUser" select
+          <d-text-field color="primary" inlined depressed label="User Select" v-model="selectedUser" select
                         :items="userItems">
             <template slot="item" slot-scope="{item}">
               <d-card-title class="pa-0 font-size-small" color="inherit">
@@ -125,19 +125,19 @@
             </template>
           </d-text-field>
 
-          <d-text-field color="primary" outlined depressed label="Date" type="date" v-model="date"/>
+          <d-text-field color="primary" inlined depressed label="Date" type="date" v-model="date"/>
         </d-card-content>
 
         <d-card-content flex wrap class="pt-2">
-          <d-card-title class="font-size-medium" outlined depressed elevation="n2" rounded="lg">
+          <d-card-title class="font-size-medium" inlined depressed elevation="n2" rounded="lg">
             <d-icon :size="34" color="primary" name="text"/>
             {{ text }}
           </d-card-title>
-          <d-card-title class="font-size-medium" outlined depressed elevation="n2" rounded="lg">
+          <d-card-title class="font-size-medium" inlined depressed elevation="n2" rounded="lg">
             <d-icon :size="34" color="primary" name="list-ol"/>
             <d-icon :size="34" :name="iconItems[selectedIcon].icon" :icon-style="iconItems[selectedIcon].iconStyle"/>
           </d-card-title>
-          <d-card-title class="font-size-medium" outlined depressed elevation="n2" rounded="lg">
+          <d-card-title class="font-size-medium" inlined depressed elevation="n2" rounded="lg">
             <d-icon :size="34" color="primary" name="calendar-alt"/>
             {{ date }}
           </d-card-title>
@@ -183,7 +183,7 @@
           Images!
         </d-card-title>
         <d-card-content>
-          <d-image height="100px" width="min-content"
+          <d-image height="100px" width="auto"
                    src="https://swansoftwaresolutions.com/wp-content/uploads/2020/01/Benefits-of-Using-VUE.JS.jpeg"/>
         </d-card-content>
       </d-card>
@@ -229,10 +229,10 @@
 
           <d-card-content style="flex: 1">
             <d-card-title>
-              Outlined
+              Inlined
             </d-card-title>
             <d-list class="rounded-lg elevation-n2" color="primary" v-model="listItem">
-              <d-list-item v-for="i in 6" :key="i-1" :outlined="listItem === i-1">
+              <d-list-item v-for="i in 6" :key="i-1" :inlined="listItem === i-1">
                 <d-icon class="mr-1" :name="`${i-1}-plus`"/>
                 Item {{ i - 1 }}
               </d-list-item>
@@ -242,10 +242,10 @@
           <d-card-content style="flex: 1" elevation="n1">
             <d-card-title>
               <d-icon name="sad-crying" color="primary" :size="34"/>
-              & Outlined
+              & Inlined
             </d-card-title>
             <d-list class="rounded-lg elevation-n2" color="primary" v-model="listItem">
-              <d-list-item v-for="i in 6" :key="i-1" :outlined="listItem === i-1" depressed>
+              <d-list-item v-for="i in 6" :key="i-1" :inlined="listItem === i-1" depressed>
                 <d-icon class="mr-1" :name="`${i-1}-plus`"/>
                 Item {{ i - 1 }}
               </d-list-item>

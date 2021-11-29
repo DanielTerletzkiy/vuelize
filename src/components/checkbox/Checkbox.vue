@@ -17,7 +17,7 @@ export default {
   props: {
     value: Boolean,
     color: {type: String, default: 'primary'},
-    size: {type: Number, default: 18},
+    size: {type: [String, Number], default: 18},
     onIcon: {type: String, default: 'check'},
     offIcon: {type: String, default: 'check'},
   },

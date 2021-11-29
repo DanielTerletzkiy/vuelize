@@ -6,7 +6,6 @@
       </d-icon-button>
       <slot></slot>
     </d-card>
-    <d-divider v-if="this.$vuelize.theme.dark" height="2px"/>
   </d-function-wrapper>
 </template>
 
@@ -27,10 +26,12 @@ export default {
   top: 0;
 
   width: 100%;
-  min-height: 54px;
+  max-height: 54px;
   z-index: 10;
 
   border-radius: 0;
+
+  box-shadow: 0 2px 30px -20px rgba(31,33,40,1);
 
   .d-card{
     min-height: inherit;

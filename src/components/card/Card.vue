@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper :classes="['d-card', ...classesObject]" v-bind="{...$props, ...$attrs}" :style="{background: this.processColor(this.color)}">
+  <d-function-wrapper :classes="['d-card', ...classesObject]" v-bind="{...$props, ...$attrs}" :style="stylesObject">
     <slot></slot>
   </d-function-wrapper>
 </template>
@@ -9,12 +9,23 @@ export default {
   name: "d-card",
   props: {
     color: String,
-    block: Boolean
+    block: Boolean,
+    minWidth: String,
+    maxWidth: String,
+    width: String,
   },
 
   computed: {
     classesObject() {
       return {'d-card--block': this.block}
+    },
+    stylesObject(){
+      return {
+        background: this.processColor(this.color),
+        minWidth: this.minWidth,
+        maxWidth: this.maxWidth,
+        width: this.width,
+      }
     }
   }
 }

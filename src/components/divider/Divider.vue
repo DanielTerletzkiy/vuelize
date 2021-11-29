@@ -9,20 +9,24 @@ export default {
   props: {
     block: Boolean,
     spacing: Number,
-    height: {type: String, default: '1px'}
+    vertical: Boolean,
+    size: {type: String, default: '1px'},
   },
 
   computed: {
     classesObject() {
       return {
         'd-divider--block': this.block,
+        'd-divider--vertical': this.vertical,
+        'd-divider--horizontal': !this.vertical,
         [`mx-${this.spacing}`]: this.spacing
       }
     },
     stylesObject(){
       return {
-        height: this.height,
-        'border-radius': this.height
+        height: this.vertical === false ? this.size : '',
+        width: this.vertical === true ? this.size : '',
+        'border-radius': this.size
       }
     }
   },
@@ -33,13 +37,33 @@ export default {
 @import "../../styles/variables";
 
 .d-divider {
-  min-width: min-content;
-  height: 1px;
   background: currentColor;
   border-radius: 2px;
 
+  &--horizontal {
+    min-width: min-content;
+  }
+
+  &--vertical {
+    min-height: min-content;
+  }
+
   &.d-divider--block {
-    width: auto;
+    &.d-divider--horizontal {
+      width: auto;
+      flex: 1;
+    }
+    &.d-divider--vertical {
+      display: flex;
+      align-self: stretch;
+    }
+  }
+
+  &.theme--dark {
+    color: darken($dark_card_text, 50);
+  }
+  &.theme--light {
+    color: lighten($light_card_text, 50);
   }
 }
 

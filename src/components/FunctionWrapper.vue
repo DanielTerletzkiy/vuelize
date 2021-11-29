@@ -9,19 +9,6 @@
 export default {
   name: "d-function-wrapper",
 
-  props: {
-    rootDiv: {type: String, default: 'div'},
-    classes: Array,
-    color: String,
-
-    rounded: {type: String, default: 'lg'},
-    elevation: String,
-    outlined: Boolean,
-    depressed: Boolean,
-
-    link: {type: String, default: null}
-  },
-
   computed: {
     classAttributes() {
       return {
@@ -29,6 +16,7 @@ export default {
         [`elevation-${this.elevation}`]: this.elevation,
         elevation: this.elevation === '',
         outlined: this.outlined,
+        inlined: this.inlined,
         depressed: this.depressed,
       }
     },

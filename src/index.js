@@ -25,6 +25,9 @@ import DSelectMenu from "./components/menu/SelectMenu.vue";
 import DImage from "./components/image/Image.vue";
 import DCardContent from "./components/card/content/CardContent.vue";
 import DDivider from "./components/divider/Divider.vue";
+import DRow from "./components/flex/Row.vue";
+import DColumn from "./components/flex/Column.vue";
+import DSpacer from "./components/flex/Spacer.vue";
 import DToolbar from "./components/app/toolbar/Toolbar.vue";
 import DNavigationBar from "./components/app/navigation/NavigationBar.vue";
 
@@ -48,6 +51,9 @@ export default Vue => {
     Vue.component("d-image", DImage);
     Vue.component("d-card-content", DCardContent);
     Vue.component("d-divider", DDivider);
+    Vue.component("d-row", DRow);
+    Vue.component("d-column", DColumn);
+    Vue.component("d-spacer", DSpacer);
     Vue.component("d-toolbar", DToolbar);
     Vue.component("d-navigation-bar", DNavigationBar);
 
@@ -68,6 +74,25 @@ export default Vue => {
 
     //Imports FunctionWrapper
     Vue.component('d-function-wrapper', DFunctionWrapper)
+
+
+    //Vue mixin
+    Vue.mixin({
+        //Default props
+        props: {
+            rootDiv: {type: String, default: 'div'},
+            classes: Array,
+            color: String,
+
+            rounded: {type: String, default: 'lg'},
+            elevation: [String, Number, undefined],
+            outlined: Boolean,
+            inlined: Boolean,
+            depressed: Boolean,
+
+            link: {type: String, default: null}
+        }
+    })
 
 
     //Click outside listener
@@ -117,9 +142,14 @@ export default Vue => {
         let g = parseInt(hexColor.substr(2, 2), 16);
         let b = parseInt(hexColor.substr(4, 2), 16);
         // Get YIQ ratio
-        let yiq = ((r * 299) + (g * 395) + (b * 114)) / 1000;
+        let yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
         // Check contrast
-        return (yiq >= 128) ? 'black' : 'white';
+        return (yiq >= 160) ? 'black' : 'white';
 
+    }
+
+    //Mobile detection functions
+    Vue.prototype.$isMobile = function() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 };
