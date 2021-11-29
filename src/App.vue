@@ -13,11 +13,11 @@
       <d-navigation-bar permanent v-model="navDrawer">
         <d-list :value="currentNavigation" color="primary">
           <d-list-item :key="'/'" link="/">
-            <d-icon name="angle-right"/>
+            <d-icon name="estate"/>
             Home
           </d-list-item>
           <d-list-item :key="'/test'" link="test">
-            <d-icon name="angle-right"/>
+            <d-icon name="flask"/>
             Test
           </d-list-item>
         </d-list>
