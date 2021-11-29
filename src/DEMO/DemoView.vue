@@ -183,7 +183,7 @@
           Images!
         </d-card-title>
         <d-card-content>
-          <d-image height="100px" width="min-content"
+          <d-image height="100px" width="auto"
                    src="https://swansoftwaresolutions.com/wp-content/uploads/2020/01/Benefits-of-Using-VUE.JS.jpeg"/>
         </d-card-content>
       </d-card>
