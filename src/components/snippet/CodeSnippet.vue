@@ -4,14 +4,14 @@
       <d-row :elevation="this.$vuelize.theme.dark ? 'n1' : ''">
         <d-column>
           <d-card-subtitle color="primary">
-            {{label}}
+            {{ label }}
           </d-card-subtitle>
         </d-column>
         <d-spacer/>
-        <d-divider vertical block size="1.4px" class="my-3" :color="hover?'primary':''"/>
+        <d-divider vertical block size="1.5px" class="my-3" :color="hover.includes(-1)?'primary':''"/>
         <d-column>
           <d-icon-button size="40" color="primary" @click="copySequence"
-                         v-hover="{ over: ()=>{this.hover = true}, leave: ()=>{this.hover = false} }">
+                         v-hover="{ over: ()=>{setHover(true, -1)}, leave: ()=>{setHover(false, -1)} }">
             <d-icon name="clipboard-notes"/>
           </d-icon-button>
         </d-column>
@@ -19,14 +19,20 @@
 
       <d-row class="d-code-snippet__row" v-for="(code, c) in this.codeArray" :key="c">
         <d-column>
-          <d-card-subtitle class="d-code-snippet__code">
+          <d-card-subtitle class="d-code-snippet__row__number">
+            {{ c }}
+          </d-card-subtitle>
+        </d-column>
+        <d-column>
+          <d-card-subtitle class="d-code-snippet__row__code">
             {{ code }}
           </d-card-subtitle>
         </d-column>
         <d-spacer></d-spacer>
-        <d-divider vertical block size="1.4px" class="my-3" :color="hover?'primary':''"/>
+        <d-divider vertical block size="1.5px" class="my-3" :color="hover.includes(c)?'primary':''"/>
         <d-column>
-          <d-icon-button size="40" color="primary" @click="()=>copy(code)">
+          <d-icon-button size="40" color="primary" @click="()=>copy(code)"
+                         v-hover="{ over: ()=>{setHover(true, c)}, leave: ()=>{setHover(false, c)} }">
             <d-icon name="clipboard"/>
           </d-icon-button>
         </d-column>
@@ -45,7 +51,7 @@ export default {
   },
 
   data: () => ({
-    hover: false
+    hover: [],
   }),
 
   methods: {
@@ -58,6 +64,19 @@ export default {
       }).join('');
       this.copy(codeSequence)
     },
+    setHover(state, index) {
+      if (state) {
+        if (index === -1) {
+          for (let i = -1; i < this.codeArray.length; i++) {
+            this.hover.push(i);
+          }
+        } else {
+          this.hover = [index];
+        }
+      } else {
+        this.hover = [];
+      }
+    }
   }
 }
 </script>
@@ -70,12 +89,18 @@ export default {
     overflow: hidden;
   }
 
-  &__code {
-    font-family: monospace;
-  }
 
   &__row {
     width: 100%;
+
+    &__number {
+      user-select: none;
+      padding-left: 16px !important;
+    }
+
+    &__code {
+      font-family: monospace;
+    }
   }
 }
 </style>
