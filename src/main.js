@@ -7,9 +7,11 @@ Vue.use(index)
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-import DemoView from "@/DEMO/DemoView";
+import DemoView from "@/DOCS/DemoView";
+import GettingStarted from "@/DOCS/views/GettingStarted";
 const routes = [
-    { path: '/', component: DemoView },
+    { path: '/', component: GettingStarted },
+    { path: '/test', component: DemoView },
 ]
 
 const router = new VueRouter({

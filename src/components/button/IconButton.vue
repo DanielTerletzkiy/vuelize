@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper root-div="button" :classes="['d-icon-button']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
+  <d-function-wrapper root-div="button" :classes="['d-icon-button']" v-bind="{...$props, ...$attrs}" @click="$emit('click')" :style="stylesObject">
     <span class="d-icon-button__content">
       <slot name="default"></slot>
     </span>
@@ -9,7 +9,20 @@
 
 <script>
 export default {
-  name: "d-icon-button"
+  name: "d-icon-button",
+
+  props: {
+    size: {type: [String, Number], default: 50},
+  },
+
+  computed: {
+    stylesObject(){
+      return {
+        width: this.size + 'px',
+        height: this.size + 'px',
+      }
+    }
+  }
 }
 </script>
 
@@ -24,8 +37,8 @@ export default {
   cursor: pointer;
   padding: 0 12px;
 
-  min-height: 50px;
-  min-width: 50px;
+  height: 50px;
+  width: 50px;
 
   border-radius: 8px;
 
