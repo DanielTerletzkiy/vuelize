@@ -28,6 +28,7 @@ import DDivider from "./components/divider/Divider.vue";
 import DRow from "./components/flex/Row.vue";
 import DColumn from "./components/flex/Column.vue";
 import DSpacer from "./components/flex/Spacer.vue";
+import DCodeSnippet from "./components/snippet/CodeSnippet.vue";
 import DToolbar from "./components/app/toolbar/Toolbar.vue";
 import DNavigationBar from "./components/app/navigation/NavigationBar.vue";
 
@@ -54,6 +55,7 @@ export default Vue => {
     Vue.component("d-row", DRow);
     Vue.component("d-column", DColumn);
     Vue.component("d-spacer", DSpacer);
+    Vue.component("d-code-snippet", DCodeSnippet);
     Vue.component("d-toolbar", DToolbar);
     Vue.component("d-navigation-bar", DNavigationBar);
 
@@ -95,7 +97,7 @@ export default Vue => {
     })
 
 
-    //Click outside listener
+    //Click outside directive
     Vue.directive('click-outside', {
         bind: function (el, binding, vnode) {
             el.clickOutsideEvent = function (event) {
@@ -109,6 +111,41 @@ export default Vue => {
             document.body.removeEventListener('click', el.clickOutsideEvent)
         },
     });
+
+    //Hover directive
+    Vue.directive('hover', {
+        bind: function (el, binding, vNode) {
+            // Provided expression must evaluate to an object.
+            const compName = vNode.context.name
+            if (typeof binding.value !== 'object') {
+                let warn = `[v-hover]: provided expression '${binding.expression}' is not an object, but it needs to be.`
+                if (compName) { warn += `\nFound in component '${compName}'` }
+                console.warn(warn)
+            }
+            if (!binding.value.over && !binding.value.leave) {
+                let warn = `[v-hover]: object provided does not have 'over' or 'leave' properties. Needs at least one to be of use`
+                if (compName) { warn += `\nFound in component '${compName}'` }
+                console.warn(warn)
+            }
+            el.__vHoverOver__ = binding.value.over || (() => {})
+            el.__vHoverLeave__ = binding.value.leave || (() => {})
+
+            // Add Event Listeners
+            el.addEventListener('mouseover', el.__vHoverOver__)
+            el.addEventListener('mouseleave', el.__vHoverLeave__)
+            el.addEventListener('touchmove', el.__vHoverOver__)
+            el.addEventListener('touchend', el.__vHoverLeave__)
+        },
+        unbind: function (el) {
+            // Remove Event Listeners
+            el.removeEventListener('mouseover', el.__vHoverOver__)
+            el.removeEventListener('mouseleave', el.__vHoverLeave__)
+            el.removeEventListener('touchmove', el.__vHoverOver__)
+            el.removeEventListener('touchend', el.__vHoverLeave__)
+            delete el.__vHoverOver__
+            delete el.__vHoverLeave__
+        }
+    })
 
     Vue.config.productionTip = false
 

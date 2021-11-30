@@ -28,10 +28,8 @@
 </template>
 
 <script>
-import DCodeSnippet from "@/DOCS/components/CodeSnippets";
 export default {
   name: "GettingStarted",
-  components: {DCodeSnippet}
 }
 </script>
 
