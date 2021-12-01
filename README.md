@@ -1,24 +1,8 @@
-# component-lib
+# VUELIZE for VUE.js 2
 
-## Project setup
-```
-npm install
-```
+### [Documentation Website](https://danielterletzkiy.github.io/vuelize/#/)
+### [NPM Website](https://www.npmjs.com/package/vuelize)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+This is a vue component library with inspiration from Google's Material UI and Vuetify
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```npm install vuelize```
