@@ -28,7 +28,8 @@ import DDivider from "./components/divider/Divider.vue";
 import DRow from "./components/flex/Row.vue";
 import DColumn from "./components/flex/Column.vue";
 import DSpacer from "./components/flex/Spacer.vue";
-import DCodeSnippet from "./components/snippet/CodeSnippet.vue";
+import DCodeSnippet from "./components/code/CodeSnippet.vue";
+import DCodeLine from "./components/code/CodeLine.vue";
 import DTooltip from "./components/tooltip/Tooltip.vue";
 import DToolbar from "./components/app/toolbar/Toolbar.vue";
 import DNavigationBar from "./components/app/navigation/NavigationBar.vue";
@@ -57,6 +58,7 @@ export default Vue => {
     Vue.component("d-column", DColumn);
     Vue.component("d-spacer", DSpacer);
     Vue.component("d-code-snippet", DCodeSnippet);
+    Vue.component("d-code-line", DCodeLine);
     Vue.component("d-tooltip", DTooltip);
     Vue.component("d-toolbar", DToolbar);
     Vue.component("d-navigation-bar", DNavigationBar);

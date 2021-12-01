@@ -1,6 +1,6 @@
 <template>
-  <d-function-wrapper :classes="['d-code-snippet']" v-bind="{...$props, ...$attrs}">
-    <d-card block max-width="600px" depressed class="d-code-snippet__card">
+  <d-function-wrapper :classes="['d-code-line']" v-bind="{...$props, ...$attrs}">
+    <d-card block max-width="600px" depressed class="d-code-line__card">
       <d-row :elevation="this.$vuelize.theme.dark ? 'n1' : ''">
         <d-column>
           <d-card-subtitle color="primary">
@@ -17,14 +17,14 @@
         </d-column>
       </d-row>
 
-      <d-row class="d-code-snippet__row" v-for="(code, c) in this.codeArray" :key="c">
+      <d-row class="d-code-line__row" v-for="(code, c) in this.codeArray" :key="c">
         <d-column>
-          <d-card-subtitle class="d-code-snippet__row__number">
-            {{ c }}
+          <d-card-subtitle class="d-code-line__row__number">
+            {{ c + 1 }}
           </d-card-subtitle>
         </d-column>
         <d-column>
-          <d-card-subtitle class="d-code-snippet__row__code">
+          <d-card-subtitle class="d-code-line__row__code">
             {{ code }}
           </d-card-subtitle>
         </d-column>
@@ -43,7 +43,7 @@
 
 <script>
 export default {
-  name: "d-code-snippet",
+  name: "d-code-line",
 
   props: {
     label: {type: String, required: true},
@@ -84,7 +84,7 @@ export default {
 <style lang="scss">
 @import "../../styles/variables";
 
-.d-code-snippet {
+.d-code-line {
   &__card {
     overflow: hidden;
   }

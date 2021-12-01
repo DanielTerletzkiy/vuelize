@@ -45,7 +45,7 @@ export default {
 
   methods: {
     toUrl(path){
-      return encodeURI(path)
+      return encodeURI(path.replaceAll(' ', '_').toLowerCase())
     }
   },
 }

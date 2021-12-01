@@ -8,7 +8,10 @@
 
     <div style="display: flex">
       <d-navigation-bar :permanent="!this.$isMobile()" :temporary="this.$isMobile()" v-model="navDrawer">
-        <NavItem v-for="navItem in navItems" path="" :position="0" :key="navItem.category" :nav-item="navItem" class="px-2"/>
+        <div class="pt-2">
+          <NavItem v-for="navItem in navItems" path="" :position="0" :key="navItem.category" :nav-item="navItem"
+                   class="px-2"/>
+        </div>
       </d-navigation-bar>
 
       <main class="pa-6" style="flex: 1">
@@ -22,6 +25,7 @@
 <script>
 
 import NavItem from "@/DOCS/components/NavItem";
+
 export default {
   name: 'App',
   components: {NavItem},
