@@ -9,7 +9,7 @@ export default {
   name: "d-list",
 
   props: {
-    value: Number
+    value: [Number, String]
   },
 }
 </script>

@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 import DemoView from "@/DOCS/DemoView";
 import GettingStarted from "@/DOCS/views/GettingStarted";
 const routes = [
-    { path: '/', component: GettingStarted },
+    { path: '/Getting%20Started', component: GettingStarted },
     { path: '/test', component: DemoView },
 ]
 

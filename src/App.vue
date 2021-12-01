@@ -8,16 +8,7 @@
 
     <div style="display: flex">
       <d-navigation-bar :permanent="!this.$isMobile()" :temporary="this.$isMobile()" v-model="navDrawer">
-        <d-list :value="currentNavigation" color="primary">
-          <d-list-item :key="'/'" link="/">
-            <d-icon name="estate"/>
-            Home
-          </d-list-item>
-          <d-list-item :key="'/test'" link="test">
-            <d-icon name="flask"/>
-            Test
-          </d-list-item>
-        </d-list>
+        <NavItem v-for="navItem in navItems" path="" :position="0" :key="navItem.category" :nav-item="navItem" class="px-2"/>
       </d-navigation-bar>
 
       <main class="pa-6" style="flex: 1">
@@ -30,18 +21,29 @@
 
 <script>
 
+import NavItem from "@/DOCS/components/NavItem";
 export default {
   name: 'App',
-
+  components: {NavItem},
   data: () => ({
     navDrawer: true,
-  }),
 
-  computed: {
-    currentNavigation() {
-      return this.$route.path;
-    }
-  },
+    navItems: [
+      {
+        category: 'Getting Started', icon: 'estate', items: []
+      },
+      {
+        category: 'Components', icon: 'layers', items: [
+          {
+            category: 'Buttons', icon: 'power', items: [
+              {category: 'Normal', icon: 'square-shape', items: []},
+              {category: 'Icon', icon: 'icons', items: []}
+            ]
+          }
+        ]
+      }
+    ]
+  }),
 }
 </script>
 
