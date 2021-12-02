@@ -44,7 +44,10 @@ export default {
 
   computed: {
     textFieldStylesObject() {
-      return {color: (this.hover || this.selected) ? this.processColor(this.color) : ''}
+      return {
+        color: (this.hover || this.selected) ? this.processColor(this.color) : null,
+        caretColor: (this.hover || this.selected) ? this.processColor(this.color) : null,
+      }
     },
 
     classesObject() {

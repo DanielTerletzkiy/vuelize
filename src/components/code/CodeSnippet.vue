@@ -17,13 +17,11 @@
         </d-column>
       </d-row>
 
-      <div ref="codeInput" v-show="false">
-        <slot>
-        </slot>
-      </div>
-      <pre ref="codeOutput" class="d-code-snippet__code">
+      <div v-html="parsedCode"/>
 
-      </pre>
+      <d-card-subtitle>
+        {{ parsedCode }}
+      </d-card-subtitle>
 
     </d-card>
   </d-function-wrapper>
@@ -35,16 +33,21 @@ export default {
 
   props: {
     label: {type: String, required: true},
+    code: {type: String, required: true},
+    parameter: Array
   },
 
   data: () => ({
     hover: false,
+    parsedCode: '',
   }),
 
   watch: {
-    '$refs'() {
-      this.code();
-      this.$forceUpdate()
+    code() {
+      this.replaceCode();
+    },
+    parameter() {
+      this.replaceCode();
     }
   },
 
@@ -53,45 +56,19 @@ export default {
       navigator.clipboard.writeText(this.$refs.codeInput.innerHTML);
     },
 
-    code() {
-      this.$refs.codeOutput.innerText = this.process(this.$refs.codeInput.innerHTML);
+    replaceCode() {
+      let code = this.code;
+      this.parameter.forEach((param) => {
+        param = param.replaceAll("'", '"');
+        code = code.replace('#', param);
+      });
+      this.parsedCode = code;
     },
 
-    process(str) {
-
-      const div = document.createElement('div');
-      div.innerHTML = str.trim();
-
-      return this.format(div, 0).innerHTML;
-    },
-
-    format(node, level) {
-
-      let indentBefore = new Array(level++ + 1).join('  '),
-          indentAfter = new Array(level - 1).join('  '),
-          textNode;
-
-      for (let i = 0; i < node.children.length; i++) {
-
-        textNode = document.createTextNode('\n' + indentBefore);
-        node.insertBefore(textNode, node.children[i]);
-
-        this.format(node.children[i], level);
-
-        if (node.lastElementChild === node.children[i]) {
-          textNode = document.createTextNode('\n' + indentAfter);
-          node.appendChild(textNode);
-        }
-      }
-
-      console.log(node)
-      return node;
-    }
   },
 
   mounted() {
-    this.code();
-    this.$forceUpdate()
+    this.replaceCode();
   }
 }
 </script>

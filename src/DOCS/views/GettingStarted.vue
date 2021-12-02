@@ -24,9 +24,7 @@
       <d-code-line label="NPM" :code-array="['npm install vuelize', 'npm run serve']"/>
       <d-code-line label="main.js" :code-array="[`import Vuelize from './vuelize'`, `Vue.use(Vuelize)`]"/>
 
-      <d-code-snippet label="app.vue">
-        <d-btn slot="default" color="primary" filled>{{ $route.path }}</d-btn>
-      </d-code-snippet>
+      <d-code-snippet label="app.vue" code="<d-btn # # # #>TEST</d-btn>" :parameter="[`color='primary'`]"/>
     </d-card-content>
   </div>
 </template>
