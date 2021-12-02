@@ -17,11 +17,14 @@
         </d-column>
       </d-row>
 
-      <div v-html="parsedCode"/>
-
-      <d-card-subtitle>
-        {{ parsedCode }}
-      </d-card-subtitle>
+      <d-row v-for="(line, l) in parsedCode" :key="l" class="d-code-snippet__row">
+        <d-column>
+          <d-card-subtitle class="d-code-snippet__row__number">{{ l + 1 }}</d-card-subtitle>
+        </d-column>
+        <d-column>
+          <d-card-subtitle class="d-code-snippet__row__code">{{ line }}</d-card-subtitle>
+        </d-column>
+      </d-row>
 
     </d-card>
   </d-function-wrapper>
@@ -30,45 +33,45 @@
 <script>
 export default {
   name: "d-code-snippet",
-
   props: {
     label: {type: String, required: true},
-    code: {type: String, required: true},
-    parameter: Array
+    code: String
   },
 
   data: () => ({
     hover: false,
-    parsedCode: '',
+    parsedCode: [],
   }),
-
-  watch: {
-    code() {
-      this.replaceCode();
-    },
-    parameter() {
-      this.replaceCode();
-    }
-  },
 
   methods: {
     copy() {
-      navigator.clipboard.writeText(this.$refs.codeInput.innerHTML);
+      navigator.clipboard.writeText(this.parsedCode.map((line)=> {return line + '\n' }).join(''));
     },
-
-    replaceCode() {
-      let code = this.code;
-      this.parameter.forEach((param) => {
-        param = param.replaceAll("'", '"');
-        code = code.replace('#', param);
-      });
-      this.parsedCode = code;
+    process() {
+      const div = document.createElement('div');
+      div.innerHTML = this.code.trim();
+      this.format(div, 0);
     },
-
+    format(node, level) {
+      let indentBefore = new Array(level++ + 1).join('  '),
+          indentAfter = new Array(level - 1).join('  '),
+          textNode;
+      for (let i = 0; i < node.children.length; i++) {
+        textNode = document.createTextNode('\n' + indentBefore);
+        node.insertBefore(textNode, node.children[i]);
+        this.format(node.children[i], level);
+        if (node.lastElementChild === node.children[i]) {
+          textNode = document.createTextNode('\n' + indentAfter);
+          node.appendChild(textNode);
+        }
+      }
+      this.parsedCode = node.outerHTML.split('\n')
+      return node;
+    }
   },
-
   mounted() {
-    this.replaceCode();
+    this.process();
+    this.$forceUpdate()
   }
 }
 </script>
@@ -86,6 +89,20 @@ export default {
   &__code {
     max-width: inherit;
     overflow: auto;
+  }
+
+  &__row {
+    width: 100%;
+    height: 24px;
+
+    &__number {
+      user-select: none;
+      padding-left: 16px !important;
+    }
+
+    &__code {
+      font-family: monospace;
+    }
   }
 }
 </style>
