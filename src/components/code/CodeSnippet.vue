@@ -93,14 +93,18 @@ export default {
 
   &__row {
     width: 100%;
-    height: 24px;
 
     &__number {
       user-select: none;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
       padding-left: 16px !important;
+      width: 40px !important;
     }
 
     &__code {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
       font-family: monospace;
     }
   }
