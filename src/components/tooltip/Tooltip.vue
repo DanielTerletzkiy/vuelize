@@ -119,32 +119,4 @@ export default {
     }
   }
 }
-
-.slide-fade-leave-active {
-  transition: all 0.05s ease;
-}
-
-.slide-fade-enter-active {
-  transition: all 0.2s ease;
-}
-
-.slide-fade-enter, .slide-fade-leave-to {
-  opacity: 0;
-}
-
-.bottom :is(.slide-fade-enter, .slide-fade-leave-to) {
-  transform: translateY(-10px);
-}
-
-.top :is(.slide-fade-enter, .slide-fade-leave-to) {
-  transform: translateY(10px);
-}
-
-.left :is(.slide-fade-enter, .slide-fade-leave-to) {
-  transform: translateX(10px);
-}
-
-.right :is(.slide-fade-enter, .slide-fade-leave-to) {
-  transform: translateX(-10px);
-}
 </style>

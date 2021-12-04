@@ -1,9 +1,10 @@
 @import "./directives/rounded";
 @import "./directives/elevation";
-@import "directives/lines";
+@import "./directives/lines";
 @import "./directives/font";
 @import "./directives/size";
 @import "./directives/flex";
+@import "./directives/transition";
 
 body, html {
   width: 100%;

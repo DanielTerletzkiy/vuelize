@@ -1,0 +1,31 @@
+@import "../variables";
+
+.slide-fade{
+  &-leave-active {
+    transition: all 0.05s ease;
+  }
+
+  &-enter-active {
+    transition: all 0.15s ease;
+  }
+
+  &-enter, &-leave-to {
+    opacity: 0;
+  }
+
+  .bottom :is(&-enter, &-leave-to) {
+    transform: translateY(-10px);
+  }
+
+  .top :is(&-enter, &-leave-to) {
+    transform: translateY(10px);
+  }
+
+  .left :is(&-enter, &-leave-to) {
+    transform: translateX(10px);
+  }
+
+  .right :is(&-enter, &-leave-to) {
+    transform: translateX(-10px);
+  }
+}
