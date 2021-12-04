@@ -1,5 +1,6 @@
 <template>
   <d-root>
+    <title>{{$route.name}}</title>
     <d-toolbar show-hamburger @hamburgerClick="navDrawer = !navDrawer">
       <div>
         <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>

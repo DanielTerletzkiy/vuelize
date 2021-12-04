@@ -25,6 +25,12 @@
       <d-code-line label="main.js" :code-array="[`import Vuelize from './vuelize'`, `Vue.use(Vuelize)`]"/>
 
       <d-code-snippet label="app.vue" :code="code">
+        <d-toolbar show-hamburger style="width: 100%">
+          <div>
+            <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>
+          </div>
+        </d-toolbar>
+        <d-card-subtitle>main content ...</d-card-subtitle>
       </d-code-snippet>
     </d-card-content>
   </div>
@@ -34,7 +40,7 @@
 export default {
   name: "GettingStarted",
 
-  data: ()=>({
+  data: () => ({
     code: `
       <d-root>
     <d-toolbar show-hamburger @hamburgerClick="navDrawer = !navDrawer">
@@ -53,7 +59,6 @@ export default {
         <router-view></router-view>
       </main>
     </div>
-
   </d-root>`
   })
 }

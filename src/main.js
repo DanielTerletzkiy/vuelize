@@ -15,7 +15,7 @@ import GettingStarted from "@/DOCS/views/GettingStarted";
 const routes = [
     {path: '/', redirect: 'getting_started'},
     {path: '/getting_started', name: 'Getting Started', component: GettingStarted},
-    {path: '/components', component: DemoView},
+    {path: '/components', name: 'Components', component: DemoView},
 ]
 
 const router = new VueRouter({

@@ -1,6 +1,6 @@
 <template>
   <d-function-wrapper :classes="['d-code-snippet']" v-bind="{...$props, ...$attrs}">
-    <d-card block max-width="600px" depressed class="d-code-snippet__card">
+    <d-card block depressed class="d-code-snippet__card">
       <d-row class="d-code-snippet__title" :elevation="this.$vuelize.theme.dark ? 'n1' : ''">
         <d-column>
           <d-card-subtitle color="primary">
@@ -17,16 +17,34 @@
         </d-column>
       </d-row>
 
-      <d-card-content class="d-code-snippet__code">
-        <d-row v-for="(line, l) in parsedCode" :key="l" class="d-code-snippet__code__row">
-          <d-column>
-            <d-card-subtitle class="d-code-snippet__code__row__number">{{ l + 1 }}</d-card-subtitle>
-          </d-column>
-          <d-column>
-            <d-card-title class="d-code-snippet__code__row__code font-size-small">{{ line }}</d-card-title>
-          </d-column>
-        </d-row>
-      </d-card-content>
+      <d-row wrap>
+        <d-column class="d-code-snippet__code">
+          <d-card-content class="pa-0">
+            <d-row v-for="(line, l) in parsedCode" :key="l" class="d-code-snippet__code__row">
+              <d-column>
+                <d-card-subtitle class="d-code-snippet__code__row__number">{{ l + 1 }}</d-card-subtitle>
+              </d-column>
+              <d-column>
+                <d-card-title class="d-code-snippet__code__row__code font-size-small">{{ line }}</d-card-title>
+              </d-column>
+            </d-row>
+          </d-card-content>
+        </d-column>
+        <d-column v-if="!!(this.$slots.default || [])[0]" class="d-code-snippet__preview pa-0 elevation-n1 ma-2">
+          <d-card-content flex column no-gap>
+            <div class="d-code-snippet__preview__title">
+              <d-card-subtitle>
+                <d-icon name="eye"/>
+                Preview
+              </d-card-subtitle>
+              <d-divider size="2px" color="primary" class="ml-2"/>
+            </div>
+            <d-card-content class="mt-3">
+              <slot></slot>
+            </d-card-content>
+          </d-card-content>
+        </d-column>
+      </d-row>
 
     </d-card>
   </d-function-wrapper>
@@ -59,7 +77,6 @@ export default {
       let code = html.innerHTML.split('\n')
       for (let i = 0; i < code.length; i++) {
         if (!code[i].replace(/\s/g, '').length) {
-          console.log("white", i)
           code.splice(i, 1)
         }
       }
@@ -129,6 +146,14 @@ export default {
         font-family: monospace;
         white-space: pre;
       }
+    }
+  }
+
+  &__preview {
+    width: 100%;
+
+    &__title {
+      width: min-content;
     }
   }
 }
