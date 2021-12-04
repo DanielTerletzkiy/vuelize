@@ -8,7 +8,7 @@
 body, html {
   width: 100%;
   min-height: 100%;
-  overflow: auto;
+  overflow: hidden;
   margin: 0;
 }
 
@@ -29,10 +29,15 @@ a {
   text-decoration: inherit;
   display: inherit;
 
-  &.d-btn{
+  &.d-btn {
     display: flex;
     width: min-content;
   }
+}
+
+.disabled {
+  pointer-events: none;
+  color: grey !important;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Source%20Sans%20Pro:200,300,400,600,700');
@@ -51,5 +56,49 @@ a {
   &.theme--light {
     $dark_background: #fafafa;
     background: $dark_background;
+  }
+}
+
+.theme--light {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: $gap * 2;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: $gap * 2;
+    transition-duration: 2s;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.theme--dark {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.086);
+    border-radius: $gap * 2;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(82, 82, 87, 0.4);
+    border-radius: $gap * 2;
+    transition-duration: 2s;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(154, 154, 163, 0.35);
   }
 }

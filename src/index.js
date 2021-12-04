@@ -89,6 +89,7 @@ export default Vue => {
             rootDiv: {type: String, default: 'div'},
             classes: Array,
             color: String,
+            disabled: Boolean,
 
             rounded: {type: String, default: 'lg'},
             elevation: [String, Number, undefined],

@@ -1,5 +1,5 @@
 <template>
-  <component :is="root" :to="link" :class="[...this.classes, themeClass, ...classAttributes]" :style="stylesObject" @click="()=>$emit('click')"
+  <component :is="root" :to="link" :disabled="disabled" :class="[...this.classes, themeClass, ...classAttributes]" :style="stylesObject" @click="()=>$emit('click')"
        @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
   </component>
@@ -18,6 +18,7 @@ export default {
         outlined: this.outlined,
         inlined: this.inlined,
         depressed: this.depressed,
+        disabled: this.disabled,
       }
     },
     root(){
