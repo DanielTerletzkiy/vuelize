@@ -1,18 +1,17 @@
 <template>
   <d-function-wrapper :classes="['d-tooltip', ...classesObject]" v-bind="{...$props, ...$attrs}">
-    <div v-hover="{ over: ()=>{this.value = true}, leave: ()=>{this.value = false} }">
+    <div class="d-tooltip__slot" v-hover="{ over: ()=>{onHover(true)}, leave: ()=>{onHover(false)} }">
       <slot name="default" v-bind="{...$props, ...$attrs}">
       </slot>
     </div>
     <transition name="slide-fade">
       <div class="d-tooltip__wrapper" v-if="value">
-        <div class="d-tooltip__wrapper__content elevation">
+        <div class="d-tooltip__wrapper__content elevation" :style="stylesObject" ref="tooltip">
           <slot name="tooltip" v-bind="{...$props, ...$attrs}">
           </slot>
         </div>
       </div>
     </transition>
-
   </d-function-wrapper>
 </template>
 
@@ -21,7 +20,7 @@ export default {
   name: "d-tooltip",
 
   props: {
-    value: Object,
+    value: Boolean,
     position: {
       type: String,
       required: true,
@@ -31,11 +30,52 @@ export default {
     },
   },
 
+  data: () => ({
+    offset: {
+      top: 'initial',
+      right: 'initial',
+      bottom: 'initial',
+      left: 'initial',
+    }
+  }),
+  methods: {
+    onHover: async function (state) {
+      this.value = state;
+      this.$forceUpdate()
+
+      await this.$refs.tooltip;
+
+      if (state) {
+        const clientRect = this.$refs.tooltip.getBoundingClientRect();
+        console.log(clientRect);
+        ['top', 'right', 'bottom', 'left'].forEach((pos) => {
+          const currentPos = clientRect[pos];
+          if (currentPos < 0 ||
+              ((pos === 'right' && currentPos + clientRect.width >= window.innerWidth))) {
+            this.offset[pos] = 'calc(50% + 8px)';
+          }
+        })
+      } else {
+        this.offset = {
+          top: 'initial',
+          right: 'initial',
+          bottom: 'initial',
+          left: 'initial',
+        }
+      }
+
+      this.$forceUpdate()
+    }
+  },
+
   computed: {
     classesObject() {
       return [this.position];
-
     },
+    stylesObject() {
+      console.log(this.offset)
+      return this.offset
+    }
   },
 }
 </script>

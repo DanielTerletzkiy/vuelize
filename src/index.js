@@ -194,4 +194,12 @@ export default Vue => {
     Vue.prototype.$isMobile = function() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
+
+    Vue.prototype.$innerWidth = function() {
+        return window.innerWidth
+    }
+
+    Vue.prototype.$innerHeight = function() {
+        return window.innerHeight
+    }
 };
