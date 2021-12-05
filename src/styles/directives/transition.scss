@@ -4,6 +4,7 @@
   &-leave-active {
     opacity: 0;
     transition: all 0.1s ease;
+    position: absolute;
   }
 
   &-enter-active {
