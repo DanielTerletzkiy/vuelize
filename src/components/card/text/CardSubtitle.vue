@@ -46,7 +46,7 @@ export default {
 .theme--light {
 
   .d-card__subtitle {
-    color: lighten($light_card_text, 36);
+    color: lighten($light_card_text, 26);
   }
 }
 </style>

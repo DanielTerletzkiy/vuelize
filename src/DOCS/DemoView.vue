@@ -202,7 +202,8 @@
           </d-btn>
           <template slot="tooltip">
             <d-card-subtitle style="min-width: 200px" color="inherit">
-              <d-icon name="smile-beam"/> Hello this is a Tooooooooool Tip
+              <d-icon name="smile-beam"/>
+              Hello this is a Tooooooooool Tip
             </d-card-subtitle>
           </template>
         </d-tooltip>
@@ -225,6 +226,85 @@
           <d-icon :size="34" :color="getContrast('info')" name="info-circle"/>
         </d-avatar>
         <d-avatar rounded="lg" elevation color="transparent" :size="50" src="https://picsum.photos/100"></d-avatar>
+      </d-card-content>
+    </d-card>
+
+    <div class="my-4"/>
+
+    <d-card elevation rounded="lg" block>
+      <d-card-title>
+        <d-icon name="user" color="primary" :size="30"/>
+        Tabs!
+      </d-card-title>
+
+      <d-card-content flex wrap column>
+        <d-tab-list color="primary" v-model="tabs">
+          <d-tab-item :key="0">
+            SCP-096
+          </d-tab-item>
+          <d-tab-item :key="1">
+            SCP-173
+          </d-tab-item>
+          <d-tab-item :key="2" disabled>
+            REDACTED
+          </d-tab-item>
+          <d-tab-item :key="3">
+            SCP-049
+          </d-tab-item>
+        </d-tab-list>
+
+        <d-card-title>
+          <d-image width="40px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/SCP_Foundation_%28emblem%29.svg/512px-SCP_Foundation_%28emblem%29.svg.png"/>
+          SCP Lore
+        </d-card-title>
+        <d-card-content v-if="tabs === 0">
+          <d-card-subtitle elevation="n2" class="pa-4 pt-0" style="display: block">
+            <d-card-subtitle class="pa-0">
+              <d-avatar
+                  src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fart.ngfiles.com%2Fcomments%2F95000%2Fiu_95222_7850304.jpg&f=1&nofb=1"/>
+              <d-card-title color="primary" class="font-weight-light font-size-large">SCP-096</d-card-title>
+            </d-card-subtitle>
+            SCP-096 is a humanoid creature that is normally extremely docile. However, when someone views SCP-096's face
+            it will enter a stage of considerable emotional distress. SCP-096 will cover its face with its hands and
+            begin screaming, crying, and babbling incoherently briefly before chasing down the person who viewed its
+            face.
+
+            SCP-096 will not stop until it reaches the person's location, after which it will proceed to kill them.
+            Afterward, it will regain its composure and become docile once again.
+          </d-card-subtitle>
+        </d-card-content>
+        <d-card-content v-if="tabs === 1">
+          <d-card-subtitle elevation="n2" class="pa-4 pt-0" style="display: block">
+            <d-card-subtitle class="pa-0">
+              <d-avatar
+                  src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwX7kQMQ0UaBN4hfG40RmJrFbBnEgcUvQmjEgNyZA%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1"/>
+              <d-card-title color="primary" class="font-weight-light font-size-large">SCP-173</d-card-title>
+            </d-card-subtitle>
+            SCP-173 is a sculpture constructed out of concrete. It is capable of moving at high speeds and will kill by
+            either snapping at the base of the skull or strangulation.
+
+            SCP-173 however, is incapable of moving when in direct line of sight of a person.
+          </d-card-subtitle>
+        </d-card-content>
+        <d-card-content v-if="tabs === 3">
+          <d-card-subtitle elevation="n2" class="pa-4 pt-0" style="display: block">
+            <d-card-subtitle class="pa-0">
+              <d-avatar
+                  src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwoSlJk198vIZt4kIE9PR6pKa1pXUy9V4zIkA%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1"/>
+              <d-card-title color="primary" class="font-weight-light font-size-large">SCP-049</d-card-title>
+            </d-card-subtitle>
+            SCP-049 is a humanoid entity which bears the appearance of a medieval plague doctor. While SCP-049 appears
+            to be wearing the thick robes and the ceramic mask indicative of that profession, the garments instead seem
+            to have grown out of SCP-049's body over time, and are now nearly indistinguishable from whatever form is
+            beneath them.
+
+            SCP-049 is capable of causing all biological functions of an organism to cease through direct skin contact.
+            SCP-049 has expressed frustration or remorse after these killings, indicating that they have done little to
+            kill "The Pestilence", though will usually seek to then perform a crude surgery on the corpse using the
+            implements contained within a black doctor's bag it carries on its person at all times. While these
+            surgeries are not always successful, they often result in the creation of instances of SCP-049-2.
+          </d-card-subtitle>
+        </d-card-content>
       </d-card-content>
     </d-card>
 
@@ -300,7 +380,9 @@ export default {
     ],
     date: undefined,
 
-    openSelectMenu: false
+    openSelectMenu: false,
+
+    tabs: 0,
   }),
 
   methods: {

@@ -2,10 +2,12 @@
 
 .slide-fade{
   &-leave-active {
-    transition: all 0.05s ease;
+    opacity: 0;
+    transition: all 0.1s ease;
   }
 
   &-enter-active {
+    opacity: 1;
     transition: all 0.15s ease;
   }
 

@@ -16,6 +16,8 @@ export default {
             compileTemplate: true, // Explicitly convert template to render function
             preprocessStyles: true,
         }),
-        buble(), // Transpile to ES5
+        buble({
+            transforms: { asyncAwait: false }
+        }), // Transpile to ES5
     ],
 };

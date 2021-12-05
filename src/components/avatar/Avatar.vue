@@ -9,7 +9,7 @@ export default {
   name: "d-avatar",
   props: {
     src: String,
-    size: {type: [String, Number], default: 40},
+    size: {type: [String, Number], default: 50},
   },
 
   computed: {

@@ -33,6 +33,8 @@ import DCodeLine from "./components/code/CodeLine.vue";
 import DTooltip from "./components/tooltip/Tooltip.vue";
 import DToolbar from "./components/app/toolbar/Toolbar.vue";
 import DNavigationBar from "./components/app/navigation/NavigationBar.vue";
+import DTabList from "./components/tab/TabList.vue";
+import DTabItem from "./components/tab/TabItem.vue";
 
 export default Vue => {
 
@@ -62,6 +64,8 @@ export default Vue => {
     Vue.component("d-tooltip", DTooltip);
     Vue.component("d-toolbar", DToolbar);
     Vue.component("d-navigation-bar", DNavigationBar);
+    Vue.component("d-tab-list", DTabList);
+    Vue.component("d-tab-item", DTabItem);
 
 
     //-----------------------
