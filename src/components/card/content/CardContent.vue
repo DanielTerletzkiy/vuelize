@@ -36,6 +36,5 @@ export default {
   height: min-content;
 
   padding: $gap*2;
-  padding-top: 0;
 }
 </style>

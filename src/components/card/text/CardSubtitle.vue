@@ -35,6 +35,10 @@ export default {
   .d-card__subtitle {
     width: auto;
   }
+
+  .d-card__title + .d-card__content {
+    padding-top: 0;
+  }
 }
 
 .theme--dark {

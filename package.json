@@ -1,13 +1,13 @@
 {
   "name": "vuelize",
-  "version": "0.0.58",
+  "version": "0.0.59",
   "private": false,
   "description": "A Vue component Library, with the most common Material UI styled components",
   "author": "Daniel Terletzkiy",
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/DanielTerletzkiy/vuelize"
+    "type": "git",
+    "url": "https://github.com/DanielTerletzkiy/vuelize"
   },
   "homepage": "https://danielterletzkiy.github.io/vuelize",
   "main": "dist/vuelize.umd.js",

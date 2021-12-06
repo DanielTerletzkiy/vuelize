@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "../../../styles/variables";
 
 .d-card__title {
@@ -31,6 +31,10 @@ export default {
 .d-card {
   .d-card__title {
     width: auto;
+  }
+
+  .d-card__title + .d-card__content {
+    padding-top: 0;
   }
 }
 
