@@ -8,7 +8,24 @@
 
 <script>
 export default {
-  name: "d-column"
+  name: "d-column",
+
+  props: {
+    wrap: Boolean,
+    column: Boolean,
+    noGap: {type: Boolean, default: true},
+  },
+
+  computed: {
+    classesObject() {
+      return {
+        flex: true,
+        wrap: this.wrap,
+        column: this.column,
+        'no-gap': this.noGap,
+      }
+    },
+  },
 }
 </script>
 
