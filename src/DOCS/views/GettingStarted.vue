@@ -22,7 +22,7 @@
         </d-column>
       </d-row>
       <d-code-line label="NPM" :code-array="['npm install vuelize', 'npm run serve']"/>
-      <d-code-line label="main.js" :code-array="[`import Vuelize from './vuelize'`, `Vue.use(Vuelize)`]"/>
+      <d-code-line label="main.js" :code-array="[`import Vuelize from 'vuelize'`, `Vue.use(Vuelize)`]"/>
 
       <d-code-snippet label="app.vue" :code="code">
         <d-toolbar show-hamburger style="width: 100%">
