@@ -234,6 +234,34 @@
     <d-card elevation rounded="lg" block>
       <d-card-title>
         <d-icon name="user" color="primary" :size="30"/>
+        Accordion!
+      </d-card-title>
+
+      <d-card-content flex wrap column>
+        <d-accordion v-model="openAccordion" :key="0" header-color="primary" elevation="n2">
+          <template slot="header">
+            <d-icon name="nerd"/> Hey you...
+          </template>
+          <template slot="content">
+            Good day <d-icon name="smile"/>
+          </template>
+        </d-accordion>
+        <d-accordion v-model="openAccordion" :key="1" header-color="primary" elevation="n2" inlined depressed>
+          <template slot="header">
+            <d-icon name="nerd"/> Nice
+          </template>
+          <template slot="content">
+            Day <d-icon name="smile"/>
+          </template>
+        </d-accordion>
+      </d-card-content>
+    </d-card>
+
+    <div class="my-4"/>
+
+    <d-card elevation rounded="lg" block>
+      <d-card-title>
+        <d-icon name="user" color="primary" :size="30"/>
         Tabs!
       </d-card-title>
 
@@ -389,6 +417,7 @@ export default {
     date: undefined,
 
     openSelectMenu: false,
+    openAccordion: 0,
 
     tabs: 0,
   }),

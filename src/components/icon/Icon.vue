@@ -7,7 +7,7 @@ export default {
   name: "d-icon",
 
   props: {
-    name: String,
+    name: {type: String, required: true},
     color: String,
     iconStyle: String,
     size: [String, Number],

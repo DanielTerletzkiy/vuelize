@@ -13,7 +13,7 @@ export default {
 
   computed: {
     classesObject() {
-      return {'d-list__item--active': this.$parent.$parent.$props.value === this.$vnode.key}
+      return {glow: true, 'glow--active': this.$parent.$parent.$props.value === this.$vnode.key}
     }
   },
 
@@ -43,65 +43,11 @@ export default {
   list-style: none;
   margin: 0;
 
-  &::before {
-    position: absolute;
-    border-radius: inherit;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background: currentColor;
-    opacity: 0;
-
-    content: '';
-    transition-duration: 0.15s;
-
-  }
-
-  &:active {
-    &::before {
-      background-color: currentColor;
-      opacity: 0.2 !important;
-    }
-  }
-
-  &:hover {
-    &::before {
-      background: currentColor;
-      opacity: 0.08;
-    }
-  }
-
-  &:not(.d-list__item--active) {
-    &.theme--dark {
-      color: $dark_card_text
-    }
-
-    &.theme--light {
-      color: $light_card_text
-    }
-  }
-
-  &.d-list__item--active {
-    &::before {
-      background: currentColor;
-      opacity: 0.1;
-    }
-    &:hover {
-      &::before {
-        background: currentColor;
-        opacity: 0.15;
-      }
-    }
-  }
-
   .d-list__item__content {
     padding: 10px 12px;
     display: flex;
     align-items: center;
+    white-space: nowrap;
     gap: $gap;
   }
 }

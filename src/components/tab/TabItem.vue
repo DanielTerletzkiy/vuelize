@@ -1,5 +1,6 @@
 <template>
-  <d-function-wrapper :classes="['d-tab-list__item', 'top', ...classesObject]" v-bind="{...$props, ...$attrs}" @click="click">
+  <d-function-wrapper :classes="['d-tab-list__item', 'top', ...classesObject]" v-bind="{...$props, ...$attrs}"
+                      @click="click">
     <div class="d-tab-list__item__content">
       <slot></slot>
     </div>
@@ -16,7 +17,10 @@ export default {
 
   computed: {
     classesObject() {
-      return {'d-tab-list__item--active': this.$parent.$parent.$props.value === this.$vnode.key}
+      return {
+        glow: true,
+        'glow--active': this.$parent.$parent.$props.value === this.$vnode.key
+      }
     }
   },
 
@@ -38,83 +42,17 @@ export default {
 @import "../../styles/variables";
 
 .d-tab-list__item {
-  user-select: none;
-  position: relative;
-
+  justify-content: center;
   border-radius: inherit;
   min-width: 64px;
   min-height: 44px;
   padding: 4px;
-
-  list-style: none;
-  margin: 0;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   &__indicator {
     position: absolute;
     width: calc(100% - 16px);
     bottom: -1px;
     opacity: 0.6;
-  }
-
-  &::before {
-    position: absolute;
-    border-radius: inherit;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background: currentColor;
-    opacity: 0;
-
-    content: '';
-    transition-duration: 0.15s;
-
-  }
-
-  &:active {
-    &::before {
-      background-color: currentColor;
-      opacity: 0.2 !important;
-    }
-  }
-
-  &:hover {
-    &::before {
-      background: currentColor;
-      opacity: 0.08;
-    }
-  }
-
-  &:not(.d-tab-list__item--active) {
-    &.theme--dark {
-      color: $dark_card_text
-    }
-
-    &.theme--light {
-      color: $light_card_text
-    }
-  }
-
-  &.d-tab-list__item--active {
-    &::before {
-      background: currentColor;
-      opacity: 0.1;
-    }
-
-    &:hover {
-      &::before {
-        background: currentColor;
-        opacity: 0.15;
-      }
-    }
   }
 
   .d-tab-list__item__content {
@@ -125,7 +63,7 @@ export default {
   }
 }
 
-.slide-fade{
+.slide-fade {
   &-leave-active {
     opacity: 0;
     transition: all 0.5s ease;

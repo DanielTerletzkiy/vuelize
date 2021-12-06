@@ -35,6 +35,7 @@ import DToolbar from "./components/app/toolbar/Toolbar.vue";
 import DNavigationBar from "./components/app/navigation/NavigationBar.vue";
 import DTabList from "./components/tab/TabList.vue";
 import DTabItem from "./components/tab/TabItem.vue";
+import DAccordion from "./components/accordion/Accordion.vue";
 
 export default Vue => {
 
@@ -66,6 +67,7 @@ export default Vue => {
     Vue.component("d-navigation-bar", DNavigationBar);
     Vue.component("d-tab-list", DTabList);
     Vue.component("d-tab-item", DTabItem);
+    Vue.component("d-accordion", DAccordion);
 
 
     //-----------------------

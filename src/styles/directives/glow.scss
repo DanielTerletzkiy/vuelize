@@ -1,0 +1,71 @@
+@import "../variables";
+
+.glow {
+  user-select: none;
+  position: relative;
+
+  border-radius: inherit;
+  padding: 4px;
+
+  list-style: none;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+
+  &::before {
+    position: absolute;
+    border-radius: inherit;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: currentColor;
+    opacity: 0;
+
+    content: '';
+    transition-duration: 0.15s;
+
+  }
+
+  &:active {
+    &::before {
+      background-color: currentColor;
+      opacity: 0.2 !important;
+    }
+  }
+
+  &:hover {
+    &::before {
+      background: currentColor;
+      opacity: 0.08;
+    }
+  }
+
+  &:not(&--active) {
+    &.theme--dark {
+      color: $dark_card_text
+    }
+
+    &.theme--light {
+      color: $light_card_text
+    }
+  }
+
+  &--active {
+    &::before {
+      background: currentColor;
+      opacity: 0.1;
+    }
+
+    &:hover {
+      &::before {
+        background: currentColor;
+        opacity: 0.15;
+      }
+    }
+  }
+}
