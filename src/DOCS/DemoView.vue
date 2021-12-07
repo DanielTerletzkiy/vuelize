@@ -15,7 +15,10 @@
             Dark mode
           </d-checkbox>
           <d-checkbox :size="24" color="success" :value="true">
-            Test
+            True
+          </d-checkbox>
+          <d-checkbox :size="24" color="info" :value="false" off-icon="times">
+            False
           </d-checkbox>
         </d-card-content>
 

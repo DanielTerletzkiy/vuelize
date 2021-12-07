@@ -31,6 +31,7 @@ export default {
 
 <style scoped lang="scss">
 .d-row {
+  width: 100%;
   align-items: center;
 }
 </style>

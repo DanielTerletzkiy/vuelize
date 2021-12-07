@@ -1,10 +1,14 @@
 <template>
-$END$
+  <d-function-wrapper :classes="['d-notification']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
+    <slot>
+
+    </slot>
+  </d-function-wrapper>
 </template>
 
 <script>
 export default {
-name: "Notification"
+  name: "d-notification"
 }
 </script>
 

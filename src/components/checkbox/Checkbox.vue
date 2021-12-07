@@ -2,7 +2,7 @@
   <d-function-wrapper :classes="['d-checkbox']" v-bind="{...$props, ...$attrs}" :style="checkboxStylesObject"
                       @click="changeValue">
     <div class="d-checkbox__box" :class="classesObject">
-      <d-icon :name="value ? onIcon : offIcon" :size="size" :color="value ? getContrast() : 'currentColor'"/>
+      <d-icon :name="value ? onIcon : offIcon" :size="size" :color="'currentColor'"/>
     </div>
     <div class="d-checkbox__label">
       <slot></slot>
@@ -20,14 +20,25 @@ export default {
     size: {type: [String, Number], default: 18},
     onIcon: {type: String, default: 'check'},
     offIcon: {type: String, default: 'check'},
+    flexDirection: {type: String, default: 'row'}
   },
 
   computed: {
     checkboxStylesObject() {
-      return {color: this.value ? this.processColor(this.color) : this.processColor('currentColor')}
+      return {
+        color: this.value ? this.processColor(this.color) : this.processColor('currentColor'),
+        flexDirection: this.flexDirection
+      }
     },
     classesObject() {
-      return {'d-checkbox--checked': this.value}
+      return {
+        'd-checkbox--checked': this.value,
+        'elevation-n1': !this.value,
+        'elevation-4': this.value && !this.$vuelize.theme.dark,
+        'inlined depressed theme--dark': !this.value && this.$vuelize.theme.dark,
+        'glow': true,
+        'glow--active': this.value
+      }
     }
   },
 
@@ -52,30 +63,18 @@ export default {
   gap: 8px;
 
   .d-checkbox__box {
-    border-radius: 8px;
-    box-shadow: inset 0 0 0 1.8px currentColor !important;
+    border-radius: $gap*1.4;
     width: min-content;
     padding: 2px;
 
     transition-duration: 0.1s;
-
-    &.d-checkbox--checked {
-      background: currentColor;
-
-      &:hover {
-        opacity: 0.9;
-      }
-
-      &:active {
-        opacity: 0.75;
-      }
-    }
   }
 
   &.theme--dark {
     .d-checkbox__label {
       color: $dark_card_text
     }
+
     .d-checkbox__box:not(.d-checkbox--checked) {
       color: darken($dark_card_text, 16);
     }
@@ -85,6 +84,7 @@ export default {
     .d-checkbox__label {
       color: $light_card_text
     }
+
     .d-checkbox__box:not(.d-checkbox--checked) {
       color: lighten($light_card_text, 24) !important;
     }

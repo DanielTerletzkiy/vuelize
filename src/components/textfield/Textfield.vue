@@ -74,7 +74,7 @@ export default {
 
 .d-text-field {
   position: relative;
-  min-width: 264px;
+  width: 264px;
   height: 3rem;
   background: inherit;
   caret-color: currentColor;

@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "../../../styles/variables";
 
 .d-card__subtitle {

@@ -47,7 +47,6 @@ export default {
 
       if (state) {
         const clientRect = this.$refs.tooltip.getBoundingClientRect();
-        console.log(clientRect);
         ['top', 'right', 'bottom', 'left'].forEach((pos) => {
           const currentPos = clientRect[pos];
           if (currentPos < 0 ||
@@ -73,7 +72,6 @@ export default {
       return [this.position];
     },
     stylesObject() {
-      console.log(this.offset)
       return this.offset
     }
   },
