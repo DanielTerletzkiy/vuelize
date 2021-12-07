@@ -48,7 +48,7 @@ export default {
     display: flex;
     align-items: center;
     white-space: nowrap;
-    gap: $gap;
+    gap: $gap*2;
   }
 }
 </style>

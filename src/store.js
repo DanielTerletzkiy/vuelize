@@ -5,6 +5,10 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
+        notification: {
+            position: 'bottom left',
+            notifications: []
+        },
         theme: {
             dark: true,
             themes: {
