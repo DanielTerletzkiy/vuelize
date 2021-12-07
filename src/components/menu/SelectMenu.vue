@@ -20,7 +20,7 @@ export default {
   name: "d-select-menu",
 
   props: {
-    value: Number,
+    value: [Number, String],
     open: Boolean,
     items: Array
   },
