@@ -7,11 +7,11 @@
         <d-icon :name="angleIcon" class="d-accordion__header__icon"/>
       </d-card-title>
     </div>
-    <transition-group name="slide-fade">
-      <d-card-content class="d-accordion__content" v-if="this.open" :key="1">
+    <transition name="slide-fade">
+      <d-card-content class="d-accordion__content" v-if="this.open">
         <slot name="content"></slot>
       </d-card-content>
-    </transition-group>
+    </transition>
   </d-function-wrapper>
 </template>
 

@@ -228,7 +228,7 @@
         <d-avatar rounded="circle" color="info" :size="50">
           <d-icon :size="34" :color="getContrast('info')" name="info-circle"/>
         </d-avatar>
-        <d-avatar rounded="lg" elevation color="transparent" :size="50" src="https://picsum.photos/100"></d-avatar>
+        <d-avatar rounded="lg" elevation color="transparent" :size="50" src="https://picsum.photos/500/850"></d-avatar>
       </d-card-content>
     </d-card>
 
@@ -236,7 +236,7 @@
 
     <d-card elevation rounded="lg" block>
       <d-card-title>
-        <d-icon name="user" color="primary" :size="30"/>
+        <d-icon name="expand-from-corner" color="primary" :size="30"/>
         Accordion!
       </d-card-title>
 

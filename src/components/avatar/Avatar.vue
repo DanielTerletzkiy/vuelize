@@ -37,6 +37,7 @@ export default {
     width: inherit;
     height: inherit;
     border-radius: inherit;
+    object-fit: cover;
   }
 }
 </style>

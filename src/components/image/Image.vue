@@ -31,5 +31,6 @@ export default {
 .d-image {
   user-select: none;
   display: block;
+  object-fit: cover;
 }
 </style>

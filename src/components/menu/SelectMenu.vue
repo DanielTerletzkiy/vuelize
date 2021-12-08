@@ -55,12 +55,14 @@ export default {
   }
 
   .d-list > li {
+    border-radius: 0 !important;
+
     &:first-child {
-      border-radius: 8px 8px 0 0;
+      border-radius: 8px 8px 0 0 !important;
     }
 
     &:last-child {
-      border-radius: 0 0 8px 8px;
+      border-radius: 0 0 8px 8px !important;
     }
   }
 }
