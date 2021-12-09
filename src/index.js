@@ -40,6 +40,8 @@ import DNavigationBar from "./components/app/navigation/NavigationBar.vue";
 import DTabList from "./components/tab/TabList.vue";
 import DTabItem from "./components/tab/TabItem.vue";
 import DAccordion from "./components/accordion/Accordion.vue";
+import DNotification from "./components/notification/Notification.vue";
+import DNotificationWrapper from "./components/notification/NotificationWrapper.vue";
 
 export default Vue => {
 
@@ -72,6 +74,8 @@ export default Vue => {
     Vue.component("d-tab-list", DTabList);
     Vue.component("d-tab-item", DTabItem);
     Vue.component("d-accordion", DAccordion);
+    Vue.component("d-notification", DNotification);
+    Vue.component("d-notification-wrapper", DNotificationWrapper);
 
 
     //-----------------------
@@ -201,6 +205,18 @@ export default Vue => {
         // Check contrast
         return (yiq >= 160) ? '#000' : '#fff';
 
+    }
+
+    //Notification Functions
+    Vue.prototype.$notify = function (title, content, type, options){
+        Vue.prototype.$vuelize.notification.notifications.push({
+            title,
+            content,
+            type,
+            options,
+            active: true,
+            created: new Date().getMilliseconds()
+        })
     }
 
     //Mobile detection functions

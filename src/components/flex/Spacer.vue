@@ -1,10 +1,22 @@
 <template>
-  <d-function-wrapper :classes="['d-spacer']" v-bind="{...$props, ...$attrs}"/>
+  <d-function-wrapper :classes="['d-spacer']" v-bind="{...$props, ...$attrs}" :style="stylesObject"/>
 </template>
 
 <script>
 export default {
-  name: "d-spacer"
+  name: "d-spacer",
+
+  props: {
+    flexGrow: [String, Number]
+  },
+
+  computed: {
+    stylesObject(){
+      return {
+        'flex-grow': this.flexGrow
+      }
+    }
+  }
 }
 </script>
 

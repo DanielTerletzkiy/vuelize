@@ -82,4 +82,10 @@ export default {
 
   }
 }
+
+.slide-fade {
+  &-leave-active {
+    position: absolute;
+  }
+}
 </style>

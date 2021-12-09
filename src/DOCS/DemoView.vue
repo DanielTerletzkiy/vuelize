@@ -83,7 +83,7 @@
           Full width Button
         </d-card-subtitle>
         <d-card-content>
-          <d-btn color="primary" glow block @click="changeColor('primary')">
+          <d-btn color="primary" glow block @click="()=>{changeColor('primary'); this.$notify('Yup...', `That's full width...`)}">
             <d-icon name="angle-left" :size="32"/>
             This is full width
             <d-icon name="angle-right" :size="32"/>
@@ -422,6 +422,10 @@ export default {
 
     tabs: 0,
   }),
+
+  mounted() {
+    this.$notify('Hello there', 'General Kenobi')
+  },
 
   methods: {
     openGithub() {
