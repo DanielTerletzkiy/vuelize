@@ -1,7 +1,7 @@
 <template>
   <d-function-wrapper :classes="['d-checkbox']" v-bind="{...$props, ...$attrs}" :style="checkboxStylesObject"
                       @click="changeValue">
-    <div class="d-checkbox__box" :class="classesObject">
+    <div class="d-checkbox__box" :class="classesObject" v-ripple>
       <d-icon :name="value ? onIcon : offIcon" :size="size" :color="'currentColor'"/>
     </div>
     <div class="d-checkbox__label">

@@ -2,7 +2,7 @@
   <d-function-wrapper root-div="d-card" :classes="['d-accordion', 'bottom']"
                       v-bind="{...$props, ...$attrs}">
     <div @click="onClick" style="border-radius: inherit">
-      <d-card-title class="d-accordion__header" :color="headerColor" :class="['glow',{'glow--active': this.open}]">
+      <d-card-title class="d-accordion__header" :color="headerColor" :class="['glow',{'glow--active': this.open}]" v-ripple>
         <slot name="header"></slot>
         <d-icon :name="angleIcon" class="d-accordion__header__icon"/>
       </d-card-title>

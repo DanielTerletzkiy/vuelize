@@ -1,6 +1,6 @@
 <template>
   <d-function-wrapper :classes="['d-tab-list__item', 'top', ...classesObject]" v-bind="{...$props, ...$attrs}"
-                      @click="click">
+                      @click="click" v-ripple>
     <div class="d-tab-list__item__content">
       <slot></slot>
     </div>

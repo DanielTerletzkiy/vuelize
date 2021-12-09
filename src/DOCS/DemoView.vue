@@ -156,18 +156,16 @@
       </d-card-title>
 
       <d-card-content>
-        <d-btn color="primary" glow @click="()=>openSelectMenu=!openSelectMenu" class="pa-3">
+        <d-btn color="primary" glow @click="()=>openSelectMenu=!openSelectMenu" size="large">
           <template slot="default">
-            <d-card-title class="pa-0 font-size-small" color="inherit">
               <d-icon :name="iconItems[selectedIcon].icon" :icon-style="iconItems[selectedIcon].iconStyle"
                       color="primary"/>
               {{ iconItems[selectedIcon].name }}
-            </d-card-title>
           </template>
           <template slot="misc">
             <d-select-menu :open.sync="openSelectMenu" v-model="selectedIcon" :items="iconItems">
               <template slot="item" slot-scope="{item}">
-                <d-card-title class="pa-0 font-size-small" color="inherit">
+                <d-card-title class="font-size-small" color="inherit">
                   <d-icon :name="item.icon" :icon-style="item.iconStyle" color="primary"/>
                   {{ item.name }}
                 </d-card-title>

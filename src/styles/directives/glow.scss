@@ -31,13 +31,6 @@
 
   }
 
-  &:active {
-    &::before {
-      background-color: currentColor;
-      opacity: 0.2 !important;
-    }
-  }
-
   &:hover {
     &::before {
       background: currentColor;

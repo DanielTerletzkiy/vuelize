@@ -1,6 +1,7 @@
 <template>
-  <d-function-wrapper root-div="button" :classes="['d-btn', ...classesObject]" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
-    <span class="d-btn__content" :style="{color: this.filled ? getContrast(this.$attrs.color):''}">
+  <d-function-wrapper root-div="button" :classes="['d-btn', ...classesObject]" v-bind="{...$props, ...$attrs}"
+                      @click="$emit('click')">
+    <span class="d-btn__content" :style="{color: this.filled ? this.getContrast(this.color):''}" v-ripple>
       <slot name="default"></slot>
     </span>
     <slot name="misc"></slot>
@@ -14,7 +15,13 @@ export default {
   props: {
     filled: Boolean,
     block: Boolean,
-    glow: Boolean
+    glow: Boolean,
+
+    size: {
+      type: String, validator: function (value) {
+        return ['small', 'regular', 'large'].indexOf(value) !== -1
+      }
+    }
   },
 
   computed: {
@@ -23,6 +30,7 @@ export default {
         'd-btn--filled': this.filled,
         'd-btn--block': this.block,
         'd-btn--glow': this.glow,
+        [`d-btn--${this.size}`]: this.size
       }
     },
   }
@@ -38,12 +46,11 @@ export default {
   border: none;
   font: inherit;
   cursor: pointer;
-  padding: 0 12px;
 
   min-height: 36px;
   min-width: 80px;
 
-  border-radius: 8px;
+  border-radius: inherit;
 
   text-transform: uppercase;
   font-weight: 600;
@@ -52,7 +59,6 @@ export default {
 
   &:focus-visible {
     outline: 1px solid currentColor;
-    box-shadow: inset 0px -2px 0px 0px currentColor
   }
 
   &::before {
@@ -70,11 +76,6 @@ export default {
     transition-duration: 0.25s;
   }
 
-  &:active {
-    &::before {
-      opacity: 0.2 !important;
-    }
-  }
 
   &:hover {
     &::before {
@@ -86,12 +87,6 @@ export default {
   &.d-btn--filled {
     &::before {
       opacity: 1;
-    }
-
-    &:active {
-      &::before {
-        opacity: 0.75 !important;
-      }
     }
 
     &:hover {
@@ -111,12 +106,6 @@ export default {
         opacity: 0.15;
       }
     }
-
-    &:active {
-      &::before {
-        opacity: 0.2;
-      }
-    }
   }
 
   &.d-btn--block {
@@ -126,11 +115,25 @@ export default {
   }
 
   .d-btn__content {
+    min-height: inherit;
+    padding: 0 12px;
+    border-radius: inherit;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px
+    gap: 4px;
+  }
+
+  &.d-btn--small .d-btn__content{
+    padding: 0;
+  }
+
+  &.d-btn--large .d-btn__content{
+    padding: 18px;
+    font-size: 1.6rem !important;
+    font-weight: normal;
+
   }
 }
 

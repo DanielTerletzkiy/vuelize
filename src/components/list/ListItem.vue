@@ -1,6 +1,6 @@
 <template>
   <d-function-wrapper root-div="li" tabindex="0" :classes="['d-list__item', ...classesObject]"
-                      v-bind="{...$props, ...$attrs}" @click="click">
+                      v-bind="{...$props, ...$attrs}" @click="click" v-ripple>
     <div class="d-list__item__content">
       <slot></slot>
     </div>
@@ -13,7 +13,10 @@ export default {
 
   computed: {
     classesObject() {
-      return {glow: true, 'glow--active': this.$parent.$parent.$props.value === this.$vnode.key}
+      return {
+        glow: true,
+        'glow--active': this.$parent.$parent.$props.value === this.$vnode.key
+      }
     }
   },
 

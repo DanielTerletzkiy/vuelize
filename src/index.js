@@ -5,6 +5,10 @@ import store from "./store";
 import Unicon from 'vue-unicons/dist/vue-unicons-vue2.es'
 import * as uc from 'vue-unicons/dist/icons'
 
+//Imports Ripple
+import Ripple from "vue-material-design-ripple";
+import "vue-material-design-ripple/dist/vue-material-design-ripple.css";
+
 //Imports Components
 import DFunctionWrapper from "./components/FunctionWrapper.vue";
 
@@ -82,6 +86,9 @@ export default Vue => {
     ));
     Unicon.add(objArray)
     Vue.use(Unicon)
+
+    //Register ripple directive
+    Vue.directive("ripple", Ripple);
 
 
     //Imports FunctionWrapper
@@ -192,7 +199,7 @@ export default Vue => {
         // Get YIQ ratio
         let yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
         // Check contrast
-        return (yiq >= 160) ? 'black' : 'white';
+        return (yiq >= 160) ? '#000' : '#fff';
 
     }
 

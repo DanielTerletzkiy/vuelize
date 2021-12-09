@@ -1,6 +1,6 @@
 <template>
   <d-function-wrapper root-div="button" :classes="['d-icon-button']" v-bind="{...$props, ...$attrs}" @click="$emit('click')" :style="stylesObject">
-    <span class="d-icon-button__content">
+    <span class="d-icon-button__content" v-ripple>
       <slot name="default"></slot>
     </span>
     <slot name="misc"></slot>
@@ -35,7 +35,6 @@ export default {
   border: none;
   font: inherit;
   cursor: pointer;
-  padding: 0 12px;
 
   height: 50px;
   width: 50px;
@@ -49,7 +48,6 @@ export default {
 
   &:focus-visible {
     outline: 1px solid currentColor;
-    box-shadow: inset 0px -2px 0px 0px currentColor
   }
 
   &::before {
@@ -67,12 +65,6 @@ export default {
     transition-duration: 0.25s;
   }
 
-  &:active {
-    &::before {
-      opacity: 0.2 !important;
-    }
-  }
-
   &:hover {
     &::before {
       opacity: 0.1;
@@ -81,6 +73,9 @@ export default {
   }
 
   .d-icon-button__content {
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
     position: relative;
     display: flex;
     align-items: center;
