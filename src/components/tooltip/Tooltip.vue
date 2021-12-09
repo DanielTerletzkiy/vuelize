@@ -6,7 +6,7 @@
     </div>
     <transition name="slide-fade">
       <div class="d-tooltip__wrapper" v-if="value">
-        <div class="d-tooltip__wrapper__content elevation" :style="stylesObject" ref="tooltip">
+        <div class="d-tooltip__wrapper__content elevation rounded-pill" :style="stylesObject" ref="tooltip">
           <slot name="tooltip" v-bind="{...$props, ...$attrs}">
           </slot>
         </div>
@@ -78,7 +78,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "../../styles/variables";
 
 .d-tooltip {
@@ -98,7 +98,7 @@ export default {
       height: max-content;
       position: relative;
       border-radius: inherit;
-      padding: 4px 12px;
+      padding: 0 12px;
 
       word-break: keep-all;
 

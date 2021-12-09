@@ -130,8 +130,8 @@ export default {
   }
 
   &.d-btn--large .d-btn__content{
-    padding: 18px;
-    font-size: 1.6rem !important;
+    min-height: 50px;
+    font-size: 1.6rem;
     font-weight: normal;
 
   }
