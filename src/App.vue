@@ -2,9 +2,14 @@
   <d-root>
     <title>{{$route.name}}</title>
     <d-toolbar show-hamburger @hamburgerClick="navDrawer = !navDrawer">
-      <div>
+      <d-row>
         <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>
-      </div>
+        <d-spacer/>
+        <d-card-subtitle elevation="n2" :inlined="!$vuelize.theme.dark" depressed class="my-0 mr-1 font-weight-thicc">
+          <d-icon color="primary" name="chart-growth"/>
+          v{{ version }}
+        </d-card-subtitle>
+      </d-row>
     </d-toolbar>
 
     <d-notification-wrapper/>
@@ -20,7 +25,13 @@
           <d-column flex column block>
             <d-accordion v-model="notifications" header-color="primary" style="width: 100%">
               <template slot="header">
-                <d-icon name="bell"/>Notifications
+                <d-badge color="primary" :value="$vuelize.notification.notifications.filter(e => e.active).length > 0">
+                  <d-icon name="bell"/>
+                  <template slot="content">
+                    {{ $vuelize.notification.notifications.filter(e => e.active).length }}
+                  </template>
+                </d-badge>
+                Notifications
               </template>
               <template slot="content">
                 <d-notification-wrapper class="pa-0" permanent style="max-height: 474px; overflow: auto"/>
@@ -41,6 +52,7 @@
 <script>
 
 import NavItem from "@/DOCS/components/NavItem";
+import {version} from '../package.json';
 
 export default {
   name: 'App',
@@ -66,6 +78,12 @@ export default {
 
     notifications: false,
   }),
+
+  computed: {
+    version() {
+      return version
+    }
+  }
 }
 </script>
 

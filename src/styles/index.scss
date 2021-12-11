@@ -1,3 +1,5 @@
+@import "./variables";
+
 @import "./directives/rounded";
 @import "./directives/elevation";
 @import "./directives/lines";
@@ -21,6 +23,7 @@ body, html {
 *,
 *::before,
 *::after {
+  scrollbar-width: thin;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -51,14 +54,16 @@ a {
   overflow: auto;
 
   &.theme--dark {
-    $dark_background: #1f2128;
     background: $dark_background;
   }
 
   &.theme--light {
-    $dark_background: #fafafa;
-    background: $dark_background;
+    background: $light_background;
   }
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 .theme--light {

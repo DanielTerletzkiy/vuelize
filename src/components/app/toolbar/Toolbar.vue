@@ -1,6 +1,6 @@
 <template>
   <d-function-wrapper :classes="['d-toolbar']" v-bind="{...$props, ...$attrs}">
-    <d-card block>
+    <d-card block rounded="none">
       <d-icon-button v-if="showHamburger" color="primary" @click="(e)=>$emit('hamburgerClick', e)">
         <d-icon name="bars"/>
       </d-icon-button>

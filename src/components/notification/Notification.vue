@@ -1,23 +1,24 @@
 <template>
   <d-function-wrapper :classes="['d-notification']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
     <slot name="default" :notification="this.notification">
-      <d-card :color="color" min-width="100%" max-width="500px" v-hover="{ over: ()=>{hover = true}, leave: ()=>{hover = false} }">
+      <d-card :color="options.color" inlined depressed min-width="100%" max-width="500px"
+              v-hover="{ over: ()=>{hover = true}, leave: ()=>{hover = false} }">
         <d-row class="px-3 left">
           <d-column>
-            <d-icon size="40" :color="getContrast(color)" name="layer-group" icon-style="monochrome"></d-icon>
+            <d-icon size="40" :color="getContrast(options.color)" :name="options.icon"></d-icon>
           </d-column>
           <d-column>
-            <d-card-title class="font-size-medium" :color="getContrast(color)">
+            <d-card-title class="font-size-medium" :color="getContrast(options.color)">
               {{ notification.title }}
             </d-card-title>
-            <d-card-subtitle :color="getContrast(color)">
+            <d-card-subtitle :color="getContrast(options.color)">
               {{ notification.content }}
             </d-card-subtitle>
           </d-column>
           <d-spacer/>
           <transition name="slide-fade">
-            <d-column v-if="hover">
-              <d-icon-button size="40" :color="getContrast(color)" @click="hide">
+            <d-column v-if="hover" class="d-notification__hide">
+              <d-icon-button size="40" :color="getContrast(options.color)" @click="hide">
                 <d-icon name="multiply"></d-icon>
               </d-icon-button>
             </d-column>
@@ -39,22 +40,70 @@ export default {
   data: () => ({
     timeout: null,
     hover: false,
+    options: {},
   }),
+
+  watch: {
+    hover(state){
+      if(state){
+        this.clearTimeout()
+      }else {
+        this.setTimeout()
+      }
+    }
+  },
 
   methods: {
     hide() {
       this.notification.active = false
+    },
+    setTimeout(){
+      this.timeout = setTimeout(() => {
+        this.hide()
+      }, 3000)
+    },
+    clearTimeout() {
+      clearTimeout(this.timeout)
     }
   },
 
   mounted() {
-    this.timeout = setTimeout(()=>{
-      this.hide()
-    }, 3000)
+    this.setTimeout();
+
+    this.options.color = this.processColor(this.notification.type)
+    switch (this.notification.type) {
+      case 'success': {
+        this.options.icon = 'check'
+        break;
+      }
+      case 'error': {
+        this.options.icon = 'exclamation-triangle'
+        break;
+      }
+      case 'warning': {
+        this.options.icon = 'exclamation-octagon'
+        break;
+      }
+      case 'info': {
+        this.options.icon = 'info-circle'
+        break;
+      }
+      default: {
+        this.options.icon = 'question'
+        break;
+      }
+    }
+
+    if (this.notification.options) {
+      this.options = this.notification.options
+    }
+
+    this.$forceUpdate()
+
   },
 
   beforeDestroy() {
-    clearTimeout(this.timeout)
+    this.clearTimeout()
   }
 
 }
@@ -62,5 +111,10 @@ export default {
 
 <style scoped lang="scss">
 .d-notification {
+  min-width: 270px;
+  position: relative;
+
+  &__hide {
+  }
 }
 </style>
