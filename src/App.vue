@@ -41,7 +41,7 @@
         </d-row>
       </d-navigation-bar>
 
-      <main class="pa-6" style="flex: 1">
+      <main :class="this.$isMobile() ? 'pa-3' : 'pa-6'" style="flex: 1">
         <router-view></router-view>
       </main>
     </div>

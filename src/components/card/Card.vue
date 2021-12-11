@@ -39,6 +39,7 @@ export default {
 
   &.d-card--block{
     width: auto;
+    flex: 1;
   }
 }
 

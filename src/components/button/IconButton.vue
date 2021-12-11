@@ -18,8 +18,8 @@ export default {
   computed: {
     stylesObject(){
       return {
-        width: this.size + 'px',
-        height: this.size + 'px',
+        'min-width': this.size + 'px',
+        'min-height': this.size + 'px',
       }
     }
   }

@@ -65,6 +65,13 @@ export default {
     placeholderActive() {
       return this.placeholder && !this.value;
     }
+  },
+
+  mounted() {
+    this.hover = false;
+    this.selected = false;
+
+    this.$forceUpdate();
   }
 }
 </script>
@@ -113,7 +120,7 @@ export default {
   }
 
   &--active {
-    box-shadow: inset 0 0 0 1.8px currentColor !important;
+    box-shadow: inset 0 0 0 1.4px currentColor !important;
   }
 
   &::before {
@@ -128,6 +135,7 @@ export default {
 
   &:focus-within::before {
     box-shadow: inset 0 0 0 2px currentColor;
+    transition-duration: 0.2s;
   }
 
   &.theme--dark {
