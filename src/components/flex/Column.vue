@@ -34,7 +34,6 @@ export default {
 
 <style scoped lang="scss">
 .d-column {
-  height: 100%;
   padding: 4px;
 }
 </style>
