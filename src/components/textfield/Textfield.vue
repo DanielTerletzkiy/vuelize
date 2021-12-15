@@ -2,12 +2,18 @@
   <d-function-wrapper :classes="['d-text-field', ...classesObject]" v-bind="{...$props, ...$attrs}"
                       :style="textFieldStylesObject"
                       @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
-    <component :is="componentType" v-bind="{...$props, ...$attrs}" :id="label" class="d-text-field__input"
+    <input v-if="componentType === 'input'" :is="componentType" v-bind="{...$props, ...$attrs}" :id="label"
+           class="d-text-field__input"
+           :placeholder="placeholderActive ? placeholder : ' '"
+           :value="value" @input="onInput"
+           @removeFocus="removeFocus"
+           @focusin="()=>this.selected = true" @focusout="()=>this.selected = false"/>
+    <component v-else :is="componentType" v-bind="{...$props, ...$attrs}" :id="label" class="d-text-field__input"
                :placeholder="placeholderActive ? placeholder : ' '"
                :value="value" @input="onInput"
                @removeFocus="removeFocus"
                @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
-      <template slot="item" slot-scope="props">
+      <template v-if="componentType !== 'input'" slot="item" slot-scope="props">
         <slot name="item" v-bind="props"></slot>
       </template>
     </component>

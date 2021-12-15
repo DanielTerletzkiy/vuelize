@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper :classes="['d-card', ...classesObject]" v-bind="{...$props, ...$attrs}" :style="stylesObject">
+  <d-function-wrapper :classes="['d-card', ...classesObject]" v-bind="{...$props, ...$attrs}" :style="stylesObject" @click="$emit('click')">
     <slot></slot>
   </d-function-wrapper>
 </template>

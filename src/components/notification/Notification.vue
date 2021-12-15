@@ -16,9 +16,10 @@
             </d-card-subtitle>
           </d-column>
           <d-spacer/>
-          <transition name="fade-x">
+          <transition name="slide-fade">
             <d-column v-if="hover" class="d-notification__hide">
-              <d-icon-button size="40" outlined depressed rounded="none" :color="getContrast(options.color)" @click="hide">
+              <d-icon-button size="40" outlined depressed rounded="none" :value="true"
+                             :color="getContrast(options.color)" @click="hide">
                 <d-icon name="multiply"></d-icon>
               </d-icon-button>
             </d-column>
@@ -117,11 +118,13 @@ export default {
 
   &__hide {
     position: absolute;
+    display: flex;
     right: 0;
     padding: 0;
+    min-height: 100% !important;
 
     button {
-      min-height: 100% !important;
+      height: auto !important;
       backdrop-filter: blur(1px);
     }
   }

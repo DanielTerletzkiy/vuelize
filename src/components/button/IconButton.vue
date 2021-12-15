@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper root-div="button" :classes="['d-icon-button']" v-bind="{...$props, ...$attrs}" @click="$emit('click')" :style="stylesObject">
+  <d-function-wrapper root-div="button" :classes="['d-icon-button', ...classesObject]" v-bind="{...$props, ...$attrs}" @click="$emit('click')" :style="stylesObject">
     <span class="d-icon-button__content" v-ripple>
       <slot name="default"></slot>
     </span>
@@ -12,14 +12,21 @@ export default {
   name: "d-icon-button",
 
   props: {
+    value: Boolean,
     size: {type: [String, Number], default: 50},
   },
 
   computed: {
     stylesObject(){
       return {
-        'min-width': this.size + 'px',
-        'min-height': this.size + 'px',
+        'width': this.size + 'px',
+        'height': this.size + 'px',
+      }
+    },
+    classesObject(){
+      return {
+        glow: true,
+        'glow--active': this.value
       }
     }
   }
@@ -36,8 +43,7 @@ export default {
   font: inherit;
   cursor: pointer;
 
-  height: 50px;
-  width: 50px;
+  padding: 0;
 
   border-radius: 8px;
 
@@ -45,32 +51,6 @@ export default {
   font-weight: 600;
   font-size: 0.875rem;
   letter-spacing: 0.0892857143em;
-
-  &:focus-visible {
-    outline: 1px solid currentColor;
-  }
-
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    content: '';
-    border-radius: inherit;
-
-    background: currentColor;
-    opacity: 0;
-
-    transition-duration: 0.25s;
-  }
-
-  &:hover {
-    &::before {
-      opacity: 0.1;
-      transition-duration: 0.15s;
-    }
-  }
 
   .d-icon-button__content {
     height: 100%;
