@@ -43,6 +43,7 @@ import DAccordion from "./components/accordion/Accordion.vue";
 import DNotification from "./components/notification/Notification.vue";
 import DNotificationWrapper from "./components/notification/NotificationWrapper.vue";
 import DBadge from "./components/badge/Badge.vue";
+import DLabel from "./components/label/Label.vue";
 
 export default Vue => {
 
@@ -78,6 +79,7 @@ export default Vue => {
     Vue.component("d-notification", DNotification);
     Vue.component("d-notification-wrapper", DNotificationWrapper);
     Vue.component("d-badge", DBadge);
+    Vue.component("d-label", DLabel);
 
 
     //-----------------------

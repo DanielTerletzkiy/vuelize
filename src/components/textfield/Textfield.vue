@@ -6,6 +6,7 @@
            class="d-text-field__input"
            :placeholder="placeholderActive ? placeholder : ' '"
            :value="value" @input="onInput"
+           @keyup.enter="$emit('enter')"
            @removeFocus="removeFocus"
            @focusin="()=>this.selected = true" @focusout="()=>this.selected = false"/>
     <component v-else :is="componentType" v-bind="{...$props, ...$attrs}" :id="label" class="d-text-field__input"
