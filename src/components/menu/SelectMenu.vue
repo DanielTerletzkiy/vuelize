@@ -2,7 +2,7 @@
   <d-function-wrapper :classes="['d-select-menu', 'bottom']" v-bind="{...$props, ...$attrs}">
     <transition name="slide-fade">
       <d-card v-if="open" class="d-select-menu__dropdown pa-0" elevation="4" v-click-outside="hideSelectMenu">
-        <d-list v-model="value" color="primary" class="pa-0" rounded="none">
+        <d-list :value="value" @input="onInput" color="primary" class="pa-0" rounded="none">
           <d-list-item v-for="(item, index) in items" :key="index">
             <slot name="item" :item="item" :index="index">
               {{ item }}
@@ -28,14 +28,11 @@ export default {
   methods: {
     hideSelectMenu() {
       this.$emit('update:open', false)
+    },
+    onInput(e){
+      this.$emit('input', e)
     }
   },
-
-  watch: {
-    value(value) {
-      this.$emit('input', value)
-    }
-  }
 }
 </script>
 

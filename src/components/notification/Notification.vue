@@ -16,9 +16,9 @@
             </d-card-subtitle>
           </d-column>
           <d-spacer/>
-          <transition name="slide-fade">
+          <transition name="fade-x">
             <d-column v-if="hover" class="d-notification__hide">
-              <d-icon-button size="40" :color="getContrast(options.color)" @click="hide">
+              <d-icon-button size="40" outlined depressed rounded="none" :color="getContrast(options.color)" @click="hide">
                 <d-icon name="multiply"></d-icon>
               </d-icon-button>
             </d-column>
@@ -44,10 +44,10 @@ export default {
   }),
 
   watch: {
-    hover(state){
-      if(state){
+    hover(state) {
+      if (state) {
         this.clearTimeout()
-      }else {
+      } else {
         this.setTimeout()
       }
     }
@@ -57,7 +57,7 @@ export default {
     hide() {
       this.notification.active = false
     },
-    setTimeout(){
+    setTimeout() {
       this.timeout = setTimeout(() => {
         this.hide()
       }, 3000)
@@ -111,10 +111,19 @@ export default {
 
 <style scoped lang="scss">
 .d-notification {
-  min-width: 270px;
+  min-width: auto;
   position: relative;
+  overflow: hidden;
 
   &__hide {
+    position: absolute;
+    right: 0;
+    padding: 0;
+
+    button {
+      min-height: 100% !important;
+      backdrop-filter: blur(1px);
+    }
   }
 }
 </style>

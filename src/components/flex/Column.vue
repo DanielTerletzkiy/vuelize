@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper :classes="['d-column', ...classesObject]" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
+  <d-function-wrapper :classes="['d-column', ...classesObject]" v-bind="{...$props, ...$attrs}" :style="stylesObject" @click="$emit('click')">
     <slot>
 
     </slot>
@@ -15,17 +15,26 @@ export default {
     wrap: Boolean,
     column: Boolean,
     block: Boolean,
-    noGap: {type: Boolean, default: true},
+    gap: Boolean,
+
+    height: String,
+    width: String,
   },
 
   computed: {
+    stylesObject() {
+      return {
+        height: this.height,
+        width: this.width,
+      }
+    },
     classesObject() {
       return {
         flex: this.flex,
         wrap: this.wrap,
         column: this.column,
         block: this.block,
-        'no-gap': this.noGap,
+        'no-gap': !this.gap,
       }
     },
   },

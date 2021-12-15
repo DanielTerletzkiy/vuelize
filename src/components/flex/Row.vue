@@ -13,16 +13,25 @@ export default {
   props: {
     wrap: Boolean,
     column: Boolean,
-    noGap: {type: Boolean, default: true},
+    gap: Boolean,
+
+    height: String,
+    width: String,
   },
 
   computed: {
+    stylesObject() {
+      return {
+        height: this.height,
+        width: this.width,
+      }
+    },
     classesObject() {
       return {
         flex: true,
         wrap: this.wrap,
         column: this.column,
-        'no-gap': this.noGap,
+        'no-gap': !this.gap,
       }
     },
   },

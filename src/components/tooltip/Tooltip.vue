@@ -5,7 +5,7 @@
       </slot>
     </div>
     <transition name="slide-fade">
-      <div class="d-tooltip__wrapper" v-if="value">
+      <div class="d-tooltip__wrapper" v-if="hovering">
         <div class="d-tooltip__wrapper__content elevation rounded-pill" :style="stylesObject" ref="tooltip">
           <slot name="tooltip" v-bind="{...$props, ...$attrs}">
           </slot>
@@ -31,6 +31,7 @@ export default {
   },
 
   data: () => ({
+    hovering: false,
     offset: {
       top: 'initial',
       right: 'initial',
@@ -38,9 +39,17 @@ export default {
       left: 'initial',
     }
   }),
+
+  watch: {
+    value(state){
+      this.hovering = state
+    }
+  },
+
   methods: {
     onHover: async function (state) {
-      this.value = state;
+      this.hovering = state
+      this.$emit('input',state)
       this.$forceUpdate()
 
       await this.$refs.tooltip;
@@ -75,6 +84,10 @@ export default {
       return this.offset
     }
   },
+
+  mounted() {
+    this.hovering = this.value
+  }
 }
 </script>
 

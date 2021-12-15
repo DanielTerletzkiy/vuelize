@@ -1,6 +1,6 @@
 {
   "name": "vuelize",
-  "version": "0.0.67",
+  "version": "0.0.68",
   "private": false,
   "description": "A Vue component Library, with the most common Material UI styled components",
   "author": "Daniel Terletzkiy",

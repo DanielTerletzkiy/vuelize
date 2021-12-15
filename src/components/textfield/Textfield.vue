@@ -3,7 +3,6 @@
                       :style="textFieldStylesObject"
                       @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
     <component :is="componentType" v-bind="{...$props, ...$attrs}" :id="label" class="d-text-field__input"
-               autocomplete="off"
                :placeholder="placeholderActive ? placeholder : ' '"
                :value="value" @input="onInput"
                @removeFocus="removeFocus"
@@ -24,6 +23,8 @@ export default {
     label: String,
     placeholder: String,
     select: Boolean,
+    width: String,
+    fullWidth: Boolean
   },
 
   data: () => ({
@@ -47,6 +48,9 @@ export default {
       return {
         color: (this.hover || this.selected) ? this.processColor(this.color) : null,
         caretColor: (this.hover || this.selected) ? this.processColor(this.color) : null,
+        width: this.width,
+        'min-width': this.fullWidth ? '100%' : 'unset',
+        flex: this.fullWidth ? 1 : 'unset'
       }
     },
 
@@ -81,7 +85,7 @@ export default {
 
 .d-text-field {
   position: relative;
-  width: 264px;
+  width: 250px;
   height: 3rem;
   background: inherit;
   caret-color: currentColor;
@@ -153,10 +157,10 @@ export default {
 
 .d-text-field__input:focus ~ .d-text-field__label, .d-text-field--placeholder .d-text-field__input ~ .d-text-field__label,
 .d-text-field__input:not(:placeholder-shown).d-text-field__input:not(:focus) ~ .d-text-field__label {
-  font-size: 1rem;
+  font-size: 0.8rem;
   padding: 0 0.3rem;
-  top: -0.685rem;
-  left: 0.5rem;
+  top: -0.485rem;
+  left: 0.4rem;
 }
 
 </style>

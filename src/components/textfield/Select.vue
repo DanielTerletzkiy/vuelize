@@ -18,7 +18,7 @@ export default {
   name: "d-select",
 
   props: {
-    value: Number,
+    value: [Number, String],
     items: Array,
   },
 
