@@ -5,7 +5,9 @@
               v-hover="{ over: ()=>{hover = true}, leave: ()=>{hover = false} }">
         <d-row class="px-3 left">
           <d-column>
-            <d-icon size="40" :color="getContrast(options.color)" :name="options.icon"></d-icon>
+            <d-icon-button :color="getContrast(options.color)" @click="hide">
+              <d-icon :size="hover?30:40" :name="hover?'multiply':options.icon"></d-icon>
+            </d-icon-button>
           </d-column>
           <d-column>
             <d-card-title class="font-size-medium" :color="getContrast(options.color)">
@@ -15,15 +17,6 @@
               {{ notification.content }}
             </d-card-subtitle>
           </d-column>
-          <d-spacer/>
-          <transition name="slide-fade">
-            <d-column v-if="hover" class="d-notification__hide">
-              <d-icon-button size="40" outlined depressed rounded="none" :value="true"
-                             :color="getContrast(options.color)" @click="hide">
-                <d-icon name="multiply"></d-icon>
-              </d-icon-button>
-            </d-column>
-          </transition>
         </d-row>
       </d-card>
     </slot>
