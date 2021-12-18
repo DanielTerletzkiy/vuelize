@@ -132,15 +132,15 @@
       </d-card-content>
 
       <d-card-content flex wrap class="pt-2">
-        <d-card-title class="font-size-medium" inlined depressed elevation="n2" rounded="lg">
+        <d-card-title class="font-size-medium" inlined depressed elevation="2" rounded="lg">
           <d-icon :size="34" color="primary" name="text"/>
           {{ text }}
         </d-card-title>
-        <d-card-title class="font-size-medium" inlined depressed elevation="n2" rounded="lg">
+        <d-card-title class="font-size-medium" inlined depressed elevation="2" rounded="lg">
           <d-icon :size="34" color="primary" name="list-ol"/>
           <d-icon :size="34" :name="iconItems[selectedIcon].icon" :icon-style="iconItems[selectedIcon].iconStyle"/>
         </d-card-title>
-        <d-card-title class="font-size-medium" inlined depressed elevation="n2" rounded="lg">
+        <d-card-title class="font-size-medium" inlined depressed elevation="2" rounded="lg">
           <d-icon :size="34" color="primary" name="calendar-alt"/>
           {{ date }}
         </d-card-title>
@@ -239,7 +239,7 @@
       </d-card-title>
 
       <d-card-content flex wrap column>
-        <d-accordion v-model="openAccordion" :key="0" header-color="primary" elevation="n2">
+        <d-accordion v-model="openAccordion" :key="0" header-color="primary" elevation="2">
           <template slot="header">
             <d-icon name="nerd"/> Hey you...
           </template>
@@ -247,7 +247,7 @@
             Good day <d-icon name="smile"/>
           </template>
         </d-accordion>
-        <d-accordion v-model="openAccordion" :key="1" header-color="primary" elevation="n2" inlined depressed>
+        <d-accordion v-model="openAccordion" :key="1" header-color="primary" elevation="2" inlined depressed>
           <template slot="header">
             <d-icon name="nerd"/> Nice
           </template>
@@ -262,7 +262,7 @@
 
     <d-card elevation rounded="lg" block>
       <d-card-title>
-        <d-icon name="user" color="primary" :size="30"/>
+        <d-icon name="browser" color="primary" :size="30"/>
         Tabs!
       </d-card-title>
 
@@ -289,7 +289,7 @@
         </d-card-title>
         <transition-group name="slide-fade">
           <d-card-content v-if="tabs === 0" :key="0">
-            <d-card-subtitle inlined depressed elevation="n2" class="pa-4 pt-0" style="display: block">
+            <d-card-subtitle inlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
               <d-card-subtitle class="pa-0">
                 <d-avatar
                     src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fart.ngfiles.com%2Fcomments%2F95000%2Fiu_95222_7850304.jpg&f=1&nofb=1"/>
@@ -306,7 +306,7 @@
             </d-card-subtitle>
           </d-card-content>
           <d-card-content v-if="tabs === 1" :key="1">
-            <d-card-subtitle inlined depressed elevation="n2" class="pa-4 pt-0" style="display: block">
+            <d-card-subtitle inlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
               <d-card-subtitle class="pa-0">
                 <d-avatar
                     src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwX7kQMQ0UaBN4hfG40RmJrFbBnEgcUvQmjEgNyZA%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1"/>
@@ -320,7 +320,7 @@
             </d-card-subtitle>
           </d-card-content>
           <d-card-content v-if="tabs === 3" :key="3">
-            <d-card-subtitle inlined depressed elevation="n2" class="pa-4 pt-0" style="display: block">
+            <d-card-subtitle inlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
               <d-card-subtitle class="pa-0">
                 <d-avatar
                     src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwoSlJk198vIZt4kIE9PR6pKa1pXUy9V4zIkA%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1"/>
@@ -357,7 +357,7 @@
           <d-card-title>
             Normal
           </d-card-title>
-          <d-list class="rounded-lg elevation-n2" color="primary" v-model="listItem">
+          <d-list class="rounded-lg elevation-2" color="primary" v-model="listItem">
             <d-list-item v-for="i in 6" :key="i-1">
               <d-icon class="mr-1" :name="`${i-1}-plus`"/>
               Item {{ i - 1 }}
@@ -369,7 +369,7 @@
           <d-card-title>
             Inlined
           </d-card-title>
-          <d-list class="rounded-lg elevation-n2" color="primary" v-model="listItem">
+          <d-list class="rounded-lg elevation-2" color="primary" v-model="listItem">
             <d-list-item v-for="i in 6" :key="i-1" :inlined="listItem === i-1">
               <d-icon class="mr-1" :name="`${i-1}-plus`"/>
               Item {{ i - 1 }}
@@ -377,12 +377,12 @@
           </d-list>
         </d-card-content>
 
-        <d-card-content style="flex: 1" elevation="n1">
+        <d-card-content style="flex: 1" elevation="1">
           <d-card-title>
             <d-icon name="sad-crying" color="primary" :size="34"/>
             & Inlined
           </d-card-title>
-          <d-list class="rounded-lg elevation-n2" color="primary" v-model="listItem">
+          <d-list class="rounded-lg elevation-2" color="primary" v-model="listItem">
             <d-list-item v-for="i in 6" :key="i-1" :inlined="listItem === i-1" depressed>
               <d-icon class="mr-1" :name="`${i-1}-plus`"/>
               Item {{ i - 1 }}

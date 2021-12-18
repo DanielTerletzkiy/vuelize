@@ -2,15 +2,15 @@
 
 .theme--dark {
   @for $i from 1 through 24 {
-    $brightness: $i + 0.5%;
-    .elevation-#{$i} {
+    $brightness: $i + 0.2%;
+    .elevation-n#{$i} {
       background: lighten($dark_sheet, $brightness) !important;
     }
   }
 
   @for $i from 1 through 24 {
     $darkness: $i + 0.5%;
-    .elevation-n#{$i} {
+    .elevation-#{$i} {
       background-color: darken($dark_sheet, $darkness) !important;
     }
   }

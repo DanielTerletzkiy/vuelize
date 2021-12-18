@@ -1,7 +1,7 @@
 <template>
   <d-function-wrapper :classes="['d-select-menu', 'bottom']" v-bind="{...$props, ...$attrs}">
     <transition name="slide-fade">
-      <d-card v-if="open" class="d-select-menu__dropdown pa-0" elevation="4" v-click-outside="hideSelectMenu">
+      <d-card v-if="open" class="d-select-menu__dropdown pa-0" :elevation="$vuelize.theme.dark?'n5':'5'" v-click-outside="hideSelectMenu">
         <d-list :value="value" @input="onInput" color="primary" class="pa-0" rounded="none">
           <d-list-item v-for="(item, index) in items" :key="index">
             <slot name="item" :item="item" :index="index">

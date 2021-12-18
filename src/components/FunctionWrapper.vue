@@ -9,6 +9,10 @@
 export default {
   name: "d-function-wrapper",
 
+  props: {
+    classes: Array,
+  },
+
   computed: {
     classAttributes() {
       return {

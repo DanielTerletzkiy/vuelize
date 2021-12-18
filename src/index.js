@@ -108,7 +108,6 @@ export default Vue => {
         //Default props
         props: {
             rootDiv: {type: String, default: 'div'},
-            classes: Array,
             color: String,
             disabled: Boolean,
 

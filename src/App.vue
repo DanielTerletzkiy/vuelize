@@ -5,7 +5,7 @@
       <d-row>
         <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>
         <d-spacer/>
-        <d-card-subtitle elevation="n2" :inlined="!$vuelize.theme.dark" depressed class="my-0 mr-1 font-weight-thicc">
+        <d-card-subtitle elevation="2" :inlined="!$vuelize.theme.dark" depressed class="my-0 mr-1 font-weight-bold">
           <d-icon color="primary" name="chart-growth"/>
           v{{ version }}
         </d-card-subtitle>

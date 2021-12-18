@@ -38,10 +38,11 @@ export default {
   bottom: 0;
   right: 0;
 
-  padding: 12px;
+  margin: 12px;
 
   &--permanent {
     position: relative;
+    margin: 0;
   }
 
   &__content > span {
