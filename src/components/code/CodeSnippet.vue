@@ -68,6 +68,7 @@ export default {
       navigator.clipboard.writeText(this.parsedCode.map((line) => {
         return line + '\n'
       }).join(''));
+      this.$notify('Copied', 'The select text was copied', 'success', {icon: 'clipboard-notes'})
     },
     process() {
       const div = document.createElement('div');

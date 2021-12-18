@@ -57,6 +57,7 @@ export default {
   methods: {
     copy(code) {
       navigator.clipboard.writeText(code);
+      this.$notify('Copied', 'The select text was copied', 'success', {icon: 'clipboard-notes'})
     },
     copySequence() {
       const codeSequence = this.codeArray.map((code) => {

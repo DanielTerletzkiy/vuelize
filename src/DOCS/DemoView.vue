@@ -83,7 +83,8 @@
           Full width Button
         </d-card-subtitle>
         <d-card-content>
-          <d-btn color="primary" glow block @click="()=>{changeColor('primary'); this.$notify('Yup...', `That's full width...`, 'info')}">
+          <d-btn color="primary" glow block
+                 @click="()=>{changeColor('primary'); this.$notify('Yup...', `That's full width...`, 'info')}">
             <d-icon name="angle-left" :size="32"/>
             This is full width
             <d-icon name="angle-right" :size="32"/>
@@ -158,9 +159,9 @@
       <d-card-content>
         <d-btn color="primary" glow @click="()=>openSelectMenu=!openSelectMenu" size="large">
           <template slot="default">
-              <d-icon :name="iconItems[selectedIcon].icon" :icon-style="iconItems[selectedIcon].iconStyle"
-                      color="primary"/>
-              {{ iconItems[selectedIcon].name }}
+            <d-icon :name="iconItems[selectedIcon].icon" :icon-style="iconItems[selectedIcon].iconStyle"
+                    color="primary"/>
+            {{ iconItems[selectedIcon].name }}
           </template>
           <template slot="misc">
             <d-select-menu :open.sync="openSelectMenu" v-model="selectedIcon" :items="iconItems">
@@ -186,6 +187,39 @@
       <d-card-content>
         <d-image height="100px" width="auto"
                  src="https://swansoftwaresolutions.com/wp-content/uploads/2020/01/Benefits-of-Using-VUE.JS.jpeg"/>
+      </d-card-content>
+    </d-card>
+
+    <div class="my-4"/>
+
+    <d-card elevation block>
+      <d-card-title>
+        <d-icon name="percentage" color="primary" :size="30"/>
+        Progressbar!
+      </d-card-title>
+      <d-card-content flex column wrap>
+        <d-column>
+          <d-row>
+            <d-card-subtitle class="pl-0">
+              With Label
+            </d-card-subtitle>
+          </d-row>
+          <d-row>
+            <d-progressbar :value="progressValue%100" style="width: 400px">
+              Download @ {{progressValue%100}}%
+            </d-progressbar>
+          </d-row>
+        </d-column>
+        <d-column>
+          <d-row>
+            <d-card-subtitle class="pl-0">
+              Without Label
+            </d-card-subtitle>
+          </d-row>
+          <d-row>
+            <d-progressbar hide-label :value="progressValue%100" style="width: 400px"/>
+          </d-row>
+        </d-column>
       </d-card-content>
     </d-card>
 
@@ -241,18 +275,22 @@
       <d-card-content flex wrap column>
         <d-accordion v-model="openAccordion" :key="0" header-color="primary" elevation="2">
           <template slot="header">
-            <d-icon name="nerd"/> Hey you...
+            <d-icon name="nerd"/>
+            Hey you...
           </template>
           <template slot="content">
-            Good day <d-icon name="smile"/>
+            Good day
+            <d-icon name="smile"/>
           </template>
         </d-accordion>
         <d-accordion v-model="openAccordion" :key="1" header-color="primary" elevation="2" inlined depressed>
           <template slot="header">
-            <d-icon name="nerd"/> Nice
+            <d-icon name="nerd"/>
+            Nice
           </template>
           <template slot="content">
-            Day <d-icon name="smile"/>
+            Day
+            <d-icon name="smile"/>
           </template>
         </d-accordion>
       </d-card-content>
@@ -418,6 +456,9 @@ export default {
     date: undefined,
 
     openSelectMenu: false,
+
+    progressValue: 0,
+
     openAccordion: 0,
 
     tabs: 0,
@@ -425,6 +466,10 @@ export default {
 
   mounted() {
     this.$notify('Hello there', 'General Kenobi', 'success')
+
+    setInterval(()=>{
+      this.progressValue += 15
+    },1000)
   },
 
   methods: {

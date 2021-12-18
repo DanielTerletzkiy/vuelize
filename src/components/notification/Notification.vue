@@ -1,7 +1,8 @@
 <template>
   <d-function-wrapper :classes="['d-notification']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
     <slot name="default" :notification="this.notification">
-      <d-card :color="options.color" :elevation="!$vuelize.theme.dark && hover?'4':'none'" :inlined="!options.color" depressed min-width="100%" max-width="500px"
+      <d-card :color="options.color" :elevation="!$vuelize.theme.dark && hover?'4':'none'" :inlined="!options.color"
+              depressed min-width="100%" max-width="500px"
               v-hover="{ over: ()=>{hover = true}, leave: ()=>{hover = false} }">
         <d-row class="px-3 left">
           <d-column>
@@ -87,7 +88,7 @@ export default {
     }
 
     if (this.notification.options) {
-      this.options = this.notification.options
+      Object.assign(this.options,this.notification.options);
     }
 
     this.setTimeout();
