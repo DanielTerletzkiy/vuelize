@@ -2,9 +2,12 @@
   <d-root>
     <title>{{$route.name}}</title>
     <d-toolbar show-hamburger @hamburgerClick="navDrawer = !navDrawer">
-      <d-row>
+      <d-row gap>
         <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>
         <d-spacer/>
+        <d-checkbox flex-direction="row-reverse" :size="24" on-icon="sunset" off-icon="moonset" v-model="$vuelize.theme.dark">
+          Dark mode
+        </d-checkbox>
         <d-card-subtitle elevation="2" :inlined="!$vuelize.theme.dark" depressed class="my-0 mr-1 font-weight-bold">
           <d-icon color="primary" name="chart-growth"/>
           v{{ version }}
@@ -65,12 +68,37 @@ export default {
         category: 'Getting Started', icon: 'estate', items: []
       },
       {
+        category: 'Directives', icon: 'ruler', items: [
+          {
+            category: 'Elevation', icon: 'power', items: []
+          },
+          {
+            category: 'Flex', icon: 'power', items: []
+          },
+          {
+            category: 'Font', icon: 'power', items: []
+          },
+          {
+            category: 'Glow', icon: 'power', items: []
+          },
+          {
+            category: 'Lines', icon: 'power', items: []
+          },
+          {
+            category: 'Rounded', icon: 'power', items: []
+          },
+          {
+            category: 'Size', icon: 'power', items: []
+          },
+          {
+            category: 'Transition', icon: 'power', items: []
+          },
+        ]
+      },
+      {
         category: 'Components', icon: 'layers', items: [
           {
-            category: 'Buttons', icon: 'power', items: [
-              {category: 'Normal', icon: 'square-shape', items: []},
-              {category: 'Icon', icon: 'icons', items: []}
-            ]
+            category: 'Buttons', icon: 'power', items: []
           }
         ]
       }

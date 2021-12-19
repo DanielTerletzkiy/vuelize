@@ -7,7 +7,7 @@
       </d-list-item>
       <d-list v-if="navItem.items.length>0" class="py-0 pr-0 pl-6">
         <div style="display: flex;">
-          <d-divider vertical size="1px" class="my-2"
+          <d-divider vertical size="1px" :color="open?'primary':''" class="my-2"
                      v-if="navItem.items.length>0"></d-divider>
           <div style="width: 100%;">
             <NavItem :nav-item="subNavItem" :path="newPath" :position="position+1" v-for="subNavItem in navItem.items"
@@ -40,17 +40,25 @@ export default {
     },
     newPath() {
       return this.path + '/' + this.navItem.category
-    }
+    },
+    open() {
+      return this.currentNavigation.includes(
+          this.toUrl(this.newPath)
+      )}
   },
 
   methods: {
-    toUrl(path){
+    toUrl(path) {
       return encodeURI(path.replaceAll(' ', '_').toLowerCase())
     }
   },
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.fade-y {
+  &-leave-active {
+    position: absolute;
+  }
+}
 </style>

@@ -205,7 +205,7 @@
             </d-card-subtitle>
           </d-row>
           <d-row>
-            <d-progressbar :value="progressValue%100" style="width: 400px">
+            <d-progressbar :value="progressValue%100" style="min-width: 300px; width: 100%">
               Download @ {{progressValue%100}}%
             </d-progressbar>
           </d-row>
@@ -217,7 +217,7 @@
             </d-card-subtitle>
           </d-row>
           <d-row>
-            <d-progressbar hide-label :value="progressValue%100" style="width: 400px"/>
+            <d-progressbar hide-label :value="progressValue%100" style="min-width: 300px; width: 100%"/>
           </d-row>
         </d-column>
       </d-card-content>

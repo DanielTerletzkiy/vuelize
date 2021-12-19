@@ -1,6 +1,6 @@
 <template>
   <d-function-wrapper :classes="['d-code-snippet']" v-bind="{...$props, ...$attrs}">
-    <d-card block depressed class="d-code-snippet__card">
+    <d-card block depressed class="d-code-snippet__card" elevation="8">
       <d-row class="d-code-snippet__title" :elevation="this.$vuelize.theme.dark ? '1' : ''">
         <d-column>
           <d-card-subtitle color="primary">
@@ -18,7 +18,7 @@
       </d-row>
 
       <d-row wrap>
-        <d-column class="d-code-snippet__code">
+        <d-column class="d-code-snippet__code my-2">
           <d-card-content class="pa-0">
             <d-row v-for="(line, l) in parsedCode" :key="l" class="d-code-snippet__code__row">
               <d-column>
@@ -30,14 +30,14 @@
             </d-row>
           </d-card-content>
         </d-column>
-        <d-column v-if="!!(this.$slots.default || [])[0]" class="d-code-snippet__preview pa-0 elevation-1 ma-2">
+        <d-column v-if="!!(this.$slots.default || [])[0]" class="d-code-snippet__preview pa-0 elevation-2">
           <d-card-content flex column no-gap>
             <div class="d-code-snippet__preview__title">
               <d-card-subtitle>
                 <d-icon name="eye"/>
                 Preview
               </d-card-subtitle>
-              <d-divider size="2px" color="primary" class="ml-2"/>
+              <d-divider size="2px" color="primary" class="mx-3"/>
             </div>
             <d-card-content class="mt-3">
               <slot></slot>

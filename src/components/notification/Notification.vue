@@ -7,7 +7,7 @@
         <d-row class="px-3 left">
           <d-column>
             <d-icon-button :color="getContrast(options.color)" @click="hide">
-              <d-icon :size="hover?30:40" :name="hover?'multiply':options.icon"></d-icon>
+              <d-icon :size="hover?30:40" :name="hover?'multiply':options.icon||'multiply'"></d-icon>
             </d-icon-button>
           </d-column>
           <d-column>

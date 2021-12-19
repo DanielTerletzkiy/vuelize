@@ -1,6 +1,6 @@
 <template>
   <d-function-wrapper :classes="['d-code-line']" v-bind="{...$props, ...$attrs}">
-    <d-card block depressed class="d-code-line__card">
+    <d-card block depressed class="d-code-line__card" elevation="8">
       <d-row class="d-code-line__title" :elevation="this.$vuelize.theme.dark ? '1' : ''">
         <d-column>
           <d-card-subtitle color="primary">
