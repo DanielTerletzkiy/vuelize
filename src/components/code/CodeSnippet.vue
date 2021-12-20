@@ -33,7 +33,7 @@
             </d-row>
           </d-card-content>
         </d-column>
-        <d-column v-if="!!(this.$slots.default || [])[0]" class="d-code-snippet__preview pa-0 ma-3 elevation-2">
+        <d-column v-if="showPreview" class="d-code-snippet__preview pa-0 ma-3 elevation-2">
           <d-card-content flex column no-gap>
             <div class="d-code-snippet__preview__title">
               <d-card-subtitle>
@@ -42,8 +42,11 @@
               </d-card-subtitle>
               <d-divider size="2px" color="primary" class="mx-3"/>
             </div>
-            <d-card-content class="mt-3">
-              <slot></slot>
+            <d-card-content
+                class="mt-3">
+              <slot>
+                <v-runtime-template :template="code"></v-runtime-template>
+              </slot>
             </d-card-content>
           </d-card-content>
         </d-column>
@@ -58,18 +61,33 @@ import VueHighlightJS from 'vue-highlightjs'
 
 Vue.use(VueHighlightJS)
 
+import VRuntimeTemplate from "v-runtime-template";
+
 export default {
   name: "d-code-snippet",
   props: {
     label: {type: String, required: true},
     code: String,
-    language: {type: String, default: 'html'}
+    language: {type: String, default: 'html'},
+    hidePreview: {type: Boolean, default: false}
+  },
+
+  components: {
+    VRuntimeTemplate
   },
 
   data: () => ({
     hover: false,
-    parsedCode: [],
   }),
+
+  computed: {
+    parsedCode() {
+      return this.code.split('\n')
+    },
+    showPreview() {
+      return (this.language.toLowerCase() === 'vue' || this.language.toLowerCase() === 'html') && !this.hidePreview
+    }
+  },
 
   methods: {
     copy() {
@@ -78,37 +96,9 @@ export default {
       }).join(''));
       this.$notify('Copied', 'Code copied', 'success', {icon: 'clipboard-notes'})
     },
-    process() {
-      const div = document.createElement('div');
-      div.innerHTML = this.code.trim();
-      const html = this.format(div, 0);
-
-      let code = html.innerHTML.split('\n')
-      for (let i = 0; i < code.length; i++) {
-        if (!code[i].replace(/\s/g, '').length) {
-          code.splice(i, 1)
-        }
-      }
-      this.parsedCode = code;
-    },
-    format(node, level) {
-      let indentBefore = new Array(level++ + 1).join('  '),
-          indentAfter = new Array(level - 1).join('  '),
-          textNode;
-      for (let i = 0; i < node.children.length; i++) {
-        textNode = document.createTextNode('\n' + indentBefore);
-        node.insertBefore(textNode, node.children[i]);
-        this.format(node.children[i], level);
-        if (node.lastElementChild === node.children[i]) {
-          textNode = document.createTextNode('\n' + indentAfter);
-          node.appendChild(textNode);
-        }
-      }
-      return node;
-    }
   },
+
   mounted() {
-    this.process();
     this.$forceUpdate()
   }
 }

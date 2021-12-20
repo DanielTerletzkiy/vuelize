@@ -22,43 +22,24 @@
         </d-column>
       </d-row>
       <d-code-line label="NPM" :code-array="['npm install vuelize', 'npm run serve']"/>
-      <d-code-line language="JavaScript" label="main.js" :code-array="[`import Vuelize from 'vuelize'`, `Vue.use(Vuelize)`]"/>
+      <d-code-line language="JavaScript" label="main.js"
+                   :code-array="[`import Vuelize from 'vuelize'`, `Vue.use(Vuelize)`]"/>
 
-      <d-code-snippet label="app.vue" :code="code">
-        <d-toolbar show-hamburger style="width: 100%">
-          <div>
-            <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>
-          </div>
-        </d-toolbar>
-        <d-card-subtitle>main content ...</d-card-subtitle>
-      </d-code-snippet>
+      <d-code-snippet label="app.vue" :code="code[0]" hide-preview/>
     </d-card-content>
   </div>
 </template>
 
 <script>
+import app from '!raw-loader!../../App.vue'
+
 export default {
   name: "GettingStarted",
 
   data: () => ({
-    code: `
-      <d-root>
-    <d-toolbar show-hamburger @hamburgerClick="navDrawer = !navDrawer">
-      <div>
-        <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>
-      </div>
-    </d-toolbar>
-    <div style="display: flex">
-      <d-navigation-bar :permanent="!this.$isMobile()" :temporary="this.$isMobile()" v-model="navDrawer">
-        <div class="pt-2">
-          <!--Nav items-->
-        </div>
-      </d-navigation-bar>
-      <main class="pa-6" style="flex: 1">
-        <router-view></router-view>
-      </main>
-    </div>
-  </d-root>`
+    code: [
+      app
+    ]
   })
 }
 </script>

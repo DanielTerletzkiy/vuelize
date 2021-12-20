@@ -2,29 +2,21 @@
   <d-row column>
     <d-column flex block>
       <d-code-snippet label="Weight" :code="example[0]">
-        <d-card-title class="font-weight-light">
-          Light
-        </d-card-title>
-        <d-card-title class="font-weight-medium">
-          Medium
-        </d-card-title>
-        <d-card-title class="font-weight-bold">
-          Bold
-        </d-card-title>
+        <div>
+          <d-card-title class="font-weight-light">
+            Light
+          </d-card-title>
+          <d-card-title class="font-weight-medium">
+            Medium
+          </d-card-title>
+          <d-card-title class="font-weight-bold">
+            Bold
+          </d-card-title>
+        </div>
       </d-code-snippet>
     </d-column>
     <d-column flex block>
-      <d-code-snippet label="Size" :code="example[1]">
-        <d-card-title class="font-size-small">
-          Small
-        </d-card-title>
-        <d-card-title class="font-size-medium">
-          Medium
-        </d-card-title>
-        <d-card-title class="font-size-large">
-          Large
-        </d-card-title>
-      </d-code-snippet>
+      <d-code-snippet label="Size" :code="example[1]"/>
     </d-column>
   </d-row>
 </template>
@@ -35,25 +27,29 @@ export default {
 
   data: () => ({
     example: [
-      '<d-card-title class="font-weight-light">\n' +
-      '  Light\n' +
-      '</d-card-title>\n' +
-      '<d-card-title class="font-weight-medium">\n' +
-      '  Medium\n' +
-      '</d-card-title>\n' +
-      '<d-card-title class="font-weight-bold">\n' +
-      '  Bold\n' +
-      '</d-card-title>',
+      '<div>\n' +
+      '  <d-card-title class="font-weight-light">\n' +
+      '    Light\n' +
+      '  </d-card-title>\n' +
+      '  <d-card-title class="font-weight-medium">\n' +
+      '    Medium\n' +
+      '  </d-card-title>\n' +
+      '  <d-card-title class="font-weight-bold">\n' +
+      '    Bold\n' +
+      '  </d-card-title>\n' +
+      '</div>',
 
-      '<d-card-title class="font-size-small">\n' +
-      '  Small\n' +
-      '</d-card-title>\n' +
-      '<d-card-title class="font-size-medium">\n' +
-      '  Medium\n' +
-      '</d-card-title>\n' +
-      '<d-card-title class="font-size-large">\n' +
-      '  Large\n' +
-      '</d-card-title>'
+      '<div>\n' +
+      '  <d-card-title class="font-size-small">\n' +
+      '    Small\n' +
+      '  </d-card-title>\n' +
+      '  <d-card-title class="font-size-medium">\n' +
+      '    Medium\n' +
+      '  </d-card-title>\n' +
+      '  <d-card-title class="font-size-large">\n' +
+      '    Large\n' +
+      '  </d-card-title>',
+      '</div>',
     ]
   }),
 }

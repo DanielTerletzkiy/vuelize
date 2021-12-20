@@ -5,7 +5,8 @@
       <d-row gap>
         <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>
         <d-spacer/>
-        <d-checkbox flex-direction="row-reverse" :size="24" on-icon="sunset" off-icon="moonset" v-model="$vuelize.theme.dark">
+        <d-checkbox flex-direction="row-reverse" :size="24" on-icon="sunset" off-icon="moonset"
+                    v-model="$vuelize.theme.dark">
           Dark mode
         </d-checkbox>
         <d-card-subtitle elevation="2" :inlined="!$vuelize.theme.dark" depressed class="my-0 mr-1 font-weight-bold">
