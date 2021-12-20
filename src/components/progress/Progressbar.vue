@@ -4,7 +4,8 @@
     <d-card class="d-progressbar__wrapper" block
             :max-width="hideLabel?'100%':`calc(100% - ${labelWidth}px)`"
             elevation="2">
-      <d-card class="d-progressbar__wrapper__indicator" :style="progressStylesObject" :width="`${value}%`" :color="color || 'primary'">
+      <d-card class="d-progressbar__wrapper__indicator" :style="progressStylesObject" :width="`${progress}%`"
+              :color="color || 'primary'">
       </d-card>
     </d-card>
     <d-card-subtitle v-if="!hideLabel" class="d-progressbar__label py-0 pl-3" ref="label">
@@ -21,7 +22,8 @@ export default {
 
   props: {
     value: {type: [String, Number], required: true},
-    hideLabel: Boolean,
+    hideLabel: {type: Boolean},
+    max: {type: Number},
   },
 
   data: () => ({
@@ -29,6 +31,14 @@ export default {
   }),
 
   computed: {
+    progress() {
+      let value = this.value;
+      if (this.max) {
+        value = this.percentage(this.value, this.max)
+        console.log(value)
+      }
+      return value
+    },
     progressStylesObject() {
       return {
         'min-height': this.hideLabel ? '8px' : '16px'
@@ -49,6 +59,9 @@ export default {
           this.labelWidth = this.$refs.label.$el.clientWidth
         })
       }
+    },
+    percentage(partialValue, totalValue) {
+      return (100 * partialValue) / totalValue;
     }
   },
 
@@ -64,6 +77,7 @@ export default {
 
   &__wrapper {
     overflow: hidden;
+
     &__indicator {
       transition-duration: .5s;
     }

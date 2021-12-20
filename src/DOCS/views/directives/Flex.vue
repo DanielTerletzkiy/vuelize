@@ -7,7 +7,7 @@
         </d-card-title>
         <d-card-content>
           <d-code-snippet label="Example" :code="example[0]">
-            <d-row>
+            <d-row wrap>
               <d-column v-for="i in 20" :key="i">
                 <d-card-title inlined depressed> {{i}} </d-card-title>
               </d-column>

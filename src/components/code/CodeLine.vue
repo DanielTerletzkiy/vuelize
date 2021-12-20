@@ -1,14 +1,14 @@
 <template>
   <d-function-wrapper :classes="['d-code-line']" v-bind="{...$props, ...$attrs}">
     <d-card block depressed class="d-code-line__card" elevation="8">
-      <d-row class="d-code-line__title" :elevation="this.$vuelize.theme.dark ? '1' : ''">
+      <d-row class="d-code-line__title">
         <d-column>
           <d-card-subtitle color="primary">
             {{ label }}
           </d-card-subtitle>
         </d-column>
         <d-spacer/>
-        <d-divider vertical block size="1.5px" class="my-3" :color="hover.includes(-1)?'primary':''"/>
+        <d-divider vertical block size="2px" class="my-3" :color="hover.includes(-1)?'primary':''"/>
         <d-column>
           <d-icon-button size="40" color="primary" @click="copySequence"
                          v-hover="{ over: ()=>{setHover(true, -1)}, leave: ()=>{setHover(false, -1)} }">
@@ -29,7 +29,7 @@
           </d-card-subtitle>
         </d-column>
         <d-spacer></d-spacer>
-        <d-divider vertical block size="1.5px" class="my-3" :color="hover.includes(c)?'primary':''"/>
+        <d-divider vertical block size="2px" class="my-3" :color="hover.includes(c)?'primary':''"/>
         <d-column>
           <d-icon-button size="40" color="primary" @click="()=>copy(code)"
                          v-hover="{ over: ()=>{setHover(true, c)}, leave: ()=>{setHover(false, c)} }">
@@ -57,7 +57,7 @@ export default {
   methods: {
     copy(code) {
       navigator.clipboard.writeText(code);
-      this.$notify('Copied', 'The select text was copied', 'success', {icon: 'clipboard-notes'})
+      this.$notify('Copied', 'Code copied', 'success', {icon: 'clipboard-notes'})
     },
     copySequence() {
       const codeSequence = this.codeArray.map((code) => {

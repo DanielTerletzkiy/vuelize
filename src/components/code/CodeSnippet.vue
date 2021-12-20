@@ -1,14 +1,14 @@
 <template>
   <d-function-wrapper :classes="['d-code-snippet']" v-bind="{...$props, ...$attrs}">
     <d-card block depressed class="d-code-snippet__card" elevation="8">
-      <d-row class="d-code-snippet__title" :elevation="this.$vuelize.theme.dark ? '1' : ''">
+      <d-row class="d-code-snippet__title">
         <d-column>
           <d-card-subtitle color="primary">
             {{ label }}
           </d-card-subtitle>
         </d-column>
         <d-spacer/>
-        <d-divider vertical block size="1.5px" class="my-3" :color="hover?'primary':''"/>
+        <d-divider vertical block size="2px" class="my-3" :color="hover?'primary':''"/>
         <d-column>
           <d-icon-button size="40" color="primary" @click="copy"
                          v-hover="{ over: ()=>{this.hover = true}, leave: ()=>{this.hover = false} }">
@@ -16,7 +16,6 @@
           </d-icon-button>
         </d-column>
       </d-row>
-
       <d-row wrap>
         <d-column class="d-code-snippet__code my-2">
           <d-card-content class="pa-0">
@@ -30,7 +29,7 @@
             </d-row>
           </d-card-content>
         </d-column>
-        <d-column v-if="!!(this.$slots.default || [])[0]" class="d-code-snippet__preview pa-0 elevation-2">
+        <d-column v-if="!!(this.$slots.default || [])[0]" class="d-code-snippet__preview pa-0 ma-3 elevation-2">
           <d-card-content flex column no-gap>
             <div class="d-code-snippet__preview__title">
               <d-card-subtitle>
@@ -68,7 +67,7 @@ export default {
       navigator.clipboard.writeText(this.parsedCode.map((line) => {
         return line + '\n'
       }).join(''));
-      this.$notify('Copied', 'The select text was copied', 'success', {icon: 'clipboard-notes'})
+      this.$notify('Copied', 'Code copied', 'success', {icon: 'clipboard-notes'})
     },
     process() {
       const div = document.createElement('div');
@@ -145,7 +144,7 @@ export default {
         padding-bottom: 0 !important;
         min-height: auto !important;
         font-family: monospace;
-        white-space: pre;
+        white-space: pre-wrap;
       }
     }
   }
