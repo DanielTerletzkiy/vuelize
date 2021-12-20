@@ -8,6 +8,9 @@
           </d-card-subtitle>
         </d-column>
         <d-spacer/>
+        <d-card-subtitle root-div="pre">
+          {{ language }}
+        </d-card-subtitle>
         <d-divider vertical block size="2px" class="my-3" :color="hover.includes(-1)?'primary':''"/>
         <d-column>
           <d-icon-button size="40" color="primary" @click="copySequence"
@@ -52,7 +55,7 @@ export default {
   props: {
     label: {type: String, required: true},
     codeArray: Array,
-    language: {type: String, default: 'shell-session'}
+    language: {type: String, default: 'ShellScript'}
   },
 
   data: () => ({

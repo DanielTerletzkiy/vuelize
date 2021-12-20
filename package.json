@@ -24,7 +24,7 @@
     "build:umd": "rollup --config rollup.config.js --format umd --file dist/vuelize.umd.js",
     "build:es": "rollup --config rollup.config.js --format es --file dist/vuelize.esm.js",
     "build:unpkg": "rollup --config rollup.config.js --format iife --file dist/vuelize.min.js",
-    "build:docs": "vue-cli-service build --dest gh-pages && git add gh-pages && git commit -m'adding gh-pages to subtree' && git subtree push --prefix gh-pages origin gh-pages"
+    "build:docs": "vue-cli-service build --dest gh-pages && git add gh-pages && git commit -m'adding gh-pages to subtree' && git subtree push --prefix gh-pages origin gh-pages && git push"
   },
   "dependencies": {
     "core-js": "^3.6.5",

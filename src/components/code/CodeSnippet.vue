@@ -8,6 +8,9 @@
           </d-card-subtitle>
         </d-column>
         <d-spacer/>
+        <d-card-subtitle root-div="pre">
+          {{ language }}
+        </d-card-subtitle>
         <d-divider vertical block size="2px" class="my-3" :color="hover?'primary':''"/>
         <d-column>
           <d-icon-button size="40" color="primary" @click="copy"
@@ -45,7 +48,6 @@
           </d-card-content>
         </d-column>
       </d-row>
-
     </d-card>
   </d-function-wrapper>
 </template>
@@ -61,7 +63,7 @@ export default {
   props: {
     label: {type: String, required: true},
     code: String,
-    language: {type: String, default: 'vue'}
+    language: {type: String, default: 'html'}
   },
 
   data: () => ({
