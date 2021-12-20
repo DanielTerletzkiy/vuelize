@@ -1,20 +1,13 @@
 <template>
   <d-row column>
     <d-column flex block>
-      <d-card block>
-        <d-card-title>
-          Rows with Columns
-        </d-card-title>
-        <d-card-content>
-          <d-code-snippet label="Example" :code="example[0]">
-            <d-row wrap>
-              <d-column v-for="i in 20" :key="i">
-                <d-card-title inlined depressed> {{i}} </d-card-title>
-              </d-column>
-            </d-row>
-          </d-code-snippet>
-        </d-card-content>
-      </d-card>
+      <d-code-snippet label="Rows with Columns" :code="example[0]">
+        <d-row wrap>
+          <d-column v-for="i in 20" :key="i">
+            <d-card-title inlined depressed> {{ i }}</d-card-title>
+          </d-column>
+        </d-row>
+      </d-code-snippet>
     </d-column>
   </d-row>
 </template>

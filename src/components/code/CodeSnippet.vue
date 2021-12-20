@@ -24,7 +24,8 @@
                 <d-card-subtitle class="d-code-snippet__code__row__number">{{ l + 1 }}</d-card-subtitle>
               </d-column>
               <d-column>
-                <d-card-title class="d-code-snippet__code__row__code font-size-small">{{ line }}</d-card-title>
+                <d-card-title v-highlightjs="line" class="d-code-snippet__code__row__code font-size-small"><code
+                    :class="language"></code></d-card-title>
               </d-column>
             </d-row>
           </d-card-content>
@@ -50,11 +51,17 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueHighlightJS from 'vue-highlightjs'
+
+Vue.use(VueHighlightJS)
+
 export default {
   name: "d-code-snippet",
   props: {
     label: {type: String, required: true},
-    code: String
+    code: String,
+    language: {type: String, default: 'vue'}
   },
 
   data: () => ({
@@ -107,9 +114,10 @@ export default {
 
 <style lang="scss">
 @import "../../styles/variables";
+@import "../../styles/highlightjs/highlightjs";
 
 .d-code-snippet {
-  max-width: inherit;
+  width: 100%;
 
   &__title {
     position: sticky;

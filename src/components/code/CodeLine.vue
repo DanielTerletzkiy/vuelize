@@ -24,9 +24,8 @@
           </d-card-subtitle>
         </d-column>
         <d-column>
-          <d-card-subtitle class="d-code-line__row__code">
-            {{ code }}
-          </d-card-subtitle>
+          <d-card-title v-highlightjs="code" class="d-code-snippet__code__row__code font-size-small"><code
+              :class="language"></code></d-card-title>
         </d-column>
         <d-spacer></d-spacer>
         <d-divider vertical block size="2px" class="my-3" :color="hover.includes(c)?'primary':''"/>
@@ -42,12 +41,18 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueHighlightJS from 'vue-highlightjs'
+
+Vue.use(VueHighlightJS)
+
 export default {
   name: "d-code-line",
 
   props: {
     label: {type: String, required: true},
     codeArray: Array,
+    language: {type: String, default: 'shell-session'}
   },
 
   data: () => ({
@@ -84,6 +89,7 @@ export default {
 
 <style lang="scss">
 @import "../../styles/variables";
+@import "../../styles/highlightjs/highlightjs";
 
 .d-code-line {
   &__card {

@@ -1,44 +1,30 @@
 <template>
   <d-row column>
     <d-column flex block>
-      <d-card block>
-        <d-card-title>
-          Weight
+      <d-code-snippet label="Weight" :code="example[0]">
+        <d-card-title class="font-weight-light">
+          Light
         </d-card-title>
-        <d-card-content>
-          <d-code-snippet label="Example" :code="example[0]">
-            <d-card-title class="font-weight-light">
-              Light
-            </d-card-title>
-            <d-card-title class="font-weight-medium">
-              Medium
-            </d-card-title>
-            <d-card-title class="font-weight-bold">
-              Bold
-            </d-card-title>
-          </d-code-snippet>
-        </d-card-content>
-      </d-card>
+        <d-card-title class="font-weight-medium">
+          Medium
+        </d-card-title>
+        <d-card-title class="font-weight-bold">
+          Bold
+        </d-card-title>
+      </d-code-snippet>
     </d-column>
     <d-column flex block>
-      <d-card block>
-        <d-card-title>
-          Size
+      <d-code-snippet label="Size" :code="example[1]">
+        <d-card-title class="font-size-small">
+          Small
         </d-card-title>
-        <d-card-content>
-          <d-code-snippet label="Example" :code="example[1]">
-            <d-card-title class="font-size-small">
-              Small
-            </d-card-title>
-            <d-card-title class="font-size-medium">
-              Medium
-            </d-card-title>
-            <d-card-title class="font-size-large">
-              Large
-            </d-card-title>
-          </d-code-snippet>
-        </d-card-content>
-      </d-card>
+        <d-card-title class="font-size-medium">
+          Medium
+        </d-card-title>
+        <d-card-title class="font-size-large">
+          Large
+        </d-card-title>
+      </d-code-snippet>
     </d-column>
   </d-row>
 </template>
