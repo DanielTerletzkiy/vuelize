@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper root-div="ul" :classes="['d-list']" v-bind="{...$props, ...$attrs}">
+  <d-function-wrapper root-tag="ul" :classes="['d-list']" v-bind="{...$props, ...$attrs}">
     <slot></slot>
   </d-function-wrapper>
 </template>

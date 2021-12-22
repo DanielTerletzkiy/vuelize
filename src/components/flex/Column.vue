@@ -11,12 +11,6 @@ export default {
   name: "d-column",
 
   props: {
-    flex: Boolean,
-    wrap: Boolean,
-    column: Boolean,
-    block: Boolean,
-    gap: Boolean,
-
     height: String,
     width: String,
   },
@@ -28,15 +22,6 @@ export default {
         width: this.width,
       }
     },
-    classesObject() {
-      return {
-        flex: this.flex,
-        wrap: this.wrap,
-        column: this.column,
-        block: this.block,
-        'no-gap': !this.gap,
-      }
-    },
   },
 }
 </script>
@@ -44,5 +29,11 @@ export default {
 <style scoped lang="scss">
 .d-column {
   padding: 4px;
+  flex-direction: column;
+  height: 100%;
+
+  ::v-deep > .d-column {
+    padding: 0;
+  }
 }
 </style>

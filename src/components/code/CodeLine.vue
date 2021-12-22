@@ -8,7 +8,7 @@
           </d-card-subtitle>
         </d-column>
         <d-spacer/>
-        <d-card-subtitle root-div="pre">
+        <d-card-subtitle root-tag="pre">
           {{ language }}
         </d-card-subtitle>
         <d-divider vertical block size="2px" class="my-3" :color="hover.includes(-1)?'primary':''"/>

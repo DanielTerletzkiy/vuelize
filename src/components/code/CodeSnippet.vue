@@ -1,14 +1,14 @@
 <template>
   <d-function-wrapper :classes="['d-code-snippet']" v-bind="{...$props, ...$attrs}">
     <d-card block depressed class="d-code-snippet__card" elevation="8">
-      <d-row class="d-code-snippet__title">
+      <d-row class="d-code-snippet__title" :elevation="$vuelize.theme.dark?8:'0'">
         <d-column>
           <d-card-subtitle color="primary">
             {{ label }}
           </d-card-subtitle>
         </d-column>
         <d-spacer/>
-        <d-card-subtitle root-div="pre">
+        <d-card-subtitle root-tag="pre">
           {{ language }}
         </d-card-subtitle>
         <d-divider vertical block size="2px" class="my-3" :color="hover?'primary':''"/>
@@ -113,12 +113,15 @@ export default {
 
   &__title {
     position: sticky;
-    left: 0;
+    top: 54px;
+
+    &.theme--light {
+      background: $light_sheet;
+    }
   }
 
   &__card {
     max-width: inherit;
-    overflow: hidden;
   }
 
   &__code {

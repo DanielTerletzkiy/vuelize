@@ -1,15 +1,13 @@
 <template>
-<div>
-  <d-card-title>
-    {{title}}
-  </d-card-title>
-  <d-card-subtitle>
-    {{subtitle}}
-  </d-card-subtitle>
-  <d-card-content>
+  <div>
+    <d-card-title>
+      {{ title }}
+    </d-card-title>
+    <d-card-subtitle>
+      {{ subtitle }}
+    </d-card-subtitle>
     <router-view></router-view>
-  </d-card-content>
-</div>
+  </div>
 </template>
 
 <script>
@@ -17,11 +15,11 @@ export default {
   name: "Wrapper",
 
   computed: {
-    title(){
-      return this.$route.matched.length>1 ? this.$route.matched[this.$route.matched.length-2].name : this.$route.name
+    title() {
+      return this.$route.matched.length > 1 ? this.$route.matched[this.$route.matched.length - 2].name : this.$route.name
     },
-    subtitle(){
-      return this.$route.matched.length>1 ? this.$route.matched[this.$route.matched.length-1].name : ''
+    subtitle() {
+      return this.$route.matched.length > 1 ? this.$route.matched[this.$route.matched.length - 1].name : ''
     }
   },
 
@@ -31,6 +29,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

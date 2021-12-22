@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper root-div="button" :classes="['d-btn', ...classesObject]" v-bind="{...$props, ...$attrs}"
+  <d-function-wrapper root-tag="button" :classes="['d-btn', ...classesObject]" v-bind="{...$props, ...$attrs}"
                       @click="$emit('click')">
     <span class="d-btn__content" :style="{color: this.filled ? this.getContrast(this.color):''}" v-ripple>
       <slot name="default"></slot>

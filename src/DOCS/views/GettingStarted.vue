@@ -6,9 +6,8 @@
     <d-card-subtitle>
       Installation
     </d-card-subtitle>
-    <d-card-content flex wrap column>
       <d-row>
-        <d-column class="pl-0">
+        <d-column>
           <d-btn link="/" href="https://www.npmjs.com/package/vuelize" target="_blank" glow color="error">
             <d-icon name="java-script"/>
             NPM
@@ -21,12 +20,18 @@
           </d-btn>
         </d-column>
       </d-row>
-      <d-code-line label="NPM" :code-array="['npm install vuelize', 'npm run serve']"/>
-      <d-code-line language="JavaScript" label="main.js"
-                   :code-array="[`import Vuelize from 'vuelize'`, `Vue.use(Vuelize)`]"/>
-
-      <d-code-snippet label="app.vue" :code="code[0]" hide-preview/>
-    </d-card-content>
+    <d-column gap>
+      <d-column>
+        <d-code-line label="NPM" :code-array="['npm install vuelize', 'npm run serve']"/>
+      </d-column>
+      <d-column>
+        <d-code-line language="JavaScript" label="main.js"
+                     :code-array="[`import Vuelize from 'vuelize'`, `Vue.use(Vuelize)`]"/>
+      </d-column>
+      <d-column>
+        <d-code-snippet label="app.vue" :code="code[0]" hide-preview/>
+      </d-column>
+    </d-column>
   </div>
 </template>
 

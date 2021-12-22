@@ -11,10 +11,6 @@ export default {
   name: "d-row",
 
   props: {
-    wrap: Boolean,
-    column: Boolean,
-    gap: Boolean,
-
     height: String,
     width: String,
   },
@@ -26,14 +22,6 @@ export default {
         width: this.width,
       }
     },
-    classesObject() {
-      return {
-        flex: true,
-        wrap: this.wrap,
-        column: this.column,
-        'no-gap': !this.gap,
-      }
-    },
   },
 }
 </script>
@@ -42,5 +30,9 @@ export default {
 .d-row {
   width: 100%;
   align-items: center;
+
+  .no-gap::v-deep > .d-column {
+    padding: 4px;
+  }
 }
 </style>

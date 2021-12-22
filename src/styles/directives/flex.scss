@@ -2,7 +2,6 @@
 
 .flex {
   display: flex;
-
   gap: $gap * 3;
 
   &.no-gap {
@@ -20,5 +19,9 @@
 
   &.column {
     flex-direction: column;
+  }
+
+  .space-between {
+    justify-content: space-between;
   }
 }

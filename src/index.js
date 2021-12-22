@@ -9,6 +9,9 @@ import * as uc from 'vue-unicons/dist/icons'
 import Ripple from "vue-material-design-ripple";
 import "vue-material-design-ripple/dist/vue-material-design-ripple.css";
 
+//Imports flex mixin
+import flex from "./mixins/flex.js";
+
 //Imports Components
 import DFunctionWrapper from "./components/FunctionWrapper.vue";
 
@@ -107,9 +110,10 @@ export default Vue => {
 
     //Vue mixin
     Vue.mixin({
+        mixins: [flex],
         //Default props
         props: {
-            rootDiv: {type: String, default: 'div'},
+            rootTag: {type: String, default: 'div'},
             color: String,
             disabled: Boolean,
 

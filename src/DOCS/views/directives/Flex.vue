@@ -1,9 +1,9 @@
 <template>
-  <d-row column>
-    <d-column flex block>
+  <d-column gap>
+    <d-column block>
       <d-code-snippet label="Rows with Columns" :code="example[0]"/>
     </d-column>
-  </d-row>
+  </d-column>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
   <transition name="slide-fade">
-    <d-function-wrapper root-div="nav" :classes="['d-navigation-bar', ...classesObject]" v-bind="{...$props, ...$attrs}" v-if="value">
+    <d-function-wrapper root-tag="nav" :classes="['d-navigation-bar', ...classesObject]" v-bind="{...$props, ...$attrs}" v-if="value">
       <d-card block class="d-navigation-bar__content" :elevation="this.$vuelize.theme.dark?'1':''">
         <slot></slot>
       </d-card>

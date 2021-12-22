@@ -20,7 +20,7 @@
 
     <div style="display: flex">
       <d-navigation-bar :permanent="!this.$isMobile()" :temporary="this.$isMobile()" v-model="navDrawer">
-        <d-row class="pt-2" column style="height: 100%">
+        <d-column class="pt-2" column style="height: 100%">
           <d-column flex column block>
             <NavItem v-for="navItem in navItems" path="" :position="0" :key="navItem.category" :nav-item="navItem"
                      class="px-2"/>
@@ -42,7 +42,7 @@
               </template>
             </d-accordion>
           </d-column>
-        </d-row>
+        </d-column>
       </d-navigation-bar>
 
       <main :class="this.$isMobile() ? 'pa-3' : 'pa-6'" style="flex: 1">

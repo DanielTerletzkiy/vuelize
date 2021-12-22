@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper root-div="d-card" elevation="n4" :classes="['d-progressbar']" v-bind="{...$props, ...$attrs}"
+  <d-function-wrapper root-tag="d-card" elevation="n4" :classes="['d-progressbar']" v-bind="{...$props, ...$attrs}"
                       @click="$emit('click')">
     <d-card class="d-progressbar__wrapper" block
             :max-width="hideLabel?'100%':`calc(100% - ${labelWidth}px)`"

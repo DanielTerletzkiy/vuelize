@@ -1,24 +1,12 @@
 <template>
-  <d-row column>
-    <d-column flex block>
-      <d-code-snippet label="Weight" :code="example[0]">
-        <div>
-          <d-card-title class="font-weight-light">
-            Light
-          </d-card-title>
-          <d-card-title class="font-weight-medium">
-            Medium
-          </d-card-title>
-          <d-card-title class="font-weight-bold">
-            Bold
-          </d-card-title>
-        </div>
-      </d-code-snippet>
+  <d-column gap>
+    <d-column block>
+      <d-code-snippet label="Weight" :code="example[0]"/>
     </d-column>
-    <d-column flex block>
+    <d-column block>
       <d-code-snippet label="Size" :code="example[1]"/>
     </d-column>
-  </d-row>
+  </d-column>
 </template>
 
 <script>

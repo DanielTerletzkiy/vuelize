@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper root-div="li" tabindex="0" :classes="['d-list__item', ...classesObject]"
+  <d-function-wrapper root-tag="li" tabindex="0" :classes="['d-list__item', ...classesObject]"
                       v-bind="{...$props, ...$attrs}" @click="click" v-ripple>
     <div class="d-list__item__content">
       <slot></slot>

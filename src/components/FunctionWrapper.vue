@@ -26,7 +26,7 @@ export default {
       }
     },
     root(){
-      return this.link ? 'router-link' : this.rootDiv
+      return this.link ? 'router-link' : this.rootTag
     },
     themeClass() {
       return {'theme--dark': this.$vuelize.theme.dark, 'theme--light': !this.$vuelize.theme.dark}

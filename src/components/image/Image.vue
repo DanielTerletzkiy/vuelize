@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper root-div="img" :src="src" draggable="false" :classes="['d-image', ...classesObject]" v-bind="{...$props, ...$attrs}"
+  <d-function-wrapper root-tag="img" :src="src" draggable="false" :classes="['d-image', ...classesObject]" v-bind="{...$props, ...$attrs}"
                       :style="stylesObject"/>
 </template>
 
