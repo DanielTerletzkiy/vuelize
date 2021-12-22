@@ -20,13 +20,13 @@
 
     <div style="display: flex">
       <d-navigation-bar :permanent="!this.$isMobile()" :temporary="this.$isMobile()" v-model="navDrawer">
-        <d-column class="pt-2" column style="height: 100%">
+        <d-column class="pt-2" :wrap="false" style="height: 100%">
           <d-column flex column block>
             <NavItem v-for="navItem in navItems" path="" :position="0" :key="navItem.category" :nav-item="navItem"
                      class="px-2"/>
           </d-column>
           <d-spacer :flex-grow="100"/>
-          <d-column flex column block>
+          <d-row>
             <d-accordion v-model="notifications" header-color="primary" style="width: 100%">
               <template slot="header">
                 <d-badge color="primary" :value="$vuelize.notification.notifications.filter(e => e.active).length > 0">
@@ -41,7 +41,7 @@
                 <d-notification-wrapper class="pa-0" permanent style="max-height: 474px; overflow: auto"/>
               </template>
             </d-accordion>
-          </d-column>
+          </d-row>
         </d-column>
       </d-navigation-bar>
 
