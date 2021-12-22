@@ -123,6 +123,9 @@ export default Vue => {
             inlined: Boolean,
             depressed: Boolean,
 
+            dark: Boolean,
+            light: Boolean,
+
             link: {type: String, default: null}
         }
     })

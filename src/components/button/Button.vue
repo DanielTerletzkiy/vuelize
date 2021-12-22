@@ -136,13 +136,4 @@ export default {
 
   }
 }
-
-.theme--dark .d-btn {
-
-}
-
-
-.theme--light .d-btn {
-
-}
 </style>

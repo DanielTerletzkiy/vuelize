@@ -1,5 +1,6 @@
 <template>
-  <d-function-wrapper :classes="['d-card', ...classesObject]" v-bind="{...$props, ...$attrs}" :style="stylesObject" @click="$emit('click')">
+  <d-function-wrapper :classes="['d-card', ...classesObject]" v-bind="{...$props, ...$attrs}" :style="stylesObject"
+                      @click="$emit('click')">
     <slot></slot>
   </d-function-wrapper>
 </template>
@@ -19,7 +20,7 @@ export default {
     classesObject() {
       return {'d-card--block': this.block}
     },
-    stylesObject(){
+    stylesObject() {
       return {
         background: this.processColor(this.color),
         minWidth: this.minWidth,
@@ -37,21 +38,17 @@ export default {
 .d-card {
   width: max-content;
 
-  &.d-card--block{
+  &.d-card--block {
     width: auto;
     flex: 1;
   }
-}
 
-.theme--dark {
-  .d-card {
+  &.theme--dark {
     background: $dark_sheet;
     color: $dark_card_text;
   }
-}
 
-.theme--light {
-  .d-card {
+  &.theme--light {
     background: $light_sheet;
     color: $light_card_text;
   }

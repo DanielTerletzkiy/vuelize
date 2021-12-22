@@ -26,6 +26,14 @@ export default {
   display: flex;
   align-items: center;
   gap: 8px;
+
+  &.theme--dark{
+    color: $dark_card_text;
+  }
+
+  &.theme--light{
+    color: $light_card_text;
+  }
 }
 
 .d-card {
@@ -35,19 +43,6 @@ export default {
 
   .d-card__title + .d-card__content {
     padding-top: 0;
-  }
-}
-
-.theme--dark {
-  .d-card__title {
-    color: $dark_card_text;
-  }
-}
-
-.theme--light {
-
-  .d-card__title {
-    color: $light_card_text;
   }
 }
 </style>

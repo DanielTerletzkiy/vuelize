@@ -36,6 +36,7 @@ export default {
         'elevation-n1': !this.value,
         'elevation-4': this.value && !this.$vuelize.theme.dark,
         'inlined depressed theme--dark': !this.value && this.$vuelize.theme.dark,
+        'theme--light': !this.$vuelize.theme.dark,
         'glow': true,
         'glow--active': this.value
       }

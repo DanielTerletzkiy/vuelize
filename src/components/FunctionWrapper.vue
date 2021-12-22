@@ -29,7 +29,14 @@ export default {
       return this.link ? 'router-link' : this.rootTag
     },
     themeClass() {
-      return {'theme--dark': this.$vuelize.theme.dark, 'theme--light': !this.$vuelize.theme.dark}
+      let theme;
+      if((this.$vuelize.theme.dark || this.dark) && !this.light){
+        theme = 'theme--dark'
+      }
+      if((!this.$vuelize.theme.dark || this.light) && !this.dark){
+        theme = 'theme--light'
+      }
+      return theme;
     },
     stylesObject() {
       //console.log(this.color)
