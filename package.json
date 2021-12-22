@@ -17,7 +17,7 @@
     "dist"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve DOCS/main.js",
     "lint": "vue-cli-service lint",
     "build": "npm run build:umd && npm run build:es && npm run build:unpkg",
     "build:publish": "npm run build && npm publish",

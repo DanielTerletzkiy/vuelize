@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import app from '!raw-loader!../../App.vue'
+import app from '!raw-loader!../App.vue'
 
 export default {
   name: "GettingStarted",

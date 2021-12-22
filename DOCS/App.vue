@@ -55,7 +55,7 @@
 
 <script>
 
-import NavItem from "@/DOCS/components/NavItem";
+import NavItem from "./components/NavItem";
 import {version} from '../package.json';
 
 export default {

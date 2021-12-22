@@ -1,5 +1,5 @@
 <template>
-  <component :is="root" :to="link" :disabled="disabled" :class="[...this.classes, themeClass, ...classAttributes]" :style="stylesObject" @click="()=>$emit('click')"
+  <component :is="root" :to="link" :disabled="disabled" :class="[...this.classes, themeClass, ...classAttributes]" :style="stylesObject" v-on="$listeners"
        @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
   </component>

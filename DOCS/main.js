@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import index from './index'
+import index from '@'
 
 Vue.use(index)
 
@@ -40,12 +40,9 @@ Vue.prototype.$getStyle = function (className_, noSelector = false) {
 
 }
 
-import DemoView from "@/DOCS/DemoView";
-import GettingStarted from "@/DOCS/views/GettingStarted";
-import Wrapper from "@/DOCS/views/Wrapper";
-import Elevation from "@/DOCS/views/directives/Elevation";
-import Flex from "@/DOCS/views/directives/Flex";
-import Font from "@/DOCS/views/directives/Font";
+import DemoView from "./DemoView";
+import GettingStarted from "./views/GettingStarted";
+import Wrapper from "./views/Wrapper";
 
 const routes = [
     {
@@ -58,26 +55,9 @@ const routes = [
         component: GettingStarted
     },
     {
-        path: '/directives',
+        path: '/directives/:directive?',
         name: 'Directives',
         component: Wrapper,
-        children: [
-            {
-                path: 'elevation',
-                name: 'Elevation',
-                component: Elevation
-            },
-            {
-                path: 'flex',
-                name: 'Flex',
-                component: Flex
-            },
-            {
-                path: 'font',
-                name: 'Font',
-                component: Font
-            },
-        ]
     },
     {
         path: '/components',
