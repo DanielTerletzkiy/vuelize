@@ -1,12 +1,10 @@
 <template>
-  <d-row column>
-
-  </d-row>
+$END$
 </template>
 
 <script>
 export default {
-  name: "Glow"
+name: "nullify"
 }
 </script>
 
