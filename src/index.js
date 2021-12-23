@@ -126,6 +126,9 @@ export default Vue => {
             dark: Boolean,
             light: Boolean,
 
+            width: [String,Number],
+            height: [String,Number],
+
             link: {type: String, default: null}
         }
     })

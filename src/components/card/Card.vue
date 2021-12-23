@@ -13,7 +13,6 @@ export default {
     block: Boolean,
     minWidth: String,
     maxWidth: String,
-    width: String,
   },
 
   computed: {
@@ -25,7 +24,6 @@ export default {
         background: this.processColor(this.color),
         minWidth: this.minWidth,
         maxWidth: this.maxWidth,
-        width: this.width,
       }
     }
   }

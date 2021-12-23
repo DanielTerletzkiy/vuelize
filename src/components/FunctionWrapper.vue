@@ -1,6 +1,7 @@
 <template>
-  <component :is="root" :to="link" :disabled="disabled" :class="[...this.classes, themeClass, ...classAttributes]" :style="stylesObject" v-on="$listeners"
-       @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
+  <component :is="root" :to="link" :disabled="disabled" :class="[...this.classes, themeClass, ...classAttributes]"
+             :style="stylesObject" v-on="$listeners"
+             @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
   </component>
 </template>
@@ -25,22 +26,22 @@ export default {
         disabled: this.disabled,
       }
     },
-    root(){
+    root() {
       return this.link ? 'router-link' : this.rootTag
     },
     themeClass() {
       let theme;
-      if((this.$vuelize.theme.dark || this.dark) && !this.light){
+      if ((this.$vuelize.theme.dark || this.dark) && !this.light) {
         theme = 'theme--dark'
       }
-      if((!this.$vuelize.theme.dark || this.light) && !this.dark){
+      if ((!this.$vuelize.theme.dark || this.light) && !this.dark) {
         theme = 'theme--light'
       }
       return theme;
     },
     stylesObject() {
       //console.log(this.color)
-      return {color: this.processColor(this.color)}
+      return {color: this.processColor(this.color), width: this.width, height: this.height}
     }
   },
 }
