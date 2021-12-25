@@ -13,7 +13,7 @@ import path from 'path'
 
 import pkg from './package.json'
 
-const name = 'BasicoCoComponents'
+const name = 'vuelize'
 const argv = minimist(process.argv.slice(2))
 const rootDir = path.resolve(__dirname, '.')
 const browsersList = fs
