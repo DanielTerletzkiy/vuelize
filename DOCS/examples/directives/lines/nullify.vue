@@ -21,7 +21,8 @@
 
 <script>
 export default {
-  name: "Nullify"
+  name: "Nullify",
+  weight: "3"
 }
 </script>
 

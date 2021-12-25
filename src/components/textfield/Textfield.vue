@@ -23,8 +23,14 @@
 </template>
 
 <script>
+import DSelect from "@/components/textfield/Select.vue";
 export default {
   name: "d-text-field",
+
+  components: {
+    DSelect
+  },
+
   props: {
     value: undefined,
     label: String,

@@ -23,7 +23,8 @@
 
 <script>
 export default {
-  name: "Outlined"
+  name: "Outlined",
+  weight: "2"
 }
 </script>
 

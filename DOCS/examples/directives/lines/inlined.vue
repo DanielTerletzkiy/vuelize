@@ -23,7 +23,8 @@
 
 <script>
 export default {
-  name: "Inlined"
+  name: "Inlined",
+  weight: "1"
 }
 </script>
 

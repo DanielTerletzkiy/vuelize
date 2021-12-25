@@ -30,7 +30,6 @@ export default {
 .d-column {
   padding: 4px;
   flex-direction: column;
-  height: 100%;
 
   ::v-deep > .d-column {
     padding: 0;

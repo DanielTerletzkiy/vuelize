@@ -43,19 +43,28 @@ export default {
       const req = require.context('!raw-loader!../examples', true, /\.(js|vue)$/i);
       let comps = [];
 
-      req.keys().reverse().forEach((key) => {
+      req.keys().forEach((key) => {
         if (key.match(this.$route.path)) {
 
-          const nameReg = new RegExp("name: \"(.*)\""/*".(\\w+/){2}(\\w+)"*/);
+          const nameReg = new RegExp("name: \"(.*)\"");
           const name = req(key).default.match(nameReg)[1];
 
+          const weightReg = new RegExp("weight: \"(.*)\"");
+          let weight = req(key).default.match(weightReg);
+          if(weight !== null){
+            weight = parseInt(weight[1])
+          }else {
+            weight = 100
+          }
+          console.log(weight)
+
           const compReg = new RegExp("<template>\\r\\n(.*)\\r\\n</template>", 's');
-          console.log(req(key))
-          comps.push({name: name, component: req(key).default.match(compReg)[1]});
+          //console.log(req(key))
+          comps.push({name, weight, component: req(key).default.match(compReg)[1]});
         }
       })
-      this.examples = comps;
-      console.log(this.examples)
+      this.examples = comps.sort((a, b) => a.weight - b.weight);
+      //console.log(this.examples)
     }
   },
 
@@ -67,7 +76,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.title {}
+.title {
+}
+
 .subtitle {
   text-transform: capitalize;
 }
