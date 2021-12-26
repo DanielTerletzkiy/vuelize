@@ -71,29 +71,26 @@ export default {
       {
         category: 'Directives', icon: 'ruler', items: [
           {
-            category: 'Elevation', icon: 'power', items: []
+            category: 'Elevation', icon: 'angle-right', items: []
           },
           {
-            category: 'Flex', icon: 'power', items: []
+            category: 'Flex', icon: 'angle-right', items: []
           },
           {
-            category: 'Font', icon: 'power', items: []
+            category: 'Font', icon: 'angle-right', items: []
           },
           {
-            category: 'Glow', icon: 'power', items: []
+            category: 'Glow', icon: 'angle-right', items: []
           },
           {
-            category: 'Lines', icon: 'power', items: []
+            category: 'Lines', icon: 'angle-right', items: []
           },
           {
-            category: 'Rounded', icon: 'power', items: []
+            category: 'Rounded', icon: 'angle-right', items: []
           },
           {
-            category: 'Size', icon: 'power', items: []
-          },
-          {
-            category: 'Transition', icon: 'power', items: []
-          },
+            category: 'Size', icon: 'angle-right', items: []
+          }
         ]
       },
       {

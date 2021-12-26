@@ -325,7 +325,7 @@
                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/SCP_Foundation_%28emblem%29.svg/512px-SCP_Foundation_%28emblem%29.svg.png"/>
           SCP Lore
         </d-card-title>
-        <transition-group name="slide-fade">
+        <fade-transition group>
           <d-card-content v-if="tabs === 0" :key="0">
             <d-card-subtitle inlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
               <d-card-subtitle class="pa-0">
@@ -379,7 +379,7 @@
               surgeries are not always successful, they often result in the creation of instances of SCP-049-2.
             </d-card-subtitle>
           </d-card-content>
-        </transition-group>
+        </fade-transition>
       </d-card-content>
     </d-card>
 

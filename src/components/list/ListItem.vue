@@ -47,6 +47,7 @@ export default {
   margin: 0;
 
   .d-list__item__content {
+    width: 100%;
     padding: 6px 12px;
     display: flex;
     align-items: center;

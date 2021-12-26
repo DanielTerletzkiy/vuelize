@@ -1,13 +1,13 @@
 <template>
-  <d-function-wrapper :classes="['d-tab-list__item', 'top', ...classesObject]" v-bind="{...$props, ...$attrs}"
+  <d-function-wrapper :classes="['d-tab-list__item', ...classesObject]" v-bind="{...$props, ...$attrs}"
                       @click="click" v-ripple>
     <div class="d-tab-list__item__content">
       <slot></slot>
     </div>
-    <transition name="slide-fade">
+    <slide-y-down-transition :duration="30">
       <d-divider class="d-tab-list__item__indicator" color="primary" size="2px"
                  v-if="this.$parent.$parent.$props.value === this.$vnode.key"/>
-    </transition>
+    </slide-y-down-transition>
   </d-function-wrapper>
 </template>
 

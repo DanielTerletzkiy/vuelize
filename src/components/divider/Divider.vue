@@ -26,7 +26,6 @@ export default {
       return {
         height: this.vertical === false ? this.size : '',
         width: this.vertical === true ? this.size : '',
-        'border-radius': this.size
       }
     }
   },
@@ -38,7 +37,7 @@ export default {
 
 .d-divider {
   background: currentColor;
-  border-radius: 2px;
+  border-radius: 9999px !important;
 
   &--horizontal {
     min-width: min-content;

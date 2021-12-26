@@ -47,6 +47,8 @@ export default {
 
 <style scoped lang="scss">
 .d-text-field__input {
+  user-select: none;
+  cursor: default;
   position: relative;
   padding-top: 0.5em !important;
   padding-bottom: 0.5em !important;

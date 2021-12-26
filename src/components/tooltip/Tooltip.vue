@@ -1,17 +1,17 @@
 <template>
-  <d-function-wrapper :classes="['d-tooltip', ...classesObject]" v-bind="{...$props, ...$attrs}">
+  <d-function-wrapper :classes="['d-tooltip']" v-bind="{...$props, ...$attrs}">
     <div class="d-tooltip__slot" v-hover="{ over: ()=>{onHover(true)}, leave: ()=>{onHover(false)} }">
       <slot name="default" v-bind="{...$props, ...$attrs}">
       </slot>
     </div>
-    <transition name="slide-fade">
-      <div class="d-tooltip__wrapper" v-if="hovering">
+    <fade-transition>
+      <div class="d-tooltip__wrapper" v-show="hovering">
         <div class="d-tooltip__wrapper__content elevation rounded-pill" :style="stylesObject" ref="tooltip">
           <slot name="tooltip" v-bind="{...$props, ...$attrs}">
           </slot>
         </div>
       </div>
-    </transition>
+    </fade-transition>
   </d-function-wrapper>
 </template>
 
@@ -77,9 +77,6 @@ export default {
   },
 
   computed: {
-    classesObject() {
-      return [this.position];
-    },
     stylesObject() {
       return this.offset
     }
@@ -99,6 +96,7 @@ export default {
   width: max-content;
 
   &__wrapper {
+    margin: $gap;
     z-index: 12;
     width: 100%;
     position: absolute;

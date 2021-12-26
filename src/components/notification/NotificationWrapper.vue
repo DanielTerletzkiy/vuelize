@@ -2,10 +2,10 @@
   <d-function-wrapper :classes="['d-notification-wrapper', ...classesObject]" v-bind="{...$props, ...$attrs}"
                       @click="$emit('click')">
     <div class="d-notification-wrapper__content">
-      <transition-group name="fade-x">
+      <slide-x-right-transition group :delay="100">
         <d-notification v-for="notification in notifications" :notification="notification" color="primary"
                         :key="notification.created"/>
-      </transition-group>
+      </slide-x-right-transition>
     </div>
   </d-function-wrapper>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper root-tag="d-card" :classes="['d-accordion', 'bottom']"
+  <d-function-wrapper root-tag="d-card" :classes="['d-accordion']"
                       v-bind="{...$props, ...$attrs}">
     <div @click="onClick" style="border-radius: inherit">
       <d-card-title class="d-accordion__header" :color="headerColor" :class="['glow',{'glow--active': this.open}]" v-ripple>
@@ -7,11 +7,11 @@
         <d-icon :name="angleIcon" class="d-accordion__header__icon"/>
       </d-card-title>
     </div>
-    <transition name="slide-fade">
+    <collapse-transition :duration="60">
       <d-card-content class="d-accordion__content" v-if="this.open">
         <slot name="content"></slot>
       </d-card-content>
-    </transition>
+    </collapse-transition>
   </d-function-wrapper>
 </template>
 

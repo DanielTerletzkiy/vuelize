@@ -1,15 +1,15 @@
 <template>
-  <d-function-wrapper :classes="['d-badge', 'top']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
+  <d-function-wrapper :classes="['d-badge']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
     <slot name="default">
     </slot>
-    <transition name="slide-fade">
+    <fade-transition>
       <d-avatar v-if="value" v-bind="{...$props, ...$attrs}" :size="size" rounded="circle" class="d-badge__content">
         <d-card-subtitle :color="getContrast(color)">
           <slot name="content">
           </slot>
         </d-card-subtitle>
       </d-avatar>
-    </transition>
+    </fade-transition>
   </d-function-wrapper>
 </template>
 

@@ -9,6 +9,9 @@ import * as uc from 'vue-unicons/dist/icons'
 import Ripple from "vue-material-design-ripple";
 import "vue-material-design-ripple/dist/vue-material-design-ripple.css";
 
+//Imports transitions
+import Transitions from 'vue2-transitions'
+
 //Imports flex mixin
 import flex from "./mixins/flex.js";
 
@@ -101,6 +104,9 @@ export default Vue => {
     //Register ripple directive
     Vue.directive("ripple", Ripple);
 
+    //Registers transitions
+    Vue.use(Transitions)
+
 
     //Imports FunctionWrapper
     Vue.component('d-function-wrapper', DFunctionWrapper)
@@ -124,8 +130,8 @@ export default Vue => {
             dark: Boolean,
             light: Boolean,
 
-            width: [String,Number],
-            height: [String,Number],
+            width: [String, Number],
+            height: [String, Number],
 
             link: {type: String, default: null}
         }
@@ -154,16 +160,22 @@ export default Vue => {
             const compName = vNode.context.name
             if (typeof binding.value !== 'object') {
                 let warn = `[v-hover]: provided expression '${binding.expression}' is not an object, but it needs to be.`
-                if (compName) { warn += `\nFound in component '${compName}'` }
+                if (compName) {
+                    warn += `\nFound in component '${compName}'`
+                }
                 console.warn(warn)
             }
             if (!binding.value.over && !binding.value.leave) {
                 let warn = `[v-hover]: object provided does not have 'over' or 'leave' properties. Needs at least one to be of use`
-                if (compName) { warn += `\nFound in component '${compName}'` }
+                if (compName) {
+                    warn += `\nFound in component '${compName}'`
+                }
                 console.warn(warn)
             }
-            el.__vHoverOver__ = binding.value.over || (() => {})
-            el.__vHoverLeave__ = binding.value.leave || (() => {})
+            el.__vHoverOver__ = binding.value.over || (() => {
+            })
+            el.__vHoverLeave__ = binding.value.leave || (() => {
+            })
 
             // Add Event Listeners
             el.addEventListener('mouseover', el.__vHoverOver__)
@@ -221,7 +233,7 @@ export default Vue => {
     }
 
     //Notification Functions
-    Vue.prototype.$notify = function (title, content, type, options){
+    Vue.prototype.$notify = function (title, content, type, options) {
         Vue.prototype.$vuelize.notification.notifications.push({
             title,
             content,
@@ -233,15 +245,15 @@ export default Vue => {
     }
 
     //Mobile detection functions
-    Vue.prototype.$isMobile = function() {
+    Vue.prototype.$isMobile = function () {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    Vue.prototype.$innerWidth = function() {
+    Vue.prototype.$innerWidth = function () {
         return window.innerWidth
     }
 
-    Vue.prototype.$innerHeight = function() {
+    Vue.prototype.$innerHeight = function () {
         return window.innerHeight
     }
 };

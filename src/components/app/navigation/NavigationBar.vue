@@ -1,11 +1,11 @@
 <template>
-  <transition name="slide-fade">
+  <slide-x-left-transition :duration="100">
     <d-function-wrapper root-tag="nav" :classes="['d-navigation-bar', ...classesObject]" v-bind="{...$props, ...$attrs}" v-if="value">
       <d-card block class="d-navigation-bar__content" :elevation="this.$vuelize.theme.dark?'1':''">
         <slot></slot>
       </d-card>
     </d-function-wrapper>
-  </transition>
+  </slide-x-left-transition>
 </template>
 
 <script>
@@ -54,19 +54,5 @@ export default {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
-}
-
-
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-
-.slide-fade-leave-active {
-  transition: all .1s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-
-.slide-fade-enter, .slide-fade-leave-to {
-  transform: translateX(-10px);
-  opacity: 0;
 }
 </style>
