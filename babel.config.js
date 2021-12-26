@@ -1,4 +1,4 @@
-const devPresets = ["@vue/cli-plugin-babel/preset", {
+const devPresets = ["@babel/preset-env", {
     "useBuiltIns": false,
 }];
 const buildPresets = ['@babel/preset-env'];
