@@ -1,9 +1,10 @@
 <template>
   <d-function-wrapper :classes="['d-select-menu']" v-bind="{...$props, ...$attrs}">
     <slide-y-up-transition :duration="80">
-      <d-card v-if="open" class="d-select-menu__dropdown pa-0" :elevation="$vuelize.theme.dark?'n2':'5'" v-click-outside="hideSelectMenu">
+      <d-card v-if="open" class="d-select-menu__dropdown pa-0" :elevation="$vuelize.theme.dark?'n2':'5'"
+              v-click-outside="hideSelectMenu">
         <d-list :value="value" @input="onInput" color="primary" class="pa-0" rounded="none">
-          <d-list-item v-for="(item, index) in items" :key="index">
+          <d-list-item v-for="(item, index) in items" :key="index" v-show="activeSearch(item)">
             <slot name="item" :item="item" :index="index">
               {{ item }}
             </slot>
@@ -20,7 +21,7 @@ export default {
   name: "d-select-menu",
 
   props: {
-    value: [Number, String],
+    value: [Number, String, Array],
     open: Boolean,
     items: Array
   },
@@ -29,8 +30,16 @@ export default {
     hideSelectMenu() {
       this.$emit('update:open', false)
     },
-    onInput(e){
+    onInput(e) {
       this.$emit('input', e)
+    },
+
+    activeSearch(item){
+      if(item.activeSearch !== null && item.activeSearch !== undefined){
+        return item.activeSearch
+      }else {
+        return true
+      }
     }
   },
 }

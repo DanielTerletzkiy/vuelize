@@ -109,6 +109,22 @@
         <d-text-field color="primary" inlined depressed label="Default Select" v-model="selectedIcon" select
                       :items="['Cube', 'Anchor', 'Layers Alt']"/>
 
+        <d-text-field color="primary" width="780px" inlined depressed label="Icon Select Autocomplete" text="name" v-model="selectedIcons" autocomplete
+                      :items="iconItems">
+          <template v-slot:label="{ item }">
+            <d-label class="px-1 py-0">
+              <d-icon :name="item.icon" :icon-style="item.iconStyle" color="primary"/>
+              {{ item.name }}
+            </d-label>
+          </template>
+          <template slot="item" slot-scope="{item}">
+            <d-card-title class="pa-0 font-size-small" color="inherit">
+              <d-icon :name="item.icon" :icon-style="item.iconStyle" color="primary"/>
+              {{ item.name }}
+            </d-card-title>
+          </template>
+        </d-text-field>
+
         <d-text-field color="primary" inlined depressed label="Icon Select" v-model="selectedIcon" select
                       :items="iconItems">
           <template slot="item" slot-scope="{item}">
@@ -206,7 +222,7 @@
           </d-row>
           <d-row>
             <d-progressbar :value="progressValue%100" style="min-width: 300px; width: 100%">
-              Download @ {{progressValue%100}}%
+              Download @ {{ progressValue % 100 }}%
             </d-progressbar>
           </d-row>
         </d-column>
@@ -441,6 +457,7 @@ export default {
 
     text: '',
     selectedIcon: 0,
+    selectedIcons: [0, 2],
     iconItems: [
       {icon: 'cube', name: 'Cube', iconStyle: 'line'},
       {icon: 'anchor', name: 'Anchor', iconStyle: 'line'},
@@ -467,9 +484,9 @@ export default {
   mounted() {
     this.$notify('Hello there', 'General Kenobi', 'success')
 
-    setInterval(()=>{
+    setInterval(() => {
       this.progressValue += 15
-    },1000)
+    }, 1000)
   },
 
   methods: {

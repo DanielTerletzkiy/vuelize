@@ -5,7 +5,7 @@
       <span class="d-text-field__input__default">{{ items[value] }}</span>
     </slot>
     <d-icon :name="angleIcon" class="d-text-field__input__icon"/>
-    <d-select-menu v-bind="{...$props, ...$attrs}" :value="value" @input="onInput" :open.sync="dropdownOpen">
+    <d-select-menu v-bind="{...$props, ...$attrs}" :inlined="false" :value="value" @input="onInput" :open.sync="dropdownOpen">
       <template slot="item" slot-scope="props">
         <slot name="item" v-bind="props"></slot>
       </template>

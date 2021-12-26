@@ -2,42 +2,51 @@
   <d-function-wrapper :classes="['d-text-field', ...classesObject]" v-bind="{...$props, ...$attrs}"
                       :style="textFieldStylesObject"
                       @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
-    <input v-if="componentType === 'input'" :is="componentType" v-bind="{...$props, ...$attrs}" :id="label"
+    <component v-if="componentType !== 'input'" :is="componentType" v-bind="{...$props, ...$attrs}" :id="label"
+               class="d-text-field__input"
+               :placeholder="placeholderActive ? placeholder : ' '"
+               :value="value" @input="onInput"
+               @removeFocus="removeFocus"
+               @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
+      <template v-if="componentType !== 'input'" slot="label" slot-scope="props">
+        <slot name="label" v-bind="props"></slot>
+      </template>
+      <template v-if="componentType !== 'input'" slot="item" slot-scope="props">
+        <slot name="item" v-bind="props"></slot>
+      </template>
+    </component>
+    <input v-else v-bind="{...$props, ...$attrs}" :id="label"
            class="d-text-field__input"
            :placeholder="placeholderActive ? placeholder : ' '"
            :value="value" @input="onInput"
            @keyup.enter="$emit('enter')"
            @removeFocus="removeFocus"
            @focusin="()=>this.selected = true" @focusout="()=>this.selected = false"/>
-    <component v-else :is="componentType" v-bind="{...$props, ...$attrs}" :id="label" class="d-text-field__input"
-               :placeholder="placeholderActive ? placeholder : ' '"
-               :value="value" @input="onInput"
-               @removeFocus="removeFocus"
-               @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
-      <template v-if="componentType !== 'input'" slot="item" slot-scope="props">
-        <slot name="item" v-bind="props"></slot>
-      </template>
-    </component>
     <label :for="label" class="d-text-field__label">{{ label }}</label>
   </d-function-wrapper>
 </template>
 
 <script>
-import DSelect from "@/components/textfield/Select.vue";
+import DSelect from "@/components/textfield/variant/Select.vue";
+import DAutocomplete from "@/components/textfield/variant/Autocomplete.vue";
+
 export default {
   name: "d-text-field",
 
   components: {
-    DSelect
+    DSelect,
+    DAutocomplete
   },
 
   props: {
     value: undefined,
     label: String,
     placeholder: String,
-    select: Boolean,
     width: String,
-    fullWidth: Boolean
+    fullWidth: Boolean,
+
+    select: Boolean,
+    autocomplete: Boolean,
   },
 
   data: () => ({
@@ -76,7 +85,13 @@ export default {
     },
 
     componentType() {
-      return this.select ? 'd-select' : 'input'
+      if (this.select) {
+        return 'd-select'
+      } else if (this.autocomplete) {
+        return 'd-autocomplete'
+      } else {
+        return 'input'
+      }
     },
 
     placeholderActive() {
@@ -104,7 +119,7 @@ export default {
   caret-color: currentColor;
   transition-duration: 0.15s;
 
-  &__input {
+  &__input, ::v-deep .d-text-field__input__autocomplete {
     position: absolute;
     top: 0;
     left: 0;
@@ -126,7 +141,7 @@ export default {
   }
 
   &__label {
-    border-radius: inherit;
+    border-radius: 50px 50px 0 0;
     position: absolute;
     left: 1rem;
     top: 0.8rem;
@@ -134,6 +149,7 @@ export default {
     cursor: text;
     transition-duration: 0.2s;
     background: inherit;
+    height: 10px;
   }
 
   &--active {

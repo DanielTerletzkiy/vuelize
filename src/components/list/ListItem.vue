@@ -12,10 +12,15 @@ export default {
   name: "d-list-item",
 
   computed: {
+    isMultiple() {
+      return typeof this.$parent.$parent.$props.value === 'object'
+    },
     classesObject() {
       return {
         glow: true,
-        'glow--active': this.$parent.$parent.$props.value === this.$vnode.key
+        'glow--active': this.isMultiple ?
+            this.$parent.$parent.$props.value.includes(this.$vnode.key)
+            : this.$parent.$parent.$props.value === this.$vnode.key
       }
     }
   },
@@ -24,7 +29,18 @@ export default {
     click() {
       //check if listItem is under d-list
       if (this.$parent.$parent.$options._componentTag === 'd-list') {
-        this.$parent.$parent.$emit('input', this.$vnode.key)
+        if (this.isMultiple) {
+          let tempArray = this.$parent.$parent.$props.value;
+          if (this.$parent.$parent.$props.value.includes(this.$vnode.key)) {
+            tempArray.splice(tempArray.indexOf(this.$vnode.key), 1)
+          } else {
+            tempArray.push(this.$vnode.key)
+          }
+          this.$parent.$parent.$emit('input', tempArray)
+
+        } else {
+          this.$parent.$parent.$emit('input', this.$vnode.key)
+        }
       } else {
         this.$emit('input', this.$vnode.key)
       }
