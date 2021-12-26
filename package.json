@@ -25,7 +25,6 @@
   "scripts": {
     "serve": "vue-cli-service serve DOCS/main.js",
     "lint": "vue-cli-service lint",
-    "build": "npm run build:umd && npm run build:es && npm run build:unpkg",
     "build:rollup": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
     "build:publish": "npm run build:rollup && np",
     "build:docs": "vue-cli-service build --dest gh-pages DOCS/main.js && git add gh-pages && git commit -m'adding gh-pages to subtree' && git subtree push --prefix gh-pages origin gh-pages && git push"
