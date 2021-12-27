@@ -1,6 +1,6 @@
 <template>
   <d-function-wrapper root-tag="li" tabindex="0" :classes="['d-list__item', ...classesObject]"
-                      v-bind="{...$props, ...$attrs}" @click="click" v-ripple>
+                      v-bind="{...$props, ...$attrs}" @click="click" @keyup.enter="click" v-ripple>
     <div class="d-list__item__content">
       <slot></slot>
     </div>
@@ -61,6 +61,11 @@ export default {
 
   list-style: none;
   margin: 0;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 1.4px currentColor;
+  }
 
   .d-list__item__content {
     width: 100%;

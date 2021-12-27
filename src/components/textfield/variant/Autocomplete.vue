@@ -1,14 +1,14 @@
 <template>
   <div v-bind="{...$props, ...$attrs}" @focusin="$emit('focusin')"
-       @focusout="$emit('focusout')" @click="toggleDropdown" @keypress.enter="toggleDropdown" tabindex="0">
+       @focusout="$emit('focusout')" @click.self="toggleDropdown" @keypress.enter="toggleDropdown" tabindex="0">
     <slide-y-down-transition group style="display: flex;">
       <div v-for="(item, i) in value.map(v=>items[v])" :key="i">
-        <slot name="label" :item="item" :index="value">
+        <slot name="label" :item="item" :index="i">
           <d-label class="d-text-field__input__default">{{ item }}</d-label>
         </slot>
       </div>
     </slide-y-down-transition>
-    <input v-model="search" @input="()=>dropdownOpen=true" v-bind="{...$props, ...$attrs}"
+    <input v-model="search" @input="()=>dropdownOpen=true" @click.self="()=>dropdownOpen=true" v-bind="{...$props, ...$attrs}"
            class="d-text-field__input__autocomplete"/>
     <d-icon :name="angleIcon" class="d-text-field__input__icon"/>
     <d-select-menu width="0" v-bind="{...$props, ...$attrs}" :items="searchedItems" :inlined="false" :value="value"
@@ -33,7 +33,7 @@ export default {
 
   methods: {
     toggleDropdown() {
-      this.dropdownOpen = !this.dropdownOpen;
+      this.dropdownOpen = true;
     },
 
     onInput(val) {
@@ -65,7 +65,7 @@ export default {
 <style scoped lang="scss">
 .d-text-field__input {
   position: relative;
-  padding-left: 4px !important;
+  padding-left: 12px !important;
   padding-top: 0.5em !important;
   padding-bottom: 0.5em !important;
   display: flex;

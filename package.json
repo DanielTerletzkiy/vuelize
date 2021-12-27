@@ -30,6 +30,7 @@
     "build:docs": "vue-cli-service build --dest gh-pages DOCS/main.js && git add gh-pages && git commit -m'adding gh-pages to subtree' && git subtree push --prefix gh-pages origin gh-pages && git push"
   },
   "dependencies": {
+    "@babel/runtime": "^7.16.5",
     "@rollup/plugin-alias": "^3.1.8",
     "@rollup/plugin-babel": "^5.3.0",
     "core-js": "^3.6.5",

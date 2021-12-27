@@ -109,17 +109,21 @@
         <d-text-field color="primary" inlined depressed label="Default Select" v-model="selectedIcon" select
                       :items="['Cube', 'Anchor', 'Layers Alt']"/>
 
-        <d-text-field color="primary" width="780px" inlined depressed label="Icon Select Autocomplete" text="name" v-model="selectedIcons" autocomplete
+        <d-text-field placeholder="test" color="primary" full-width inlined depressed label="Icon Select Autocomplete"
+                      text="name" v-model="selectedIcons" autocomplete
                       :items="iconItems">
-          <template v-slot:label="{ item }">
-            <d-label class="px-1 py-0">
-              <d-icon :name="item.icon" :icon-style="item.iconStyle" color="primary"/>
+          <template v-slot:label="{ item, index }">
+            <d-label class="px-1 py-0" :color="item.color">
+              <d-icon :name="item.icon" :icon-style="item.iconStyle"/>
               {{ item.name }}
+              <d-icon-button size="24" rounded="circle" @click="()=>selectedIcons.splice(index,1)">
+                <d-icon name="times"/>
+              </d-icon-button>
             </d-label>
           </template>
           <template slot="item" slot-scope="{item}">
-            <d-card-title class="pa-0 font-size-small" color="inherit">
-              <d-icon :name="item.icon" :icon-style="item.iconStyle" color="primary"/>
+            <d-card-title class="pa-0 font-size-small" :color="item.color">
+              <d-icon :name="item.icon" :icon-style="item.iconStyle"/>
               {{ item.name }}
             </d-card-title>
           </template>
@@ -458,10 +462,11 @@ export default {
     text: '',
     selectedIcon: 0,
     selectedIcons: [0, 2],
+    mappedIcons: [],
     iconItems: [
-      {icon: 'cube', name: 'Cube', iconStyle: 'line'},
-      {icon: 'anchor', name: 'Anchor', iconStyle: 'line'},
-      {icon: 'layers-alt', name: 'Layers Alt', iconStyle: 'monochrome'},
+      {icon: 'cube', name: 'Cube', iconStyle: 'line', color: 'primary'},
+      {icon: 'anchor', name: 'Anchor', iconStyle: 'line', color: 'warning'},
+      {icon: 'layers-alt', name: 'Layers Alt', iconStyle: 'monochrome', color: 'error'},
     ],
     selectedUser: 0,
     userItems: [

@@ -2,10 +2,10 @@
   <d-function-wrapper :classes="['d-notification-wrapper', ...classesObject]" v-bind="{...$props, ...$attrs}"
                       @click="$emit('click')">
     <div class="d-notification-wrapper__content">
-      <slide-x-right-transition group :delay="100">
+      <fade-transition group :delay="0">
         <d-notification v-for="notification in notifications" :notification="notification" color="primary"
                         :key="notification.created"/>
-      </slide-x-right-transition>
+      </fade-transition>
     </div>
   </d-function-wrapper>
 </template>
@@ -23,7 +23,9 @@ export default {
       return {'d-notification-wrapper--permanent': this.permanent}
     },
     notifications() {
-      return this.permanent ? this.$vuelize.notification.notifications : this.$vuelize.notification.notifications.filter(notification => notification.active === true)
+      return this.permanent ?
+          this.$vuelize.notification.notifications
+          : this.$vuelize.notification.notifications.filter(notification => notification.active === true)
     }
   }
 }
