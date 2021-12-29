@@ -1,16 +1,19 @@
 <template>
   <div v-bind="{...$props, ...$attrs}" @focusin="$emit('focusin')"
-       @focusout="$emit('focusout')" @click.self="toggleDropdown" @keypress.enter="toggleDropdown" tabindex="0">
-    <slide-y-down-transition group style="display: flex;">
+       @focusout="$emit('focusout')" @click.self="dropdownOpen = true" @keypress.enter="dropdownOpen = true" tabindex="0">
+    <slide-y-down-transition group style="display: flex; align-items: center">
       <div v-for="(item, i) in value.map(v=>items[v])" :key="i">
         <slot name="label" :item="item" :index="i">
           <d-label class="d-text-field__input__default">{{ item }}</d-label>
         </slot>
       </div>
     </slide-y-down-transition>
-    <input v-model="search" @input="()=>dropdownOpen=true" @click.self="()=>dropdownOpen=true" v-bind="{...$props, ...$attrs}"
+    <input v-model="search" ref="searchInput" @input="()=>dropdownOpen=true" @click.self="()=>dropdownOpen=true"
+           @keydown.delete="onBackspace" v-bind="{...$props, ...$attrs}"
            class="d-text-field__input__autocomplete"/>
-    <d-icon :name="angleIcon" class="d-text-field__input__icon"/>
+    <d-icon-button size="24" rounded="md" class="d-text-field__input__icon" @click="toggleDropdown">
+      <d-icon :name="angleIcon"/>
+    </d-icon-button>
     <d-select-menu width="0" v-bind="{...$props, ...$attrs}" :items="searchedItems" :inlined="false" :value="value"
                    @input="onInput"
                    :open.sync="dropdownOpen">
@@ -33,12 +36,18 @@ export default {
 
   methods: {
     toggleDropdown() {
-      this.dropdownOpen = true;
+      this.dropdownOpen = !this.dropdownOpen;
     },
 
     onInput(val) {
       this.$emit('input', val)
-      this.$emit('removeFocus')
+      this.$refs.searchInput.focus()
+    },
+
+    onBackspace() {
+      if (this.search.length === 0) {
+        this.value.splice(this.value.length - 1, 1)
+      }
     }
   },
 
@@ -73,6 +82,7 @@ export default {
   .d-text-field__input__autocomplete {
     position: relative !important;
     padding-left: 8px !important;
+    height: calc(100% + 16px) !important;
   }
 
   .d-text-field__input__default {

@@ -22,7 +22,7 @@
            @keyup.enter="$emit('enter')"
            @removeFocus="removeFocus"
            @focusin="()=>this.selected = true" @focusout="()=>this.selected = false"/>
-    <label :for="label" class="d-text-field__label">{{ label }}</label>
+    <label v-if="label" :for="label" class="d-text-field__label" :class="labelClassesObject">{{ label }}</label>
   </d-function-wrapper>
 </template>
 
@@ -47,6 +47,9 @@ export default {
 
     select: Boolean,
     autocomplete: Boolean,
+
+    filled: Boolean,
+    inlined: Boolean
   },
 
   data: () => ({
@@ -79,8 +82,15 @@ export default {
     classesObject() {
       return {
         'd-text-field--active': (this.hover || this.selected),
-        elevation: true,
-        'd-text-field--placeholder': this.placeholderActive
+        'd-text-field--placeholder': this.placeholderActive,
+        'd-text-field--inlined inlined depressed elevation': this.inlined,
+        'd-text-field--filled glow glow--active': this.filled,
+      }
+    },
+
+    labelClassesObject() {
+      return {
+        'd-text-field--filled': this.filled,
       }
     },
 
@@ -115,7 +125,6 @@ export default {
   position: relative;
   width: 250px;
   height: 3rem;
-  background: inherit;
   caret-color: currentColor;
   transition-duration: 0.15s;
 
@@ -132,6 +141,7 @@ export default {
     outline: none;
     padding: 0 1.25em;
     background: none;
+    align-items: center;
 
     color: currentColor;
     caret-color: inherit;
@@ -152,8 +162,38 @@ export default {
     height: 10px;
   }
 
-  &--active {
-    box-shadow: inset 0 0 0 1.4px currentColor !important;
+  &--inlined {
+    background: inherit;
+
+    &.d-text-field--active {
+      box-shadow: inset 0 0 0 1.4px currentColor !important;
+    }
+
+    &:focus-within::before {
+      box-shadow: inset 0 0 0 2px currentColor;
+      transition-duration: 0.2s;
+    }
+  }
+
+  &--filled {
+    &.glow--active:not(:hover):not(.d-text-field--active)::before {
+      opacity: 0.05 !important;
+    }
+
+    &.d-text-field {
+      min-height: 3.6rem !important;
+    }
+
+    .d-text-field__label {
+      top: 1rem;
+      font-size: 1.2rem;
+
+    }
+
+    .d-text-field__input {
+      padding-top: 12px !important;
+      padding-bottom: 0 !important;
+    }
   }
 
   &::before {
@@ -164,11 +204,6 @@ export default {
     height: 100%;
     content: '';
     border-radius: inherit;
-  }
-
-  &:focus-within::before {
-    box-shadow: inset 0 0 0 2px currentColor;
-    transition-duration: 0.2s;
   }
 
   &.theme--dark {
@@ -186,10 +221,15 @@ export default {
 
 .d-text-field__input:focus ~ .d-text-field__label, .d-text-field--placeholder .d-text-field__input ~ .d-text-field__label,
 .d-text-field__input:not(:placeholder-shown).d-text-field__input:not(:focus) ~ .d-text-field__label {
-  font-size: 0.8rem;
+
+  font-size: 0.9rem;
   padding: 0 0.3rem;
   top: -0.485rem;
   left: 0.4rem;
+
+  &.d-text-field--filled {
+    top: 0.2rem !important;
+  }
 }
 
 </style>

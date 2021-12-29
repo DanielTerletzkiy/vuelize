@@ -1,6 +1,9 @@
 <template>
   <d-function-wrapper root-tag="li" tabindex="0" :classes="['d-list__item', ...classesObject]"
+                      @focusin="()=>focus = true"
+                      @focusout="()=>focus = false"
                       v-bind="{...$props, ...$attrs}" @click="click" @keyup.enter="click" v-ripple>
+    <d-card class="d-list__item__indicator" color="currentColor"/>
     <div class="d-list__item__content">
       <slot></slot>
     </div>
@@ -10,6 +13,10 @@
 <script>
 export default {
   name: "d-list-item",
+
+  data: ()=>({
+    focus: false
+  }),
 
   computed: {
     isMultiple() {
@@ -63,8 +70,16 @@ export default {
   margin: 0;
 
   &:focus-visible {
+    position: relative;
+
     outline: none;
-    box-shadow: inset 0 0 0 1.4px currentColor;
+    .d-list__item__indicator {
+      position: absolute;
+      left: -2px;
+      max-height: 30px;
+      height: 100%;
+      width: 4px;
+    }
   }
 
   .d-list__item__content {

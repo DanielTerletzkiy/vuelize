@@ -6,8 +6,9 @@
         <d-list :value="value"
                 @input="onInput"
                 color="primary" class="pa-0" rounded="none">
-          <d-list-item v-for="(item, index) in items" :key="index" @keypress.down="focus(index+1)"
+          <d-list-item v-for="(item, index) in items" :key="index"
                        v-show="activeSearch(item)"
+                       :color="item.color || ''"
                        :tabindex="0" ref="item">
             <slot name="item" :item="item" :index="index">
               {{ item }}
@@ -30,6 +31,26 @@ export default {
     items: Array
   },
 
+  data: () => ({
+    currentItem: -1
+  }),
+
+  watch: {
+    open(state) {
+      if (state) {
+        document.addEventListener("keyup", this.focusNext);
+        window.addEventListener("keydown", this.preventArrow, false);
+        this.currentItem = -1
+      } else {
+        document.removeEventListener("keyup", this.focusNext)
+        window.removeEventListener('keydown', this.preventArrow)
+      }
+    },
+    items() {
+      this.currentItem = -1
+    }
+  },
+
   methods: {
     hideSelectMenu() {
       this.$emit('update:open', false)
@@ -39,10 +60,49 @@ export default {
     },
 
     focus(index) {
-      console.log(index)
       this.$nextTick(() => {
-        this.$refs.item[index].$el.focus()
+        if (this.$refs.item !== undefined) {
+          this.$refs.item[index].$el.focus()
+        }
       })
+    },
+
+    focusNext: async function () {
+      await this.$nextTick()
+
+      if (event.keyCode === 27) {
+        this.hideSelectMenu();
+        return
+      }
+
+      if (event.keyCode === 13) {
+        //this.currentItem = -1;
+        return
+      }
+
+      if (event.keyCode === 38 || event.keyCode === 40) {
+        if (event.keyCode === 38 && this.currentItem <= 0) {
+          this.$parent.$refs.searchInput.focus()
+          this.currentItem = -1
+          return
+        }
+
+        if (event.keyCode === 38 && this.currentItem > 0) {
+          this.currentItem--
+        } else if (event.keyCode === 40 && this.currentItem < this.items.length-1) {
+          this.currentItem++
+        }
+
+        if (this.$refs.item) {
+          this.$refs.item[this.currentItem].$el.focus()
+        }
+      }
+    },
+
+    preventArrow() {
+      if (["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(event.code) > -1) {
+        event.preventDefault();
+      }
     },
 
     activeSearch(item) {

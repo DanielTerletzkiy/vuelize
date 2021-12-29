@@ -102,40 +102,39 @@
       </d-card-title>
 
       <d-card-content flex wrap>
-        <d-text-field color="primary" inlined depressed label="Text" type="text" v-model="text"/>
+        <d-text-field color="primary" filled label="Text" type="text" v-model="text"/>
+        <d-text-field color="primary" inlined label="Text" type="text" v-model="text"/>
         <d-text-field color="primary" inlined depressed label="Text with placeholder" type="text" v-model="text"
                       placeholder="This is a placeholder"/>
 
-        <d-text-field color="primary" inlined depressed label="Default Select" v-model="selectedIcon" select
+        <d-text-field color="primary" filled label="Default Select" v-model="selectedIcon" select
                       :items="['Cube', 'Anchor', 'Layers Alt']"/>
 
-        <d-text-field placeholder="test" color="primary" full-width inlined depressed label="Icon Select Autocomplete"
+        <d-text-field placeholder="test" color="primary" full-width filled label="Icon Select Autocomplete"
                       text="name" v-model="selectedIcons" autocomplete
                       :items="iconItems">
           <template v-slot:label="{ item, index }">
             <d-label class="px-1 py-0" :color="item.color">
               <d-icon :name="item.icon" :icon-style="item.iconStyle"/>
               {{ item.name }}
-              <d-icon-button size="24" rounded="circle" @click="()=>selectedIcons.splice(index,1)">
+              <d-icon-button size="24" color="inherit" rounded="circle" @click="()=>selectedIcons.splice(index,1)">
                 <d-icon name="times"/>
               </d-icon-button>
             </d-label>
           </template>
           <template slot="item" slot-scope="{item}">
-            <d-card-title class="pa-0 font-size-small" :color="item.color">
               <d-icon :name="item.icon" :icon-style="item.iconStyle"/>
               {{ item.name }}
-            </d-card-title>
           </template>
         </d-text-field>
 
-        <d-text-field color="primary" inlined depressed label="Icon Select" v-model="selectedIcon" select
+        <d-text-field color="primary" filled label="Icon Select" v-model="selectedIcon" select
                       :items="iconItems">
           <template slot="item" slot-scope="{item}">
-            <d-card-title class="pa-0 font-size-small" color="inherit">
-              <d-icon :name="item.icon" :icon-style="item.iconStyle" color="primary"/>
+            <d-card-subtitle class="pa-0" :color="item.color">
+              <d-icon :name="item.icon" :icon-style="item.iconStyle"/>
               {{ item.name }}
-            </d-card-title>
+            </d-card-subtitle>
           </template>
         </d-text-field>
 

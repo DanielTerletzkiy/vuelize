@@ -1,11 +1,15 @@
 <template>
   <div v-bind="{...$props, ...$attrs}" @focusin="$emit('focusin')"
-       @focusout="$emit('focusout')" @click="toggleDropdown" @keypress.enter="toggleDropdown" tabindex="0">
-    <slot name="item" :item="items[value]" :index="value">
+       @focusout="$emit('focusout')" @click="toggleDropdown" @keypress.enter="dropdownOpen = true"
+       tabindex="0">
+    <slot name="item" v-ripple :item="items[value]" :index="value">
       <span class="d-text-field__input__default">{{ items[value] }}</span>
     </slot>
-    <d-icon :name="angleIcon" class="d-text-field__input__icon"/>
-    <d-select-menu v-bind="{...$props, ...$attrs}" :inlined="false" :value="value" @input="onInput" :open.sync="dropdownOpen">
+    <d-icon-button size="24" rounded="md" class="d-text-field__input__icon">
+      <d-icon :name="angleIcon"/>
+    </d-icon-button>
+    <d-select-menu v-bind="{...$props, ...$attrs}" :inlined="false" :value="value" @input="onInput"
+                   :open.sync="dropdownOpen">
       <template slot="item" slot-scope="props">
         <slot name="item" v-bind="props"></slot>
       </template>
@@ -27,7 +31,8 @@ export default {
       this.dropdownOpen = !this.dropdownOpen;
     },
 
-    onInput(val){
+    onInput(val) {
+      this.toggleDropdown()
       this.$emit('input', val)
       this.$emit('removeFocus')
     }
