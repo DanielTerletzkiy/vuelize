@@ -50,6 +50,7 @@ import DNotificationWrapper from "./components/notification/NotificationWrapper.
 import DBadge from "./components/badge/Badge.vue";
 import DLabel from "./components/label/Label.vue";
 import DProgressbar from "./components/progress/Progressbar.vue";
+import DDialog from "./components/dialog/Dialog.vue";
 
 export default Vue => {
 
@@ -86,6 +87,7 @@ export default Vue => {
     Vue.component("d-badge", DBadge);
     Vue.component("d-label", DLabel);
     Vue.component("d-progressbar", DProgressbar);
+    Vue.component("d-dialog", DDialog);
 
 
     //-----------------------

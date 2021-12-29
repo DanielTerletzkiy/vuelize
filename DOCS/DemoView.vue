@@ -110,7 +110,7 @@
         <d-text-field color="primary" filled label="Default Select" v-model="selectedIcon" select
                       :items="['Cube', 'Anchor', 'Layers Alt']"/>
 
-        <d-text-field placeholder="test" color="primary" full-width filled label="Icon Select Autocomplete"
+        <d-text-field placeholder="test" color="primary" full-width inlined label="Icon Select Autocomplete"
                       text="name" v-model="selectedIcons" autocomplete
                       :items="iconItems">
           <template v-slot:label="{ item, index }">
@@ -123,8 +123,8 @@
             </d-label>
           </template>
           <template slot="item" slot-scope="{item}">
-              <d-icon :name="item.icon" :icon-style="item.iconStyle"/>
-              {{ item.name }}
+            <d-icon :name="item.icon" :icon-style="item.iconStyle"/>
+            {{ item.name }}
           </template>
         </d-text-field>
 
@@ -193,6 +193,58 @@
             </d-select-menu>
           </template>
         </d-btn>
+      </d-card-content>
+    </d-card>
+
+    <div class="my-4"/>
+
+    <d-card elevation block>
+      <d-card-title>
+        <d-icon name="comment-alt" color="primary" :size="30"/>
+        Dialogs!
+      </d-card-title>
+      <d-card-content>
+        <d-btn filled color="primary" @click="()=>openDialog=true">
+          Open Dialog
+        </d-btn>
+        <d-dialog v-model="openDialog" :persistent="persistentDialog">
+          <d-card width="400px">
+            <d-card-title>
+              YesNo Dialog
+            </d-card-title>
+            <d-card-subtitle>
+              <d-checkbox v-model="persistentDialog" size="24" off-icon="lock-open-alt" on-icon="lock-alt">Persistent</d-checkbox>
+            </d-card-subtitle>
+            <d-divider class="mx-3"/>
+            <d-column gap>
+              <d-column block>
+                <d-row>
+                  <d-column>
+                    <d-card-title class="font-size-large font-weight-bold" style="text-transform: uppercase"
+                                  :color="yesNo.answer === 'yes' ? 'success' : 'error'">
+                      {{ yesNo.answer }}
+                    </d-card-title>
+                    <d-card-subtitle>
+                      Answer
+                    </d-card-subtitle>
+                  </d-column>
+                  <d-spacer/>
+                  <d-icon-button @click="()=>yesNoApi()">
+                    <d-icon name="sync"/>
+                  </d-icon-button>
+                </d-row>
+                <d-image height="300px" :src="yesNo.image"/>
+              </d-column>
+              <d-spacer/>
+              <d-row class="pa-1" elevation="1">
+                <d-spacer/>
+                <d-btn color="primary" glow @click="()=>openDialog=false">
+                  Close
+                </d-btn>
+              </d-row>
+            </d-column>
+          </d-card>
+        </d-dialog>
       </d-card-content>
     </d-card>
 
@@ -478,12 +530,24 @@ export default {
 
     openSelectMenu: false,
 
+    openDialog: false,
+    persistentDialog: false,
+    yesNo: {},
+
     progressValue: 0,
 
     openAccordion: 0,
 
     tabs: 0,
   }),
+
+  watch: {
+    openDialog(state) {
+      if (state) {
+        this.yesNoApi()
+      }
+    }
+  },
 
   mounted() {
     this.$notify('Hello there', 'General Kenobi', 'success')
@@ -504,6 +568,19 @@ export default {
         this.$vuelize.theme.themes.light.primary = this.processColor(color)
 
       }
+    },
+    yesNoApi: async function () {
+      fetch("https://yesno.wtf/api")
+          .then(function (response) {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            this.yesNo = data
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
     }
   }
 }
