@@ -1,7 +1,7 @@
 <template>
   <d-function-wrapper :classes="['d-checkbox']" v-bind="{...$props, ...$attrs}" :style="checkboxStylesObject"
                       @click="changeValue">
-    <div class="d-checkbox__box" :class="classesObject" v-ripple>
+    <div class="d-checkbox__box" :class="classesObject" v-ripple :tabindex="this.disabled?-1:0" @keyup.enter="changeValue">
       <d-icon :name="value ? onIcon : offIcon" :size="size" :color="'currentColor'"/>
     </div>
     <div class="d-checkbox__label">
@@ -69,6 +69,10 @@ export default {
     padding: 2px;
 
     transition-duration: 0.1s;
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+    }
   }
 
   &.theme--dark {

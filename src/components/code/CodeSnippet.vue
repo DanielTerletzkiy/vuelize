@@ -7,9 +7,19 @@
             {{ label }}
           </d-card-subtitle>
         </d-column>
+        <d-row width="max-content" v-if="splitVueTags">
+          <d-divider vertical block size="2px" class="my-4 mr-2"/>
+          <d-tab-list v-model="currentVueTag">
+            <d-tab-item height="0px" :color="currentVueTag === tag ? color : ''" v-for="{tag, icon, color} in vueTags"
+                        :key="tag">
+              <d-icon :name="icon"/>
+              <d-card-subtitle color="inherit" root-tag="pre">{{ tag }}</d-card-subtitle>
+            </d-tab-item>
+          </d-tab-list>
+        </d-row>
         <d-spacer/>
         <d-card-subtitle root-tag="pre">
-          {{ language }}
+          {{ currentLanguage }}
         </d-card-subtitle>
         <d-divider vertical block size="2px" class="my-3" :color="hover?'primary':''"/>
         <d-column>
@@ -27,8 +37,8 @@
                 <d-card-subtitle class="d-code-snippet__code__row__number">{{ l + 1 }}</d-card-subtitle>
               </d-column>
               <d-column>
-                <d-card-title v-highlightjs="line" class="d-code-snippet__code__row__code font-size-small"><code
-                    :class="language"></code></d-card-title>
+                <d-card-title v-highlightjs="line" :key="currentLanguage" class="d-code-snippet__code__row__code font-size-small"><code
+                    :class="currentLanguage"></code></d-card-title>
               </d-column>
             </d-row>
           </d-card-content>
@@ -69,7 +79,8 @@ export default {
     label: {type: String, required: true},
     code: String,
     language: {type: String, default: 'html'},
-    hidePreview: {type: Boolean, default: false}
+    hidePreview: {type: Boolean, default: false},
+    splitVueTags: Boolean,
   },
 
   components: {
@@ -78,14 +89,39 @@ export default {
 
   data: () => ({
     hover: false,
+    vueTags: [
+      {tag: 'template', language: 'html', icon: 'html5-alt', color: '#DD6025'},
+      {tag: 'script', language: 'javascript', icon: 'vuejs', color: '#41B883'},
+      {tag: 'style', language: 'css', icon: 'css3-simple', color: '#3492CB'}
+    ],
+    currentVueTag: 'template'
   }),
 
   computed: {
     parsedCode() {
-      return this.code.split('\n')
+      if (this.splitVueTags) {
+        let tagContents = []
+        this.vueTags.forEach((item) => {
+          const regex = new RegExp("<" + item.tag + ".*>(.*)</" + item.tag + ">", 's')
+          const extract = this.code.match(regex)[0]
+          tagContents.push(extract.split('\n'))
+        })
+        return tagContents[this.vueTags.findIndex((item) => item.tag === this.currentVueTag)]
+      } else {
+        return this.code.split('\n')
+      }
+    },
+    currentLanguage() {
+      if (this.splitVueTags) {
+        return this.vueTags.find((item) =>
+            item.tag === this.currentVueTag
+        ).language
+      } else {
+        return this.language
+      }
     },
     showPreview() {
-      return (this.language.toLowerCase() === 'vue' || this.language.toLowerCase() === 'html') && !this.hidePreview
+      return (this.language.toLowerCase() === 'vue' || this.language.toLowerCase() === 'html' || this.splitVueTags) && !this.hidePreview
     }
   },
 

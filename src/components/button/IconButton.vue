@@ -52,6 +52,10 @@ export default {
   font-size: 0.875rem;
   letter-spacing: 0.0892857143em;
 
+  &:focus-visible {
+    outline: 2px solid currentColor;
+  }
+
   .d-icon-button__content {
     height: 100%;
     width: 100%;

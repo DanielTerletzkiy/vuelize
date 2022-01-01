@@ -8,7 +8,6 @@ export default {
 
   props: {
     block: Boolean,
-    spacing: Number,
     vertical: Boolean,
     size: {type: String, default: '1px'},
   },
@@ -19,13 +18,12 @@ export default {
         'd-divider--block': this.block,
         'd-divider--vertical': this.vertical,
         'd-divider--horizontal': !this.vertical,
-        [`mx-${this.spacing}`]: this.spacing
       }
     },
     stylesObject(){
       return {
-        height: this.vertical === false ? this.size : '',
-        width: this.vertical === true ? this.size : '',
+        height: this.vertical === false ? this.size : this.$attrs.height,
+        width: this.vertical === true ? this.size : this.$attrs.width,
       }
     }
   },
@@ -44,7 +42,7 @@ export default {
   }
 
   &--vertical {
-    min-height: min-content;
+    //min-height: min-content;
   }
 
   &.d-divider--block {
@@ -53,6 +51,7 @@ export default {
       flex: 1;
     }
     &.d-divider--vertical {
+      height: inherit;
       display: flex;
       align-self: stretch;
     }

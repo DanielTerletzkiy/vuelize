@@ -1,11 +1,11 @@
 <template>
   <d-root>
     <title>{{$route.name}}</title>
-    <d-toolbar show-hamburger @hamburgerClick="navDrawer = !navDrawer">
+    <d-toolbar show-hamburger @hamburgerClick="()=>navDrawer = !navDrawer">
       <d-row gap>
         <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>
         <d-spacer/>
-        <d-checkbox flex-direction="row-reverse" :size="24" on-icon="sunset" off-icon="moonset"
+        <d-checkbox flex-direction="row-reverse" :size="24" on-icon="moonset" off-icon="sunset"
                     v-model="$vuelize.theme.dark">
           Dark mode
         </d-checkbox>

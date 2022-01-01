@@ -8,14 +8,17 @@
     </d-card-subtitle>
 
     <d-column column gap>
-      <d-column block v-for="{component, name} in examples" :key="name">
-        <d-code-snippet :label="name" :code="component"/>
+      <d-column block v-for="{name, code, component} in examples" :key="name">
+        <d-code-snippet :label="name" :code="code" split-vue-tags>
+          <component :is="component"/>
+        </d-code-snippet>
       </d-column>
     </d-column>
   </div>
 </template>
 
 <script>
+import Vue from 'vue';
 export default {
   name: "Wrapper",
 
@@ -40,31 +43,28 @@ export default {
 
   methods: {
     getExamples() {
-      const req = require.context('!raw-loader!../examples', true, /\.(js|vue)$/i);
+      const req = require.context('../examples', true, /\.(js|vue)$/i, 'sync');
       let comps = [];
-
       req.keys().forEach((key) => {
         if (key.match(this.$route.path)) {
+          const vueCode = require('!raw-loader!../examples' + key.substring(1)).default;
 
           const nameReg = new RegExp("name: \"(.*)\"");
-          const name = req(key).default.match(nameReg)[1];
+          const name = vueCode.match(nameReg)[1];
 
           const weightReg = new RegExp("weight: \"(.*)\"");
-          let weight = req(key).default.match(weightReg);
+          let weight = vueCode.match(weightReg);
           if(weight !== null){
             weight = parseInt(weight[1])
           }else {
             weight = 100
           }
-          console.log(weight)
 
-          const compReg = new RegExp("<template>\\r\\n(.*)\\r\\n</template>", 's');
-          //console.log(req(key))
-          comps.push({name, weight, component: req(key).default.match(compReg)[1]});
+          const code = req(key).default;
+          comps.push( {name, code: vueCode, component: Vue.component(key, code), weight});
         }
-      })
+      });
       this.examples = comps.sort((a, b) => a.weight - b.weight);
-      //console.log(this.examples)
     }
   },
 

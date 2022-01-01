@@ -1,13 +1,9 @@
 <template>
   <d-function-wrapper :classes="['d-tab-list__item', ...classesObject]" v-bind="{...$props, ...$attrs}"
-                      @click="click" v-ripple>
+                      @click="click" v-ripple :tabindex="this.disabled?-1:0" @keyup.enter="click">
     <div class="d-tab-list__item__content">
       <slot></slot>
     </div>
-    <slide-y-down-transition :duration="30">
-      <d-divider class="d-tab-list__item__indicator" color="primary" size="2px"
-                 v-if="this.$parent.$parent.$props.value === this.$vnode.key"/>
-    </slide-y-down-transition>
   </d-function-wrapper>
 </template>
 
@@ -48,11 +44,8 @@ export default {
   min-height: 44px;
   padding: 4px;
 
-  &__indicator {
-    position: absolute;
-    width: calc(100% - 16px);
-    bottom: -1px;
-    opacity: 0.6;
+  &:focus-visible {
+    outline: 2px solid currentColor;
   }
 
   .d-tab-list__item__content {

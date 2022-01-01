@@ -58,7 +58,7 @@ export default {
   letter-spacing: 0.0892857143em;
 
   &:focus-visible {
-    outline: 1px solid currentColor;
+    outline: 2px solid currentColor;
   }
 
   &::before {

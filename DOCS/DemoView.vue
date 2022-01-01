@@ -11,7 +11,7 @@
           Checkbox
         </d-card-subtitle>
         <d-card-content flex wrap column>
-          <d-checkbox :size="24" on-icon="sunset" off-icon="moonset" v-model="$vuelize.theme.dark">
+          <d-checkbox :size="24" on-icon="moonset" off-icon="sunset" v-model="$vuelize.theme.dark">
             Dark mode
           </d-checkbox>
           <d-checkbox :size="24" color="success" :value="true">

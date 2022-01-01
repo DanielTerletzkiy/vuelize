@@ -29,7 +29,7 @@
                      :code-array="[`import Vuelize from 'vuelize'`, `Vue.use(Vuelize)`]"/>
       </d-column>
       <d-column>
-        <d-code-snippet label="app.vue" :code="code[0]" hide-preview/>
+        <d-code-snippet label="app.vue" :code="code[0]" hide-preview split-vue-tags/>
       </d-column>
     </d-column>
   </div>
