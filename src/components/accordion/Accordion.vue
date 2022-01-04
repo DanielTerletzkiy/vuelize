@@ -52,7 +52,6 @@ export default {
       } else {
         value = !this.value;
       }
-      console.log(value)
       this.$emit('input', value)
     }
   }

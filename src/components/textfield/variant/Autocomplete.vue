@@ -8,7 +8,7 @@
         </slot>
       </div>
     </slide-y-down-transition>
-    <input v-model="search" ref="searchInput" @input="()=>dropdownOpen=true" @click.self="()=>dropdownOpen=true"
+    <input v-model="search" ref="searchInput" @input="dropdownOpen=true" @click.self="dropdownOpen=true"
            @keydown.delete="onBackspace" v-bind="{...$props, ...$attrs}"
            class="d-text-field__input__autocomplete"/>
     <d-icon-button size="24" rounded="md" class="d-text-field__input__icon" @click="toggleDropdown">
