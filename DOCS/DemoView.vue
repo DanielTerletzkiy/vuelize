@@ -302,7 +302,7 @@
         Toooool Tips!
       </d-card-title>
       <d-card-content>
-        <d-tooltip position="bottom" color="primary">
+        <d-tooltip position="bottom" color="primary" filled>
           <d-btn filled color="primary">
             Hover me!
           </d-btn>
@@ -313,6 +313,28 @@
             </d-card-subtitle>
           </template>
         </d-tooltip>
+      </d-card-content>
+    </d-card>
+
+    <div class="my-4"/>
+
+    <d-card elevation block>
+      <d-card-title>
+        <d-icon name="label" color="primary" :size="30"/>
+        Labels!
+      </d-card-title>
+      <d-card-content>
+        <d-row gap>
+          <d-label ripple>
+            Label 1
+          </d-label>
+          <d-label ripple color="primary">
+            Label 1
+          </d-label>
+          <d-label ripple filled color="primary">
+            Label 1
+          </d-label>
+        </d-row>
       </d-card-content>
     </d-card>
 

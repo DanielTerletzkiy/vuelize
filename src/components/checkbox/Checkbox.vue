@@ -4,7 +4,7 @@
     <div class="d-checkbox__box" :class="classesObject" v-ripple :tabindex="this.disabled?-1:0" @keyup.enter="changeValue">
       <d-icon :name="value ? onIcon : offIcon" :size="size" :color="'currentColor'"/>
     </div>
-    <div class="d-checkbox__label">
+    <div class="d-checkbox__label" v-if="!!this.$slots.default">
       <slot></slot>
     </div>
   </d-function-wrapper>

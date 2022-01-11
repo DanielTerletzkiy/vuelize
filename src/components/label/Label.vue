@@ -1,9 +1,15 @@
 <template>
-  <d-function-wrapper :classes="['d-label', ...classesObject]" v-bind="{...$props, ...$attrs}" @click="$emit('click')" v-ripple>
-    <d-card-subtitle class="d-label__content py-1" :color="filled?getContrast(color):'inherit'" rounded="inherit">
-      <slot name="default">
-      </slot>
-    </d-card-subtitle>
+  <d-function-wrapper :classes="['d-label']" v-bind="{...$props, ...$attrs}"
+                      @click="$emit('click')">
+    <d-card class="d-label__wrapper" style="color: inherit" :color="filled?color:'inherit'" :class="classesObject">
+      <d-card-subtitle class="d-label__wrapper__content py-1" :color="filled?getContrast(color):'inherit'"
+                       rounded="inherit">
+        <slot name="default">
+        </slot>
+      </d-card-subtitle>
+      <d-card-subtitle v-if="ripple" class="d-label__wrapper__ripple" :color="filled?getContrast(color):'inherit'"
+                       v-ripple/>
+    </d-card>
   </d-function-wrapper>
 </template>
 
@@ -12,14 +18,15 @@ export default {
   name: "d-label",
 
   props: {
-    filled: Boolean
+    filled: Boolean,
+    ripple: Boolean
   },
 
   computed: {
     classesObject() {
       return {
         'glow': true,
-        'glow--active': true,
+        'glow--active': !this.filled,
         'd-label--filled': this.filled
       }
     }
@@ -29,20 +36,25 @@ export default {
 
 <style scoped lang="scss">
 .d-label {
-  padding: 2px 6px;
-  margin: 4px;
   height: min-content;
   width: max-content;
 
-  &.d-label--filled {
-    &::before {
-      opacity: 0.8;
-    }
-  }
+  &__wrapper {
+    position: relative;
+    padding: 0 6px;
+    min-height: 32px;
 
-  &__content {
-    z-index: 1;
-    width: max-content;
+    &__content {
+      width: max-content;
+    }
+
+    &__ripple {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>

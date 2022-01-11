@@ -1,9 +1,8 @@
 <template>
   <d-function-wrapper root-tag="d-card" elevation="n4" :classes="['d-progressbar']" v-bind="{...$props, ...$attrs}"
                       @click="$emit('click')">
-    <d-card class="d-progressbar__wrapper" block
-            :max-width="hideLabel?'100%':`calc(100% - ${labelWidth}px)`"
-            elevation="2">
+    <d-card class="d-progressbar__wrapper glow glow--active" :color="color || 'primary'" block
+            :max-width="hideLabel?'100%':`calc(100% - ${labelWidth}px)`">
       <d-card class="d-progressbar__wrapper__indicator" :style="progressStylesObject" :width="`${progress}%`"
               :color="color || 'primary'">
       </d-card>
@@ -41,7 +40,7 @@ export default {
     },
     progressStylesObject() {
       return {
-        'min-height': this.hideLabel ? '8px' : '16px'
+        'min-height': this.hideLabel ? '4px' : '16px'
       }
     }
   },
@@ -76,7 +75,9 @@ export default {
   position: relative;
 
   &__wrapper {
+    padding: 0;
     overflow: hidden;
+    background: transparent !important;
 
     &__indicator {
       transition-duration: .5s;

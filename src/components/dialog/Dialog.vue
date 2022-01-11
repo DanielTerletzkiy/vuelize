@@ -1,5 +1,5 @@
 <template>
-  <fade-transition>
+  <fade-transition :duration="{leave: 150}">
     <d-function-wrapper :classes="['d-dialog', ...classesObject]" v-bind="{...$props, ...$attrs}"
                         @click="$emit('click')"
                         v-if="value">

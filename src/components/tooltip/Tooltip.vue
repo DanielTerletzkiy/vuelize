@@ -6,10 +6,13 @@
     </div>
     <fade-transition>
       <div class="d-tooltip__wrapper" v-show="hovering">
-        <div class="d-tooltip__wrapper__content elevation rounded-pill" :style="stylesObject" ref="tooltip">
-          <slot name="tooltip" v-bind="{...$props, ...$attrs}">
-          </slot>
-        </div>
+        <d-card class="d-tooltip__wrapper__content rounded-lg" :class="contentClassesObject" :style="stylesObject"
+                style="color: inherit" :color="filled?color:''" ref="tooltip">
+          <d-card-subtitle class="pa-0" :color="filled?getContrast(color):'inherit'">
+            <slot name="tooltip" v-bind="{...$props, ...$attrs}">
+            </slot>
+          </d-card-subtitle>
+        </d-card>
       </div>
     </fade-transition>
   </d-function-wrapper>
@@ -21,6 +24,7 @@ export default {
 
   props: {
     value: Boolean,
+    filled: Boolean,
     position: {
       type: String,
       required: true,
@@ -41,7 +45,7 @@ export default {
   }),
 
   watch: {
-    value(state){
+    value(state) {
       this.hovering = state
     }
   },
@@ -49,7 +53,7 @@ export default {
   methods: {
     onHover: async function (state) {
       this.hovering = state
-      this.$emit('input',state)
+      this.$emit('input', state)
       this.$forceUpdate()
 
       await this.$refs.tooltip;
@@ -77,6 +81,12 @@ export default {
   },
 
   computed: {
+    contentClassesObject() {
+      return {
+        filled: this.filled,
+        'glow glow--active': !this.filled
+      }
+    },
     stylesObject() {
       return this.offset
     }
@@ -109,24 +119,10 @@ export default {
       height: max-content;
       position: relative;
       border-radius: inherit;
-      padding: 0 12px;
+      padding: 0;
 
       word-break: keep-all;
 
-      &:before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        content: '';
-        border-radius: inherit;
-
-        background: currentColor;
-        opacity: 0.1;
-
-        transition-duration: 0.25s;
-      }
     }
   }
 
