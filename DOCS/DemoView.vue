@@ -6,6 +6,8 @@
         Buttons!
       </d-card-title>
 
+      <d-dot-loader v-model="$vuelize.theme.dark" color="primary" :amount="3" :default-size="12" :speed="400" :delay="0" side-to-side/>
+
       <d-card-content>
         <d-card-subtitle>
           Checkbox

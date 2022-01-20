@@ -51,6 +51,7 @@ import DBadge from "./components/badge/Badge.vue";
 import DLabel from "./components/label/Label.vue";
 import DProgressbar from "./components/progress/Progressbar.vue";
 import DDialog from "./components/dialog/Dialog.vue";
+import DDotLoader from "./components/loader/DotLoader.vue";
 
 export default Vue => {
 
@@ -88,6 +89,7 @@ export default Vue => {
     Vue.component("d-label", DLabel);
     Vue.component("d-progressbar", DProgressbar);
     Vue.component("d-dialog", DDialog);
+    Vue.component("d-dot-loader", DDotLoader);
 
 
     //-----------------------
