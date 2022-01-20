@@ -1,5 +1,6 @@
 <template>
-  <component :is="root" :to="link" :disabled="disabled" :class="[...this.classes, themeClass, ...classAttributes]"
+  <component :is="root" :to="link" :disabled="disabled"
+             :class="[...this.classes, themeClass, elevationClass, ...classAttributes]"
              :style="stylesObject" v-on="$listeners"
              @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
@@ -18,12 +19,31 @@ export default {
     classAttributes() {
       return {
         [`rounded-${this.rounded}`]: this.rounded,
-        [`elevation-${this.elevation}`]: this.elevation,
-        elevation: this.elevation === '',
         outlined: this.outlined,
         inlined: this.inlined,
         depressed: this.depressed,
         disabled: this.disabled,
+      }
+    },
+    elevationClass() {
+      /*if (this.elevation && this.elevationInvert) {
+          return `elevation-${this.elevation.includes('n') ? '' : 'n'}${this.elevation}`
+      }*/
+      if (this.elevationDark !== '' || this.elevationLight !== '') {
+        if (this.themeClass === 'theme--dark' && this.elevationDark) {
+          return `elevation-${this.elevationDark}`;
+        }
+
+        if (this.themeClass === 'theme--light' && this.elevationLight) {
+          return `elevation-${this.elevationLight}`;
+        }
+      }
+      if (this.elevation === '' || this.elevationDark === '' || this.elevationLight === '') {
+        return 'elevation'
+      } else if (this.elevation) {
+        return `elevation-${this.elevation}`
+      } else {
+        return ''
       }
     },
     root() {

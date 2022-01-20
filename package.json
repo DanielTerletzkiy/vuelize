@@ -14,7 +14,8 @@
   "module": "dist/vuelize.esm.js",
   "unpkg": "dist/vuelize.min.js",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "keywords": [
     "vue",

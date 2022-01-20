@@ -48,7 +48,6 @@ export default {
   cursor: pointer;
 
   min-height: 36px;
-  min-width: 80px;
 
   border-radius: inherit;
 
@@ -116,7 +115,7 @@ export default {
 
   .d-btn__content {
     min-height: inherit;
-    padding: 0 12px;
+    padding: 0 16px;
     border-radius: inherit;
     position: relative;
     display: flex;

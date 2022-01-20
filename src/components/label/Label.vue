@@ -1,7 +1,7 @@
 <template>
   <d-function-wrapper :classes="['d-label']" v-bind="{...$props, ...$attrs}"
                       @click="$emit('click')">
-    <d-card class="d-label__wrapper" style="color: inherit" :color="filled?color:'inherit'" :class="classesObject">
+    <d-card class="d-label__wrapper" style="color: inherit" :color="filled?color:'inherit'" :class="classesObject" :rounded="rounded">
       <d-card-subtitle class="d-label__wrapper__content py-1" :color="filled?getContrast(color):'inherit'"
                        rounded="inherit">
         <slot name="default">

@@ -75,7 +75,6 @@ export default {
         caretColor: (this.hover || this.selected) ? this.processColor(this.color) : null,
         width: this.width,
         'min-width': this.fullWidth ? '100%' : 'unset',
-        flex: this.fullWidth ? 1 : 'unset'
       }
     },
 

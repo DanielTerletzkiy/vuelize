@@ -12,8 +12,8 @@ import "vue-material-design-ripple/dist/vue-material-design-ripple.css";
 //Imports transitions
 import Transitions from 'vue2-transitions'
 
-//Imports flex mixin
-import flex from "./mixins/flex.js";
+//Imports root mixin
+import root from "./mixins/root.js";
 
 //Imports Components
 import DFunctionWrapper from "./components/FunctionWrapper.vue";
@@ -114,30 +114,8 @@ export default Vue => {
     Vue.component('d-function-wrapper', DFunctionWrapper)
 
 
-    //Vue mixin
-    Vue.mixin({
-        mixins: [flex],
-        //Default props
-        props: {
-            rootTag: {type: String, default: 'div'},
-            color: String,
-            disabled: Boolean,
-
-            rounded: {type: String, default: 'lg'},
-            elevation: [String, Number, undefined],
-            outlined: Boolean,
-            inlined: Boolean,
-            depressed: Boolean,
-
-            dark: Boolean,
-            light: Boolean,
-
-            width: [String, Number],
-            height: [String, Number],
-
-            link: {type: String, default: null}
-        }
-    })
+    //Registers root mixin
+    Vue.mixin(root)
 
 
     //Click outside directive

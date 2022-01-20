@@ -1,6 +1,6 @@
 <template>
   <d-function-wrapper :classes="['d-avatar', ...classesObject]" v-bind="{...$props, ...$attrs}" :style="avatarStylesObject">
-    <slot><d-image class="d-avatar__image" :src="src"/></slot>
+    <slot><d-image class="d-avatar__image" :src="src" :rounded="rounded"/></slot>
   </d-function-wrapper>
 </template>
 

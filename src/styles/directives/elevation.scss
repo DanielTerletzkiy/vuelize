@@ -24,14 +24,14 @@
   @for $i from 1 through 24 {
     $elevation: $i + 0.5px;
     &.elevation-#{$i} {
-      box-shadow: rgba(99, 99, 99, 0.2) 0 2px $elevation 1px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0 2px $elevation 0;
     }
   }
 
   @for $i from 1 through 24 {
-    $elevation: $i + 0.5px;
+    $darkness: $i + 1%;
     &.elevation-n#{$i} {
-      box-shadow: inset rgba(99, 99, 99, 0.2) 0 2px $elevation 1px;
+      background-color: darken($light_sheet, $darkness) !important;
     }
   }
 

@@ -1,7 +1,7 @@
 <template>
   <d-function-wrapper :classes="['d-code-snippet']" v-bind="{...$props, ...$attrs}">
     <d-card block depressed class="d-code-snippet__card" elevation="8">
-      <d-row class="d-code-snippet__title" :elevation="$vuelize.theme.dark?8:'0'">
+      <d-row class="d-code-snippet__title" :elevation="$vuelize.theme.dark?8:0">
         <d-column>
           <d-card-subtitle color="primary">
             {{ label }}
