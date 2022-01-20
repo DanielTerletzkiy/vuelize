@@ -6,7 +6,18 @@
         Buttons!
       </d-card-title>
 
-      <d-dot-loader v-model="$vuelize.theme.dark" color="primary" :amount="3" :default-size="12" :speed="400" :delay="0" side-to-side/>
+      <d-card-subtitle>
+        This is a
+      <d-text-spoiler color="primary">
+        <d-card-subtitle>
+          very big Spoiler
+        </d-card-subtitle>
+      </d-text-spoiler>
+        !!!
+      </d-card-subtitle>
+
+      <d-dot-loader v-model="$vuelize.theme.dark" color="primary" :amount="3" :default-size="12" :speed="400" :delay="0"
+                    side-to-side/>
 
       <d-card-content>
         <d-card-subtitle>
@@ -215,7 +226,8 @@
               YesNo Dialog
             </d-card-title>
             <d-card-subtitle>
-              <d-checkbox v-model="persistentDialog" size="24" off-icon="lock-open-alt" on-icon="lock-alt">Persistent</d-checkbox>
+              <d-checkbox v-model="persistentDialog" size="24" off-icon="lock-open-alt" on-icon="lock-alt">Persistent
+              </d-checkbox>
             </d-card-subtitle>
             <d-divider class="mx-3"/>
             <d-column gap>
