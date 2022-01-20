@@ -74,9 +74,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../styles/variables";
+
 .d-tab-list {
   display: flex;
   position: relative;
+  gap: $gap;
 
   &__indicator {
     position: absolute;
