@@ -1,6 +1,6 @@
 <template>
   <component :is="root" :to="link" :disabled="disabled"
-             :class="[...this.classes, themeClass, elevationClass, ...classAttributes]"
+             :class="[...this.classes, themeClass, ...elevationClass, ...classAttributes]"
              :style="stylesObject" v-on="$listeners"
              @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
@@ -26,25 +26,25 @@ export default {
       }
     },
     elevationClass() {
-      /*if (this.elevation && this.elevationInvert) {
-          return `elevation-${this.elevation.includes('n') ? '' : 'n'}${this.elevation}`
-      }*/
-      if (this.elevationDark !== '' || this.elevationLight !== '') {
-        if (this.themeClass === 'theme--dark' && this.elevationDark) {
-          return `elevation-${this.elevationDark}`;
-        }
-
-        if (this.themeClass === 'theme--light' && this.elevationLight) {
-          return `elevation-${this.elevationLight}`;
-        }
-      }
-      if (this.elevation === '' || this.elevationDark === '' || this.elevationLight === '') {
-        return 'elevation'
+      let elevationObject = {}
+      if (this.elevation === '') {
+        elevationObject['elevation'] = true
       } else if (this.elevation) {
-        return `elevation-${this.elevation}`
-      } else {
-        return ''
+        elevationObject[`elevation-${this.elevation}`] = true
       }
+
+      if (this.elevationDark === '') {
+        elevationObject['elevation-dark'] = true
+      } else if (this.elevationDark) {
+        elevationObject[`elevation-dark-${this.elevationDark}`] = true
+      }
+
+      if (this.elevationLight === '') {
+        elevationObject['elevation-light'] = true
+      } else if (this.elevationLight) {
+        elevationObject[`elevation-light-${this.elevationLight}`] = true
+      }
+      return elevationObject
     },
     root() {
       return this.link ? 'router-link' : this.rootTag
