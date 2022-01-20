@@ -55,11 +55,12 @@ export default {
       this.hovering = state
       this.$emit('input', state)
       this.$forceUpdate()
+      await this.$nextTick()
 
       await this.$refs.tooltip;
 
       if (state) {
-        const clientRect = this.$refs.tooltip.getBoundingClientRect();
+        const clientRect = this.$refs.tooltip.$el.getBoundingClientRect();
         ['top', 'right', 'bottom', 'left'].forEach((pos) => {
           const currentPos = clientRect[pos];
           if (currentPos < 0 ||

@@ -31,9 +31,15 @@ export default {
 
   border-radius: 0;
 
-  box-shadow: 0 2px 30px -20px rgba(31,33,40,1);
+  &.theme--dark {
+    box-shadow: 0 2px 30px -2px rgba(31, 33, 40, 1);
+  }
 
-  .d-card{
+  &.theme--light {
+    box-shadow: 0 2px 30px -24px rgba(31, 33, 40, 1);
+  }
+
+  .d-card {
     min-height: inherit;
     padding: 2px;
     display: flex;

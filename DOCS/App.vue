@@ -9,7 +9,7 @@
                     v-model="$vuelize.theme.dark">
           Dark mode
         </d-checkbox>
-        <d-card-subtitle elevation="2" :inlined="!$vuelize.theme.dark" depressed class="my-0 mr-1 font-weight-bold">
+        <d-card-subtitle elevation-dark="2" :inlined="!$vuelize.theme.dark" depressed class="my-0 mr-1 font-weight-bold">
           <d-icon color="primary" name="chart-growth"/>
           v{{ version }}
         </d-card-subtitle>

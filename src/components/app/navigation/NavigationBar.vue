@@ -1,7 +1,7 @@
 <template>
   <slide-x-left-transition :duration="100">
     <d-function-wrapper root-tag="nav" :classes="['d-navigation-bar', ...classesObject]" v-bind="{...$props, ...$attrs}" v-if="value">
-      <d-card block class="d-navigation-bar__content" :elevation="this.$vuelize.theme.dark?'1':''">
+      <d-card block class="d-navigation-bar__content" rounded="none" :elevation="this.$vuelize.theme.dark?'1':''">
         <slot></slot>
       </d-card>
     </d-function-wrapper>

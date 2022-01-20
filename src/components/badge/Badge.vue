@@ -3,12 +3,12 @@
     <slot name="default">
     </slot>
     <fade-transition>
-      <d-avatar v-if="value" v-bind="{...$props, ...$attrs}" :size="size" rounded="circle" class="d-badge__content">
-        <d-card-subtitle :color="getContrast(color)">
+      <d-card v-if="value" v-bind="{...$props, ...$attrs}" :min-width="size+'px'" :height="size+'px'" rounded="pill" class="d-badge__content">
+        <d-card-subtitle :color="getContrast(color)" class="d-badge__content__text">
           <slot name="content">
           </slot>
         </d-card-subtitle>
-      </d-avatar>
+      </d-card>
     </fade-transition>
   </d-function-wrapper>
 </template>
@@ -19,7 +19,7 @@ export default {
 
   props: {
     value: {type: Boolean, default: true},
-    size: {type: [String, Number], default: '18'}
+    size: {type: [String, Number], default: '22'}
   }
 }
 </script>
@@ -30,9 +30,14 @@ export default {
 
   &__content {
     position: absolute;
-    top: calc(15px - 100%);
-    right: calc(15px - 100%);
-    padding: 4px;
+    top: -12px;
+    right: -12px;
+    display: flex;
+    justify-content: center;
+
+    &__text {
+      padding: 0 6px;
+    }
   }
 }
 </style>
