@@ -9,6 +9,9 @@ import * as uc from 'vue-unicons/dist/icons'
 import Ripple from "vue-material-design-ripple";
 import "vue-material-design-ripple/dist/vue-material-design-ripple.css";
 
+//Imports Long Press
+import LongPress from 'vue-directive-long-press'
+
 //Imports transitions
 import Transitions from 'vue2-transitions'
 
@@ -52,8 +55,9 @@ import DLabel from "./components/label/Label.vue";
 import DProgressbar from "./components/progress/Progressbar.vue";
 import DDialog from "./components/dialog/Dialog.vue";
 import DDotLoader from "./components/loader/DotLoader.vue";
+import DTextSpoiler from "./components/text/Spoiler.vue";
 
-export default Vue => {
+export default (Vue, options = {}) => {
 
     //Imports all components
     Vue.component("d-card", DCard);
@@ -90,9 +94,12 @@ export default Vue => {
     Vue.component("d-progressbar", DProgressbar);
     Vue.component("d-dialog", DDialog);
     Vue.component("d-dot-loader", DDotLoader);
+    Vue.component("d-text-spoiler", DTextSpoiler);
 
 
     //-----------------------
+
+    store.state.theme = Object.assign(store.state.theme, options.theme)
 
     //Implement store
     Vue.prototype.$vuelize = store.state
@@ -107,6 +114,9 @@ export default Vue => {
 
     //Register ripple directive
     Vue.directive("ripple", Ripple);
+
+    //Register long press
+    Vue.directive('long-press', LongPress)
 
     //Registers transitions
     Vue.use(Transitions)
