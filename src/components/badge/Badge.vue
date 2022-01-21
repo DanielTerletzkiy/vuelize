@@ -3,7 +3,8 @@
     <slot name="default">
     </slot>
     <fade-transition>
-      <d-card v-if="value" v-bind="{...$props, ...$attrs}" :min-width="size+'px'" :height="size+'px'" rounded="pill" class="d-badge__content">
+      <d-card v-if="value" v-bind="{...$props, ...$attrs}" :min-width="size+'px'" :height="size+'px'" rounded="pill"
+              class="d-badge__content">
         <d-card-subtitle :color="getContrast(color)" class="d-badge__content__text">
           <slot name="content">
           </slot>
