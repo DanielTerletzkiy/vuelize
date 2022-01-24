@@ -98,7 +98,7 @@ export default {
 
     &__chart {
       border-radius: 0 8px 0 0 !important;
-      min-width: max-content !important;
+      min-width: 0 !important;
       width: auto !important;
       height: 100% !important;
     }
