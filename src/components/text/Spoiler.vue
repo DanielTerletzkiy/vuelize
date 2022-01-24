@@ -1,12 +1,14 @@
 <template>
   <d-function-wrapper :classes="['d-text-spoiler']" v-bind="{...$props, ...$attrs}"
                       v-long-press="300" @long-press-start="onLongClick" @click="onClick">
-    <slot name="default" class="d-text-spoiler__content">
-    </slot>
+    <div class="d-text-spoiler__content">
+      <slot name="default">
+      </slot>
+    </div>
     <fade-transition>
-      <d-card :color="color" v-if="hidden" class="d-text-spoiler__blocker glow" elevation="n4" v-ripple>
+      <d-card :color="color" v-if="hidden" class="d-text-spoiler__blocker glow" elevation="n4" rounded="md" v-ripple>
         <d-spacer/>
-        <d-icon name="eye"/>
+        <d-icon name="eye" size="20"/>
         <d-spacer/>
       </d-card>
     </fade-transition>
@@ -32,11 +34,19 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.d-text-spoiler__content > * {
+  padding: 0 !important;
+}
+</style>
+
 <style scoped lang="scss">
 .d-text-spoiler {
   position: relative;
   max-width: max-content;
-  margin: 0 4px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
 
   &__blocker {
     position: absolute;

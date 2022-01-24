@@ -56,6 +56,7 @@ import DProgressbar from "./components/progress/Progressbar.vue";
 import DDialog from "./components/dialog/Dialog.vue";
 import DDotLoader from "./components/loader/DotLoader.vue";
 import DTextSpoiler from "./components/text/Spoiler.vue";
+import DChart from "./components/chart/Chart.vue";
 
 export default (Vue, options = {}) => {
 
@@ -95,6 +96,7 @@ export default (Vue, options = {}) => {
     Vue.component("d-dialog", DDialog);
     Vue.component("d-dot-loader", DDotLoader);
     Vue.component("d-text-spoiler", DTextSpoiler);
+    Vue.component("d-chart", DChart);
 
 
     //-----------------------

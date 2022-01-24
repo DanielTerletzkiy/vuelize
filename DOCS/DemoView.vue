@@ -6,18 +6,77 @@
         Buttons!
       </d-card-title>
 
+
       <d-card-subtitle>
         This is a
-      <d-text-spoiler color="primary">
-        <d-card-subtitle>
-          very big Spoiler
-        </d-card-subtitle>
-      </d-text-spoiler>
+        <d-text-spoiler color="primary">
+          <d-card-subtitle>
+            very big Spoiler
+          </d-card-subtitle>
+        </d-text-spoiler>
         !!!
       </d-card-subtitle>
 
-      <d-dot-loader v-model="$vuelize.theme.dark" color="primary" :amount="3" :default-size="12" :speed="400" :delay="0"
-                    side-to-side/>
+      <d-chart class="ma-2" :columns="['T0','T1','T2','T3','T4','T5','T6','T7','T8']" :value="[{
+        name: 'Data 1',
+        color: 'primary',
+        points: [
+            {
+              value: 1,
+            },
+            {
+              value: 2,
+            },
+            {
+              value: 2.5,
+            },
+            {
+              value: 3,
+            },
+            {
+              value: 6,
+            },
+            {
+              value: 4,
+            },
+            {
+              value: 3.5,
+            },
+            {
+              value: 4.5,
+            },
+            {
+              value: 7,
+            },
+        ]
+      },
+      {
+        name: 'Data 2',
+        color: 'warning',
+        points: [
+            0,2,2,0,0,3,8,4,2
+        ]
+      }
+      ,
+      {
+        name: 'Data 3',
+        color: '#A37EFF',
+        points: [
+            {
+              value: 0,
+              column: 'T3'
+            },
+            {
+              value: 2,
+              column: 'T4'
+            },
+            {
+              value: 0,
+              column: 'T7'
+            },
+        ]
+      }]"/>
+
 
       <d-card-content>
         <d-card-subtitle>
@@ -588,9 +647,9 @@ export default {
   mounted() {
     this.$notify('Hello there', 'General Kenobi', 'success')
 
-    setInterval(() => {
+    /*setInterval(() => {
       this.progressValue += 15
-    }, 1000)
+    }, 1000)*/
   },
 
   methods: {
