@@ -17,7 +17,7 @@
         !!!
       </d-card-subtitle>
 
-      <d-chart class="ma-2" :columns="['T0','T1','T2','T3','T4','T5','T6','T7','T8']" :value="[{
+      <d-chart class="ma-2" :columns="['T0','T1','T2','T3','T4','T5','T6','T7','T8']" :gridSize="0" :value="[{
         name: 'Data 1',
         color: 'primary',
         points: [

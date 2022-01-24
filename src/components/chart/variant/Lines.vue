@@ -9,7 +9,7 @@
       <rect x="0" width="100%" height="100%" fill="url(#grid)"></rect>
       <svg class="d-line__flip" ref="chart" :key="key">
         <SvgLine :value="data" v-for="(data, i) in value" :key="i" :columns="columns" :color="data.color"
-                 :id="data.name" @hover="setHover"/>
+                 :id="data.name" @hover="setHover" v-bind="{...$props, ...$attrs}" :maxValue="maxValue"/>
         <fade-transition>
           <use v-if="hover" id="use" :key="hover" :xlink:href="'#'+hover"
                v-hover="{over: ()=>{this.hoverLock = true}, leave:()=>{this.hoverLock = false}}"/>
@@ -28,7 +28,12 @@ import Vivus from "vivus"
 export default {
   name: "d-lines",
   components: {SvgLine},
-  props: {value: Array, columns: Array, gridSize: {type: [Number, String], default: 50}},
+  props: {
+    value: Array,
+    columns: Array,
+    gridSize: {type: [Number, String]},
+    maxValue: {type: [Number, String]}
+  },
 
   data: () => ({
     key: 1,
@@ -55,7 +60,8 @@ export default {
         type: 'delayed',
         duration: 250,
         animTimingFunction: Vivus.EASE
-      }, () => {});
+      }, () => {
+      });
     }
   },
 

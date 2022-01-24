@@ -4,8 +4,8 @@
       <d-column :wrap="false" class="py-0" style="width:30px">
         <d-spacer/>
         <d-card-subtitle style="align-self: end; transform: translate(0px,25px);" class="pa-0 px-2" height="50px"
-                         v-for="i in Array.from(Array(maxValue+1).keys()).reverse()" :key="i">
-          {{ i }}
+                         v-for="(i, x) in rowItems" :key="x">
+          <span v-if="(x !== 0 ? (rowItems[x]<rowItems[x-1]):x===0)">{{ i }}</span>
         </d-card-subtitle>
         <div style="height: 30px"/>
       </d-column>
@@ -15,7 +15,8 @@
                 :wrap="false">
         <d-card elevation-dark="6" class="d-chart__container__chart"
                 :style="`width: ${50*(columnItems.length)}px !important; height: 100% !important`">
-          <component :is="variant" v-bind="{...$props, ...$attrs}" v-model="value" :columns="columns"/>
+          <component :is="variant" v-bind="{...$props, ...$attrs}" v-model="value" :columns="columnItems"
+                     :maxValue="maxValue"/>
         </d-card>
         <d-divider v-if="false" class="d-chart__container__horizontal-divider" elevation="n6"/>
         <d-row :wrap="false">
@@ -44,6 +45,8 @@ export default {
     value: {type: Array, required: true},
     variant: {type: String, default: "lines"},
     columns: {type: Array},
+    gridSize: {type: [Number, String], default: 50},
+    rowLines: {type: [String, Number], default: 8},
   },
 
   computed: {
@@ -70,7 +73,7 @@ export default {
     },
     columnItems() {
       let items = []
-      if (this.columns&&this.columns.length > 0) {
+      if (this.columns && this.columns.length > 0) {
         items = this.columns
       }
       if (items.length < this.maxColumns) {
@@ -79,6 +82,13 @@ export default {
       }
       console.log(items)
       return items
+    },
+    rowItems() {
+      let items = [0]
+      for (let i = 0; i < this.rowLines; i++) {
+        items.push(Math.ceil((this.maxValue / this.rowLines) * (i + 1)))
+      }
+      return items.reverse()
     }
   },
 

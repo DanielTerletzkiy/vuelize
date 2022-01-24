@@ -1,18 +1,20 @@
 <template>
-  <d-function-wrapper root-tag="g" :classes="['d-svg-line', ...classesObject]" v-bind="{...$props, ...$attrs}" v-hover="{over: ()=>{this.$emit('hover',value.name)}, leave:()=>{this.$emit('hover',null)}}">
-      <linearGradient :id="'grad'+value.color" x1="0%" y1="0%" x2="0%" y2="100%" class="d-svg-line__gradient">
-        <stop offset="0%" class="d-svg-line__gradient__end"></stop>
-        <stop offset="100%" class="d-svg-line__gradient__start"></stop>
-      </linearGradient>
+  <d-function-wrapper root-tag="g" :classes="['d-svg-line', ...classesObject]" v-bind="{...$props, ...$attrs}"
+                      v-hover="{over: ()=>{this.$emit('hover',value.name)}, leave:()=>{this.$emit('hover',null)}}">
+    <linearGradient :id="'grad'+value.color" x1="0%" y1="0%" x2="0%" y2="100%" class="d-svg-line__gradient">
+      <stop offset="0%" class="d-svg-line__gradient__end"></stop>
+      <stop offset="100%" class="d-svg-line__gradient__start"></stop>
+    </linearGradient>
 
-      <path :fill="`url(#grad${value.color})`" class="d-svg-line__gradient" stroke-width="0" :d="getGradientPoints"></path>
+    <path :fill="`url(#grad${value.color})`" class="d-svg-line__gradient" stroke-width="0"
+          :d="getGradientPoints"></path>
 
-      <path fill="none" stroke="currentColor" class="d-svg-line__path" style="height:100%; width:100%" stroke-width="2"
-            :d="getDataPoints"></path>
-      <g>
-        <circle v-for="points in getDataPoints" :key="points" :cx="points.split(',')[0].replace(/\D/g, '')"
-                :cy="points.split(',')[1].replace(/\D/g, '')" r="4" fill="currentColor"></circle>
-      </g>
+    <path fill="none" stroke="currentColor" class="d-svg-line__path" style="height:100%; width:100%" stroke-width="2"
+          :d="getDataPoints"></path>
+    <g>
+      <circle v-for="points in getDataPoints" :key="points" :cx="points.split(',')[0].replace(/\D/g, '')"
+              :cy="points.split(',')[1].replace(/\D/g, '')" r="4" fill="currentColor"></circle>
+    </g>
   </d-function-wrapper>
 </template>
 
@@ -20,7 +22,7 @@
 export default {
   name: "SvgLine",
 
-  props: {value: Object, columns: Array},
+  props: {value: Object, columns: Array, rowLines: [String, Number], maxValue: {type: [String,Number]}},
 
   computed: {
     getDataPoints() {
@@ -36,7 +38,7 @@ export default {
           point += this.columns.indexOf(dataPoint.column) * 50;
         }
         point += ","
-        point += this.getValue(dataPoint) * 50;
+        point += this.getValue(dataPoint);
         points.push(point);
       })
       console.log(points);
@@ -62,7 +64,7 @@ export default {
           point += this.columns.indexOf(dataPoint.column) * 50;
         }
         point += ","
-        point += this.getValue(dataPoint) * 50;
+        point += this.getValue(dataPoint);
         points.push(point);
       })
       point = "";
@@ -74,18 +76,22 @@ export default {
       point += ",-100";
       points.push(point);
 
-
+      console.log(points, this.columns)
       return points
     }
   },
 
   methods: {
     getValue(dataPoint) {
+      let value = null
       if (typeof dataPoint.value === "number") {
-        return dataPoint.value;
+        value = dataPoint.value;
       } else {
-        return dataPoint;
+        value = dataPoint;
       }
+      const percentage = value / this.maxValue;
+
+      return ((this.rowLines * 50 * percentage).toFixed(0));
     }
   }
 
