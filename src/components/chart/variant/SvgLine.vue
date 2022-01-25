@@ -11,7 +11,7 @@
 
     <path fill="none" stroke="currentColor" class="d-svg-line__path" style="height:100%; width:100%" stroke-width="2"
           :d="getDataPoints"></path>
-    <g>
+    <g v-if="showDots">
       <circle v-for="points in getDataPoints" :key="points" :cx="points.split(',')[0].replace(/\D/g, '')"
               :cy="points.split(',')[1].replace(/\D/g, '')" r="4" fill="currentColor"></circle>
     </g>
@@ -22,7 +22,15 @@
 export default {
   name: "SvgLine",
 
-  props: {value: Object, columns: Array, rowLines: [String, Number], maxValue: {type: [String,Number]}},
+  props: {
+    value: Object,
+    columns: Array,
+    showDots: Boolean,
+    rowLines: [String, Number],
+    rowSpacing: {type: [Number, String]},
+    columnSpacing: {type: [Number, String]},
+    maxValue: {type: [String, Number]},
+  },
 
   computed: {
     getDataPoints() {
@@ -33,9 +41,9 @@ export default {
           point += "M";
         }
         if (!dataPoint.column) {
-          point += i * 50
+          point += i * this.columnSpacing
         } else {
-          point += this.columns.indexOf(dataPoint.column) * 50;
+          point += this.columns.indexOf(dataPoint.column) * this.columnSpacing;
         }
         point += ","
         point += this.getValue(dataPoint);
@@ -51,7 +59,7 @@ export default {
       if (!this.value.points[0].column) {
         point += 0
       } else {
-        point += this.columns.indexOf(this.value.points[0].column) * 50;
+        point += this.columns.indexOf(this.value.points[0].column) * this.columnSpacing;
       }
       point += ",0";
       points.push(point);
@@ -59,9 +67,9 @@ export default {
       this.value.points.forEach((dataPoint, i) => {
         let point = ""
         if (!dataPoint.column) {
-          point += i * 50
+          point += i * this.columnSpacing
         } else {
-          point += this.columns.indexOf(dataPoint.column) * 50;
+          point += this.columns.indexOf(dataPoint.column) * this.columnSpacing;
         }
         point += ","
         point += this.getValue(dataPoint);
@@ -69,9 +77,9 @@ export default {
       })
       point = "";
       if (!this.value.points[this.value.points.length - 1].column) {
-        point += (this.value.points.length - 1) * 50
+        point += (this.value.points.length - 1) * this.columnSpacing
       } else {
-        point += this.columns.indexOf(this.value.points[this.value.points.length - 1].column) * 50;
+        point += this.columns.indexOf(this.value.points[this.value.points.length - 1].column) * this.columnSpacing;
       }
       point += ",-100";
       points.push(point);
@@ -91,7 +99,7 @@ export default {
       }
       const percentage = value / this.maxValue;
 
-      return ((this.rowLines * 50 * percentage).toFixed(0));
+      return ((this.rowLines * this.rowSpacing * percentage).toFixed(0));
     }
   }
 

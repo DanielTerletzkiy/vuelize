@@ -17,7 +17,9 @@
         !!!
       </d-card-subtitle>
 
-      <d-chart class="ma-2" :columns="['T0','T1','T2','T3','T4','T5','T6','T7','T8']" :gridSize="0" :value="[{
+      <d-chart class="ma-2" :columns="['T0','T1','T2','T3','T4','T5','T6','T7','T8']"
+               showDots
+               :value="[{
         name: 'Data 1',
         color: 'primary',
         points: [
@@ -28,19 +30,19 @@
               value: 2,
             },
             {
-              value: 2.5,
+              value: 25,
             },
             {
-              value: 3,
+              value: 16,
             },
             {
-              value: 6,
+              value: 14,
             },
             {
-              value: 4,
+              value: 18,
             },
             {
-              value: 3.5,
+              value: 35,
             },
             {
               value: 4.5,
@@ -48,14 +50,15 @@
             {
               value: 7,
             },
+            {
+              value: 24,
+            },
         ]
       },
       {
         name: 'Data 2',
         color: 'warning',
-        points: [
-            0,2,2,0,0,3,8,4,2
-        ]
+        points: warningData
       }
       ,
       {
@@ -67,12 +70,12 @@
               column: 'T3'
             },
             {
-              value: 2,
+              value: 8,
               column: 'T4'
             },
             {
               value: 0,
-              column: 'T7'
+              column: 11
             },
         ]
       }]"/>
@@ -603,6 +606,9 @@
 export default {
   name: 'DemoView',
   data: () => ({
+
+    warningData: [],
+
     listItem: 0,
 
     text: '',
@@ -650,6 +656,10 @@ export default {
     /*setInterval(() => {
       this.progressValue += 15
     }, 1000)*/
+
+    setInterval(() => {
+      this.warningData.push(Math.random()*30)
+    }, 10000)
   },
 
   methods: {
