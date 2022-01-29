@@ -2,7 +2,10 @@
   <d-function-wrapper :classes="['d-text-field', ...classesObject]" v-bind="{...$props, ...$attrs}"
                       :style="textFieldStylesObject"
                       @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
-    <component v-if="componentType !== 'input'" :is="componentType" v-bind="{...$props, ...$attrs}" :id="label"
+    <div class="d-text-field__prefix">
+      <slot name="prefix"/>
+    </div>
+    <component v-if="componentType !== 'input'" :is="componentType" v-bind="{...$props, ...$attrs}" :id="this.uuid"
                class="d-text-field__input"
                :placeholder="placeholderActive ? placeholder : ' '"
                :value="value" @input="onInput"
@@ -15,14 +18,19 @@
         <slot name="item" v-bind="props"></slot>
       </template>
     </component>
-    <input v-else v-bind="{...$props, ...$attrs}" :id="label"
+    <input v-else v-bind="{...$props, ...$attrs}" :id="this.uuid"
            class="d-text-field__input"
            :placeholder="placeholderActive ? placeholder : ' '"
            :value="value" @input="onInput"
            @keyup.enter="$emit('enter')"
            @removeFocus="removeFocus"
            @focusin="()=>this.selected = true" @focusout="()=>this.selected = false"/>
-    <label v-if="label" :for="label" class="d-text-field__label" :class="labelClassesObject">{{ label }}</label>
+    <label v-if="label && !solo" :for="this.uuid" class="d-text-field__label" :class="labelClassesObject">{{
+        label
+      }}</label>
+    <div class="d-text-field__suffix">
+      <slot name="suffix"/>
+    </div>
   </d-function-wrapper>
 </template>
 
@@ -39,17 +47,18 @@ export default {
   },
 
   props: {
-    value: undefined,
-    label: String,
-    placeholder: String,
-    width: String,
-    fullWidth: Boolean,
-
-    select: Boolean,
     autocomplete: Boolean,
 
     filled: Boolean,
-    inlined: Boolean
+    fullWidth: Boolean,
+    inlined: Boolean,
+    solo: Boolean,
+    label: String,
+    placeholder: String,
+
+    select: Boolean,
+    value: undefined,
+    width: String
   },
 
   data: () => ({
@@ -57,26 +66,7 @@ export default {
     selected: false,
   }),
 
-  methods: {
-    onInput(e) {
-      this.$emit('input', typeof e === 'object' ? e.target.value : e)
-    },
-    removeFocus() {
-      this.selected = false;
-      this.hover = false;
-      document.activeElement.blur();
-    }
-  },
-
   computed: {
-    textFieldStylesObject() {
-      return {
-        color: (this.hover || this.selected) ? this.processColor(this.color) : null,
-        caretColor: (this.hover || this.selected) ? this.processColor(this.color) : null,
-        width: this.width,
-        'min-width': this.fullWidth ? '100%' : 'unset',
-      }
-    },
 
     classesObject() {
       return {
@@ -84,12 +74,7 @@ export default {
         'd-text-field--placeholder': this.placeholderActive,
         'd-text-field--inlined inlined depressed elevation': this.inlined,
         'd-text-field--filled glow glow--active': this.filled,
-      }
-    },
-
-    labelClassesObject() {
-      return {
-        'd-text-field--filled': this.filled,
+        'd-text-field--solo': this.solo,
       }
     },
 
@@ -103,8 +88,22 @@ export default {
       }
     },
 
+    labelClassesObject() {
+      return {
+        'd-text-field--filled': this.filled,
+      }
+    },
+
     placeholderActive() {
       return this.placeholder && !this.value;
+    },
+    textFieldStylesObject() {
+      return {
+        color: (this.hover || this.selected) ? this.processColor(this.color) : null,
+        caretColor: (this.hover || this.selected) ? this.processColor(this.color) : null,
+        width: this.width,
+        'min-width': this.fullWidth ? '100%' : 'unset',
+      }
     }
   },
 
@@ -113,6 +112,17 @@ export default {
     this.selected = false;
 
     this.$forceUpdate();
+  },
+
+  methods: {
+    onInput(e) {
+      this.$emit('input', typeof e === 'object' ? e.target.value : e)
+    },
+    removeFocus() {
+      this.selected = false;
+      this.hover = false;
+      document.activeElement.blur();
+    }
   }
 }
 </script>
@@ -161,6 +171,16 @@ export default {
     height: 10px;
   }
 
+  &__prefix {
+
+  }
+
+  &__suffix {
+    position: absolute;
+    right: 1rem;
+    font-size: 20px;
+  }
+
   &--inlined {
     background: inherit;
 
@@ -179,19 +199,26 @@ export default {
       opacity: 0.05 !important;
     }
 
-    &.d-text-field {
-      min-height: 3.6rem !important;
-    }
+    height: 3.6rem;
 
     .d-text-field__label {
       top: 1rem;
       font-size: 1.2rem;
-
     }
 
     .d-text-field__input {
       padding-top: 12px !important;
       padding-bottom: 0 !important;
+    }
+  }
+
+  &--solo {
+    height: 3rem !important;
+    .d-text-field__input {
+      padding: 0 1.25em !important;
+    }
+    .d-text-field__label {
+      display: none;
     }
   }
 

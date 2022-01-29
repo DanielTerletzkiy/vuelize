@@ -3,6 +3,7 @@
 .flex {
   display: flex;
   gap: $gap * 3;
+  flex-wrap: unset;
 
   &.no-gap {
     gap: normal;

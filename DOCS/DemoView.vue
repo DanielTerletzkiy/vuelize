@@ -176,9 +176,14 @@
         Text fields!
       </d-card-title>
 
-      <d-card-content flex wrap>
-        <d-text-field color="primary" filled label="Text" type="text" v-model="text"/>
-        <d-text-field color="primary" inlined label="Text" type="text" v-model="text"/>
+      <d-card-content flex wrap root-tag="form">
+        <d-text-field color="primary" solo filled class="glow glow--active" placeholder="Search..." type="email" v-model="text">
+          <template v-slot:suffix>
+            <d-icon name="search"/>
+          </template>
+        </d-text-field>
+        <d-text-field color="primary" filled label="E-mail" type="email" v-model="text"/>
+        <d-text-field color="primary" solo inlined label="Password" type="password" v-model="text"/>
         <d-text-field color="primary" inlined depressed label="Text with placeholder" type="text" v-model="text"
                       placeholder="This is a placeholder"/>
 

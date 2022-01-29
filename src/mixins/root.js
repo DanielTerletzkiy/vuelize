@@ -1,4 +1,5 @@
 import flex from "@/mixins/flex";
+let uuid = 0;
 
 export default {
     mixins: [flex],
@@ -25,5 +26,10 @@ export default {
         height: [String, Number],
 
         link: {type: String, default: null}
-    }
+    },
+
+    beforeCreate() {
+        this.uuid = uuid.toString();
+        uuid += 1;
+    },
 }
