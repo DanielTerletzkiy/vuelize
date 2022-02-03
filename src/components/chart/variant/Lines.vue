@@ -67,7 +67,7 @@ export default {
       if (!this.hoverLock) {
         this.hover = e
       }
-      console.log(this.$refs[this.hover][0].getDataPoints)
+      //console.log(this.$refs[this.hover][0].getDataPoints)
     }, 0),
     getDataPointValue(dataPoint) {
       let value = null;

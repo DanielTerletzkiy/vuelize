@@ -49,7 +49,7 @@ export default {
         point += this.getValue(dataPoint);
         points.push(point);
       })
-      console.log(points);
+      //console.log(points);
       return points
     },
     getGradientPoints() {
@@ -84,7 +84,7 @@ export default {
       point += ",-100";
       points.push(point);
 
-      console.log(points, this.columns)
+      //console.log(points, this.columns)
       return points
     }
   },

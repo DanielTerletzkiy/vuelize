@@ -85,7 +85,7 @@ export default {
         const requiredColumns = this.maxColumns - items.length
         items.push(...Array.from({length: requiredColumns}, (_, i) => i + items.length))
       }
-      console.log(items)
+      //console.log(items)
       return items
     },
     rowItems() {

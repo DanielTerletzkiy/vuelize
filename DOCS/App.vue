@@ -2,17 +2,23 @@
   <d-root>
     <title>{{$route.name}}</title>
     <d-toolbar show-hamburger @hamburgerClick="()=>navDrawer = !navDrawer">
-      <d-row gap>
+      <d-row gap class="px-2">
         <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>
         <d-spacer/>
         <d-checkbox flex-direction="row-reverse" :size="24" on-icon="moonset" off-icon="sunset"
                     v-model="$vuelize.theme.dark">
           Dark mode
         </d-checkbox>
-        <d-card-subtitle elevation-dark="2" :inlined="!$vuelize.theme.dark" depressed class="my-0 mr-1 font-weight-bold">
-          <d-icon color="primary" name="chart-growth"/>
-          v{{ version }}
-        </d-card-subtitle>
+        <d-tooltip color="#fff" elevation-light>
+          <d-card-subtitle elevation-dark="2" :inlined="!$vuelize.theme.dark" depressed class="font-weight-bold">
+            <d-icon color="primary" name="chart-growth"/>
+            v{{ version }}
+          </d-card-subtitle>
+          <template slot="tooltip">
+            <d-icon name="chart-growth"/>
+            Current NPM Version
+          </template>
+        </d-tooltip>
       </d-row>
     </d-toolbar>
 

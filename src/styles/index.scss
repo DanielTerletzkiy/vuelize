@@ -33,6 +33,11 @@ a {
   text-decoration: inherit;
   display: inherit;
 
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
   &.d-btn {
     display: flex;
     width: min-content;

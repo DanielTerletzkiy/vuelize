@@ -34,7 +34,7 @@ export default {
       let value = this.value;
       if (this.max) {
         value = this.percentage(this.value, this.max)
-        console.log(value)
+        //console.log(value)
       }
       return value
     },

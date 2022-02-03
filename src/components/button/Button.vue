@@ -56,8 +56,11 @@ export default {
   font-size: 0.875rem;
   letter-spacing: 0.0892857143em;
 
+  transition-duration: 0.1s;
+
   &:focus-visible {
     outline: 2px solid currentColor;
+    outline-offset: 2px;
   }
 
   &::before {

@@ -1,18 +1,18 @@
 <template>
-  <d-function-wrapper :classes="['d-tooltip']" v-bind="{...$props, ...$attrs}">
+  <d-function-wrapper :classes="['d-tooltip', position]">
     <div class="d-tooltip__slot" v-hover="{ over: ()=>{onHover(true)}, leave: ()=>{onHover(false)} }">
       <slot name="default" v-bind="{...$props, ...$attrs}">
       </slot>
     </div>
     <fade-transition>
       <div class="d-tooltip__wrapper" v-show="hovering">
-        <d-card class="d-tooltip__wrapper__content rounded-lg" :class="contentClassesObject" :style="stylesObject"
-                style="color: inherit" :color="filled?color:''" ref="tooltip">
-          <d-card-subtitle class="pa-0" :color="filled?getContrast(color):'inherit'">
-            <slot name="tooltip" v-bind="{...$props, ...$attrs}">
+        <d-label class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :class="contentClassesObject"
+                 :style="stylesObject" ref="tooltip">
+          <d-card-subtitle :style="{color: fontColor + '!important'}" class="pa-0">
+            <slot name="tooltip">
             </slot>
           </d-card-subtitle>
-        </d-card>
+        </d-label>
       </div>
     </fade-transition>
   </d-function-wrapper>
@@ -25,6 +25,7 @@ export default {
   props: {
     value: Boolean,
     filled: Boolean,
+    fontColor: String,
     position: {
       type: String,
       required: true,
@@ -41,60 +42,63 @@ export default {
       right: 'initial',
       bottom: 'initial',
       left: 'initial',
-    }
+    },
+    padding: 8
   }),
 
   watch: {
     value(state) {
       this.hovering = state
-    }
+    },
   },
 
   methods: {
     onHover: async function (state) {
       this.hovering = state
       this.$emit('input', state)
-      this.$forceUpdate()
-      await this.$nextTick()
-
+      await this.$nextTick();
       await this.$refs.tooltip;
 
       if (state) {
         const clientRect = this.$refs.tooltip.$el.getBoundingClientRect();
-        ['top', 'right', 'bottom', 'left'].forEach((pos) => {
-          const currentPos = clientRect[pos];
-          if (currentPos < 0 ||
-              ((pos === 'right' && currentPos + clientRect.width >= window.innerWidth))) {
-            this.offset[pos] = 'calc(50% + 8px)';
-          }
-        })
-      } else {
-        this.offset = {
-          top: 'initial',
-          right: 'initial',
-          bottom: 'initial',
-          left: 'initial',
-        }
-      }
+        //console.log(clientRect);
 
-      this.$forceUpdate()
-    }
+        if (clientRect.right >= window.innerWidth) {
+          this.offset.right = Math.round(clientRect.right - window.innerWidth) + this.padding + 'px';
+        }
+        if (clientRect.left <= 0) {
+          this.offset.left = Math.round(clientRect.left * -1) + this.padding + 'px';
+        }
+        //console.log(this.offset);
+      }
+    },
   },
 
   computed: {
     contentClassesObject() {
       return {
         filled: this.filled,
-        'glow glow--active': !this.filled
+        glow: !this.filled,
+        'glow--active': !this.filled && this.color
       }
     },
     stylesObject() {
-      return this.offset
+      return {
+        ...this.offset,
+        color: this.processColor(this.color),
+        background: this.opacity < 1 ? 'transparent' : this.color
+      }
     }
   },
 
   mounted() {
-    this.hovering = this.value
+    if(!this.fontColor && this.filled){
+      this.fontColor = this.getContrast(this.color)
+    }
+    this.hovering = this.value;
+    if (this.hovering) {
+      this.onHover(this.hovering);
+    }
   }
 }
 </script>
@@ -107,43 +111,29 @@ export default {
   width: max-content;
 
   &__wrapper {
-    margin: $gap;
     z-index: 12;
     width: 100%;
+    padding: $gap;
     position: absolute;
     display: flex;
     justify-content: center;
     border-radius: inherit;
 
     &__content {
+      position: relative;
       width: auto;
       height: max-content;
-      position: relative;
       border-radius: inherit;
       padding: 0;
 
+      background: transparent !important;
+
       word-break: keep-all;
 
-    }
-  }
-
-  &.theme--dark .d-tooltip__wrapper__content {
-    background: $dark_sheet;
-  }
-
-  &.theme--light .d-tooltip__wrapper__content {
-    background: $light_sheet;
-  }
-
-  &.bottom {
-    .d-tooltip__wrapper {
-      top: calc(100% + 6px);
-    }
-  }
-
-  &.top {
-    .d-tooltip__wrapper {
-      bottom: calc(100% + 6px);
+      & > * {
+        font-size: 0.9rem !important;
+        width: max-content !important;
+      }
     }
   }
 
@@ -152,7 +142,7 @@ export default {
     align-items: center;
 
     .d-tooltip__wrapper {
-      right: calc(100% + 6px);
+      right: calc(100% + 8px);
     }
   }
 
@@ -161,7 +151,7 @@ export default {
     align-items: center;
 
     .d-tooltip__wrapper {
-      left: calc(100% + 6px);
+      left: calc(100% + 8px);
     }
   }
 }

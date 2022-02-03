@@ -388,10 +388,8 @@
             Hover me!
           </d-btn>
           <template slot="tooltip">
-            <d-card-subtitle style="min-width: 270px" color="inherit">
               <d-icon name="smile-beam"/>
               Hello this is a Tooooooooool Tip
-            </d-card-subtitle>
           </template>
         </d-tooltip>
       </d-card-content>

@@ -44,8 +44,11 @@ export default {
   min-height: 44px;
   padding: 4px;
 
+  transition-duration: 0.1s;
+
   &:focus-visible {
     outline: 2px solid currentColor;
+    outline-offset: 2px;
   }
 
   .d-tab-list__item__content {

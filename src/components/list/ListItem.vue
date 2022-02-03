@@ -3,7 +3,9 @@
                       @focusin="()=>focus = true"
                       @focusout="()=>focus = false"
                       v-bind="{...$props, ...$attrs}" @click="click" @keyup.enter="click" v-ripple>
-    <d-card class="d-list__item__indicator" color="currentColor"/>
+    <fade-transition>
+      <d-card v-if="focus" class="d-list__item__indicator" color="currentColor"/>
+    </fade-transition>
     <div class="d-list__item__content">
       <slot></slot>
     </div>
@@ -14,7 +16,7 @@
 export default {
   name: "d-list-item",
 
-  data: ()=>({
+  data: () => ({
     focus: false
   }),
 
@@ -73,6 +75,7 @@ export default {
     position: relative;
 
     outline: none;
+
     .d-list__item__indicator {
       position: absolute;
       left: -2px;

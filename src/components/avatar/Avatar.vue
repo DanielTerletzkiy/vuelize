@@ -33,6 +33,8 @@ export default {
 
   transition-duration: 0.2s;
 
+  overflow: hidden;
+
   &__image {
     width: inherit;
     height: inherit;
