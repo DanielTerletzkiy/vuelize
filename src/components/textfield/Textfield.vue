@@ -138,7 +138,7 @@ export default {
   transition-duration: 0.15s;
 
   &__input, ::v-deep .d-text-field__input__autocomplete {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -172,12 +172,14 @@ export default {
   }
 
   &__prefix {
-
+    position: relative;
+    left: 0.5rem;
+    font-size: 20px;
   }
 
   &__suffix {
-    position: absolute;
-    right: 1rem;
+    position: relative;
+    right: 0.5rem;
     font-size: 20px;
   }
 
@@ -202,6 +204,7 @@ export default {
     height: 3.6rem;
 
     .d-text-field__label {
+      height: auto;
       top: 1rem;
       font-size: 1.2rem;
     }
@@ -209,6 +212,18 @@ export default {
     .d-text-field__input {
       padding-top: 12px !important;
       padding-bottom: 0 !important;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+
+    &:not(.d-text-field--solo){
+
+    .d-text-field__prefix{
+      padding-top: 12px;
+    }
+    .d-text-field__suffix{
+      padding-top: 12px;
+    }
     }
   }
 
@@ -220,6 +235,10 @@ export default {
     .d-text-field__label {
       display: none;
     }
+  }
+
+  &.d-text-field--filled.d-text-field--inlined label{
+    background: none !important;
   }
 
   &::before {
