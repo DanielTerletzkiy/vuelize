@@ -17,52 +17,27 @@
         !!!
       </d-card-subtitle>
 
-      <d-chart class="ma-2" :columns="['T0','T1','T2','T3','T4','T5','T6','T7','T8']"
-               showDots
+      <d-chart class="ma-2" color="primary" columnSpacing="40" row-spacing="40" row-lines="6"
+               :columns="['T0','T1','T2','T3','T4','T5','T6','T7','T8']"
+               :show-labels="false"
+               showGrid
                :value="[{
         name: 'Data 1',
         color: 'primary',
-        points: [
-            {
-              value: 1,
-            },
-            {
-              value: 2,
-            },
-            {
-              value: 25,
-            },
-            {
-              value: 16,
-            },
-            {
-              value: 14,
-            },
-            {
-              value: 18,
-            },
-            {
-              value: 35,
-            },
-            {
-              value: 4.5,
-            },
-            {
-              value: 7,
-            },
-            {
-              value: 24,
-            },
-        ]
+        points: dataPool[0]
       },
       {
         name: 'Data 2',
         color: 'warning',
-        points: warningData
-      }
-      ,
+        points: dataPool[1]
+      },
       {
         name: 'Data 3',
+        color: 'error',
+        points: dataPool[2]
+      },
+      {
+        name: 'Data 4',
         color: '#A37EFF',
         points: [
             {
@@ -75,7 +50,7 @@
             },
             {
               value: 0,
-              column: 11
+              column: 'T8'
             },
         ]
       }]"/>
@@ -177,9 +152,14 @@
       </d-card-title>
 
       <d-card-content flex wrap root-tag="form">
-        <d-text-field color="primary" solo filled class="glow glow--active" placeholder="Search..." type="email" v-model="text">
+        <d-text-field color="primary" solo inlined filled class="glow glow--active" placeholder="Amount..." type="number"
+                      v-model="text">
+          <template v-slot:prefix>
+            <d-icon size="14" name="euro"/>
+          </template>
           <template v-slot:suffix>
-            <d-icon name="search"/>
+            <d-icon name="plus" v-ripple class="rounded-circle"
+                    @click="$notify('Amount added', text, 'success')"/>
           </template>
         </d-text-field>
         <d-text-field color="primary" filled label="E-mail" type="email" v-model="text"/>
@@ -388,8 +368,8 @@
             Hover me!
           </d-btn>
           <template slot="tooltip">
-              <d-icon name="smile-beam"/>
-              Hello this is a Tooooooooool Tip
+            <d-icon name="smile-beam"/>
+            Hello this is a Tooooooooool Tip
           </template>
         </d-tooltip>
       </d-card-content>
@@ -610,7 +590,7 @@ export default {
   name: 'DemoView',
   data: () => ({
 
-    warningData: [],
+    dataPool: [[], [], []],
 
     listItem: 0,
 
@@ -660,9 +640,23 @@ export default {
       this.progressValue += 15
     }, 1000)*/
 
-    setInterval(() => {
-      this.warningData.push(Math.random()*30)
-    }, 10000)
+    for (let i = 0; i < 4; i++) {
+      this.dataPool[0].push(Math.random() * 30)
+      this.dataPool[1].push(Math.random() * 62)
+      this.dataPool[2].push(Math.random() * 15)
+
+      this.dataPool[0].push(Math.random() * 544)
+      this.dataPool[1].push(Math.random() * 454)
+      this.dataPool[2].push(Math.random() * 344)
+
+      this.dataPool[0].push(Math.random() * 432)
+      this.dataPool[1].push(Math.random() * 303)
+      this.dataPool[2].push(Math.random() * 301)
+
+      this.dataPool[0].push(Math.random() * 200)
+      this.dataPool[1].push(Math.random() * 200)
+      this.dataPool[2].push(Math.random() * 200)
+    }
   },
 
   methods: {
