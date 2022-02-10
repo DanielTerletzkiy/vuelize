@@ -28,7 +28,6 @@ export default {
     fontColor: String,
     position: {
       type: String,
-      required: true,
       validator: function (value) {
         return ['top', 'bottom', 'left', 'right'].indexOf(value) !== -1
       }
