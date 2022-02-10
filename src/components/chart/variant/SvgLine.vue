@@ -6,7 +6,7 @@
       <stop offset="100%" class="d-svg-line__gradient__start"></stop>
     </linearGradient>
 
-    <path :fill="`url(#grad${value.color})`" class="d-svg-line__gradient" stroke-width="0"
+    <path v-if="showGradient" :fill="`url(#grad${value.color})`" class="d-svg-line__gradient" stroke-width="0"
           :d="getGradientPoints"></path>
 
     <path fill="none" stroke="currentColor" class="d-svg-line__path" style="height:100%; width:100%" stroke-width="2"
@@ -26,6 +26,7 @@ export default {
     value: Object,
     columns: Array,
     showDots: Boolean,
+    showGradient: Boolean,
     rowLines: [String, Number],
     rowSpacing: {type: [Number, String]},
     columnSpacing: {type: [Number, String]},

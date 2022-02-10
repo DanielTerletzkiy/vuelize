@@ -1,15 +1,16 @@
 <template>
   <d-function-wrapper :classes="['d-lines', ...classesObject]" v-bind="{...$props, ...$attrs}" :color="color">
     <fade-transition group style="width: 100%; height: 100%; position: absolute" v-if="hover">
-      <d-label root-tag="d-card" elevation v-for="(dataPoint, i) in $refs[hover][0].getDataPoints" :key="dataPoint"
+      <d-label root-tag="d-card" v-for="(dataPoint, i) in $refs[hover][0].getDataPoints" :key="dataPoint"
                ref="dataPointLabel"
                class="d-lines__label"
+               filled
                :color="$refs[hover][0].color"
                :style="{left: dataPoint.split(',')[0].replace(/\D/g, '') + 'px', bottom: dataPoint.split(',')[1].replace(/\D/g, '') + 'px'}">
         <span class="d-lines__label__content">{{ getDataPointValue($refs[hover][0].value.points[i]) }}</span>
       </d-label>
     </fade-transition>
-    <svg class="d-lines__flip">
+    <svg class="d-lines__flip" v-hover="{over: ()=>{this.mainHover = true}, leave:()=>{this.mainHover = false}}">
       <defs v-if="showGrid">
         <pattern id="grid" :width="columnSpacing" :height="rowSpacing" patternUnits="userSpaceOnUse">
           <path :d="`M ${columnSpacing} 0 L 0 0 0 ${rowSpacing}`" fill="none" stroke-width="1"
@@ -17,6 +18,7 @@
         </pattern>
       </defs>
       <rect x="0" width="100%" height="100%" fill="url(#grid)"></rect>
+
       <svg class="d-line__flip" ref="chart" :key="key">
         <SvgLine :ref="data.name" :value="data" v-for="(data, i) in value" :key="i" :columns="columns"
                  :color="data.color"
@@ -26,6 +28,10 @@
                v-hover="{over: ()=>{this.hoverLock = true}, leave:()=>{this.hoverLock = false}}"/>
         </fade-transition>
       </svg>
+
+      <path ref="cursor" :d="`M${cursorPosition} 0 v0 ${(rowLines+1)*rowSpacing}`" stroke-width="2"
+            stroke-linecap="round" style="transition: 0.2s"
+            stroke="currentColor"></path>
     </svg>
   </d-function-wrapper>
 </template>
@@ -45,21 +51,35 @@ export default {
     showGrid: Boolean,
     rowSpacing: {type: [Number, String]},
     columnSpacing: {type: [Number, String]},
-    maxValue: {type: [Number, String]}
+    rowLines: {type: [String, Number]},
+    maxValue: {type: [Number, String]},
   },
 
   data: () => ({
     key: 1,
     hover: null,
-    hoverLock: false
+    hoverLock: false,
+    mainHover: false,
+
+    cursorPosition: -100
   }),
 
   watch: {
     value() {
-      this.key = Math.random();
+      this.key = Math.random(); //update everything properly
       this.animatePaths();
       this.$forceUpdate();
     },
+    mainHover(state) {
+      if (state) {
+        window.addEventListener('mousemove', this.updateCursor);
+      } else {
+        setTimeout(() => {
+          this.cursorPosition = -100;
+        }, 10)
+        window.removeEventListener('mousemove', this.updateCursor);
+      }
+    }
   },
 
   methods: {
@@ -85,11 +105,21 @@ export default {
         animTimingFunction: Vivus.EASE
       }, () => {
       });
-    }
+    },
+    updateCursor: debounce(function (e) {
+      const rect = this.$refs.chart.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      console.log(Math.round(x / this.columnSpacing))
+      this.cursorPosition = Math.round(x / this.columnSpacing) * this.columnSpacing;
+    }, 1)
   },
 
   mounted() {
     this.animatePaths();
+  },
+
+  destroyed() {
+    window.removeEventListener('mousemove', this.updateCursor);
   }
 }
 </script>

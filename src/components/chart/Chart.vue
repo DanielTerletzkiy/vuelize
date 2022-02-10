@@ -1,7 +1,7 @@
 <template>
   <d-function-wrapper :classes="['d-chart']" v-bind="{...$props, ...$attrs}">
     <d-row class="d-chart__container" elevation-dark="1" elevation-light="n2">
-      <d-column :wrap="false" class="py-0" style="width:30px">
+      <d-column :wrap="false" class="py-0" style="width:30px" v-if="showLabels">
         <d-spacer/>
         <d-card-subtitle :style="{'align-self': 'end', transform: `translate(0px,${rowSpacing/2}px)`}" class="pa-0 px-2" :height="`${rowSpacing}px`"
                          v-for="(i, x) in rowItems" :key="x">
@@ -12,12 +12,12 @@
       <d-column block class="pa-0"
                 :style="{overflow: 'auto', maxWidth: this.$innerWidth()-80 + 'px', borderRadius: '0 8px 0 0 !important'}"
                 :wrap="false">
-        <d-card elevation-dark="6" class="d-chart__container__chart"
-                :style="`width: ${columnSpacing*(columnItems.length)}px !important; height: 100% !important`">
+        <d-card elevation-dark="6" class="d-chart__container__chart" :class="{'hidden-labels': !showLabels}"
+                :style="`width: ${columnSpacing*(columnItems.length-1)}px !important; height: ${rowSpacing*(rowItems.length-1)}px !important`">
           <component :is="variant" v-bind="{...$props, ...$attrs}" v-model="value" :columns="columnItems"
                      :maxValue="maxValue"/>
         </d-card>
-        <d-row :wrap="false">
+        <d-row :wrap="false" v-if="showLabels">
           <d-card-subtitle class="pa-0 px-2"
                            :style="{'justify-content': 'center',
                            'min-width': `${columnSpacing}px`,
@@ -48,7 +48,9 @@ export default {
     variant: {type: String, default: "lines"},
     columns: {type: Array},
     showDots: {type: Boolean, default: false},
+    showGradient: {type: Boolean, default: true},
     showGrid: {type: Boolean, default: false},
+    showLabels: {type: Boolean, default: true},
     rowSpacing: {type: [Number, String], default: 50},
     columnSpacing: {type: [String, Number], default: 50},
     rowLines: {type: [String, Number], default: 10},
@@ -116,6 +118,10 @@ export default {
       min-width: 0 !important;
       width: auto !important;
       height: 100% !important;
+      overflow: hidden !important;
+      &.hidden-labels {
+        border-radius: 8px !important;
+      }
     }
 
     &__horizontal-divider {
