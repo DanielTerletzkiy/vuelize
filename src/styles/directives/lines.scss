@@ -1,4 +1,4 @@
-.outlined {
+/*.outlined {
   box-shadow: 0 0 0 1.4px currentColor;
   &.depressed.theme--dark {
     box-shadow: 0 0 0 1.4px rgba(255, 255, 255, 0.12);
@@ -6,14 +6,14 @@
   &.depressed.theme--light {
     box-shadow: 0 0 0 1.4px rgba(0, 0, 0, 0.12);
   }
-}
+}*/
 
-.inlined {
-  box-shadow: inset 0 0 0 1.4px currentColor;
+.inlined, .outlined {
+  border: 1px solid currentColor;
   &.depressed.theme--dark {
-    box-shadow: inset 0 0 0 1.4px rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
   &.depressed.theme--light {
-    box-shadow: inset 0 0 0 1.4px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.12);
   }
 }

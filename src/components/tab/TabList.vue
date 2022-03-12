@@ -79,6 +79,7 @@ export default {
 .d-tab-list {
   display: flex;
   position: relative;
+  gap: $gap;
 
   &__indicator {
     position: absolute;

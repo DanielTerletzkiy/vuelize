@@ -1,7 +1,7 @@
 <template>
   <d-function-wrapper :classes="['d-checkbox']" v-bind="{...$props, ...$attrs}" :style="checkboxStylesObject"
                       @click="changeValue">
-    <div class="d-checkbox__box" :class="classesObject" v-ripple :tabindex="this.disabled?-1:0" @keyup.enter="changeValue">
+    <div class="d-checkbox__box" :class="classesObject" :style="checkboxBoxStylesObject" v-ripple :tabindex="this.disabled?-1:0" @keyup.enter="changeValue">
       <d-icon :name="value ? onIcon : offIcon" :size="size" :color="'currentColor'"/>
     </div>
     <div class="d-checkbox__label" v-if="!!this.$slots.default">
@@ -26,8 +26,14 @@ export default {
   computed: {
     checkboxStylesObject() {
       return {
-        color: this.value ? this.processColor(this.color) : this.processColor('currentColor'),
-        flexDirection: this.flexDirection
+        color: this.value ? this.processColor(this.color, this.tint) : this.processColor('currentColor'),
+        flexDirection: this.flexDirection,
+      }
+    },
+    checkboxBoxStylesObject(){
+      return {
+        width: this.size + 6 + 'px',
+        height: this.size+ 6 + 'px',
       }
     },
     classesObject() {
@@ -64,8 +70,10 @@ export default {
 
   .d-checkbox__box {
     border-radius: $gap*1.4;
-    width: min-content;
-    padding: 2px;
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
 
     transition-duration: 0.1s;
 

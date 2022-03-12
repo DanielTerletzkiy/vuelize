@@ -7,6 +7,7 @@ export default {
     props: {
         rootTag: {type: String, default: 'div'},
         color: String,
+        tint: [String, Number],
         disabled: Boolean,
 
         elevation: [String, Number, undefined],
@@ -14,8 +15,15 @@ export default {
         elevationLight: [String, Number, undefined],
         //elevationInvert: Boolean,
 
+        glow: Boolean,
+        glowing: Boolean,
+        filledGlow: [String, Boolean],
+
         rounded: {type: String, default: 'lg'},
         outlined: Boolean,
+        /**
+         * @deprecated Use the outlined instead
+         */
         inlined: Boolean,
         depressed: Boolean,
 

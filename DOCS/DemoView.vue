@@ -6,6 +6,27 @@
         Buttons!
       </d-card-title>
 
+      <d-card class="ma-4 pa-2" color="primary">
+        <d-card class="pa-4" color="primary" tint="8">
+          <d-card-subtitle color="primary" tint="80">
+            tinting test
+          </d-card-subtitle>
+        </d-card>
+      </d-card>
+
+      <d-card width="auto" height="100px" class="ma-4" glow filled-glow="primary" tint="10">
+        <d-row class="pa-2">
+          <d-avatar src="https://picsum.photos/400/400" size="80"/>
+          <d-column>
+            <d-card-title>
+              User Name
+            </d-card-title>
+            <d-card-subtitle>
+              Sample text
+            </d-card-subtitle>
+          </d-column>
+        </d-row>
+      </d-card>
 
       <d-card-subtitle>
         This is a
@@ -61,6 +82,9 @@
           Checkbox
         </d-card-subtitle>
         <d-card-content flex wrap column>
+          <d-checkbox :size="24" color="primary" tint="20" v-model="$vuelize.theme.hmmm" off-icon="times">
+            Dummy
+          </d-checkbox>
           <d-checkbox :size="24" on-icon="moonset" off-icon="sunset" v-model="$vuelize.theme.dark">
             Dark mode
           </d-checkbox>
@@ -107,15 +131,15 @@
         <d-card-subtitle>
           Colored and
           <d-icon name="angle-right" :size="18"/>
-          <d-card-subtitle class="pl-0 py-0" color="primary">sad and inlined | inlined | glowing | camo
+          <d-card-subtitle class="pl-0 py-0" color="primary">sad and outlined | outlined | glowing | camo
           </d-card-subtitle>
         </d-card-subtitle>
         <d-card-content flex wrap>
-          <d-btn color="success" inlined depressed @click="changeColor('success')">
+          <d-btn color="success" outlined depressed @click="changeColor('success')">
             <d-icon name="check"/>
             Success
           </d-btn>
-          <d-btn color="error" inlined @click="changeColor('error')">
+          <d-btn color="error" outlined @click="changeColor('error')">
             <d-icon name="exclamation-triangle"/>
             Error
           </d-btn>
@@ -152,7 +176,8 @@
       </d-card-title>
 
       <d-card-content flex wrap root-tag="form">
-        <d-text-field color="primary" solo inlined filled class="glow glow--active" placeholder="Amount..." type="number"
+        <d-text-field color="primary" tint="40" solo outlined filled class="glow glow--active" placeholder="Amount..."
+                      type="number"
                       v-model="text">
           <template v-slot:prefix>
             <d-icon size="14" name="euro"/>
@@ -163,14 +188,14 @@
           </template>
         </d-text-field>
         <d-text-field color="primary" filled label="E-mail" type="email" v-model="text"/>
-        <d-text-field color="primary" solo inlined label="Password" type="password" v-model="text"/>
-        <d-text-field color="primary" inlined depressed label="Text with placeholder" type="text" v-model="text"
+        <d-text-field color="primary" solo outlined label="Password" type="password" v-model="text"/>
+        <d-text-field color="primary" outlined depressed label="Text with placeholder" type="text" v-model="text"
                       placeholder="This is a placeholder"/>
 
         <d-text-field color="primary" filled label="Default Select" v-model="selectedIcon" select
                       :items="['Cube', 'Anchor', 'Layers Alt']"/>
 
-        <d-text-field placeholder="test" color="primary" full-width inlined label="Icon Select Autocomplete"
+        <d-text-field placeholder="test" color="primary" full-width outlined label="Icon Select Autocomplete"
                       text="name" v-model="selectedIcons" autocomplete
                       :items="iconItems">
           <template v-slot:label="{ item, index }">
@@ -198,7 +223,7 @@
           </template>
         </d-text-field>
 
-        <d-text-field color="primary" inlined depressed label="User Select" v-model="selectedUser" select
+        <d-text-field color="primary" outlined depressed label="User Select" v-model="selectedUser" select
                       :items="userItems">
           <template slot="item" slot-scope="{item}">
             <d-card-title class="pa-0 font-size-small" color="inherit">
@@ -208,19 +233,19 @@
           </template>
         </d-text-field>
 
-        <d-text-field color="primary" inlined depressed label="Date" type="date" v-model="date"/>
+        <d-text-field color="primary" outlined depressed label="Date" type="date" v-model="date"/>
       </d-card-content>
 
       <d-card-content flex wrap class="pt-2">
-        <d-card-title class="font-size-medium" inlined depressed elevation="2" rounded="lg">
+        <d-card-title class="font-size-medium" outlined depressed elevation="2" rounded="lg">
           <d-icon :size="34" color="primary" name="text"/>
           {{ text }}
         </d-card-title>
-        <d-card-title class="font-size-medium" inlined depressed elevation="2" rounded="lg">
+        <d-card-title class="font-size-medium" outlined depressed elevation="2" rounded="lg">
           <d-icon :size="34" color="primary" name="list-ol"/>
           <d-icon :size="34" :name="iconItems[selectedIcon].icon" :icon-style="iconItems[selectedIcon].iconStyle"/>
         </d-card-title>
-        <d-card-title class="font-size-medium" inlined depressed elevation="2" rounded="lg">
+        <d-card-title class="font-size-medium" outlined depressed elevation="2" rounded="lg">
           <d-icon :size="34" color="primary" name="calendar-alt"/>
           {{ date }}
         </d-card-title>
@@ -435,7 +460,7 @@
             <d-icon name="smile"/>
           </template>
         </d-accordion>
-        <d-accordion v-model="openAccordion" :key="1" header-color="primary" elevation="2" inlined depressed>
+        <d-accordion v-model="openAccordion" :key="1" header-color="primary" elevation="2" outlined depressed>
           <template slot="header">
             <d-icon name="nerd"/>
             Nice
@@ -479,7 +504,7 @@
         </d-card-title>
         <fade-transition group>
           <d-card-content v-if="tabs === 0" :key="0">
-            <d-card-subtitle inlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
+            <d-card-subtitle outlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
               <d-card-subtitle class="pa-0">
                 <d-avatar
                     src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fart.ngfiles.com%2Fcomments%2F95000%2Fiu_95222_7850304.jpg&f=1&nofb=1"/>
@@ -496,7 +521,7 @@
             </d-card-subtitle>
           </d-card-content>
           <d-card-content v-if="tabs === 1" :key="1">
-            <d-card-subtitle inlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
+            <d-card-subtitle outlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
               <d-card-subtitle class="pa-0">
                 <d-avatar
                     src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwX7kQMQ0UaBN4hfG40RmJrFbBnEgcUvQmjEgNyZA%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1"/>
@@ -510,7 +535,7 @@
             </d-card-subtitle>
           </d-card-content>
           <d-card-content v-if="tabs === 3" :key="3">
-            <d-card-subtitle inlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
+            <d-card-subtitle outlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
               <d-card-subtitle class="pa-0">
                 <d-avatar
                     src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwoSlJk198vIZt4kIE9PR6pKa1pXUy9V4zIkA%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1"/>
@@ -557,10 +582,10 @@
 
         <d-card-content style="flex: 1">
           <d-card-title>
-            Inlined
+            outlined
           </d-card-title>
           <d-list class="rounded-lg elevation-2" color="primary" v-model="listItem">
-            <d-list-item v-for="i in 6" :key="i-1" :inlined="listItem === i-1">
+            <d-list-item v-for="i in 6" :key="i-1" :outlined="listItem === i-1">
               <d-icon class="mr-1" :name="`${i-1}-plus`"/>
               Item {{ i - 1 }}
             </d-list-item>
@@ -570,10 +595,10 @@
         <d-card-content style="flex: 1" elevation="1">
           <d-card-title>
             <d-icon name="sad-crying" color="primary" :size="34"/>
-            & Inlined
+            & outlined
           </d-card-title>
           <d-list class="rounded-lg elevation-2" color="primary" v-model="listItem">
-            <d-list-item v-for="i in 6" :key="i-1" :inlined="listItem === i-1" depressed>
+            <d-list-item v-for="i in 6" :key="i-1" :outlined="listItem === i-1" depressed>
               <d-icon class="mr-1" :name="`${i-1}-plus`"/>
               Item {{ i - 1 }}
             </d-list-item>

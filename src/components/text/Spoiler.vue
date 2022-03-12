@@ -6,9 +6,10 @@
       </slot>
     </div>
     <fade-transition>
-      <d-card :color="color" v-if="hidden" class="d-text-spoiler__blocker glow" elevation="n4" rounded="md" v-ripple>
+      <d-card :color="color" v-if="hidden" class="d-text-spoiler__blocker glow" elevation-dark="4" elevation-light="n4"
+              outlined depressed rounded="md" v-ripple>
         <d-spacer/>
-        <d-icon name="eye" size="20"/>
+        <d-icon name="eye" size="30"/>
         <d-spacer/>
       </d-card>
     </fade-transition>
@@ -44,7 +45,7 @@ export default {
 .d-text-spoiler {
   position: relative;
   max-width: max-content;
-  padding: 0 4px;
+  padding: 4px 8px;
   display: flex;
   align-items: center;
 

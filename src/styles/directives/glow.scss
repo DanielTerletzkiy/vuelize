@@ -38,7 +38,7 @@
     }
   }
 
-  &:not(&--active) {
+  &:not(:is(&--active,&--filled)) {
     &.theme--dark {
       color: $dark_card_text
     }
@@ -57,7 +57,41 @@
     &:hover {
       &::before {
         background: currentColor;
-        opacity: 0.15;
+        opacity: 0.2;
+      }
+    }
+  }
+
+  &--filled {
+    & > *{
+      z-index: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: currentColor;
+    }
+    &::before{
+      content: "";
+      top: 50%;
+      left: 0;
+      background: var(--fill-background) !important;
+      border-radius: inherit;
+      position: absolute;
+      transform: translate(0%,-50%);
+      transition: ease-in 0.15s;
+      width: 0;
+      height: 0;
+      opacity: 1 !important;
+    }
+
+    &:hover {
+      & *{
+        color: var(--fill-contrast) !important;
+      }
+      &:before {
+        width: 100% !important;
+        height: 100% !important;
       }
     }
   }

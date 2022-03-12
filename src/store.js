@@ -13,7 +13,7 @@ const store = new Vuex.Store({
             dark: true,
             themes: {
                 dark: {
-                    primary: '#4A90F9',
+                    primary: '#9570FF',
                     secondary: '#424242',
                     success: '#A7FA00',
                     error: '#ff6b6b',

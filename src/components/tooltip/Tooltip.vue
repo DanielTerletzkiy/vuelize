@@ -84,7 +84,7 @@ export default {
     stylesObject() {
       return {
         ...this.offset,
-        color: this.processColor(this.color),
+        color: this.processColor(this.color, this.tint),
         background: this.opacity < 1 ? 'transparent' : this.color
       }
     }

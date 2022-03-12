@@ -1,7 +1,7 @@
 <template>
   <component :is="root" :to="link" :disabled="disabled"
              :class="[...this.classes, themeClass, ...elevationClass, ...classAttributes]"
-             :style="stylesObject" v-on="$listeners"
+             :style="stylesObject" v-on="$listeners" ref="component"
              @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
   </component>
@@ -23,6 +23,9 @@ export default {
         inlined: this.inlined,
         depressed: this.depressed,
         disabled: this.disabled,
+        glow: this.glow,
+        ['glow--active']: this.glowing,
+        ['glow--filled']: this.filledGlow,
       }
     },
     elevationClass() {
@@ -60,13 +63,23 @@ export default {
       return theme;
     },
     stylesObject() {
-      //console.log(this.color)
-      return {color: this.processColor(this.color), width: this.width, height: this.height}
+      let color = this.processColor(this.color, this.tint);
+      if (this.filledGlow) {
+        const glowColor = this.filledGlow === true ? color : this.processColor(this.filledGlow, this.tint);
+        this.$nextTick(() => {
+          this.$refs.component.style.setProperty('--fill-background', glowColor);
+          this.$refs.component.style.setProperty('--fill-contrast', this.getContrast(glowColor));
+        })
+      }
+      return {color, width: this.width, height: this.height}
     }
   },
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+:root {
+  --fill-background: currentColor;
+  --fill-contrast: currentColor;
+}
 </style>

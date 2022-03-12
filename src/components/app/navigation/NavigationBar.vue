@@ -1,9 +1,15 @@
 <template>
   <slide-x-left-transition :duration="100">
-    <d-function-wrapper root-tag="nav" :classes="['d-navigation-bar', ...classesObject]" v-bind="{...$props, ...$attrs}" v-if="value">
-      <d-card block class="d-navigation-bar__content" rounded="none" :elevation="this.$vuelize.theme.dark?'1':''">
-        <slot></slot>
-      </d-card>
+    <d-function-wrapper root-tag="nav" :classes="['d-navigation-bar', ...classesObject]" v-bind="{...$props, ...$attrs}"
+                        v-if="value">
+      <d-row block height="100%">
+        <d-card block color="transparent" class="d-navigation-bar__content" rounded="none">
+          <slot></slot>
+        </d-card>
+        <d-column height="100%">
+          <d-divider vertical block class="my-3"/>
+        </d-column>
+      </d-row>
     </d-function-wrapper>
   </slide-x-left-transition>
 </template>

@@ -58,10 +58,10 @@ export default {
   }
 
   &.theme--dark {
-    color: darken($dark_card_text, 50);
+    color: darken($dark_card_text, 55);
   }
   &.theme--light {
-    color: lighten($light_card_text, 50);
+    color: lighten($light_card_text, 60);
   }
 }
 

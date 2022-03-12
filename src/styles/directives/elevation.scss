@@ -3,14 +3,15 @@
 .theme--dark {
   @for $i from 1 through 24 {
     $brightness: $i + 0.2%;
-    &.elevation-n#{$i}, .elevation-dark-n#{$i} {
+    &.elevation-#{$i}, .elevation-dark-#{$i} {
       background: lighten($dark_sheet, $brightness) !important;
+      box-shadow: darken($dark_sheet, $brightness) 0 2px 6px -2px;
     }
   }
 
   @for $i from 1 through 24 {
     $darkness: $i + 0.5%;
-    &.elevation-#{$i}, .elevation-dark-#{$i} {
+    &.elevation-n#{$i}, .elevation-dark-n#{$i} {
       background-color: darken($dark_sheet, $darkness) !important;
     }
   }

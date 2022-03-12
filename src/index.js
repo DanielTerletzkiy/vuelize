@@ -191,7 +191,7 @@ export default (Vue, options = {}) => {
     Vue.config.productionTip = false
 
     //Color process functions
-    Vue.prototype.processColor = function (color) {
+    Vue.prototype.processColor = function (color, tint = null) {
         let colorOut;
         if (this.$vuelize.theme.dark) {
             colorOut = this.$vuelize.theme.themes.dark[color]
@@ -199,14 +199,21 @@ export default (Vue, options = {}) => {
             colorOut = this.$vuelize.theme.themes.light[color]
         }
         if (!colorOut) {
-            return color
-        } else {
-            return colorOut
+            colorOut = color;
         }
+
+        if (tint && ['currentColor', 'transparent'].indexOf(colorOut) === -1) {
+            try {
+                colorOut = Vue.prototype.tintColor(colorOut, parseInt(tint));
+            } catch (e) {
+                console.warn(e)
+            }
+        }
+        return colorOut;
     }
 
     Vue.prototype.getContrast = function (color) {
-        let hexColor = this.processColor(color || this.color);
+        let hexColor = this.processColor(color || this.color, this.tint || null);
         if (hexColor.slice(0, 1) === '#') {
             hexColor = hexColor.slice(1);
         }
@@ -224,6 +231,10 @@ export default (Vue, options = {}) => {
         // Check contrast
         return (yiq >= 160) ? '#000' : '#fff';
 
+    }
+
+    Vue.prototype.tintColor = function adjust(color, amount) {
+        return '#' + color.replace(/^#/, '').replace(/../g, color => ('0' + Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2));
     }
 
     //Notification Functions

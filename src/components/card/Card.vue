@@ -9,7 +9,6 @@
 export default {
   name: "d-card",
   props: {
-    color: String,
     block: Boolean,
     minWidth: String,
     maxWidth: String,
@@ -21,7 +20,7 @@ export default {
     },
     stylesObject() {
       return {
-        background: this.processColor(this.color),
+        background: this.processColor(this.color, this.tint),
         minWidth: this.minWidth,
         maxWidth: this.maxWidth,
       }

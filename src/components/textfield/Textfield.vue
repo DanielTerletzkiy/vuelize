@@ -51,7 +51,7 @@ export default {
 
     filled: Boolean,
     fullWidth: Boolean,
-    inlined: Boolean,
+    outlined: Boolean,
     solo: Boolean,
     label: String,
     placeholder: String,
@@ -72,7 +72,7 @@ export default {
       return {
         'd-text-field--active': (this.hover || this.selected),
         'd-text-field--placeholder': this.placeholderActive,
-        'd-text-field--inlined inlined depressed elevation': this.inlined,
+        'd-text-field--outlined outlined depressed elevation': this.outlined,
         'd-text-field--filled glow glow--active': this.filled,
         'd-text-field--solo': this.solo,
       }
@@ -99,8 +99,8 @@ export default {
     },
     textFieldStylesObject() {
       return {
-        color: (this.hover || this.selected) ? this.processColor(this.color) : null,
-        caretColor: (this.hover || this.selected) ? this.processColor(this.color) : null,
+        color: (this.hover || this.selected) ? this.processColor(this.color, this.tint) : null,
+        caretColor: (this.hover || this.selected) ? this.processColor(this.color, this.tint) : null,
         width: this.width,
         'min-width': this.fullWidth ? '100%' : 'unset',
       }
@@ -183,15 +183,15 @@ export default {
     font-size: 20px;
   }
 
-  &--inlined {
+  &--outlined {
     background: inherit;
 
     &.d-text-field--active {
-      box-shadow: inset 0 0 0 1.4px currentColor !important;
+      box-shadow: inset 0 0 0 0.4px currentColor !important;
+      border-color: currentColor;
     }
 
     &:focus-within::before {
-      box-shadow: inset 0 0 0 2px currentColor;
       transition-duration: 0.2s;
     }
   }
@@ -237,7 +237,7 @@ export default {
     }
   }
 
-  &.d-text-field--filled.d-text-field--inlined label{
+  &.d-text-field--filled.d-text-field--outlined label{
     background: none !important;
   }
 

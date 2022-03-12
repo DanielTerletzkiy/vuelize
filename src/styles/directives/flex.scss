@@ -2,7 +2,7 @@
 
 .flex {
   display: flex;
-  gap: $gap * 3;
+  gap: $gap * 2;
   flex-wrap: unset;
 
   &.no-gap {

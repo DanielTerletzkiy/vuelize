@@ -15,10 +15,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../styles/variables";
 .d-list {
   display: flex;
   flex-direction: column;
   padding: 8px;
   margin: 0;
+  gap: $gap;
 }
 </style>
