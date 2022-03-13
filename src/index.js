@@ -212,8 +212,8 @@ export default (Vue, options = {}) => {
         return colorOut;
     }
 
-    Vue.prototype.getContrast = function (color) {
-        let hexColor = this.processColor(color || this.color, this.tint || null);
+    Vue.prototype.getContrast = function (color, tint) {
+        let hexColor = this.processColor(color || this.color, tint || this.tint);
         if (hexColor.slice(0, 1) === '#') {
             hexColor = hexColor.slice(1);
         }
@@ -229,7 +229,7 @@ export default (Vue, options = {}) => {
         // Get YIQ ratio
         let yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
         // Check contrast
-        return (yiq >= 160) ? '#000' : '#fff';
+        return (yiq >= 160) ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.85)';
 
     }
 

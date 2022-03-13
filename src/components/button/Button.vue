@@ -1,6 +1,6 @@
 <template>
   <d-function-wrapper root-tag="button" :classes="['d-btn', ...classesObject]" v-bind="{...$props, ...$attrs}"
-                      @click="$emit('click')">
+                      @click="$emit('click')" :glow="false">
     <span class="d-btn__content" :style="{color: this.filled ? this.getContrast(this.color):''}" v-ripple>
       <slot name="default"></slot>
     </span>
@@ -43,7 +43,6 @@ export default {
   position: relative;
   background: none;
   color: inherit;
-  border: none;
   font: inherit;
   cursor: pointer;
 
@@ -54,7 +53,7 @@ export default {
   text-transform: uppercase;
   font-weight: 600;
   font-size: 0.875rem;
-  letter-spacing: 0.0892857143em;
+  letter-spacing: 0.089em;
 
   transition-duration: 0.1s;
 
@@ -118,6 +117,8 @@ export default {
 
   .d-btn__content {
     min-height: inherit;
+    height: 100%;
+    width: 100%;
     padding: 0 16px;
     border-radius: inherit;
     position: relative;

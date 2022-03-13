@@ -32,8 +32,8 @@ export default {
     },
     checkboxBoxStylesObject(){
       return {
-        width: this.size + 6 + 'px',
-        height: this.size+ 6 + 'px',
+        width: parseInt(this.size) + 6 + 'px',
+        height: parseInt(this.size)+ 6 + 'px',
       }
     },
     classesObject() {

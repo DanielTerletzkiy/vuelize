@@ -131,7 +131,7 @@
         <d-card-subtitle>
           Colored and
           <d-icon name="angle-right" :size="18"/>
-          <d-card-subtitle class="pl-0 py-0" color="primary">sad and outlined | outlined | glowing | camo
+          <d-card-subtitle class="pl-0 py-0" color="primary">depressed and outlined | outlined | glowing | camo
           </d-card-subtitle>
         </d-card-subtitle>
         <d-card-content flex wrap>
@@ -139,7 +139,7 @@
             <d-icon name="check"/>
             Success
           </d-btn>
-          <d-btn color="error" outlined @click="changeColor('error')">
+          <d-btn color="error" outlined :depressed="false" @click="changeColor('error')">
             <d-icon name="exclamation-triangle"/>
             Error
           </d-btn>
@@ -176,7 +176,7 @@
       </d-card-title>
 
       <d-card-content flex wrap root-tag="form">
-        <d-text-field color="primary" tint="40" solo outlined filled class="glow glow--active" placeholder="Amount..."
+        <d-text-field color="primary" tint="40" solo outlined placeholder="Amount..."
                       type="number"
                       v-model="text">
           <template v-slot:prefix>
@@ -298,7 +298,8 @@
               YesNo Dialog
             </d-card-title>
             <d-card-subtitle>
-              <d-checkbox v-model="persistentDialog" size="24" off-icon="lock-open-alt" on-icon="lock-alt">Persistent
+              <d-checkbox v-model="persistentDialog" size="24" off-icon="lock-open-alt" on-icon="lock-alt">
+                Persistent
               </d-checkbox>
             </d-card-subtitle>
             <d-divider class="mx-3"/>
@@ -481,30 +482,37 @@
         Tabs!
       </d-card-title>
 
-      <d-card-content flex wrap column class="right">
-        <d-tab-list color="primary" v-model="tabs">
+      <d-card-content flex wrap column>
+        <d-tab-list color="primary" filled elevation-dark="1" v-model="tabs">
           <d-tab-item :key="0">
-            SCP-096
+            <d-column style="align-items: center;">
+              <d-icon name="user"/>
+              SCP-096
+            </d-column>
           </d-tab-item>
           <d-tab-item :key="1">
-            SCP-173
+            <d-column style="align-items: center;">
+              <d-icon name="user"/>
+              SCP-173
+            </d-column>
           </d-tab-item>
           <d-tab-item :key="2" disabled>
-            REDACTED
+            <d-column style="align-items: center;">
+              <d-icon name="user"/>
+              REDACTED
+            </d-column>
           </d-tab-item>
           <d-tab-item :key="3">
-            SCP-049
+            <d-column style="align-items: center;">
+              <d-icon name="user"/>
+              SCP-049
+            </d-column>
           </d-tab-item>
         </d-tab-list>
 
-        <d-card-title>
-          <d-image width="40px"
-                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/SCP_Foundation_%28emblem%29.svg/512px-SCP_Foundation_%28emblem%29.svg.png"/>
-          SCP Lore
-        </d-card-title>
-        <fade-transition group>
+        <collapse-transition>
           <d-card-content v-if="tabs === 0" :key="0">
-            <d-card-subtitle outlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
+            <d-card-subtitle elevation="2" class="pa-4 pt-0" style="display: block">
               <d-card-subtitle class="pa-0">
                 <d-avatar
                     src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fart.ngfiles.com%2Fcomments%2F95000%2Fiu_95222_7850304.jpg&f=1&nofb=1"/>
@@ -521,7 +529,7 @@
             </d-card-subtitle>
           </d-card-content>
           <d-card-content v-if="tabs === 1" :key="1">
-            <d-card-subtitle outlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
+            <d-card-subtitle elevation="2" class="pa-4 pt-0" style="display: block">
               <d-card-subtitle class="pa-0">
                 <d-avatar
                     src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwX7kQMQ0UaBN4hfG40RmJrFbBnEgcUvQmjEgNyZA%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1"/>
@@ -535,7 +543,7 @@
             </d-card-subtitle>
           </d-card-content>
           <d-card-content v-if="tabs === 3" :key="3">
-            <d-card-subtitle outlined depressed elevation="2" class="pa-4 pt-0" style="display: block">
+            <d-card-subtitle elevation="2" class="pa-4 pt-0" style="display: block">
               <d-card-subtitle class="pa-0">
                 <d-avatar
                     src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwoSlJk198vIZt4kIE9PR6pKa1pXUy9V4zIkA%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1"/>
@@ -556,7 +564,7 @@
               surgeries are not always successful, they often result in the creation of instances of SCP-049-2.
             </d-card-subtitle>
           </d-card-content>
-        </fade-transition>
+        </collapse-transition>
       </d-card-content>
     </d-card>
 
@@ -573,7 +581,7 @@
             Normal
           </d-card-title>
           <d-list class="rounded-lg elevation-2" color="primary" v-model="listItem">
-            <d-list-item v-for="i in 6" :key="i-1">
+            <d-list-item v-for="i in 6" :key="i-1" glow filled-glow="primary">
               <d-icon class="mr-1" :name="`${i-1}-plus`"/>
               Item {{ i - 1 }}
             </d-list-item>
@@ -604,6 +612,84 @@
             </d-list-item>
           </d-list>
         </d-card-content>
+      </d-card-content>
+    </d-card>
+
+    <div class="my-4"/>
+
+    <d-card elevation rounded="lg" block max-width="800px">
+      <d-card-title>
+        <d-icon name="flask" color="primary" :size="30"/>
+        Test Design
+      </d-card-title>
+      <d-card-content flex column wrap>
+        <d-card-subtitle class="pb-0">
+          Recent Projects
+        </d-card-subtitle>
+        <d-column block>
+          <d-row align="initial">
+            <d-column>
+              <d-card v-for="i in 3" :key="i" min-width="340px" glow filled-glow="primary" v-ripple rounded="xl">
+                <d-row>
+                  <d-column>
+                    <d-avatar src="https://picsum.photos/400/400" size="85" rounded="xl"/>
+                  </d-column>
+                  <d-column block>
+                    <d-card-title class="font-size-medium pt-0">
+                      Project {{ i }}
+                      <d-spacer/>
+                      <d-icon-button size="30">
+                        <d-icon name="angle-right"/>
+                      </d-icon-button>
+                    </d-card-title>
+                    <d-card-subtitle>
+                      Mega-project
+                    </d-card-subtitle>
+                    <d-label style="margin-top: -4px" class="ml-2" color="primary" tint="20">
+                      {{ Math.round(Math.random() * i * (Math.random() * i * 4)) * 4 }}h
+                    </d-label>
+                  </d-column>
+                </d-row>
+              </d-card>
+            </d-column>
+            <d-column block outlined depressed>
+              <d-spacer/>
+              <d-row justify="center">
+                <d-btn elevation-dark="n1" height="50px" width="140px" rounded="xl" color="primary" glow>
+                  <d-icon name="file-plus-alt"/>
+                  Add
+                </d-btn>
+              </d-row>
+            </d-column>
+          </d-row>
+          <d-card-subtitle class="pb-0">Sorting</d-card-subtitle>
+          <d-tab-list color="primary" rounded="xl" filled v-model="listItem" outlined>
+            <d-tab-item :key="0" rounded="xl">
+              <d-column class="pa-0" style="align-items: center;">
+                <d-icon name="sort-amount-up"/>
+                Sort asc
+              </d-column>
+            </d-tab-item>
+            <d-tab-item :key="1" rounded="xl">
+              <d-column class="pa-0" style="align-items: center;">
+                <d-icon name="sort-amount-down"/>
+                Sort desc
+              </d-column>
+            </d-tab-item>
+            <d-tab-item :key="2" rounded="xl">
+              <d-column class="pa-0" style="align-items: center;">
+                <d-icon name="filter"/>
+                Filter
+              </d-column>
+            </d-tab-item>
+            <d-tab-item :key="3" rounded="xl">
+              <d-column class="pa-0" style="align-items: center;">
+                <d-icon name="scroll"/>
+                Scroll
+              </d-column>
+            </d-tab-item>
+          </d-tab-list>
+        </d-column>
       </d-card-content>
     </d-card>
   </div>

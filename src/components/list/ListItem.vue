@@ -67,6 +67,7 @@ export default {
 
   border-radius: inherit;
   min-height: 36px;
+  padding: 4px;
 
   list-style: none;
   margin: 0;

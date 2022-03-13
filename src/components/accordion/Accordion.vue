@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper root-tag="d-card" :classes="['d-accordion']"
+  <d-function-wrapper :classes="['d-accordion']"
                       v-bind="{...$props, ...$attrs}">
     <div @click="onClick" style="border-radius: inherit">
       <d-card-title class="d-accordion__header" :color="headerColor" :class="['glow',{'glow--active': this.open}]" v-ripple>

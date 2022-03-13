@@ -36,7 +36,7 @@ export default {
 
 .d-card__title ~ .d-card__subtitle {
   margin-top: -20px;
-  padding-left: 10px;
+  //padding-left: 10px;
 }
 
 

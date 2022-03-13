@@ -44,6 +44,10 @@ a {
   }
 }
 
+button {
+  border: none;
+}
+
 .disabled {
   pointer-events: none;
   color: grey !important;

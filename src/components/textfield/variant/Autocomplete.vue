@@ -14,7 +14,7 @@
     <d-icon-button size="24" rounded="md" class="d-text-field__input__icon" @click="toggleDropdown">
       <d-icon :name="angleIcon"/>
     </d-icon-button>
-    <d-select-menu width="0" v-bind="{...$props, ...$attrs}" :items="searchedItems" :inlined="false" :value="value"
+    <d-select-menu width="0" v-bind="{...$props, ...$attrs}" :items="searchedItems" :value="value"
                    @input="onInput"
                    :open.sync="dropdownOpen">
       <template slot="item" slot-scope="props">

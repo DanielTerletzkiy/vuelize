@@ -1,7 +1,7 @@
 <template>
-  <d-function-wrapper :classes="['d-tab-list']" v-bind="{...$props, ...$attrs}">
+  <d-function-wrapper :classes="['d-tab-list', ...classesObject]" v-bind="{...$props, ...$attrs}">
     <slot ref="item"></slot>
-    <d-divider class="d-tab-list__indicator" :color="currentColor" size="2px" :style="indicatorStylesObject"/>
+    <d-divider v-if="showIndicator" class="d-tab-list__indicator" :color="currentColor" size="2px" :style="indicatorStylesObject"/>
   </d-function-wrapper>
 </template>
 
@@ -10,7 +10,10 @@ export default {
   name: "d-tab-list",
 
   props: {
-    value: {type: [String, Number]}
+    value: {type: [String, Number]},
+    showIndicator: {type: Boolean},
+    filled: {type: Boolean},
+    outlined: {type: Boolean},
   },
 
   data: () => ({
@@ -40,6 +43,11 @@ export default {
         return {}
       }
 
+    },
+    classesObject(){
+      return {
+        'pa-1 depressed': this.outlined,
+      }
     }
   },
 
@@ -80,6 +88,10 @@ export default {
   display: flex;
   position: relative;
   gap: $gap;
+
+  &.theme--dark {
+    border-color: rgba(45, 49, 59, 1);
+  }
 
   &__indicator {
     position: absolute;

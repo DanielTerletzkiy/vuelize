@@ -33,7 +33,7 @@
           </d-column>
           <d-spacer :flex-grow="100"/>
           <d-row>
-            <d-accordion v-model="notifications" header-color="primary" style="width: 100%">
+            <d-accordion v-model="notifications" header-color="primary" style="width: 100%" outlined depressed>
               <template slot="header">
                 <d-badge color="primary" :value="$vuelize.notification.notifications.filter(e => e.active).length > 0">
                   <d-icon name="bell"/>

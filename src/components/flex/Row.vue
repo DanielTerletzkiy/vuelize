@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper :classes="['d-row', ...classesObject]" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
+  <d-function-wrapper :classes="['d-row', ...classesObject]" v-bind="{...$props, ...$attrs}" :style="stylesObject" @click="$emit('click')">
     <slot>
 
     </slot>
@@ -11,15 +11,15 @@ export default {
   name: "d-row",
 
   props: {
-    height: String,
-    width: String,
+    align: String,
+    justify: String,
   },
 
   computed: {
     stylesObject() {
       return {
-        height: this.height,
-        width: this.width,
+        alignItems: this.align,
+        justifyContent: this.justify,
       }
     },
   },

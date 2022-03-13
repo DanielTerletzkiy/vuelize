@@ -5,7 +5,7 @@
               v-click-outside="hideSelectMenu">
         <d-list :value="value"
                 @input="onInput"
-                color="primary" class="pa-0" rounded="none">
+                color="primary" class="d-select-menu__dropdown__list pa-0" rounded="none">
           <d-list-item v-for="(item, index) in items" :key="index"
                        v-show="activeSearch(item)"
                        :color="item.color || ''"
@@ -118,6 +118,7 @@ export default {
 
 <style scoped lang="scss">
 .d-select-menu {
+  border: none !important;
   &__dropdown {
     position: absolute;
     z-index: 1;
@@ -129,6 +130,10 @@ export default {
 
     top: calc(100% + 6px);
     left: 0;
+
+    &__list {
+      gap: 0;
+    }
   }
 
   .d-list > li {

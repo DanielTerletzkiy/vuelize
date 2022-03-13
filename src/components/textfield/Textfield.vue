@@ -136,6 +136,8 @@ export default {
   height: 3rem;
   caret-color: currentColor;
   transition-duration: 0.15s;
+  display: flex;
+  align-items: center;
 
   &__input, ::v-deep .d-text-field__input__autocomplete {
     position: relative;
@@ -173,18 +175,19 @@ export default {
 
   &__prefix {
     position: relative;
-    left: 0.5rem;
+    left: 0.7rem;
     font-size: 20px;
   }
 
   &__suffix {
     position: relative;
-    right: 0.5rem;
+    right: 0.7rem;
     font-size: 20px;
   }
 
   &--outlined {
     background: inherit;
+    box-shadow: none;
 
     &.d-text-field--active {
       box-shadow: inset 0 0 0 0.4px currentColor !important;
@@ -212,8 +215,8 @@ export default {
     .d-text-field__input {
       padding-top: 12px !important;
       padding-bottom: 0 !important;
-      padding-left: 1em;
-      padding-right: 1em;
+      padding-left: 1.2em;
+      padding-right: 1.2em;
     }
 
     &:not(.d-text-field--solo){

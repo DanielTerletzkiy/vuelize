@@ -1,25 +1,25 @@
 <template>
   <d-function-wrapper :classes="['d-notification']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
     <slot name="default" :notification="this.notification">
-      <d-card :color="options.color" :elevation="!$vuelize.theme.dark && hover?'4':'none'" :inlined="!options.color"
-              depressed min-width="100%" max-width="500px"
-              v-hover="{ over: ()=>{hover = true}, leave: ()=>{hover = false} }">
+      <d-card-content class="d-notification__content" :color="options.color" glow glowing :outlined="!options.color"
+                      depressed min-width="100%" max-width="500px"
+                      v-hover="{ over: ()=>{hover = true}, leave: ()=>{hover = false} }">
         <d-row class="px-3 left">
           <d-column>
-            <d-icon-button :color="getContrast(options.color)" @click="hide">
+            <d-icon-button :color="(options.color)" @click="hide">
               <d-icon :size="hover?30:40" :name="hover?'multiply':options.icon||'multiply'"></d-icon>
             </d-icon-button>
           </d-column>
           <d-column>
-            <d-card-title class="font-size-medium" :color="getContrast(options.color)">
+            <d-card-title v-if="notification.title" class="font-size-medium" :color="(options.color)">
               {{ notification.title }}
             </d-card-title>
-            <d-card-subtitle :color="getContrast(options.color)">
+            <d-card-subtitle v-if="notification.content" :color="(options.color)">
               {{ notification.content }}
             </d-card-subtitle>
           </d-column>
         </d-row>
-      </d-card>
+      </d-card-content>
     </slot>
   </d-function-wrapper>
 </template>
@@ -88,7 +88,7 @@ export default {
     }
 
     if (this.notification.options) {
-      Object.assign(this.options,this.notification.options);
+      Object.assign(this.options, this.notification.options);
     }
 
     this.setTimeout();
@@ -108,6 +108,11 @@ export default {
   min-width: auto;
   position: relative;
   overflow: hidden;
+
+  &__content{
+    backdrop-filter: blur(20px);
+    padding: 0;
+  }
 
   &__hide {
     position: absolute;

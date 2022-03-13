@@ -9,11 +9,11 @@
 }*/
 
 .inlined, .outlined {
-  border: 1px solid currentColor;
+  outline: 1px solid currentColor;
   &.depressed.theme--dark {
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    outline: 1px solid rgba(255, 255, 255, 0.06);
   }
   &.depressed.theme--light {
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    outline: 1px solid rgba(0, 0, 0, 0.12);
   }
 }

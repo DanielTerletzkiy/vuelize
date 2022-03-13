@@ -1,6 +1,7 @@
 <template>
-  <d-function-wrapper :classes="['d-tab-list__item', ...classesObject]" v-bind="{...$props, ...$attrs}"
-                      @click="click" v-ripple :tabindex="this.disabled?-1:0" @keyup.enter="click">
+  <d-function-wrapper :classes="['d-tab-list__item', ...classesObject]"
+                      v-bind="{...$props, ...$attrs}" :style="stylesObject"
+                      @click="click" v-ripple :tabindex="this.disabled?-1:0" @keyup.enter="click" glow :glowing="!filled && selected">
     <div class="d-tab-list__item__content">
       <slot></slot>
     </div>
@@ -12,10 +13,28 @@ export default {
   name: "d-tab-item",
 
   computed: {
-    classesObject() {
+    itemColor() {
+      return this.color || this.$parent.$parent.$props.color;
+    },
+    selected() {
+      return this.$parent.$parent.$props.value === this.$vnode.key
+    },
+    filled(){
+      return this.$parent.$parent.$props.filled
+    },
+    classesObject(){
       return {
-        glow: true,
-        'glow--active': this.$parent.$parent.$props.value === this.$vnode.key
+        'd-tab-list__item__content--selected': this.selected
+      }
+    },
+    stylesObject() {
+      if (this.filled) {
+        return {
+          background: this.selected ? this.processColor(this.itemColor) : 'transparent',
+          color: this.selected ? this.getContrast(this.itemColor) : '',
+        }
+      }else{
+        return {}
       }
     }
   },
@@ -40,11 +59,13 @@ export default {
 .d-tab-list__item {
   justify-content: center;
   border-radius: inherit;
+  width: 100%;
   min-width: 64px;
   min-height: 44px;
-  padding: 4px;
+  padding: 0 14px;
+  font-weight: 600;
 
-  transition-duration: 0.1s;
+  transition-duration: 0.5s;
 
   &:focus-visible {
     outline: 2px solid currentColor;
@@ -52,22 +73,14 @@ export default {
   }
 
   .d-tab-list__item__content {
-    padding: 10px 12px;
     display: flex;
     align-items: center;
     gap: $gap;
-  }
-}
 
-.slide-fade {
-  &-leave-active {
-    opacity: 0;
-    transition: all 0.5s ease;
   }
 
-  .top :is(&-enter, &-leave-to) {
-    transform: translateY(2px);
+  &:not(.d-tab-list__item__content--selected) {
+    color: darken($dark_card_text, 30);
   }
-
 }
 </style>

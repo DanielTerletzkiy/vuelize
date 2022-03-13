@@ -25,7 +25,7 @@ export default {
          * @deprecated Use the outlined instead
          */
         inlined: Boolean,
-        depressed: Boolean,
+        depressed: {type: Boolean, default: true},
 
         dark: Boolean,
         light: Boolean,

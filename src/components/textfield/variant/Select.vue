@@ -8,7 +8,7 @@
     <d-icon-button size="24" rounded="md" class="d-text-field__input__icon">
       <d-icon :name="angleIcon"/>
     </d-icon-button>
-    <d-select-menu width="0" v-bind="{...$props, ...$attrs}" :inlined="false" :value="value" @input="onInput"
+    <d-select-menu width="0" v-bind="{...$props, ...$attrs}" :value="value" @input="onInput"
                    :open.sync="dropdownOpen">
       <template slot="item" slot-scope="props">
         <slot name="item" v-bind="props"></slot>
