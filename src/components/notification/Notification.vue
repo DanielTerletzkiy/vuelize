@@ -4,17 +4,17 @@
       <d-card-content class="d-notification__content" :color="options.color" glow glowing :outlined="!options.color"
                       depressed min-width="100%" max-width="500px"
                       v-hover="{ over: ()=>{hover = true}, leave: ()=>{hover = false} }">
-        <d-row class="px-3 left">
-          <d-column>
+        <d-row class="pa-2">
+          <d-column class="pa-0">
             <d-icon-button :color="(options.color)" @click="hide">
               <d-icon :size="hover?30:40" :name="hover?'multiply':options.icon||'multiply'"></d-icon>
             </d-icon-button>
           </d-column>
-          <d-column>
-            <d-card-title v-if="notification.title" class="font-size-medium" :color="(options.color)">
+          <d-column class="pa-0" style="align-self: stretch; justify-content: center; gap: 16px">
+            <d-card-title v-if="notification.title" class="py-0 font-size-medium" :color="(options.color)">
               {{ notification.title }}
             </d-card-title>
-            <d-card-subtitle v-if="notification.content" :color="(options.color)">
+            <d-card-subtitle v-if="notification.content" class="py-0" :color="(options.color)">
               {{ notification.content }}
             </d-card-subtitle>
           </d-column>
@@ -108,8 +108,13 @@ export default {
   min-width: auto;
   position: relative;
   overflow: hidden;
+  transition: transform 0.2s ease-out;
 
-  &__content{
+  &:hover {
+    transform: scale(1.04);
+  }
+
+  &__content {
     backdrop-filter: blur(20px);
     padding: 0;
   }

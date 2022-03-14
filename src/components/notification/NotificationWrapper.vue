@@ -44,6 +44,8 @@ export default {
 
   &--permanent {
     position: relative;
+    overflow-x: hidden !important;
+    padding: 4px !important;
     margin: 0;
   }
 

@@ -6,14 +6,6 @@
         Buttons!
       </d-card-title>
 
-      <d-card class="ma-4 pa-2" color="primary">
-        <d-card class="pa-4" color="primary" tint="8">
-          <d-card-subtitle color="primary" tint="80">
-            tinting test
-          </d-card-subtitle>
-        </d-card>
-      </d-card>
-
       <d-card width="auto" height="100px" class="ma-4" glow filled-glow="primary" tint="10">
         <d-row class="pa-2">
           <d-avatar src="https://picsum.photos/400/400" size="80"/>
@@ -581,7 +573,19 @@
             Normal
           </d-card-title>
           <d-list class="rounded-lg elevation-2" color="primary" v-model="listItem">
-            <d-list-item v-for="i in 6" :key="i-1" glow filled-glow="primary">
+            <d-list-item v-for="i in 6" :key="i-1">
+              <d-icon class="mr-1" :name="`${i-1}-plus`"/>
+              Item {{ i - 1 }}
+            </d-list-item>
+          </d-list>
+        </d-card-content>
+
+        <d-card-content style="flex: 1">
+          <d-card-title>
+            filled
+          </d-card-title>
+          <d-list class="rounded-lg elevation-2" filled color="primary" v-model="listItem">
+            <d-list-item v-for="i in 6" :key="i-1">
               <d-icon class="mr-1" :name="`${i-1}-plus`"/>
               Item {{ i - 1 }}
             </d-list-item>
@@ -593,7 +597,7 @@
             outlined
           </d-card-title>
           <d-list class="rounded-lg elevation-2" color="primary" v-model="listItem">
-            <d-list-item v-for="i in 6" :key="i-1" :outlined="listItem === i-1">
+            <d-list-item v-for="i in 6" :key="i-1" :outlined="listItem === i-1" :depressed="false">
               <d-icon class="mr-1" :name="`${i-1}-plus`"/>
               Item {{ i - 1 }}
             </d-list-item>
@@ -602,8 +606,7 @@
 
         <d-card-content style="flex: 1" elevation="1">
           <d-card-title>
-            <d-icon name="sad-crying" color="primary" :size="34"/>
-            & outlined
+            depressed & outlined
           </d-card-title>
           <d-list class="rounded-lg elevation-2" color="primary" v-model="listItem">
             <d-list-item v-for="i in 6" :key="i-1" :outlined="listItem === i-1" depressed>
@@ -745,7 +748,7 @@ export default {
   },
 
   mounted() {
-    this.$notify('Hello there', 'General Kenobi', 'success')
+    this.$notify('Hello there', '', 'success')
 
     /*setInterval(() => {
       this.progressValue += 15

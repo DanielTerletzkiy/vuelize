@@ -1,8 +1,10 @@
 <template>
-  <d-function-wrapper root-tag="li" tabindex="0" :classes="['d-list__item', ...classesObject]"
+  <d-function-wrapper root-tag="li" :classes="['d-list__item', ...classesObject]"
+                      :style="stylesObject" v-ripple
                       @focusin="()=>focus = true"
                       @focusout="()=>focus = false"
-                      v-bind="{...$props, ...$attrs}" @click="click" @keyup.enter="click" v-ripple>
+                      v-bind="{...$props, ...$attrs}" @click="click" :tabindex="this.disabled?-1:0" @keyup.enter="click"
+                      glow :glowing="!filled && selected">
     <fade-transition>
       <d-card v-if="focus" class="d-list__item__indicator" color="currentColor"/>
     </fade-transition>
@@ -24,12 +26,30 @@ export default {
     isMultiple() {
       return typeof this.$parent.$parent.$props.value === 'object'
     },
+    itemColor() {
+      return this.color || this.$parent.$parent.$props.color;
+    },
+    selected() {
+      return this.isMultiple ?
+          this.$parent.$parent.$props.value.includes(this.$vnode.key)
+          : this.$parent.$parent.$props.value === this.$vnode.key
+    },
+    filled() {
+      return this.$parent.$parent.$props.filled
+    },
     classesObject() {
       return {
-        glow: true,
-        'glow--active': this.isMultiple ?
-            this.$parent.$parent.$props.value.includes(this.$vnode.key)
-            : this.$parent.$parent.$props.value === this.$vnode.key
+        'd-list__item__content--selected': this.selected
+      }
+    },
+    stylesObject() {
+      if (this.filled) {
+        return {
+          background: this.selected ? this.processColor(this.itemColor) : 'transparent',
+          color: this.selected ? this.getContrast(this.itemColor) : '',
+        }
+      } else {
+        return {}
       }
     }
   },
@@ -72,6 +92,8 @@ export default {
   list-style: none;
   margin: 0;
 
+  transition: background 0.2s ease-out;
+
   &:focus-visible {
     position: relative;
 
@@ -93,6 +115,10 @@ export default {
     align-items: center;
     white-space: nowrap;
     gap: $gap*2;
+  }
+
+  &:not(.d-list__item__content--selected) {
+    color: darken($dark_card_text, 14) !important;
   }
 }
 </style>

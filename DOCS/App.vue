@@ -10,7 +10,7 @@
           Dark mode
         </d-checkbox>
         <d-tooltip color="#fff" elevation-light>
-          <d-card-subtitle elevation-dark="2" :inlined="!$vuelize.theme.dark" depressed class="font-weight-bold">
+          <d-card-subtitle elevation-dark="n1" outlined class="font-weight-bold">
             <d-icon color="primary" name="chart-growth"/>
             v{{ version }}
           </d-card-subtitle>

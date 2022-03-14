@@ -1,7 +1,8 @@
 <template>
   <d-function-wrapper :classes="['d-tab-list__item', ...classesObject]"
                       v-bind="{...$props, ...$attrs}" :style="stylesObject"
-                      @click="click" v-ripple :tabindex="this.disabled?-1:0" @keyup.enter="click" glow :glowing="!filled && selected">
+                      @click="click" v-ripple :tabindex="this.disabled?-1:0" @keyup.enter="click" glow
+                      :glowing="!filled && selected">
     <div class="d-tab-list__item__content">
       <slot></slot>
     </div>
@@ -19,10 +20,10 @@ export default {
     selected() {
       return this.$parent.$parent.$props.value === this.$vnode.key
     },
-    filled(){
+    filled() {
       return this.$parent.$parent.$props.filled
     },
-    classesObject(){
+    classesObject() {
       return {
         'd-tab-list__item__content--selected': this.selected
       }
@@ -33,7 +34,7 @@ export default {
           background: this.selected ? this.processColor(this.itemColor) : 'transparent',
           color: this.selected ? this.getContrast(this.itemColor) : '',
         }
-      }else{
+      } else {
         return {}
       }
     }
@@ -65,7 +66,7 @@ export default {
   padding: 0 14px;
   font-weight: 600;
 
-  transition-duration: 0.5s;
+  transition: background 0.2s ease-out;
 
   &:focus-visible {
     outline: 2px solid currentColor;

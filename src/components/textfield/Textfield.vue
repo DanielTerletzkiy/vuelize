@@ -190,7 +190,7 @@ export default {
     box-shadow: none;
 
     &.d-text-field--active {
-      box-shadow: inset 0 0 0 0.4px currentColor !important;
+      outline: solid 1px currentColor !important;
       border-color: currentColor;
     }
 

@@ -1,5 +1,5 @@
 <template>
-  <d-function-wrapper root-tag="ul" :classes="['d-list']" v-bind="{...$props, ...$attrs}">
+  <d-function-wrapper root-tag="ul" :classes="['d-list', ...classesObject]" v-bind="{...$props, ...$attrs}">
     <slot></slot>
   </d-function-wrapper>
 </template>
@@ -9,8 +9,18 @@ export default {
   name: "d-list",
 
   props: {
-    value: [Number, String, Array]
+    value: [Number, String, Array],
+    filled: {type: Boolean},
+    outlined: {type: Boolean},
   },
+
+  computed: {
+    classesObject(){
+      return {
+        'pa-1 depressed': this.outlined,
+      }
+    }
+  }
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <d-function-wrapper :classes="['d-select-menu']" v-bind="{...$props, ...$attrs}">
     <slide-y-up-transition :duration="80">
-      <d-card v-if="open" class="d-select-menu__dropdown pa-0" :elevation="$vuelize.theme.dark?'n2':'5'"
+      <d-card v-if="open" class="d-select-menu__dropdown pa-0" elevation="4"
               v-click-outside="hideSelectMenu">
         <d-list :value="value"
                 @input="onInput"

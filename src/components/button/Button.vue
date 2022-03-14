@@ -128,11 +128,11 @@ export default {
     gap: 4px;
   }
 
-  &.d-btn--small .d-btn__content{
+  &.d-btn--small .d-btn__content {
     padding: 0;
   }
 
-  &.d-btn--large .d-btn__content{
+  &.d-btn--large .d-btn__content {
     min-height: 50px;
     font-size: 1.6rem;
     font-weight: normal;

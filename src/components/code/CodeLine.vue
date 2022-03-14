@@ -1,7 +1,7 @@
 <template>
   <d-function-wrapper :classes="['d-code-line']" v-bind="{...$props, ...$attrs}">
-    <d-card block depressed class="d-code-line__card" elevation="8">
-      <d-row class="d-code-line__title">
+    <d-card block depressed class="d-code-line__card" elevation-dark="n4" elevation-light="0">
+      <d-row class="d-code-line__title" elevation-dark="n2" elevation-light="0">
         <d-column>
           <d-card-subtitle color="primary">
             {{ label }}
