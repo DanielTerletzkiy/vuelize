@@ -1,10 +1,12 @@
 <template>
   <d-function-wrapper :classes="['d-toolbar']" v-bind="{...$props, ...$attrs}">
     <d-card block rounded="none">
-      <d-icon-button v-if="showHamburger" color="primary" @click="(e)=>$emit('hamburgerClick', e)">
-        <d-icon name="bars"/>
-      </d-icon-button>
-      <slot></slot>
+      <d-row block gap class="px-2">
+        <d-icon-button v-if="showHamburger" color="primary" @click="(e)=>$emit('hamburgerClick', e)" style="margin-left: -8px">
+          <d-icon name="bars"/>
+        </d-icon-button>
+        <slot></slot>
+      </d-row>
     </d-card>
   </d-function-wrapper>
 </template>

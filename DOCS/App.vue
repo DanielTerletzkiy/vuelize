@@ -1,31 +1,29 @@
 <template>
   <d-root>
     <title>{{$route.name}}</title>
-    <d-toolbar show-hamburger @hamburgerClick="()=>navDrawer = !navDrawer">
-      <d-row gap class="px-2">
-        <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>
-        <d-spacer/>
-        <d-checkbox flex-direction="row-reverse" :size="24" on-icon="moonset" off-icon="sunset"
-                    v-model="$vuelize.theme.dark">
-          Dark mode
-        </d-checkbox>
-        <d-tooltip color="#fff" elevation-light>
-          <d-card-subtitle elevation-dark="n1" outlined class="font-weight-bold">
-            <d-icon color="primary" name="chart-growth"/>
-            v{{ version }}
-          </d-card-subtitle>
-          <template slot="tooltip">
-            <d-icon name="chart-growth"/>
-            Current NPM Version
-          </template>
-        </d-tooltip>
-      </d-row>
-    </d-toolbar>
+    <template v-slot:toolbar>
+      <d-toolbar show-hamburger @hamburgerClick="()=>navDrawer = !navDrawer">
+          <d-card-title class="font-size-medium" color="primary">Vuelize</d-card-title>
+          <d-spacer/>
+          <d-checkbox flex-direction="row-reverse" :size="24" on-icon="moonset" off-icon="sunset"
+                      v-model="$vuelize.theme.dark">
+            Dark mode
+          </d-checkbox>
+          <d-tooltip color="#fff" elevation-light>
+            <d-card-subtitle elevation-dark="n1" outlined class="font-weight-bold">
+              <d-icon color="primary" name="chart-growth"/>
+              v{{ version }}
+            </d-card-subtitle>
+            <template slot="tooltip">
+              <d-icon name="chart-growth"/>
+              Current NPM Version
+            </template>
+          </d-tooltip>
+      </d-toolbar>
+    </template>
 
-    <d-notification-wrapper/>
-
-    <div style="display: flex">
-      <d-navigation-bar :permanent="!this.$isMobile()" :temporary="this.$isMobile()" v-model="navDrawer">
+    <template v-slot:navbar>
+      <d-navigation-bar :permanent="!$isMobile()" :temporary="$isMobile()" v-model="navDrawer">
         <d-column class="pt-2" :wrap="false" style="height: 100%">
           <d-column flex column block>
             <NavItem v-for="navItem in navItems" path="" :position="0" :key="navItem.category" :nav-item="navItem"
@@ -50,11 +48,11 @@
           </d-row>
         </d-column>
       </d-navigation-bar>
+    </template>
 
-      <main :class="this.$isMobile() ? 'pa-3' : 'pa-6'" style="flex: 1">
-        <router-view></router-view>
-      </main>
-    </div>
+    <template v-slot:main>
+      <router-view/>
+    </template>
 
   </d-root>
 </template>

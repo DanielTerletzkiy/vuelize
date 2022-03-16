@@ -65,6 +65,7 @@ export default {
   min-height: 44px;
   padding: 0 14px;
   font-weight: 600;
+  cursor: pointer;
 
   transition: background 0.2s ease-out;
 

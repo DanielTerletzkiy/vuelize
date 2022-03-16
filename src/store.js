@@ -14,11 +14,11 @@ const store = new Vuex.Store({
             themes: {
                 dark: {
                     primary: '#9570FF',
-                    secondary: '#424242',
-                    success: '#A7FA00',
-                    error: '#ff6b6b',
-                    warning: '#ffa600',
-                    info: '#00b2ff'
+                    secondary: '#9ea7ad',
+                    success: '#74ec38',
+                    error: '#e15139',
+                    warning: '#fca121',
+                    info: '#2ea2e0'
                 },
                 light: {
                     primary: '#3075FF',

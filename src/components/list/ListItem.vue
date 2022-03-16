@@ -88,6 +88,7 @@ export default {
   border-radius: inherit;
   min-height: 36px;
   padding: 4px;
+  cursor: pointer;
 
   list-style: none;
   margin: 0;

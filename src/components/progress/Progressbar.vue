@@ -1,7 +1,7 @@
 <template>
   <d-function-wrapper root-tag="d-card" elevation="n4" :classes="['d-progressbar']" v-bind="{...$props, ...$attrs}"
                       @click="$emit('click')">
-    <d-card class="d-progressbar__wrapper glow glow--active" :color="color || 'primary'" block
+    <d-card class="d-progressbar__wrapper" :color="color || 'primary'" block
             :max-width="hideLabel?'100%':`calc(100% - ${labelWidth}px)`">
       <d-card class="d-progressbar__wrapper__indicator" :style="progressStylesObject" :width="`${progress}%`"
               :color="color || 'primary'">

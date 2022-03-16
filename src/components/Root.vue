@@ -1,5 +1,20 @@
 <template>
-  <div class="d-root" id="app" :class="themeMode">
+  <div class="d-root" id="root" :class="themeMode">
+    <d-notification-wrapper/>
+    <header style="position: sticky; top: 0; width: 100%; max-height: 54px; z-index: 10;">
+      <slot name="toolbar"></slot>
+    </header>
+    <div style="display: flex;">
+      <aside>
+        <slot name="navbar"></slot>
+      </aside>
+      <main style="flex: 1;" class="pa-3">
+        <slot name="main"></slot>
+      </main>
+    </div>
+    <footer>
+      <slot name="footer"></slot>
+    </footer>
     <slot/>
   </div>
 </template>
