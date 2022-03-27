@@ -1,0 +1,29 @@
+<script setup lang="ts">
+// This starter template is using Vue 3 <script setup> SFCs
+// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+import HelloWorld from './components/HelloWorld.vue'
+import DRoot from "./components/DRoot.vue";
+import DToolbar from "./components/app/toolbar/DToolbar.vue";
+import DCardSubtitle from "./components/card/text/DCardSubtitle.vue";
+import DCardTitle from "./components/card/text/DCardTitle.vue";
+import DImage from "./components/image/DImage.vue";
+</script>
+
+<template>
+  <DRoot>
+    <template v-slot:toolbar>
+      <DToolbar show-hamburger>
+        <d-card-title color="primary" class="font-size-medium">
+          Vuelize
+        </d-card-title>
+      </DToolbar>
+    </template>
+    <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" color="#88c96b"/>
+  </DRoot>
+</template>
+
+<style>
+#app {
+
+}
+</style>

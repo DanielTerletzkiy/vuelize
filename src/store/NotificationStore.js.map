@@ -1,0 +1,1 @@
+{"version":3,"file":"NotificationStore.js","sourceRoot":"","sources":["NotificationStore.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,WAAW,EAAC,MAAM,OAAO,CAAA;AAGjC,MAAM,CAAC,MAAM,iBAAiB,GAAG,WAAW,CAAC,cAAc,EAAE;IACzD,KAAK,EAAE,GAAG,EAAE,CACR,CAAC;QACG,aAAa,EAAE,EAAE;KACE,CAAA;CAC9B,CAAC,CAAA"}
