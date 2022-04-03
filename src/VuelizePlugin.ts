@@ -15,6 +15,8 @@ import Unicon from 'vue-unicons'
 // @ts-ignore
 import * as uc from 'vue-unicons/dist/icons.js'
 
+import 'v3-transitions/dist/style.css'
+
 class Vuelize {
     app: App;
     theme: ThemeTypes;
@@ -71,7 +73,7 @@ class Vuelize {
         const g = parseInt(hexColor.substr(2, 2), 16);
         const b = parseInt(hexColor.substr(4, 2), 16);
         // Get YIQ ratio
-        const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        let yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
         // Check contrast
         return (yiq >= 160) ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.85)';
     }
@@ -106,6 +108,6 @@ export const VuelizePlugin: Plugin = {
         app.config.globalProperties.$vuelize = new Vuelize(app);
         app.provide('vuelize', app.config.globalProperties.$vuelize);
 
-        importAll(app)
+        importAll(app);
     }
 }

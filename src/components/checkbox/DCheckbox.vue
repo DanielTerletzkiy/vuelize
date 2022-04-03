@@ -3,9 +3,9 @@
             @click="click">
     <div class="d-checkbox__box" :class="classes" v-ripple
          :tabindex="disabled?-1:0" @keyup.enter="click">
-      <FadeTransition>
-        <DIcon v-if="icon" :name="icon" :size="size" :color="'currentColor'"/>
-      </FadeTransition>
+      <SlideYDownTransition group :duration="150">
+        <DIcon v-if="icon" :key="icon" :name="icon" :size="size" :color="'currentColor'"/>
+      </SlideYDownTransition>
     </div>
     <div class="d-checkbox__label" v-if="!!this.$slots.default">
       <slot></slot>
@@ -17,7 +17,7 @@
 import {computed, inject, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DIcon from "../icon/DIcon.vue";
-import FadeTransition from "vue2-transitions/src/Fade/FadeTransition.vue";
+import { SlideYDownTransition } from 'v3-transitions';
 import defaultProps from "../../mixins/DefaultProps";
 
 const vuelize: any = inject('vuelize');
@@ -73,6 +73,7 @@ const classes = computed(() => {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
     transition-duration: 0.1s;
 

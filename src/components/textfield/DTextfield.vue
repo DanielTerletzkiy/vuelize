@@ -1,14 +1,14 @@
 <template>
-  <d-function-wrapper :classes="['d-text-field', ...classesObject]" v-bind="{...$props, ...$attrs}"
-                      :style="textFieldStylesObject"
-                      @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
+  <DWrapper :classes="['d-text-field', classesObject]" v-bind="{...$props, ...$attrs}"
+            :style="textFieldStylesObject"
+            @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
     <div class="d-text-field__prefix">
       <slot name="prefix"/>
     </div>
-    <component v-if="componentType !== 'input'" :is="componentType" v-bind="{...$props, ...$attrs}" :id="this.uuid"
+    <component v-if="componentType !== 'input'" :is="componentType" v-bind="{...$props, ...$attrs}" :id="instance.uid"
                class="d-text-field__input"
                :placeholder="placeholderActive ? placeholder : ' '"
-               :value="value" @input="onInput"
+               :value="modelValue" @input="onInput"
                @removeFocus="removeFocus"
                @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
       <template v-if="componentType !== 'input'" slot="label" slot-scope="props">
@@ -18,112 +18,104 @@
         <slot name="item" v-bind="props"></slot>
       </template>
     </component>
-    <input v-else v-bind="{...$props, ...$attrs}" :id="this.uuid"
+    <input v-else v-bind="{...$props, ...$attrs}" :id="instance.uid"
            class="d-text-field__input"
            :placeholder="placeholderActive ? placeholder : ' '"
-           :value="value" @input="onInput"
+           :value="modelValue" @input="onInput"
            @keyup.enter="$emit('enter')"
            @removeFocus="removeFocus"
            @focusin="()=>this.selected = true" @focusout="()=>this.selected = false"/>
-    <label v-if="label && !solo" :for="this.uuid" class="d-text-field__label" :class="labelClassesObject">{{
+    <label v-if="label && !solo" :for="instance.uid" class="d-text-field__label" :class="labelClassesObject">{{
         label
       }}</label>
     <div class="d-text-field__suffix">
       <slot name="suffix"/>
     </div>
-  </d-function-wrapper>
+  </DWrapper>
 </template>
 
-<script>
+<script setup lang="ts">
 import DSelect from "@/components/textfield/variant/Select.vue";
 import DAutocomplete from "@/components/textfield/variant/Autocomplete.vue";
+import {computed, inject, onMounted, ref} from "vue";
+import defaultProps from "../../mixins/DefaultProps";
+import {getCurrentInstance} from 'vue';
+import DWrapper from "../DWrapper.vue";
 
-export default {
-  name: "d-text-field",
 
-  components: {
-    DSelect,
-    DAutocomplete
-  },
+const instance: any = getCurrentInstance();
+const vuelize: any = inject('vuelize');
 
-  props: {
-    autocomplete: Boolean,
+const emit = defineEmits(['update:modelValue', 'enter']);
+const props = defineProps({
+  autocomplete: {type: Boolean},
+  filled: {type: Boolean},
+  fullWidth: {type: Boolean},
+  solo: {type: Boolean},
+  label: {type: String},
+  placeholder: {type: String, default: ''},
+  select: {type: Boolean},
+  modelValue: {type: [String, Object]},
+  ...defaultProps
+});
 
-    filled: Boolean,
-    fullWidth: Boolean,
-    outlined: Boolean,
-    solo: Boolean,
-    label: String,
-    placeholder: String,
+const hover = ref(false);
+const selected = ref(false);
 
-    select: Boolean,
-    value: undefined,
-    width: String
-  },
+const placeholderActive = !!props.placeholder && !props.modelValue;
 
-  data: () => ({
-    hover: false,
-    selected: false,
-  }),
-
-  computed: {
-
-    classesObject() {
-      return {
-        'd-text-field--active': (this.hover || this.selected),
-        'd-text-field--placeholder': this.placeholderActive,
-        'd-text-field--outlined outlined depressed elevation': this.outlined,
-        'd-text-field--filled glow glow--active': this.filled,
-        'd-text-field--solo': this.solo,
-      }
-    },
-
-    componentType() {
-      if (this.select) {
-        return 'd-select'
-      } else if (this.autocomplete) {
-        return 'd-autocomplete'
-      } else {
-        return 'input'
-      }
-    },
-
-    labelClassesObject() {
-      return {
-        'd-text-field--filled': this.filled,
-      }
-    },
-
-    placeholderActive() {
-      return this.placeholder && !this.value;
-    },
-    textFieldStylesObject() {
-      return {
-        color: (this.hover || this.selected) ? this.processColor(this.color, this.tint) : null,
-        caretColor: (this.hover || this.selected) ? this.processColor(this.color, this.tint) : null,
-        width: this.width,
-        'min-width': this.fullWidth ? '100%' : 'unset',
-      }
-    }
-  },
-
-  mounted() {
-    this.hover = false;
-    this.selected = false;
-
-    this.$forceUpdate();
-  },
-
-  methods: {
-    onInput(e) {
-      this.$emit('input', typeof e === 'object' ? e.target.value : e)
-    },
-    removeFocus() {
-      this.selected = false;
-      this.hover = false;
-      document.activeElement.blur();
-    }
+const classesObject = computed(() => {
+  return {
+    'd-text-field--active': (hover.value || selected.value),
+    'd-text-field--placeholder': placeholderActive,
+    'd-text-field--outlined outlined depressed elevation': props.outlined,
+    'd-text-field--filled glow glow--active': props.filled,
+    'd-text-field--solo': props.solo,
   }
+});
+
+const componentType = computed(() => {
+  if (props.select) {
+    return 'd-select'
+  } else if (props.autocomplete) {
+    return 'd-autocomplete'
+  } else {
+    return 'input'
+  }
+})
+
+const labelClassesObject = computed(() => {
+  return {
+    'd-text-field--filled': props.filled,
+  }
+});
+
+const textFieldStylesObject = computed(() => {
+  return {
+    color: (hover.value || selected.value) ? vuelize.getColor(props.color, props.tint) : null,
+    caretColor: (hover.value || selected.value) ? vuelize.getColor(props.color, props.tint) : null,
+    width: props.width,
+    'min-width': props.fullWidth ? '100%' : 'unset',
+  }
+});
+
+
+onMounted(() => {
+  hover.value = false;
+  selected.value = false;
+
+  instance.proxy.$forceUpdate();
+});
+
+function onInput(e: { target: HTMLInputElement }) {
+  emit('update:modelValue', typeof e === 'object' ? e.target.value : e)
+}
+
+function removeFocus() {
+  hover.value = false;
+  selected.value = false;
+  //@ts-ignore
+  document.activeElement.blur();
 }
 </script>
 
@@ -139,7 +131,7 @@ export default {
   display: flex;
   align-items: center;
 
-  &__input, ::v-deep .d-text-field__input__autocomplete {
+  &__input, :deep(.d-text-field__input__autocomplete) {
     position: relative;
     top: 0;
     left: 0;
@@ -190,7 +182,7 @@ export default {
     box-shadow: none;
 
     &.d-text-field--active {
-      outline: solid 1px currentColor !important;
+      outline: solid 1.8px currentColor !important;
       border-color: currentColor;
     }
 
@@ -219,28 +211,31 @@ export default {
       padding-right: 1.2em;
     }
 
-    &:not(.d-text-field--solo){
+    &:not(.d-text-field--solo) {
 
-    .d-text-field__prefix{
-      padding-top: 12px;
-    }
-    .d-text-field__suffix{
-      padding-top: 12px;
-    }
+      .d-text-field__prefix {
+        padding-top: 12px;
+      }
+
+      .d-text-field__suffix {
+        padding-top: 12px;
+      }
     }
   }
 
   &--solo {
     height: 3rem !important;
+
     .d-text-field__input {
       padding: 0 1.25em !important;
     }
+
     .d-text-field__label {
       display: none;
     }
   }
 
-  &.d-text-field--filled.d-text-field--outlined label{
+  &.d-text-field--filled.d-text-field--outlined label {
     background: none !important;
   }
 

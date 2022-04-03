@@ -45,11 +45,12 @@
         </DRow>
         <DRow gap>
           <DAvatar color="primary">
-            <DIcon name="flask" :color="vuelize.getColorContrast('currentColor')"/>
+            <DIcon name="flask" :color="vuelize.getColorContrast('currentColor', 0)"/>
           </DAvatar>
           <DIconButton color="primary" name="flask" active/>
         </DRow>
-        <DCheckbox color="primary" tint="30" v-model="fill">
+        <DTextfield v-model="textfield" filled color="primary" label="Test"/>
+        <DCheckbox color="primary" tint="30" off-icon="times" v-model="fill">
           Check for filled List
         </DCheckbox>
         <DList v-model="list" color="primary" class="font-weight-bold" :filled="fill" elevation-dark="2">
@@ -106,9 +107,11 @@ import DProgressbar from "./progress/DProgressbar.vue";
 import DPagination from "./pagination/DPagination.vue";
 import DTable from "./table/DTable.vue";
 import DDivider from "./divider/DDivider.vue";
+import DTextfield from "./textfield/DTextfield.vue";
 
 const vuelize: any = inject('vuelize');
 
+const textfield = ref('');
 const fill = ref(false);
 const list = ref(1);
 const page = ref(1);

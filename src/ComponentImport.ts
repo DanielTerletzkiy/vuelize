@@ -95,5 +95,5 @@ export default function importAll(app: App) {
     app.component('DTable', DTable)
     app.component('DRoot', DRoot)
     app.component('DWrapper', DWrapper)
-
+    return app;
 }

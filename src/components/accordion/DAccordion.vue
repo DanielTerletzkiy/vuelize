@@ -22,14 +22,14 @@ import DWrapper from "../DWrapper.vue";
 import DCardTitle from "../card/text/DCardTitle.vue";
 import DCardContent from "../card/content/DCardContent.vue";
 import DIcon from "../icon/DIcon.vue";
-import CollapseTransition from 'vue2-transitions/src/Collapse/CollapseTransition.vue'
+import { CollapseTransition } from 'v3-transitions';
 
 const component = getCurrentInstance();
 
 const emit = defineEmits(['update:modelValue'])
 
 const props = defineProps({
-  modelValue: {type: [Boolean, Number], required: true},
+  modelValue: {type: [Boolean, Number], default: true},
   headerColor: {type: String},
 })
 
