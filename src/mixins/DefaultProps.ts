@@ -1,7 +1,7 @@
 export default {
     link: {type: String, default: null},
     color: {type: String},
-    tint: {type: [String, Number], default: 0},
+    tint: {type: Number, default: 0},
     rounded: {type: String, default: 'lg'},
     outlined: {type: Boolean},
     depressed: {type: Boolean, default: true},

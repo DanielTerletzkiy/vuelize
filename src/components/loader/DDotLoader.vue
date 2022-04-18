@@ -1,7 +1,7 @@
 <template>
   <DWrapper :classes="['d-dot-loader']" v-bind="{...$props, ...$attrs}">
     <DRow class="d-dot-loader__container" :wrap="false" gap>
-      <DAvatar class="d-dot-loader__container__dot" v-for="i in Array.from(Array(this.amount).keys())" :key="i"
+      <DAvatar class="d-dot-loader__container__dot" v-for="i in Array.from(Array(amount).keys())" :key="i"
                ref="dot"
                :style="{transform: data.currentDot === i ? 'scale(200%)' : 'scale(100%)'}"
                :size="defaultSize"
@@ -11,6 +11,12 @@
     </DRow>
   </DWrapper>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'DDotLoader',
+}
+</script>
 
 <script setup lang="ts">
 import defaultProps from "../../mixins/DefaultProps";

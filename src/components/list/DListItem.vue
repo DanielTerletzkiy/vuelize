@@ -3,7 +3,7 @@
             :style="stylesObject" v-ripple
             @focusin="()=>focus = true"
             @focusout="()=>focus = false"
-            v-bind="{...$props, ...$attrs}" @click="click" :tabindex="this.disabled?-1:0" @keyup.enter="click"
+            v-bind="{...$props, ...$attrs}" @click="click" :tabindex="disabled?-1:0" @keyup.enter="click"
             glow :glowing="!filled && selected">
     <fade-transition>
       <DCard v-if="focus" class="d-list__item__indicator"/>
@@ -13,6 +13,12 @@
     </div>
   </DWrapper>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'DListItem',
+}
+</script>
 
 <script setup lang="ts">
 import {computed, getCurrentInstance, inject, ref} from "vue";

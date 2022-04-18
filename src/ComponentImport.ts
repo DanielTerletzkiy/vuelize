@@ -13,6 +13,7 @@ import DCardSubtitle from './components/card/text/DCardSubtitle.vue'
 import DCardContent from './components/card/content/DCardContent.vue'
 import DCheckbox from './components/checkbox/DCheckbox.vue'
 import DDivider from './components/divider/DDivider.vue'
+import DDialog from './components/dialog/DDialog.vue'
 import DColumn from './components/flex/DColumn.vue'
 import DRow from './components/flex/DRow.vue'
 import DSpacer from './components/flex/DSpacer.vue'
@@ -28,7 +29,8 @@ import DNotificationWrapper from './components/notification/DNotificationWrapper
 import DPagination from './components/pagination/DPagination.vue'
 import DProgressBar from './components/progress/DProgressbar.vue'
 import DTable from './components/table/DTable.vue'
-import DRoot from './components/DRoot.vue'
+import DTextfield from './components/textfield/DTextfield.vue'
+import DRoot from './components/root/DRoot.vue'
 import DWrapper from './components/DWrapper.vue'
 
 export const getImports = {
@@ -45,6 +47,7 @@ export const getImports = {
     DCardContent,
     DCheckbox,
     DDivider,
+    DDialog,
     DColumn,
     DRow,
     DSpacer,
@@ -60,6 +63,7 @@ export const getImports = {
     DPagination,
     DProgressBar,
     DTable,
+    DTextfield,
     DRoot,
     DWrapper,
 }
@@ -78,6 +82,7 @@ export default function importAll(app: App) {
     app.component('DCardContent', DCardContent)
     app.component('DCheckbox', DCheckbox)
     app.component('DDivider', DDivider)
+    app.component('DDialog', DDialog)
     app.component('DColumn', DColumn)
     app.component('DRow', DRow)
     app.component('DSpacer', DSpacer)
@@ -93,6 +98,7 @@ export default function importAll(app: App) {
     app.component('DPagination', DPagination)
     app.component('DProgressBar', DProgressBar)
     app.component('DTable', DTable)
+    app.component('DTextfield', DTextfield)
     app.component('DRoot', DRoot)
     app.component('DWrapper', DWrapper)
     return app;

@@ -19,6 +19,12 @@
   </DWrapper>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DSelectMenu',
+}
+</script>
+
 <script setup lang="ts">
 import {ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";

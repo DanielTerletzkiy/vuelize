@@ -1,6 +1,6 @@
 <template>
   <DWrapper :classes="['d-notification']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
-    <slot name="default" :notification="this.notification">
+    <slot name="default" :notification="notification">
       <DCardContent class="d-notification__content" :color="data.options.color" glow glowing
                     :outlined="!data.options.color"
                     depressed min-width="100%" max-width="500px"
@@ -24,6 +24,12 @@
     </slot>
   </DWrapper>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'DNotification',
+}
+</script>
 
 <script setup lang="ts">
 import {inject, onBeforeUnmount, onMounted, reactive, watch} from "vue";

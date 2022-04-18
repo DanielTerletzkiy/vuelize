@@ -10,11 +10,19 @@
   </DWrapper>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DIconButton',
+}
+</script>
+
 <script setup lang="ts">
 import DWrapper from "../DWrapper.vue";
 import {ref} from "vue";
 import DIcon from "../icon/DIcon.vue";
 import defaultProps from "../../mixins/DefaultProps";
+
+defineEmits(['click'])
 
 const props = defineProps({
   active: {type: Boolean},

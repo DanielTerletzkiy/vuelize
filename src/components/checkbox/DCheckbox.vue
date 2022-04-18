@@ -7,11 +7,17 @@
         <DIcon v-if="icon" :key="icon" :name="icon" :size="size" :color="'currentColor'"/>
       </SlideYDownTransition>
     </div>
-    <div class="d-checkbox__label" v-if="!!this.$slots.default">
+    <div class="d-checkbox__label" v-if="!!$slots.default">
       <slot></slot>
     </div>
   </DWrapper>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'DCheckbox',
+}
+</script>
 
 <script setup lang="ts">
 import {computed, inject, ref} from "vue";
@@ -25,7 +31,7 @@ const vuelize: any = inject('vuelize');
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
   modelValue: {type: Boolean},
-  size: {type: [String, Number], default: 30},
+  size: {type: Number, default: 30},
   onIcon: {type: String, default: 'check'},
   offIcon: {type: String, default: ''},
   flexDirection: {type: String, default: 'row'},

@@ -28,7 +28,7 @@
                 {{ prop.name }}
               </d-checkbox>
               <d-textfield v-model="activeProps[prop.name]"
-                           v-if="prop.type.name !== 'Boolean'" full-width filled solo
+                           v-if="prop.type.name !== 'Boolean' && prop.type.name === type" full-width filled solo
                            color="primary" :placeholder="prop.name.charAt(0).toUpperCase() + prop.name.slice(1)"/>
             </d-row>
           </d-column>
@@ -40,7 +40,7 @@
           </template>
           <template v-slot:content>
             <d-column gap>
-              <d-column gap v-for="type in ['Boolean', 'String']">
+              <d-column gap v-for="type in ['Boolean', 'String', 'Number']">
                 <d-row gap>
                   <d-card-subtitle class="pa-0 font-weight-bold" color="primary" tint="40">{{ type }}</d-card-subtitle>
                   type
@@ -53,7 +53,7 @@
                     {{ prop.name }}
                   </d-checkbox>
                   <d-textfield v-model="activeProps[prop.name]"
-                               v-if="prop.type.name === 'String'" full-width filled solo
+                               v-if="prop.type.name !== 'Boolean' && prop.type.name === type" full-width filled solo
                                color="primary" :placeholder="prop.name.charAt(0).toUpperCase() + prop.name.slice(1)"/>
                 </d-row>
               </d-column>

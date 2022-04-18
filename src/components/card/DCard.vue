@@ -1,9 +1,15 @@
 <template>
-  <DWrapper :classes="['d-card', {block}]" v-bind="{...$props, ...$attrs}"
+  <DWrapper :classes="['d-card', {block}]" v-bind="{...$props, ...$attrs}" :style="{backgroundColor}"
             @click="$emit('click')">
     <slot></slot>
   </DWrapper>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'DCard',
+}
+</script>
 
 <script setup lang="ts">
 import DWrapper from "../DWrapper.vue";
@@ -23,8 +29,6 @@ const props = defineProps({
 const backgroundColor = computed(()=>{
   if(props.backgroundColor){
     return vuelize.getColor(props.backgroundColor, props.tint)
-  }else{
-    return 'unset'
   }
 })
 
@@ -37,8 +41,6 @@ const backgroundColor = computed(()=>{
   width: max-content;
   min-width: v-bind(minWidth);
   max-width: v-bind(maxWidth);
-
-  background-color: v-bind(backgroundColor);
 
   &.block {
     width: auto;

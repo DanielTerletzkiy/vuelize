@@ -3,6 +3,12 @@
             v-bind="{...$props, ...$attrs}"/>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DDivider',
+}
+</script>
+
 <script setup lang="ts">
 import {ref} from "vue";
 import DWrapper from "../DWrapper.vue";

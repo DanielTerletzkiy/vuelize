@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
-import DRoot from "./components/DRoot.vue";
+import DRoot from "./components/root/DRoot.vue";
 import DToolbar from "./components/app/toolbar/DToolbar.vue";
 import DCardSubtitle from "./components/card/text/DCardSubtitle.vue";
 import DCardTitle from "./components/card/text/DCardTitle.vue";

@@ -59,15 +59,20 @@ button {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   width: 100%;
   height: 100vh;
-  overflow: auto;
   transition: background .2s;
 
   &.dark {
     background: $dark_background;
+    color: $dark_card_text;
   }
 
   &.light {
     background: $light_background;
+    color: $light_card_text;
+  }
+
+  main {
+    overflow: auto;
   }
 }
 

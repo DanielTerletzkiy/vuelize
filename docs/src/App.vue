@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DRoot from "../../src/components/DRoot.vue";
+import DRoot from "../../src/components/root/DRoot.vue";
 import DToolbar from "../../src/components/app/toolbar/DToolbar.vue";
 import DCardTitle from "../../src/components/card/text/DCardTitle.vue";
 import DButton from "../../src/components/button/DButton.vue";

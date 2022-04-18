@@ -12,6 +12,12 @@
   </fade-transition>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DDialog',
+}
+</script>
+
 <script setup lang="ts">
 import DWrapper from "../DWrapper.vue";
 

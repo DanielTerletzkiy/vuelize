@@ -1,7 +1,7 @@
 <template>
   <DWrapper :classes="['d-text-field', classesObject]" v-bind="{...$props, ...$attrs}"
             :style="textFieldStylesObject"
-            @mouseenter="()=> this.hover = true" @mouseleave="()=> this.hover = false">
+            @mouseenter="()=> hover = true" @mouseleave="()=> hover = false">
     <div class="d-text-field__prefix">
       <slot name="prefix"/>
     </div>
@@ -10,7 +10,7 @@
                :placeholder="placeholderActive ? placeholder : ' '"
                :value="modelValue" @input="onInput"
                @removeFocus="removeFocus"
-               @focusin="()=>this.selected = true" @focusout="()=>this.selected = false">
+               @focusin="()=>selected = true" @focusout="()=>selected = false">
       <template v-if="componentType !== 'input'" slot="label" slot-scope="props">
         <slot name="label" v-bind="props"></slot>
       </template>
@@ -24,7 +24,7 @@
            :value="modelValue" @input="onInput"
            @keyup.enter="$emit('enter')"
            @removeFocus="removeFocus"
-           @focusin="()=>this.selected = true" @focusout="()=>this.selected = false"/>
+           @focusin="()=>selected = true" @focusout="()=>selected = false"/>
     <label v-if="label && !solo" :for="instance.uid" class="d-text-field__label" :class="labelClassesObject">{{
         label
       }}</label>
@@ -33,6 +33,12 @@
     </div>
   </DWrapper>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'DTextfield',
+}
+</script>
 
 <script setup lang="ts">
 import DSelect from "@/components/textfield/variant/Select.vue";

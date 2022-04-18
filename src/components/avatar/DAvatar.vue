@@ -6,6 +6,12 @@
   </DWrapper>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DAvatar',
+}
+</script>
+
 <script setup lang="ts">
 import DWrapper from "../DWrapper.vue";
 import DImage from "../image/DImage.vue";

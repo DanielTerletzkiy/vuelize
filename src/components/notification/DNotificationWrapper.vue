@@ -10,6 +10,12 @@
   </DWrapper>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DNotificationWrapper',
+}
+</script>
+
 <script setup lang="ts">
 import {computed, inject} from "vue";
 import DWrapper from "../DWrapper.vue";

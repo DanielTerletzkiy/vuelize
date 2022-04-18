@@ -20,6 +20,12 @@
   </DWrapper>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DLabel',
+}
+</script>
+
 <script setup lang="ts">
 import DWrapper from "../DWrapper.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";

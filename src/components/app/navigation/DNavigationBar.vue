@@ -15,6 +15,12 @@
   </slide-x-left-transition>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DNavigationBar',
+}
+</script>
+
 <script setup lang="ts">
 import DWrapper from "../../DWrapper.vue";
 import DRow from "../../flex/DRow.vue";

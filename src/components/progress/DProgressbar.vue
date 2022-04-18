@@ -6,12 +6,20 @@
              :color="props.color">
         <DCardSubtitle v-if="showLabel" class="d-progressbar__wrapper__indicator__label" :rounded="props.rounded"
                        :color="$vuelize.getColorContrast(props.color, props.tint)">
-          {{ progress }} %
+          <slot name="progress" :progress="progress">
+            {{ progress }} %
+          </slot>
         </DCardSubtitle>
       </DCard>
     </DCard>
   </DWrapper>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'DProgressbar',
+}
+</script>
 
 <script setup lang="ts">
 import DWrapper from "../DWrapper.vue";

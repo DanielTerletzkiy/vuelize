@@ -2,18 +2,24 @@
   <DWrapper root-tag="button" :classes="['d-btn', {filled, block, glow, size}]"
             v-bind="{...$props, ...$attrs}"
             @click="$emit('click')" :glow="false">
-    <span class="d-btn__content" :style="{color: this.filled ? $vuelize.getColorContrast(color,tint):''}" v-ripple>
-      <span class="prefix" v-if="!!this.$slots.prefix">
+    <span class="d-btn__content" :style="{color: filled ? $vuelize.getColorContrast(color,tint):''}" v-ripple>
+      <span class="prefix" v-if="!!$slots.prefix">
         <slot name="prefix"></slot>
       </span>
       <span class="center"><slot name="default"></slot></span>
-      <span class="suffix" v-if="!!this.$slots.suffix">
+      <span class="suffix" v-if="!!$slots.suffix">
         <slot name="suffix"></slot>
       </span>
     </span>
     <slot name="misc"></slot>
   </DWrapper>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'DButton',
+}
+</script>
 
 <script setup lang="ts">
 import DWrapper from "../DWrapper.vue";

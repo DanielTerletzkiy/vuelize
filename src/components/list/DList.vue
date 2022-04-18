@@ -4,6 +4,12 @@
   </DWrapper>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DList',
+}
+</script>
+
 <script setup lang="ts">
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";

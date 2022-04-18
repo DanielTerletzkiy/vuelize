@@ -4,6 +4,12 @@
   </DWrapper>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DCardSubtitle',
+}
+</script>
+
 <script setup lang="ts">
 import DWrapper from "../../DWrapper.vue";
 import defaultProps from "../../../mixins/DefaultProps";

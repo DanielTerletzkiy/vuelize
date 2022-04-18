@@ -16,6 +16,12 @@
   </DWrapper>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DAccordion',
+}
+</script>
+
 <script setup lang="ts">
 import {computed, getCurrentInstance} from "vue";
 import DWrapper from "../DWrapper.vue";

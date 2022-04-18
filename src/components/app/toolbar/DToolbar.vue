@@ -12,6 +12,12 @@
   </DWrapper>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DToolbar',
+}
+</script>
+
 <script setup lang="ts">
 import DWrapper from "../../DWrapper.vue";
 import DCard from "../../card/DCard.vue";

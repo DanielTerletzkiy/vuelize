@@ -3,6 +3,12 @@
             v-bind="{...$props, ...$attrs}"/>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'DImage',
+}
+</script>
+
 <script setup lang="ts">
 import DWrapper from "../DWrapper.vue";
 import defaultProps from "../../mixins/DefaultProps";

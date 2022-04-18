@@ -1,4 +1,7 @@
 <template>
+  <DCard backgroundColor="red">
+    gggggg
+  </DCard>
   <DCard elevation-light block>
     <DCardTitle color="primary" tint="20">
       This is a title
@@ -108,6 +111,7 @@ import DPagination from "./pagination/DPagination.vue";
 import DTable from "./table/DTable.vue";
 import DDivider from "./divider/DDivider.vue";
 import DTextfield from "./textfield/DTextfield.vue";
+import DAccordion from "./accordion/DAccordion.vue";
 
 const vuelize: any = inject('vuelize');
 
