@@ -41,8 +41,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import DSelect from "@/components/textfield/variant/Select.vue";
-import DAutocomplete from "@/components/textfield/variant/Autocomplete.vue";
+//import DSelect from "@/components/textfield/variant/Select.vue";
+//import DAutocomplete from "@/components/textfield/variant/Autocomplete.vue";
 import {computed, inject, onMounted, ref} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import {getCurrentInstance} from 'vue';
@@ -133,7 +133,6 @@ function removeFocus() {
   width: 250px;
   height: 3rem;
   caret-color: currentColor;
-  transition-duration: 0.15s;
   display: flex;
   align-items: center;
 

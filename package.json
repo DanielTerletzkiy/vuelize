@@ -1,7 +1,7 @@
 {
   "name": "vuelize",
   "private": false,
-  "version": "0.0.93-beta.10",
+  "version": "0.0.93-beta.11",
   "repository": {
     "type": "git",
     "url": "https://github.com/DanielTerletzkiy/vuelize"
@@ -28,7 +28,7 @@
     "v3-transitions": "^0.2.0",
     "vue": "^3.2.25",
     "vue-material-design-ripple": "^1.0.0",
-    "vue-unicons": "^3.2.2-alpha.1"
+    "vue-unicons": "^3.3.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",
@@ -46,17 +46,17 @@
     "@typescript-eslint/eslint-plugin": "2.33.0",
     "@typescript-eslint/parser": "2.33.0",
     "@vitejs/plugin-vue": "^2.2.0",
-    "@vue/cli-plugin-babel": "4.5.0",
-    "@vue/cli-plugin-eslint": "4.5.0",
-    "@vue/cli-plugin-typescript": "4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-plugin-babel": "^5.0.4",
+    "@vue/cli-plugin-eslint": "^5.0.4",
+    "@vue/cli-plugin-typescript": "^5.0.4",
+    "@vue/cli-service": "^5.0.4",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-prettier": "6.0.0",
     "@vue/eslint-config-typescript": "5.0.2",
     "autoprefixer": "^9.7.8",
     "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.2",
-    "cz-conventional-changelog": "^3.3.0",
+    "cz-conventional-changelog": "^3.0.1",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "3.1.3",
     "eslint-plugin-vue": "^7.1.0",
@@ -66,7 +66,7 @@
     "minimist": "^1.2.6",
     "postcss": "^8.0.0",
     "postcss-import": "12.0.1",
-    "postcss-inline-svg": "^4.1.0",
+    "postcss-inline-svg": "^5.0.0",
     "postcss-loader": "^4.0.4",
     "postcss-nested": "^4.2.1",
     "postcss-simple-vars": "5.0.2",
@@ -74,14 +74,14 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.30.0",
     "rollup-plugin-css-only": "^2.1.0",
-    "rollup-plugin-postcss": "^3.1.8",
+    "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "0.28.0",
     "rollup-plugin-vue": "^6.0.0",
     "sass": "^1.49.10",
     "typescript": "^4.5.4",
     "vite": "^2.8.0",
-    "vue-cli-plugin-webpack-bundle-analyzer": "^2.0.0",
+    "vue-cli-plugin-webpack-bundle-analyzer": "^4.0.0",
     "vue-tsc": "^0.29.8"
   }
 }

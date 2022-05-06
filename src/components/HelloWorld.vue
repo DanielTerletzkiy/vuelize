@@ -1,8 +1,14 @@
 <template>
-  <DCard backgroundColor="red">
-    gggggg
-  </DCard>
   <DCard elevation-light block>
+    <div class="pa-4">
+      <DAccordion outlined>
+        <template v-slot:header>
+          This is an Accordion
+        </template>
+        This is the content
+      </DAccordion>
+    </div>
+
     <DCardTitle color="primary" tint="20">
       This is a title
     </DCardTitle>
@@ -50,7 +56,20 @@
           <DAvatar color="primary">
             <DIcon name="flask" :color="vuelize.getColorContrast('currentColor', 0)"/>
           </DAvatar>
-          <DIconButton color="primary" name="flask" active/>
+          <DTooltip color="error" :tint="100" filled position="right">
+            <DAvatar color="error" :tint="100">
+              <DIcon name="flask" color="error" :size="40" :tint="0"/>
+            </DAvatar>
+            <template v-slot:tooltip>
+              Error
+            </template>
+          </DTooltip>
+          <DTooltip color="primary" :tint="60" filled position="bottom">
+            <DIconButton color="primary" name="flask" active/>
+            <template v-slot:tooltip>
+              This is content
+            </template>
+          </DTooltip>
         </DRow>
         <DTextfield v-model="textfield" filled color="primary" label="Test"/>
         <DCheckbox color="primary" tint="30" off-icon="times" v-model="fill">
@@ -58,7 +77,7 @@
         </DCheckbox>
         <DList v-model="list" color="primary" class="font-weight-bold" :filled="fill" elevation-dark="2">
           <DListItem v-for="i in 10" :key="i">
-            Hello number {{ i }}
+            List number {{ i }}
             <DSpacer/>
             <DLabel>
               <template v-slot:prefix>
@@ -68,11 +87,24 @@
             </DLabel>
           </DListItem>
         </DList>
+        <DTabList v-model="list" color="primary" class="font-weight-bold" :filled="fill" elevation-dark="2"
+                  showIndicator outlined>
+          <DListItem v-for="i in 4" :key="i">
+            Tab number {{ i }}
+            <DSpacer/>
+            <DLabel>
+              <template v-slot:prefix>
+                <DIcon name="check" size="20"/>
+              </template>
+              Status
+            </DLabel>
+          </DListItem>
+        </DTabList>
         <DDotLoader :model-value="true" color="primary" :amount="20" :speed="page*100" side-to-side/>
         <DProgressbar v-model="page" :max="10" color="primary"/>
         <DPagination v-model="page" :total="10" :visible-buttons="4" color="primary" rounded="circle"/>
         <DDivider class="my-2"/>
-        <DTable outlined :headers="table.headers" :data="table.data" :visible-items="5">
+        <DTable outlined :headers="table.headers" :data="table.data" :visible-items="page">
           <template #data(name)="{value, color, params}">
             <DCardSubtitle :color="color">
               <DAvatar :src="params.url" size="34"/>
@@ -112,6 +144,7 @@ import DTable from "./table/DTable.vue";
 import DDivider from "./divider/DDivider.vue";
 import DTextfield from "./textfield/DTextfield.vue";
 import DAccordion from "./accordion/DAccordion.vue";
+import DTooltip from "./tooltip/DTooltip.vue";
 
 const vuelize: any = inject('vuelize');
 

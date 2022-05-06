@@ -5,9 +5,6 @@
             @focusout="()=>focus = false"
             v-bind="{...$props, ...$attrs}" @click="click" :tabindex="disabled?-1:0" @keyup.enter="click"
             glow :glowing="!filled && selected">
-    <fade-transition>
-      <DCard v-if="focus" class="d-list__item__indicator"/>
-    </fade-transition>
     <div class="d-list__item__content">
       <slot></slot>
     </div>
@@ -21,12 +18,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {computed, getCurrentInstance, inject, ref} from "vue";
+import {computed, getCurrentInstance, inject, onMounted, ref, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
 
 const vuelize: any = inject('vuelize');
+const updateList: any = inject('updateList');
 
 const emit = defineEmits(['click']);
 const props = defineProps({
@@ -70,27 +68,26 @@ const stylesObject = computed(() => {
   }
 })
 
+watch(() => selected.value, (state) => {
+  if (state) {
+    updateParent();
+  }
+})
+
+function updateParent() {
+  updateList(instance.vnode.key, instance.vnode.el.offsetLeft, instance.vnode.el.clientWidth, props.color)
+}
 
 function click() {
-  //check if listItem is under d-list
-  if (instance.parent.parent.vnode.el.classList[0] === 'd-list') {
-    if (isMultiple.value) {
-      let tempArray = instance.parent.parent.props.modelValue;
-      if (instance.parent.parent.props.modelValue.includes(instance.vnode.key)) {
-        tempArray.splice(tempArray.indexOf(instance.vnode.key), 1)
-      } else {
-        tempArray.push(instance.vnode.key)
-      }
-      instance.parent.parent.emit('update:modelValue', tempArray)
-
-    } else {
-      instance.parent.parent.emit('update:modelValue', instance.vnode.key)
-    }
-  } else {
-    emit('click', instance.vnode.key)
-  }
-  //emit('click')
+  updateParent();
+  emit('click', instance.vnode.key)
 }
+
+onMounted(()=>{
+  if(selected.value){
+    updateParent();
+  }
+})
 </script>
 
 <style scoped lang="scss">
@@ -107,23 +104,11 @@ function click() {
   list-style: none;
   margin: 0;
 
-  transition: background 0.2s ease-out;
+  transition-duration: 0.1s;
 
   &:focus-visible {
-    position: relative;
-
-    outline: none;
-
-    .d-list__item__indicator {
-      position: absolute;
-      left: -2px;
-      top: 50%;
-      transform: translateY(-50%);
-      max-height: 30px;
-      height: 100%;
-      width: 4px;
-      background: currentColor;
-    }
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
   }
 
   .d-list__item__content {

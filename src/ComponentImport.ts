@@ -22,6 +22,7 @@ import DImage from './components/image/DImage.vue'
 import DLabel from './components/label/DLabel.vue'
 import DList from './components/list/DList.vue'
 import DListItem from './components/list/DListItem.vue'
+import DTabList from './components/tab/DTabList.vue'
 import DDotLoader from './components/loader/DDotLoader.vue'
 import DSelectMenu from './components/menu/DSelectMenu.vue'
 import DNotification from './components/notification/DNotification.vue'
@@ -29,6 +30,7 @@ import DNotificationWrapper from './components/notification/DNotificationWrapper
 import DPagination from './components/pagination/DPagination.vue'
 import DProgressBar from './components/progress/DProgressbar.vue'
 import DTable from './components/table/DTable.vue'
+import DTooltip from './components/tooltip/DTooltip.vue'
 import DTextfield from './components/textfield/DTextfield.vue'
 import DRoot from './components/root/DRoot.vue'
 import DWrapper from './components/DWrapper.vue'
@@ -56,6 +58,7 @@ export const getImports = {
     DLabel,
     DList,
     DListItem,
+    DTabList,
     DDotLoader,
     DSelectMenu,
     DNotification,
@@ -63,6 +66,7 @@ export const getImports = {
     DPagination,
     DProgressBar,
     DTable,
+    DTooltip,
     DTextfield,
     DRoot,
     DWrapper,
@@ -90,6 +94,7 @@ export default function importAll(app: App) {
     app.component('DImage', DImage)
     app.component('DLabel', DLabel)
     app.component('DList', DList)
+    app.component('DTabList', DTabList)
     app.component('DListItem', DListItem)
     app.component('DDotLoader', DDotLoader)
     app.component('DSelectMenu', DSelectMenu)
@@ -98,6 +103,7 @@ export default function importAll(app: App) {
     app.component('DPagination', DPagination)
     app.component('DProgressBar', DProgressBar)
     app.component('DTable', DTable)
+    app.component('DTooltip', DTooltip)
     app.component('DTextfield', DTextfield)
     app.component('DRoot', DRoot)
     app.component('DWrapper', DWrapper)

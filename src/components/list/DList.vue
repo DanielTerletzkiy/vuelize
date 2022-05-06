@@ -13,13 +13,17 @@ export default {
 <script setup lang="ts">
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
+import {provide} from "vue";
 
-defineEmits(['update:modelValue']);
-
+const emits = defineEmits(['update:modelValue']);
 const props = defineProps({
   modelValue: [Number, String, Array],
   filled: {type: Boolean},
   ...defaultProps
+})
+
+provide('updateList', (key: string | number) => {
+  emits("update:modelValue", key);
 })
 </script>
 

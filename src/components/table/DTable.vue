@@ -37,7 +37,7 @@
       </tr>
     </table>
     <DDivider block width="100%"/>
-    <DRow class="pa-2" block>
+    <DRow v-if="paginationAvailable" class="pa-2" block>
       <DSpacer/>
       <DPagination v-model="currentPage" color="primary" :size="24" rounded="md" :total="pages"/>
     </DRow>
@@ -74,7 +74,7 @@ const props = defineProps({
   },
   visibleItems: {
     type: Number,
-    default: 10
+    default: -1
   },
   ...defaultProps
 })
@@ -113,6 +113,10 @@ const visibleData = computed(() => {
 
 const pages = computed(() => {
   return Math.ceil(props.data.length / props.visibleItems);
+})
+
+const paginationAvailable = computed(()=>{
+  return props.visibleItems > -1
 })
 </script>
 
