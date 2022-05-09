@@ -6,7 +6,7 @@ export interface Notification {
     title: string,
     content: string,
     type: string,
-    options: object,
+    options?: object,
     active: boolean,
     created: Date
 }

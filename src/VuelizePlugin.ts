@@ -1,10 +1,9 @@
 import {App, Plugin} from 'vue';
-import {VuelizeOptions} from "./types/VuelizeOptions";
 import {createPinia} from "pinia";
 import {ThemeStore} from './store/ThemeStore'
 import {NotificationStore} from './store/NotificationStore'
 import {ThemeTypes} from "./types/ThemeTypes";
-import {NotificationTypes} from "./types/NotificationTypes";
+import {Notification, NotificationTypes} from "./types/NotificationTypes";
 import importAll from "./ComponentImport";
 
 // @ts-ignore no ripple types available
@@ -33,6 +32,10 @@ class Vuelize {
             theme: this.theme,
             notification: this.notification
         }
+    }
+
+    notify({title, content, type, options}: Notification) {
+        this.notification.notifications.push(<Notification>{title, content, type, options, active: true})
     }
 
     getColor(color: string, tint?: any): string {
@@ -96,7 +99,7 @@ function addUnicons(app: App) {
 }
 
 export const VuelizePlugin: Plugin = {
-    install(app: App, options: VuelizeOptions) {
+    install(app: App) {
         app.use(createPinia());
         app.use(VWave, {
             directive: 'ripple',

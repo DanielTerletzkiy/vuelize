@@ -5,6 +5,7 @@ import DToolbar from "./components/app/toolbar/DToolbar.vue";
 import DCardSubtitle from "./components/card/text/DCardSubtitle.vue";
 import DCardTitle from "./components/card/text/DCardTitle.vue";
 import DImage from "./components/image/DImage.vue";
+import DNotificationWrapper from "./components/notification/DNotificationWrapper.vue";
 </script>
 
 <template>
@@ -16,7 +17,8 @@ import DImage from "./components/image/DImage.vue";
         </d-card-title>
       </DToolbar>
     </template>
-    <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" color="#88c96b"/>
+    <DNotificationWrapper/>
+    <HelloWorld/>
   </DRoot>
 </template>
 

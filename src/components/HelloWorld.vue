@@ -121,7 +121,7 @@
 </template>
 
 <script setup lang="ts">
-import {inject, reactive, ref} from 'vue'
+import {inject, onMounted, reactive, ref} from 'vue'
 import DCard from "./card/DCard.vue";
 import DCardSubtitle from "./card/text/DCardSubtitle.vue";
 import DCardTitle from "./card/text/DCardTitle.vue";
@@ -345,17 +345,6 @@ const table = reactive({
   ]
 })
 
-
-const props: object = defineProps({
-  msg: {
-    type: String,
-    required: true,
-  },
-  color: {
-    type: String,
-    required: true,
-  }
-})
 const emit = defineEmits(['counterChange'])
 
 const counter = reactive({
@@ -386,13 +375,13 @@ function changeTheme(): void {
   vuelize.theme.dark = !vuelize.theme.dark
 }
 
+onMounted(() => {
+  vuelize.notify({title: 'test', content: 'test body', type: 'success'})
+})
+
 </script>
 
 <style scoped lang="scss">
-a {
-  color: v-bind(color);
-}
-
 label {
   margin: 0 0.5em;
   font-weight: bold;

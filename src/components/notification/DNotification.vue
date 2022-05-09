@@ -4,7 +4,7 @@
       <DCardContent class="d-notification__content" :color="data.options.color" glow glowing
                     :outlined="!data.options.color"
                     depressed min-width="100%" max-width="500px"
-                    v-hover="{ over: ()=>{data.hover = true}, leave: ()=>{data.hover = false} }">
+                    @mouseover="data.hover = true" @mouseleave="data.hover = false">
         <DRow class="pa-2">
           <DColumn class="pa-0">
             <DIconButton :color="(data.options.color)" @click="hide">

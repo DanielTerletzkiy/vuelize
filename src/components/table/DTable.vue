@@ -101,21 +101,25 @@ function handleSorting(key: string) {
 }
 
 const visibleData = computed(() => {
-  return props.data.sort(
+  const result = props.data.sort(
       (a: any, b: any) => {
         return sort.reverse ?
             a.find((e: any) => e.key === sort.key).value
                 .localeCompare(b.find((e: any) => e.key === sort.key).value, undefined, {numeric: true}) :
             b.find((e: any) => e.key === sort.key).value
                 .localeCompare(a.find((e: any) => e.key === sort.key).value, undefined, {numeric: true});
-      }).slice((currentPage.value - 1) * props.visibleItems, currentPage.value * props.visibleItems)
+      })
+  if (paginationAvailable.value) {
+    return result.slice((currentPage.value - 1) * props.visibleItems, currentPage.value * props.visibleItems)
+  }
+  return result;
 })
 
 const pages = computed(() => {
   return Math.ceil(props.data.length / props.visibleItems);
 })
 
-const paginationAvailable = computed(()=>{
+const paginationAvailable = computed(() => {
   return props.visibleItems > -1
 })
 </script>
