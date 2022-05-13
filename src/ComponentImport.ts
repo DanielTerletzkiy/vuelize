@@ -24,6 +24,7 @@ import DList from './components/list/DList.vue'
 import DListItem from './components/list/DListItem.vue'
 import DTabList from './components/tab/DTabList.vue'
 import DDotLoader from './components/loader/DDotLoader.vue'
+import DElevationLoader from './components/loader/DElevationLoader.vue'
 import DSelectMenu from './components/menu/DSelectMenu.vue'
 import DNotification from './components/notification/DNotification.vue'
 import DNotificationWrapper from './components/notification/DNotificationWrapper.vue'
@@ -60,6 +61,7 @@ export const getImports = {
     DListItem,
     DTabList,
     DDotLoader,
+    DElevationLoader,
     DSelectMenu,
     DNotification,
     DNotificationWrapper,
@@ -97,6 +99,7 @@ export default function importAll(app: App) {
     app.component('DTabList', DTabList)
     app.component('DListItem', DListItem)
     app.component('DDotLoader', DDotLoader)
+    app.component('DElevationLoader', DElevationLoader)
     app.component('DSelectMenu', DSelectMenu)
     app.component('DNotification', DNotification)
     app.component('DNotificationWrapper', DNotificationWrapper)

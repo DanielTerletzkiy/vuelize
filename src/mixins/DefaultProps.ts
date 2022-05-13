@@ -1,13 +1,16 @@
+import {Round, State} from "../types/Vuelize";
+import {PropType} from "vue";
+
 export default {
     link: {type: String, default: null},
-    color: {type: String},
+    color: {type: [String as any, String as PropType<State>]},
     tint: {type: Number, default: 0},
-    rounded: {type: String, default: 'lg'},
+    rounded: {type: String as PropType<Round>, default: Round.LG},
     outlined: {type: Boolean},
     depressed: {type: Boolean, default: true},
-    elevation: {type: String},
-    elevationLight: {type: String},
-    elevationDark: {type: String},
+    elevation: {type: [String, Number]},
+    elevationLight: {type: [String, Number]},
+    elevationDark: {type: [String, Number]},
     disabled: {type: Boolean},
     glow: {type: Boolean},
     glowing: {type: Boolean},

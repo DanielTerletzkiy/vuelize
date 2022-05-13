@@ -1,5 +1,4 @@
 import {defineStore} from 'pinia'
-import {Theme} from "../types/Vuelize";
 
 export const ThemeStore = defineStore('theme', {
     state: () =>
@@ -7,7 +6,7 @@ export const ThemeStore = defineStore('theme', {
             dark: true,
             rounded: 'lg',
             themes: {
-                "dark": {
+                dark: {
                     primary: '#9570FF',
                     secondary: '#9ea7ad',
                     success: '#74ec38',
@@ -15,7 +14,7 @@ export const ThemeStore = defineStore('theme', {
                     warning: '#fca121',
                     info: '#2ea2e0'
                 },
-                "light": {
+                light: {
                     primary: '#3075FF',
                     secondary: '#424242',
                     success: '#62c62f',

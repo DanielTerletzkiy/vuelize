@@ -101,6 +101,8 @@
           </DListItem>
         </DTabList>
         <DDotLoader :model-value="true" color="primary" :amount="20" :speed="page*100" side-to-side/>
+        <DElevationLoader :model-value="true" color="primary" :amount="100" :default-size="50" :columns="10"
+                          :speed="page*100"/>
         <DProgressbar v-model="page" :max="10" color="primary"/>
         <DPagination v-model="page" :total="10" :visible-buttons="4" color="primary" rounded="circle"/>
         <DDivider class="my-2"/>
@@ -121,6 +123,7 @@
 </template>
 
 <script setup lang="ts">
+import {State} from "../types/Vuelize.d.ts";
 import {inject, onMounted, reactive, ref} from 'vue'
 import DCard from "./card/DCard.vue";
 import DCardSubtitle from "./card/text/DCardSubtitle.vue";
@@ -145,14 +148,14 @@ import DDivider from "./divider/DDivider.vue";
 import DTextfield from "./textfield/DTextfield.vue";
 import DAccordion from "./accordion/DAccordion.vue";
 import DTooltip from "./tooltip/DTooltip.vue";
-import Vuelize, {State} from "../types/Vuelize.d.ts";
+import DElevationLoader from "./loader/DElevationLoader.vue";
 
 const vuelize: Vuelize = inject('vuelize') as Vuelize;
 
 const textfield = ref('');
 const fill = ref(false);
 const list = ref(1);
-const page = ref(1);
+const page = ref(5);
 
 const table = reactive({
   headers: [
@@ -377,7 +380,7 @@ function changeTheme(): void {
 }
 
 onMounted(() => {
-  vuelize.notify('test','test body', State.Success);
+  vuelize.notify('test', 'test body', State.Success);
 })
 
 </script>
