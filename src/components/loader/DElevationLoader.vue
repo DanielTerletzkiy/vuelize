@@ -18,7 +18,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {Round} from "../../types/Vuelize.d.ts";
+import {Round} from "../../types/Vuelize";
 import defaultProps from "../../mixins/DefaultProps";
 import {onMounted, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";

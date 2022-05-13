@@ -13,6 +13,7 @@ import Unicon from 'vue-unicons'
 import * as uc from 'vue-unicons/dist/icons.js'
 
 import 'v3-transitions/dist/style.css'
+import {State} from "./types/Vuelize";
 
 class VuelizePlugin implements Vuelize {
     app;

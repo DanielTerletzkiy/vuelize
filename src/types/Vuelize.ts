@@ -1,13 +1,13 @@
 import {App} from "vue";
 
-export enum State {
+export const enum State {
     Success = "success",
     Error = "error",
     Warning = "warning",
     Info = "info"
 }
 
-export enum Round {
+export const enum Round {
     Circle = "circle",
     Pill = "pill",
     XL = "xl",
@@ -22,7 +22,7 @@ declare global {
         theme: Theme.ThemeStore;
         notification: Notifications.NotificationStore;
 
-        notify(title: string, content: string, type: State, options?: object | undefined);
+        notify(title: string, content: string, type: State, options?: object | undefined): void;
 
         getColor(color: string, tint?: number | string | undefined): string;
 

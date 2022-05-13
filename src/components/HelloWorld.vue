@@ -123,7 +123,7 @@
 </template>
 
 <script setup lang="ts">
-import {State} from "../types/Vuelize.d.ts";
+import {State} from "../types/Vuelize";
 import {inject, onMounted, reactive, ref} from 'vue'
 import DCard from "./card/DCard.vue";
 import DCardSubtitle from "./card/text/DCardSubtitle.vue";
