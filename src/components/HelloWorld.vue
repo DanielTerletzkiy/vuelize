@@ -145,8 +145,9 @@ import DDivider from "./divider/DDivider.vue";
 import DTextfield from "./textfield/DTextfield.vue";
 import DAccordion from "./accordion/DAccordion.vue";
 import DTooltip from "./tooltip/DTooltip.vue";
+import Vuelize, {State} from "../types/Vuelize.d.ts";
 
-const vuelize: any = inject('vuelize');
+const vuelize: Vuelize = inject('vuelize') as Vuelize;
 
 const textfield = ref('');
 const fill = ref(false);
@@ -376,7 +377,7 @@ function changeTheme(): void {
 }
 
 onMounted(() => {
-  vuelize.notify({title: 'test', content: 'test body', type: 'success'})
+  vuelize.notify('test','test body', State.Success);
 })
 
 </script>

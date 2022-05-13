@@ -36,7 +36,7 @@
         </td>
       </tr>
     </table>
-    <DDivider block width="100%"/>
+    <DDivider v-if="paginationAvailable" block width="100%"/>
     <DRow v-if="paginationAvailable" class="pa-2" block>
       <DSpacer/>
       <DPagination v-model="currentPage" color="primary" :size="24" rounded="md" :total="pages"/>

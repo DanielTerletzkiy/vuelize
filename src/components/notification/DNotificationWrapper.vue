@@ -2,10 +2,10 @@
   <DWrapper :classes="['d-notification-wrapper', {permanent}]" v-bind="{...$props, ...$attrs}"
                       @click="$emit('click')">
     <div class="d-notification-wrapper__content">
-      <fade-transition group :delay="0">
+      <FadeTransition group :delay="0">
         <DNotification v-for="notification in notifications" :notification="notification" color="primary"
                         :key="notification.created"/>
-      </fade-transition>
+      </FadeTransition>
     </div>
   </DWrapper>
 </template>
@@ -20,6 +20,7 @@ export default {
 import {computed, inject} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DNotification from "./DNotification.vue";
+import {FadeTransition} from "v3-transitions";
 
 const vuelize: any = inject('vuelize');
 

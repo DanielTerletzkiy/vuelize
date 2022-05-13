@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import { VuelizePlugin } from "./index";
+import Vuelize  from "./index";
 const app = createApp(App);
-app.use(VuelizePlugin);
+app.use(Vuelize);
 app.mount('#app');
 //# sourceMappingURL=main.js.map

@@ -1,5 +1,5 @@
 import {defineStore} from 'pinia'
-import {ThemeTypes} from "../types/ThemeTypes";
+import {Theme} from "../types/Vuelize";
 
 export const ThemeStore = defineStore('theme', {
     state: () =>
@@ -24,5 +24,5 @@ export const ThemeStore = defineStore('theme', {
                     info: '#00b2ff'
                 },
             },
-        } as ThemeTypes)
+        } as Theme.ThemeStore)
 })

@@ -1,9 +1,9 @@
 import {defineStore} from 'pinia'
-import {NotificationTypes} from "../types/NotificationTypes";
+import {Notifications} from "../types/Vuelize";
 
 export const NotificationStore = defineStore('notification', {
     state: () =>
         ({
             notifications: []
-        } as NotificationTypes)
+        } as Notifications.NotificationStore)
 })

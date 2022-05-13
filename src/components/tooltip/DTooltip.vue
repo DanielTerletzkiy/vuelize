@@ -4,7 +4,7 @@
       <slot name="default" v-bind="{...$props, ...$attrs}">
       </slot>
     </div>
-    <FadeTransition>
+    <FadeTransition :duration="200">
       <div class="d-tooltip__wrapper" v-show="hoverState">
         <DLabel class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :filled="filled" :glow="!filled"
                 glowing :style="stylesObject" ref="tooltip">
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {computed, getCurrentInstance, inject, nextTick, onMounted, reactive, ref, watch} from "vue";
+import {computed, getCurrentInstance, inject, reactive, ref, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DLabel from "../label/DLabel.vue";

@@ -2,8 +2,6 @@ import {App, Plugin} from 'vue';
 import {createPinia} from "pinia";
 import {ThemeStore} from './store/ThemeStore'
 import {NotificationStore} from './store/NotificationStore'
-import {ThemeTypes} from "./types/ThemeTypes";
-import {Notification, NotificationTypes} from "./types/NotificationTypes";
 import importAll from "./ComponentImport";
 
 // @ts-ignore no ripple types available
@@ -15,11 +13,12 @@ import Unicon from 'vue-unicons'
 import * as uc from 'vue-unicons/dist/icons.js'
 
 import 'v3-transitions/dist/style.css'
+import Vuelize, {Notifications, State, Theme} from "./types/Vuelize";
 
-class Vuelize {
-    app: App;
-    theme: ThemeTypes;
-    notification: NotificationTypes;
+class VuelizePlugin implements Vuelize {
+    app;
+    theme;
+    notification;
 
     constructor(app: App) {
         this.app = app;
@@ -27,25 +26,16 @@ class Vuelize {
         this.notification = NotificationStore();
     }
 
-    store(): object {
-        return {
-            theme: this.theme,
-            notification: this.notification
-        }
+    notify(title: string, content: string, type: State, options?: object | undefined) {
+        this.notification.notifications.push(<Notifications.Notification>{title, content, type, options, active: true})
     }
 
-    notify({title, content, type, options}: Notification) {
-        this.notification.notifications.push(<Notification>{title, content, type, options, active: true})
-    }
-
-    getColor(color: string, tint?: any): string {
+    getColor(color: string, tint?: number | string | undefined): string {
         let colorOut: string;
         if (this.theme.dark) {
-            // @ts-ignore TODO
-            colorOut = this.theme.themes.dark[color];
+            colorOut = this.theme.themes.dark[color as keyof Theme.Dark];
         } else {
-            // @ts-ignore TODO
-            colorOut = this.theme.themes.light[color];
+            colorOut = this.theme.themes.light[color as keyof Theme.Light];
         }
         if (!colorOut) {
             colorOut = color;
@@ -53,7 +43,10 @@ class Vuelize {
 
         if (tint && ['currentColor', 'transparent'].indexOf(colorOut) === -1) {
             try {
-                colorOut = this.#tintColor(colorOut, parseInt(tint));
+                if (typeof tint === "string") {
+                    tint = parseInt(tint)
+                }
+                colorOut = this.#tintColor(colorOut, tint);
             } catch (e) {
                 console.warn(e)
             }
@@ -61,7 +54,7 @@ class Vuelize {
         return colorOut;
     }
 
-    getColorContrast(color: string, tint: any): string {
+    getColorContrast(color: string, tint?: number | string | undefined): string {
         let hexColor = this.getColor(color, tint);
         if (hexColor.slice(0, 1) === '#') {
             hexColor = hexColor.slice(1);
@@ -98,7 +91,7 @@ function addUnicons(app: App) {
     app.use(Unicon)
 }
 
-export const VuelizePlugin: Plugin = {
+export const Vuelize: Plugin = {
     install(app: App) {
         app.use(createPinia());
         app.use(VWave, {
@@ -108,7 +101,7 @@ export const VuelizePlugin: Plugin = {
         });
         addUnicons(app);
 
-        app.config.globalProperties.$vuelize = new Vuelize(app);
+        app.config.globalProperties.$vuelize = new VuelizePlugin(app);
         app.provide('vuelize', app.config.globalProperties.$vuelize);
 
         importAll(app);
