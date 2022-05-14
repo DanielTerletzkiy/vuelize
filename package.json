@@ -1,7 +1,7 @@
 {
   "name": "vuelize",
   "private": false,
-  "version": "0.0.93-beta.14",
+  "version": "0.0.93-beta.15",
   "repository": {
     "type": "git",
     "url": "https://github.com/DanielTerletzkiy/vuelize"
@@ -12,7 +12,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "build:rollup": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
-    "build:publish": "npm run build:rollup && np --yolo --no-yarn"
+    "build:publish": "npm run build:rollup && np --yolo --no-yarn",
+    "publish:dev": "npm publish --tag=develop"
   },
   "main": "dist/vuelize.umd.js",
   "module": "dist/vuelize.esm.js",

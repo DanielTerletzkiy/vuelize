@@ -4,7 +4,7 @@
               v-bind="{...$props, ...$attrs}"
               v-if="modelValue">
       <DRow block height="100%">
-        <DCard block color="transparent" class="d-navigation-bar__content" rounded="none">
+        <DCard block background-color="transparent" class="d-navigation-bar__content" rounded="none">
           <slot></slot>
         </DCard>
         <DColumn height="100%">
@@ -27,6 +27,7 @@ import DRow from "../../flex/DRow.vue";
 import DCard from "../../card/DCard.vue";
 import DColumn from "../../flex/DColumn.vue";
 import DDivider from "../../divider/DDivider.vue";
+import {SlideXLeftTransition} from "v3-transitions";
 
 defineProps({
   modelValue: {type: Boolean, default: true},

@@ -34,6 +34,7 @@ const width = ref(props.vertical ? props.size : props.width)
 
   background: currentColor;
   border-radius: 9999px !important;
+  transition: 0.2s ease;
 
   &.horizontal {
     min-width: min-content;

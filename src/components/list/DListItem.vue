@@ -3,7 +3,7 @@
             :style="stylesObject" v-ripple
             @focusin="()=>focus = true"
             @focusout="()=>focus = false"
-            v-bind="{...$props, ...$attrs}" @click="click" :tabindex="disabled?-1:0" @keyup.enter="click"
+            v-bind="{...$props, ...$attrs}" @click="onClick" :tabindex="disabled?-1:0" @keyup.enter="onClick"
             glow :glowing="!filled && selected">
     <div class="d-list__item__content">
       <slot></slot>
@@ -78,13 +78,13 @@ function updateParent() {
   updateList(instance.vnode.key, instance.vnode.el.offsetLeft, instance.vnode.el.clientWidth, props.color)
 }
 
-function click() {
+function onClick(e: Event) {
   updateParent();
-  emit('click', instance.vnode.key)
+  emit('click', e)
 }
 
-onMounted(()=>{
-  if(selected.value){
+onMounted(() => {
+  if (selected.value) {
     updateParent();
   }
 })
