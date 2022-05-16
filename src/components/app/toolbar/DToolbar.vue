@@ -2,7 +2,7 @@
   <DWrapper :classes="['d-toolbar']" v-bind="{...$props, ...$attrs}">
     <DCard block rounded="none" height="100%">
       <DRow block gap class="px-2">
-        <DIconButton v-if="showHamburger" color="primary" @click="(e)=>$emit('hamburgerClick', e)"
+        <DIconButton v-if="showHamburger" color="primary" @click="onHamburgerClick"
                      style="margin-left: -8px">
           <DIcon name="bars"/>
         </DIconButton>
@@ -25,9 +25,15 @@ import DRow from "../../flex/DRow.vue";
 import DIconButton from "../../button/DIconButton.vue";
 import DIcon from "../../icon/DIcon.vue";
 
+const emit = defineEmits(['hamburgerClick'])
+
 defineProps({
   showHamburger: {type: Boolean, default: false}
 })
+
+function onHamburgerClick(e: Event) {
+  emit('hamburgerClick', e)
+}
 </script>
 
 <style scoped lang="scss">
