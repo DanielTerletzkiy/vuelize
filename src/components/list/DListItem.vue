@@ -1,5 +1,5 @@
 <template>
-  <DWrapper root-tag="li" :classes="['d-list__item', {selected}]"
+  <DWrapper root-tag="li" :classes="['d-list__item', {selected, center}]"
             :style="stylesObject" v-ripple
             @focusin="()=>focus = true"
             @focusout="()=>focus = false"
@@ -25,9 +25,11 @@ import DCard from "../card/DCard.vue";
 
 const vuelize: any = inject('vuelize');
 const updateList: any = inject('updateList');
+const parentProps: any = inject('parentProps');
 
 const emit = defineEmits(['click']);
 const props = defineProps({
+  center: Boolean,
   ...defaultProps
 })
 
@@ -36,21 +38,21 @@ const focus = ref(false);
 const instance: any = getCurrentInstance();
 
 const itemColor = computed(() => {
-  return props.color || instance.parent.parent.props.color;
+  return props.color || parentProps.color;
 })
 
 const itemTint = computed(() => {
-  return props.tint || instance.parent.parent.props.tint;
+  return props.tint || parentProps.tint;
 })
 
 const isMultiple = computed(() => {
-  return typeof instance.parent.parent.props.modelValue === 'object'
+  return typeof parentProps.modelValue === 'object'
 })
 
 const selected = computed(() => {
   return isMultiple.value ?
-      instance.parent.parent.props.modelValue.includes(instance.vnode.key)
-      : instance.parent.parent.props.modelValue === instance.vnode.key
+      parentProps.modelValue.includes(instance.vnode.key)
+      : parentProps.modelValue === instance.vnode.key
 })
 
 const filled = computed(() => {
@@ -105,6 +107,15 @@ onMounted(() => {
   margin: 0;
 
   transition-duration: 0.1s;
+
+  &.center {
+    flex: 1;
+    text-align: center;
+
+    .d-list__item__content {
+      justify-content: center;
+    }
+  }
 
   &:focus-visible {
     outline: 2px solid currentColor;

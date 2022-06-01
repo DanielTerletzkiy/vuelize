@@ -19,7 +19,7 @@ import DWrapper from "../DWrapper.vue";
 
 const emits = defineEmits(['update:modelValue']);
 const props = defineProps({
-  modelValue: {type: [String, Number], required: true},
+  modelValue: {type: [String, Number]},
   showIndicator: {type: Boolean},
   filled: {type: Boolean},
   ...defaultProps
@@ -60,6 +60,7 @@ provide('updateList', (key: string | number, position: number, width: number, co
   };
   emits("update:modelValue", key);
 })
+provide('parentProps', props)
 </script>
 
 <style scoped lang="scss">

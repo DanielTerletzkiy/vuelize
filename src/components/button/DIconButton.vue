@@ -1,5 +1,5 @@
 <template>
-  <DWrapper root-tag="button" :classes="['d-icon-button', {glow: true, 'glow--active': active}]"
+  <DWrapper root-tag="button" :classes="['d-icon-button', {glow: true, 'glow--active': props.active}]"
             v-bind="{...$props, ...$attrs}" @click="$emit('click')">
     <span class="d-icon-button__content" v-ripple>
       <slot name="default">
@@ -18,7 +18,7 @@ export default {
 
 <script setup lang="ts">
 import DWrapper from "../DWrapper.vue";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import DIcon from "../icon/DIcon.vue";
 import defaultProps from "../../mixins/DefaultProps";
 
@@ -30,7 +30,7 @@ const props = defineProps({
   name: {type: String},
   ...defaultProps
 })
-  const size = ref(props.size+'px');
+const size = computed(() => props.size + 'px');
 </script>
 
 <style scoped lang="scss">

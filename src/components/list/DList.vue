@@ -25,6 +25,7 @@ const props = defineProps({
 provide('updateList', (key: string | number) => {
   emits("update:modelValue", key);
 })
+provide('parentProps', props)
 </script>
 
 <style scoped lang="scss">

@@ -45,7 +45,7 @@ watch(() => props.modelValue, () => {
 })
 
 const angleIcon = computed((): string => {
-  return open ? 'angle-up' : 'angle-down'
+  return open.value ? 'angle-up' : 'angle-down'
 })
 const isKeyed = computed((): boolean => {
   return (typeof state.value === "number" && typeof component?.vnode.key === "number")
