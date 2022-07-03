@@ -8,7 +8,7 @@ import importAll from "./ComponentImport";
 import VWave from "v-wave";
 
 // @ts-ignore
-import Unicon from 'vue-unicons'
+import Unicon from 'vue3-unicons'
 // @ts-ignore
 import * as uc from 'vue-unicons/dist/icons.js'
 
@@ -81,7 +81,7 @@ class VuelizePlugin implements Vuelize {
     }
 }
 
-function addUnicons(app: App) {
+/*function addUnicons(app: App) {
     const objArray: any = [];
     Object.keys(uc).forEach(key => objArray.push(
         uc[key]
@@ -89,7 +89,7 @@ function addUnicons(app: App) {
     Unicon.add(objArray)
     // @ts-ignore
     app.use(Unicon)
-}
+}*/
 
 export const Vuelize: Plugin = {
     install(app: App) {
@@ -99,7 +99,8 @@ export const Vuelize: Plugin = {
             duration: 0.2,
             finalOpacity: 0.2
         });
-        addUnicons(app);
+        app.use(Unicon);
+        //addUnicons(app);
 
         app.config.globalProperties.$vuelize = new VuelizePlugin(app);
         app.provide('vuelize', app.config.globalProperties.$vuelize);

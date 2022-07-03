@@ -8,8 +8,8 @@
               :stop-color="vuelize.getColor(color || 'currentColor')"/>
       </linearGradient>
     </svg>
-    <unicon class="d-icon" :name="name" :width="size" :height="size" :icon-style="iconStyle"
-            :fill="`url(#${uid}) ${vuelize.getColor(color || 'currentColor',tint)}`"></unicon>
+    <unicon class="d-icon" :name="name" :size="size" :icon-style="iconStyle"
+            :color="`url(#${uid}) ${vuelize.getColor(color || 'currentColor',tint)}`"></unicon>
   </DWrapper>
 </template>
 
@@ -23,13 +23,14 @@ export default {
 import {getCurrentInstance, inject} from "vue";
 import DWrapper from "../DWrapper.vue";
 import defaultProps from "../../mixins/DefaultProps";
+import Unicon from "vue3-unicons/src/components/Unicon.vue"
 
 const vuelize: any = inject('vuelize');
 
 defineProps({
   name: {type: String, required: true},
   iconStyle: {type: String},
-  size: [String, Number],
+  size: [Number],
   gradient: {type: Array},
   gradientRotation: {type: [String, Number], default: 0},
   ...defaultProps

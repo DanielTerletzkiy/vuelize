@@ -5,9 +5,7 @@ import importAll from "./ComponentImport";
 // @ts-ignore no ripple types available
 import VWave from "v-wave";
 // @ts-ignore
-import Unicon from 'vue-unicons';
-// @ts-ignore
-import * as uc from 'vue-unicons/dist/icons.js';
+import Unicon from 'vue3-unicons';
 import 'v3-transitions/dist/style.css';
 class VuelizePlugin {
     app;
@@ -69,13 +67,15 @@ class VuelizePlugin {
             .substr(-2));
     };
 }
-function addUnicons(app) {
-    const objArray = [];
-    Object.keys(uc).forEach(key => objArray.push(uc[key]));
-    Unicon.add(objArray);
+/*function addUnicons(app: App) {
+    const objArray: any = [];
+    Object.keys(uc).forEach(key => objArray.push(
+        uc[key]
+    ));
+    Unicon.add(objArray)
     // @ts-ignore
-    app.use(Unicon);
-}
+    app.use(Unicon)
+}*/
 export const Vuelize = {
     install(app) {
         app.use(createPinia());
@@ -84,7 +84,8 @@ export const Vuelize = {
             duration: 0.2,
             finalOpacity: 0.2
         });
-        addUnicons(app);
+        app.use(Unicon);
+        //addUnicons(app);
         app.config.globalProperties.$vuelize = new VuelizePlugin(app);
         app.provide('vuelize', app.config.globalProperties.$vuelize);
         importAll(app);
