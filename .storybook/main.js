@@ -4,10 +4,13 @@ module.exports = {
         "../src/**/*.stories.@(js|jsx|ts|tsx)"
     ],
     "addons": [
+        "storybook-dark-mode",
         "@storybook/addon-links",
         "@storybook/addon-essentials",
         "@storybook/addon-interactions",
-        "storybook-dark-mode",
+        "@storybook/addon-a11y",
+        "@storybook/addon-console",
+        "storybook-color-picker",
     ],
     "framework": "@storybook/vue3",
     "core": {

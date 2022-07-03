@@ -7,10 +7,10 @@ export const ThemeStore = defineStore('theme', {
             rounded: 'lg',
             themes: {
                 dark: {
-                    primary: '#9570FF',
-                    secondary: '#9ea7ad',
+                    primary: '#A8B2FF',
+                    secondary: '#363642',
                     success: '#74ec38',
-                    error: '#e15139',
+                    error: '#ff6b6b',
                     warning: '#fca121',
                     info: '#2ea2e0'
                 },

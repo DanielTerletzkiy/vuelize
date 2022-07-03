@@ -5,7 +5,7 @@ export default {
     component: DButton,
     argTypes: {
         label: {control: 'text'},
-        color: {control: 'text'},
+        color: {control: 'color'},
         filled: {control: 'boolean'},
         outlined: {control: 'boolean'},
         glow: {control: 'boolean'},
@@ -14,7 +14,7 @@ export default {
 
 const Template = (args) => ({
     components: {DButton},
-    setup(app) {
+    setup() {
         return {args};
     },
     template: '<d-button v-bind="args">{{args.label}}</d-button>',

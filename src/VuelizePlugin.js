@@ -58,9 +58,9 @@ class VuelizePlugin {
         const g = parseInt(hexColor.substr(2, 2), 16);
         const b = parseInt(hexColor.substr(4, 2), 16);
         // Get YIQ ratio
-        let yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        let yiq = (r * 0.299) + (g * 0.587) + (b * 0.114);
         // Check contrast
-        return (yiq >= 160) ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.85)';
+        return (yiq > 160) ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.85)';
     }
     #tintColor = function adjust(color, amount) {
         return '#' + color.replace(/^#/, '').replace(/../g, color => ('0' + Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16))
