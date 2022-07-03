@@ -9,7 +9,7 @@
       </DAccordion>
     </div>
 
-    <DCardTitle color="primary" tint="20">
+    <DCardTitle color="primary">
       This is a title
     </DCardTitle>
     <DCardSubtitle>
@@ -18,7 +18,7 @@
 
     <DCardContent>
       <DColumn gap>
-        <DButton color="primary" glow tint="20" elevation-light="4" @click="changeTheme">dark {{ $vuelize.theme.dark }}
+        <DButton color="primary" glow elevation-light="4" @click="changeTheme">dark {{ $vuelize.theme.dark }}
           <template v-slot:prefix>
             <DIcon name="flask"/>
           </template>
@@ -56,15 +56,15 @@
           <DAvatar color="primary">
             <DIcon name="flask" :color="vuelize.getColorContrast('currentColor', 0)"/>
           </DAvatar>
-          <DTooltip color="error" :tint="100" filled position="right">
+          <DTooltip color="error" filled position="right">
             <DAvatar color="error" :tint="100">
-              <DIcon name="flask" color="error" :size="40" :tint="0"/>
+              <DIcon name="flask" color="error" :tint="0" :size="40"/>
             </DAvatar>
             <template v-slot:tooltip>
               Error
             </template>
           </DTooltip>
-          <DTooltip color="primary" :tint="60" filled position="bottom">
+          <DTooltip color="primary" filled position="bottom">
             <DIconButton color="primary" name="flask" active/>
             <template v-slot:tooltip>
               This is content
@@ -72,7 +72,7 @@
           </DTooltip>
         </DRow>
         <DTextfield v-model="textfield" filled color="primary" label="Test"/>
-        <DCheckbox color="primary" tint="30" off-icon="times" v-model="fill">
+        <DCheckbox color="primary" off-icon="times" v-model="fill">
           Check for filled List
         </DCheckbox>
         <DList v-model="list" color="primary" class="font-weight-bold" :filled="fill" elevation-dark="2">
