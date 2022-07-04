@@ -1,8 +1,6 @@
 <template>
-  <fade-transition :duration="{leave: 150}">
-    <DWrapper :classes="['d-dialog']" v-bind="{...$props, ...$attrs}"
-                        @click="$emit('click')"
-                        v-if="modelValue">
+  <fade-transition :duration="{enter: 200, leave: 150}">
+    <DWrapper :classes="['d-dialog']" v-bind="{...$props, ...$attrs}" v-if="modelValue">
       <div class="d-dialog__backdrop" @click.self="handleClick"/>
       <div class="d-dialog__content">
         <slot name="default">
@@ -20,6 +18,7 @@ export default {
 
 <script setup lang="ts">
 import DWrapper from "../DWrapper.vue";
+import {FadeTransition} from "v3-transitions";
 
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
