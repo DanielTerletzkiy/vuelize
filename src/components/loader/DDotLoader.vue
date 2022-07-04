@@ -3,7 +3,7 @@
     <DRow class="d-dot-loader__container" :wrap="false" gap>
       <DAvatar class="d-dot-loader__container__dot" v-for="i in Array.from(Array(amount).keys())" :key="i"
                ref="dot"
-               :style="{transform: data.currentDot === i ? 'scale(200%)' : 'scale(100%)'}"
+               :style="{transform: currentDot.value === i ? 'scale(200%)' : 'scale(100%)'}"
                :size="defaultSize"
                :color="color" rounded="circle">
         <div/>
@@ -20,7 +20,7 @@ export default {
 
 <script setup lang="ts">
 import defaultProps from "../../mixins/DefaultProps";
-import {onMounted, reactive, watch} from "vue";
+import {onMounted, reactive, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DRow from "../flex/DRow.vue";
 import DAvatar from "../avatar/DAvatar.vue";
@@ -36,17 +36,15 @@ const props = defineProps({
   ...defaultProps
 })
 
-const data = reactive({
-  currentDot: -1,
-  backwards: false,
-})
+const currentDot = ref<number>(-1);
+const backwards = ref<boolean>(false);
 
 watch(() => props.modelValue, (state) => {
   if (state) {
     loop();
   } else {
-    data.currentDot = -1;
-    data.backwards = false;
+    currentDot.value = -1;
+    backwards.value = false;
   }
 })
 
@@ -57,23 +55,23 @@ onMounted(() => {
 const loop = async function () {
   while (props.modelValue) {
     if (props.sideToSide) {
-      if (data.backwards) {
-        data.currentDot--;
-        if (data.currentDot <= 0) {
-          data.backwards = false
+      if (backwards.value) {
+        currentDot.value--;
+        if (currentDot.value <= 0) {
+          backwards.value = false
           await new Promise(resolve => setTimeout(resolve, props.delay))
         }
       } else {
-        data.currentDot++;
-        if (data.currentDot >= props.amount - 1) {
-          data.backwards = true
+        currentDot.value++;
+        if (currentDot.value >= props.amount - 1) {
+          backwards.value = true
           await new Promise(resolve => setTimeout(resolve, props.delay))
         }
       }
     } else {
-      data.currentDot++;
-      if (data.currentDot >= props.amount) {
-        data.currentDot = 0
+      currentDot.value++;
+      if (currentDot.value >= props.amount) {
+        currentDot.value = 0
         await new Promise(resolve => setTimeout(resolve, props.delay))
       }
     }

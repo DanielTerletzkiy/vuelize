@@ -22,7 +22,6 @@ const props = defineProps({
 })
 
 provide('updateList', (key: string | number) => {
-  console.log(key)
   emits("update:modelValue", key);
 })
 provide('parentProps', props)
@@ -36,6 +35,6 @@ provide('parentProps', props)
   flex-direction: column;
   padding: 8px;
   margin: 0;
-  gap: $gap/1.5;
+  gap: calc($gap / 1.5);
 }
 </style>

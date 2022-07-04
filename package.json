@@ -17,11 +17,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "main": "dist/vuelize.umd.js",
-  "module": "dist/vuelize.esm.js",
-  "unpkg": "dist/vuelize.min.js",
+  "main": "src/index.js",
   "files": [
-    "dist",
     "src"
   ],
   "dependencies": {
