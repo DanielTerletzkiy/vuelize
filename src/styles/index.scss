@@ -49,8 +49,13 @@ button {
 }
 
 .disabled {
+  &.dark {
+    color: #606060 !important;
+  }
+  &.light {
+    color: #CCCCCCFF !important;
+  }
   pointer-events: none;
-  color: grey !important;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Source%20Sans%20Pro:200,300,400,600,700');
