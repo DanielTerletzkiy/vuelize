@@ -38,9 +38,15 @@ declare global {
             title: string,
             content: string,
             type: string,
-            options?: object,
+            options?: Options,
             active: boolean,
             created: Date
+        }
+
+        interface Options {
+            color: string,
+            icon: string,
+            timeout: any
         }
     }
 

@@ -1,21 +1,21 @@
 <template>
   <DWrapper :classes="['d-notification']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
     <slot name="default" :notification="notification">
-      <DCardContent class="d-notification__content" :color="data.options.color" glow glowing
-                    :outlined="!data.options.color"
+      <DCardContent class="d-notification__content" :color="options.value.color" glow glowing
+                    :outlined="!options.value.color"
                     depressed min-width="100%" max-width="500px"
-                    @mouseover="data.hover = true" @mouseleave="data.hover = false">
+                    @mouseover="hover.value = true" @mouseleave="hover.value = false">
         <DRow class="pa-2">
           <DColumn class="pa-0">
-            <DIconButton :color="(data.options.color)" @click="hide">
-              <DIcon :size="data.hover?30:40" :name="data.hover?'multiply':data.options.icon||'multiply'"></DIcon>
+            <DIconButton :color="(options.value.color)" @click="hide">
+              <DIcon :size="hover.value?30:40" :name="hover.value?'multiply':options.value.icon||'multiply'"></DIcon>
             </DIconButton>
           </DColumn>
           <d-column class="pa-0" style="align-self: stretch; justify-content: center; gap: 16px">
-            <DCardTitle v-if="notification.title" class="py-0 font-size-medium" :color="(data.options.color)">
+            <DCardTitle v-if="notification.title" class="py-0 font-size-medium" :color="(options.value.color)">
               {{ notification.title }}
             </DCardTitle>
-            <DCardSubtitle v-if="notification.content" class="py-0" :color="(data.options.color)">
+            <DCardSubtitle v-if="notification.content" class="py-0" :color="(options.value.color)">
               {{ notification.content }}
             </DCardSubtitle>
           </d-column>
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {inject, onBeforeUnmount, onMounted, reactive, watch} from "vue";
+import {inject, onBeforeUnmount, onMounted, PropType, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCardContent from "../card/content/DCardContent.vue";
 import DRow from "../flex/DRow.vue";
@@ -45,16 +45,15 @@ import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 const vuelize: any = inject("vuelize");
 
 const props = defineProps({
-  notification: {type: Object, required: true}
+  notification: {type: Object as PropType<Notifications.Notification>, required: true}
 })
 
-const data = reactive({
-  timeout: undefined as any,
-  hover: false,
-  options: {} as any,
-})
+const timeout = ref<any>(undefined);
+const hover = ref<boolean>(false);
+//const active = ref<boolean>(true); TODO
+const options = ref<Notifications.Options>({icon: '', color: '', timeout: undefined});
 
-watch(() => data.hover, (state) => {
+watch(hover, (state) => {
   if (state) {
     deleteTimeout()
   } else {
@@ -67,43 +66,43 @@ function hide() {
 }
 
 function addTimeout() {
-  data.timeout = setTimeout(() => {
+  timeout.value = setTimeout(() => {
     hide()
-  }, data.options.timeout ? data.options.timeout : 5000)
+  }, options.value.timeout ? options.value.timeout : 5000)
 }
 
 function deleteTimeout() {
-  clearTimeout(data.timeout)
+  clearTimeout(timeout.value)
 }
 
 onMounted(() => {
 
-  data.options.color = vuelize.getColor(props.notification.type)
+  options.value.color = vuelize.getColor(props.notification.type)
   switch (props.notification.type) {
     case 'success': {
-      data.options.icon = 'check'
+      options.value.icon = 'check'
       break;
     }
     case 'error': {
-      data.options.icon = 'exclamation-triangle'
+      options.value.icon = 'exclamation-triangle'
       break;
     }
     case 'warning': {
-      data.options.icon = 'exclamation-octagon'
+      options.value.icon = 'exclamation-octagon'
       break;
     }
     case 'info': {
-      data.options.icon = 'info-circle'
+      options.value.icon = 'info-circle'
       break;
     }
     default: {
-      data.options.icon = 'question'
+      options.value.icon = 'question'
       break;
     }
   }
 
   if (props.notification.options) {
-    Object.assign(data.options, props.notification.options);
+    Object.assign(options.value, props.notification.options);
   }
 
   addTimeout();
