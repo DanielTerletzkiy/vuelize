@@ -1,6 +1,6 @@
 <template>
   <DWrapper :classes="['d-icon']" v-bind="{...$props, ...$attrs}"
-            @click="$emit('click')">
+            @click="$emit('click')" :style="{width: size+'px', height: size+'px'}">
     <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
       <linearGradient :id="uid" x1="0%" y1="0%" x2="100%" y2="0%"
                       :gradientTransform="`rotate(${gradientRotation})`" v-if="gradient">
@@ -8,8 +8,10 @@
               :stop-color="vuelize.getColor(color || 'currentColor')"/>
       </linearGradient>
     </svg>
-    <unicon class="d-icon" :name="name" :size="size" :icon-style="iconStyle"
-            :color="`url(#${uid}) ${vuelize.getColor(color || 'currentColor',tint)}`"></unicon>
+    <fade-transition :duration="120">
+      <unicon :name="name" :size="size" :icon-style="iconStyle"
+              :color="`url(#${uid}) ${vuelize.getColor(color || 'currentColor',tint)}`"></unicon>
+    </fade-transition>
   </DWrapper>
 </template>
 
@@ -20,8 +22,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {getCurrentInstance, inject} from "vue";
+import {getCurrentInstance, inject, PropType} from "vue";
 import DWrapper from "../DWrapper.vue";
+import {FadeTransition} from "v3-transitions";
+import {Style} from "vue3-unicons/types/Unicon"
 import defaultProps from "../../mixins/DefaultProps";
 import Unicon from "vue3-unicons/src/components/Unicon.vue"
 
@@ -29,7 +33,7 @@ const vuelize: any = inject('vuelize');
 
 defineProps({
   name: {type: String, required: true},
-  iconStyle: {type: String},
+  iconStyle: {type: String as PropType<Style>},
   size: [Number],
   gradient: {type: Array},
   gradientRotation: {type: [String, Number], default: 0},
