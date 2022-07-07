@@ -1,7 +1,8 @@
+import { ref } from 'vue';
 import { createPinia } from "pinia";
 import { ThemeStore } from './store/ThemeStore';
-import { NotificationStore } from './store/NotificationStore';
 import importAll from "./ComponentImport";
+import Notification from "./components/notification/Notification";
 // @ts-ignore no ripple types available
 import VWave from "v-wave";
 import Unicon from 'vue3-unicons';
@@ -9,14 +10,14 @@ import 'v3-transitions/dist/style.css';
 class VuelizePlugin {
     app;
     theme;
-    notification;
+    notifications = ref([]);
     constructor(app) {
         this.app = app;
         this.theme = ThemeStore();
-        this.notification = NotificationStore();
+        this.notifications.value;
     }
     notify(title, content, type, options) {
-        this.notification.notifications.push({ title, content, type, options, active: true });
+        this.notifications.value.push(ref(new Notification(title, content, type, options)));
     }
     getColor(color, tint) {
         let colorOut;

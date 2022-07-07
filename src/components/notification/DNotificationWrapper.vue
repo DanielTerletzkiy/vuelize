@@ -1,12 +1,14 @@
 <template>
-  <DWrapper :classes="['d-notification-wrapper', {permanent}]" v-bind="{...$props, ...$attrs}"
-                      @click="$emit('click')">
-    <div class="d-notification-wrapper__content">
-      <FadeTransition group :delay="0">
-        <DNotification v-for="notification in notifications" :notification="notification" color="primary"
-                        :key="notification.created"/>
-      </FadeTransition>
-    </div>
+  <DWrapper :classes="['d-notification-wrapper']" v-bind="{...$props, ...$attrs}"
+            @click="$emit('click')">
+    <SlideXRightTransition>
+      <div class="d-notification-wrapper__content" v-if="notifications.length>0">
+        <FadeTransition group :duration="100">
+          <DNotification v-for="notification in notifications" :notification="notification"
+                         :key="notification.value.key"/>
+        </FadeTransition>
+      </div>
+    </SlideXRightTransition>
   </DWrapper>
 </template>
 
@@ -17,22 +19,16 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {computed, inject} from "vue";
+import {computed, inject, Ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DNotification from "./DNotification.vue";
-import {FadeTransition} from "v3-transitions";
+import {FadeTransition, SlideXRightTransition} from "v3-transitions";
+import Notification from "./Notification";
 
-const vuelize: any = inject('vuelize');
+const vuelize: Vuelize = inject('vuelize') as Vuelize;
 
-const props = defineProps({
-  permanent: {type: Boolean},
-})
+const notifications = computed<Array<Ref<Notification>>>(() => vuelize.notifications.value.filter((notification) => notification.value.active))
 
-const notifications = computed(() => {
-  return props.permanent ?
-      vuelize.notification.notifications
-      : vuelize.notification.notifications.filter((notification: { active: boolean; }) => notification.active)
-})
 </script>
 
 <style scoped lang="scss">

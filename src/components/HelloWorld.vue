@@ -379,8 +379,11 @@ function changeTheme(): void {
   vuelize.theme.dark = !vuelize.theme.dark
 }
 
-onMounted(() => {
-  vuelize.notify('test', 'test body', State.Success);
+onMounted(async () => {
+  for (let i = 0; i < 100; i++) {
+    await new Promise(resolve => setTimeout(resolve, Math.random() * 500))
+    vuelize.notify(i.toString(), 'test body', State.Error);
+  }
 })
 
 </script>

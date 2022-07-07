@@ -1,22 +1,25 @@
 <template>
   <DWrapper :classes="['d-notification']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
     <slot name="default" :notification="notification">
-      <DCardContent class="d-notification__content" :color="options.value.color" glow glowing
-                    :outlined="!options.value.color"
+      <DCardContent class="d-notification__content" :color="options.color" glow glowing
+                    outlined="!options.color"
                     depressed min-width="100%" max-width="500px"
-                    @mouseover="hover.value = true" @mouseleave="hover.value = false">
+                    @mouseover="hover = true" @mouseleave="hover = false">
         <DRow class="pa-2">
           <DColumn class="pa-0">
-            <DIconButton :color="(options.value.color)" @click="hide">
-              <DIcon :size="hover.value?30:40" :name="hover.value?'multiply':options.value.icon||'multiply'"></DIcon>
+            <DIconButton :color="(options.color)" @click="onCloseClick">
+              <SlideXLeftTransition group>
+                <DIcon v-if="hover" :size="40" name="multiply"></DIcon>
+                <DIcon v-else :size="40" :name="options.icon"></DIcon>
+              </SlideXLeftTransition>
             </DIconButton>
           </DColumn>
           <d-column class="pa-0" style="align-self: stretch; justify-content: center; gap: 16px">
-            <DCardTitle v-if="notification.title" class="py-0 font-size-medium" :color="(options.value.color)">
-              {{ notification.title }}
+            <DCardTitle v-if="notification.value.title" class="py-0 font-size-medium" :color="(options.color)">
+              {{ notification.value.title }}
             </DCardTitle>
-            <DCardSubtitle v-if="notification.content" class="py-0" :color="(options.value.color)">
-              {{ notification.content }}
+            <DCardSubtitle v-if="notification.value.content" class="py-0" :color="(options.color)">
+              {{ notification.value.content }}
             </DCardSubtitle>
           </d-column>
         </DRow>
@@ -32,7 +35,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {inject, onBeforeUnmount, onMounted, PropType, ref, watch} from "vue";
+import {inject, onBeforeUnmount, onMounted, PropType, Ref, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCardContent from "../card/content/DCardContent.vue";
 import DRow from "../flex/DRow.vue";
@@ -41,44 +44,37 @@ import DIconButton from "../button/DIconButton.vue";
 import DIcon from "../icon/DIcon.vue";
 import DCardTitle from "../card/text/DCardTitle.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
+import {SlideXLeftTransition} from "v3-transitions";
+
+import Notification from "./Notification";
 
 const vuelize: any = inject("vuelize");
 
 const props = defineProps({
-  notification: {type: Object as PropType<Notifications.Notification>, required: true}
+  notification: {type: Object as PropType<Ref<Notification>>, required: true}
 })
 
-const timeout = ref<any>(undefined);
+console.log(props.notification.value)
+
 const hover = ref<boolean>(false);
-//const active = ref<boolean>(true); TODO
-const options = ref<Notifications.Options>({icon: '', color: '', timeout: undefined});
+const options = ref<Notifications.Options>({icon: '', color: '', timeout: 5000});
 
 watch(hover, (state) => {
   if (state) {
-    deleteTimeout()
+    props.notification.value.removeTimeout();
   } else {
-    addTimeout()
+    props.notification.value.startTimeout();
   }
 })
 
-function hide() {
-  props.notification.active = false
-}
-
-function addTimeout() {
-  timeout.value = setTimeout(() => {
-    hide()
-  }, options.value.timeout ? options.value.timeout : 5000)
-}
-
-function deleteTimeout() {
-  clearTimeout(timeout.value)
+function onCloseClick() {
+  props.notification.value.close();
 }
 
 onMounted(() => {
 
-  options.value.color = vuelize.getColor(props.notification.type)
-  switch (props.notification.type) {
+  options.value.color = vuelize.getColor(props.notification.value.type)
+  switch (props.notification.value.type) {
     case 'success': {
       options.value.icon = 'check'
       break;
@@ -101,15 +97,13 @@ onMounted(() => {
     }
   }
 
-  if (props.notification.options) {
-    Object.assign(options.value, props.notification.options);
+  if (props.notification.value.options) {
+    Object.assign(options.value, props.notification.value.options);
   }
-
-  addTimeout();
 })
 
 onBeforeUnmount(() => {
-  deleteTimeout()
+  props.notification.value.removeTimeout();
 })
 </script>
 
@@ -119,10 +113,6 @@ onBeforeUnmount(() => {
   position: relative;
   overflow: hidden;
   transition: transform 0.2s ease-out;
-
-  &:hover {
-    transform: scale(1.04);
-  }
 
   &__content {
     backdrop-filter: blur(20px);

@@ -23,6 +23,7 @@
   ],
   "dependencies": {
     "@types/estree": "^0.0.47",
+    "lodash": "^4.17.21",
     "pinia": "^2.0.14",
     "rollup-plugin-typescript": "^1.0.1",
     "storybook-color-picker": "^3.0.1",

@@ -1,29 +1,29 @@
-import {App, Plugin} from 'vue';
+import {App, Plugin, Ref, ref} from 'vue';
 import {createPinia} from "pinia";
 import {ThemeStore} from './store/ThemeStore'
-import {NotificationStore} from './store/NotificationStore'
 import importAll from "./ComponentImport";
+import {State} from "./types/Vuelize";
+import Notification from "./components/notification/Notification";
 
 // @ts-ignore no ripple types available
 import VWave from "v-wave";
 import Unicon from 'vue3-unicons'
 
 import 'v3-transitions/dist/style.css'
-import {State} from "./types/Vuelize";
 
 class VuelizePlugin implements Vuelize {
     app;
     theme;
-    notification;
+    notifications = ref<Array<Ref<Notification>>>([]);
 
     constructor(app: App) {
         this.app = app;
         this.theme = ThemeStore();
-        this.notification = NotificationStore();
+        this.notifications.value;
     }
 
-    notify(title: string, content: string, type: State, options?: object | undefined) {
-        this.notification.notifications.push(<Notifications.Notification>{title, content, type, options, active: true})
+    notify(title: string, content: string, type: State, options: Notifications.Options) {
+        this.notifications.value.push(ref<Notification>(new Notification(title, content, type, options)))
     }
 
     getColor(color: string, tint?: number | string | undefined): string {
@@ -65,7 +65,7 @@ class VuelizePlugin implements Vuelize {
         const g = parseInt(hexColor.substr(2, 2), 16);
         const b = parseInt(hexColor.substr(4, 2), 16);
         // Get YIQ ratio
-        let yiq = (r*0.299) + (g*0.587) + (b*0.114);
+        let yiq = (r * 0.299) + (g * 0.587) + (b * 0.114);
         // Check contrast
         return (yiq > 160) ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.85)';
     }
