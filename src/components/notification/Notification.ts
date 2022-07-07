@@ -9,6 +9,7 @@ export default class Notification {
     active: Ref<boolean> | boolean = ref(true);
     timeout: any = null;
     created: Date = new Date();
+    key: number = 1;
 
     constructor(title: string, content: string, type: State, options: Notifications.Options) {
         this.title = title;
@@ -16,6 +17,7 @@ export default class Notification {
         this.type = type;
         this.options = options;
         this.created = new Date();
+        this.key = this.created.getTime() + Math.round(Math.random() * 10000);
         this.startTimeout(this.options?.timeout);
     }
 
@@ -26,6 +28,7 @@ export default class Notification {
     }
 
     removeTimeout() {
+        console.log(this.timeout)
         if (this.timeout) {
             clearTimeout(this.timeout);
         }
@@ -33,7 +36,8 @@ export default class Notification {
 
     close() {
         //whyyyyyyyyyyyyyyyyyyyyyyyyyyyy?????!!
-        //fuck refs
+        //fuck refs, but kinda dont...
+        console.log(this.active)
         if (typeof this.active === "boolean") {
             this.active = false;
         } else {

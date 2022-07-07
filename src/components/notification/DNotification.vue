@@ -2,13 +2,16 @@
   <DWrapper :classes="['d-notification']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
     <slot name="default" :notification="notification">
       <DCardContent class="d-notification__content" :color="options.color" glow glowing
-                    :outlined="!options.color"
+                    outlined="!options.color"
                     depressed min-width="100%" max-width="500px"
                     @mouseover="hover = true" @mouseleave="hover = false">
         <DRow class="pa-2">
           <DColumn class="pa-0">
             <DIconButton :color="(options.color)" @click="onCloseClick">
-              <DIcon :size="hover?30:40" :name="hover?'multiply':options.icon||'multiply'"></DIcon>
+              <SlideXLeftTransition group>
+                <DIcon v-if="hover" :size="40" name="multiply"></DIcon>
+                <DIcon v-else :size="40" :name="options.icon"></DIcon>
+              </SlideXLeftTransition>
             </DIconButton>
           </DColumn>
           <d-column class="pa-0" style="align-self: stretch; justify-content: center; gap: 16px">
@@ -41,8 +44,10 @@ import DIconButton from "../button/DIconButton.vue";
 import DIcon from "../icon/DIcon.vue";
 import DCardTitle from "../card/text/DCardTitle.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
+import {SlideXLeftTransition} from "v3-transitions";
 
 import Notification from "./Notification";
+
 const vuelize: any = inject("vuelize");
 
 const props = defineProps({
@@ -62,7 +67,7 @@ watch(hover, (state) => {
   }
 })
 
-function onCloseClick(){
+function onCloseClick() {
   props.notification.value.close();
 }
 
@@ -108,10 +113,6 @@ onBeforeUnmount(() => {
   position: relative;
   overflow: hidden;
   transition: transform 0.2s ease-out;
-
-  &:hover {
-    transform: scale(1.04);
-  }
 
   &__content {
     backdrop-filter: blur(20px);

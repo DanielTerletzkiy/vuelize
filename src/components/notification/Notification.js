@@ -8,12 +8,14 @@ export default class Notification {
     active = ref(true);
     timeout = null;
     created = new Date();
+    key = 1;
     constructor(title, content, type, options) {
         this.title = title;
         this.content = content;
         this.type = type;
         this.options = options;
         this.created = new Date();
+        this.key = this.created.getTime() + Math.round(Math.random() * 10000);
         this.startTimeout(this.options?.timeout);
     }
     startTimeout(timeoutTime = 3000) {
@@ -22,13 +24,15 @@ export default class Notification {
         }, timeoutTime);
     }
     removeTimeout() {
+        console.log(this.timeout);
         if (this.timeout) {
             clearTimeout(this.timeout);
         }
     }
     close() {
         //whyyyyyyyyyyyyyyyyyyyyyyyyyyyy?????!!
-        //fuck refs
+        //fuck refs, but kinda dont...
+        console.log(this.active);
         if (typeof this.active === "boolean") {
             this.active = false;
         }

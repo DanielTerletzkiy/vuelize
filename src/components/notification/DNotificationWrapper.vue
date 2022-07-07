@@ -1,12 +1,14 @@
 <template>
   <DWrapper :classes="['d-notification-wrapper']" v-bind="{...$props, ...$attrs}"
             @click="$emit('click')">
-    <div class="d-notification-wrapper__content">
-      <FadeTransition group :duration="50">
-        <DNotification v-for="notification in notifications" :notification="notification"
-                       :key="notification.value.created"/>
-      </FadeTransition>
-    </div>
+    <SlideXRightTransition>
+      <div class="d-notification-wrapper__content" v-if="notifications.length>0">
+        <FadeTransition group :duration="100">
+          <DNotification v-for="notification in notifications" :notification="notification"
+                         :key="notification.value.key"/>
+        </FadeTransition>
+      </div>
+    </SlideXRightTransition>
   </DWrapper>
 </template>
 
@@ -20,20 +22,12 @@ export default {
 import {computed, inject, Ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DNotification from "./DNotification.vue";
-import {FadeTransition} from "v3-transitions";
+import {FadeTransition, SlideXRightTransition} from "v3-transitions";
 import Notification from "./Notification";
 
 const vuelize: Vuelize = inject('vuelize') as Vuelize;
 
-console.log(vuelize.notifications)
-const notifications = computed<Array<Ref<Notification>>>(() => vuelize.notifications.value.filter((notification) => {
-  console.log(notification)
-  return notification.value.active
-}))
-
-watch(vuelize.notifications, (data) => {
-  console.log(data)
-}, {deep: true})
+const notifications = computed<Array<Ref<Notification>>>(() => vuelize.notifications.value.filter((notification) => notification.value.active))
 
 </script>
 
