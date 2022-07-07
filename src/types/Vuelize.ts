@@ -1,4 +1,5 @@
-import {App} from "vue";
+import {App, ref, Ref} from "vue";
+import Notification from "../components/notification/Notification";
 
 export const enum State {
     Success = "success",
@@ -20,7 +21,7 @@ declare global {
     interface Vuelize {
         app: App;
         theme: Theme.ThemeStore;
-        notification: Notifications.NotificationStore;
+        notifications: Ref<Array<Ref<Notification>>>;
 
         notify(title: string, content: string, type: State, options?: object | undefined): void;
 
@@ -30,23 +31,11 @@ declare global {
     }
 
     namespace Notifications {
-        interface NotificationStore {
-            notifications: Notification[],
-        }
-
-        interface Notification {
-            title: string,
-            content: string,
-            type: string,
-            options?: Options,
-            active: boolean,
-            created: Date
-        }
 
         interface Options {
             color: string,
             icon: string,
-            timeout: any
+            timeout: number
         }
     }
 

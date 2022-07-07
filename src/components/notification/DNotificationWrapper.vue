@@ -1,10 +1,10 @@
 <template>
-  <DWrapper :classes="['d-notification-wrapper', {permanent}]" v-bind="{...$props, ...$attrs}"
-                      @click="$emit('click')">
+  <DWrapper :classes="['d-notification-wrapper']" v-bind="{...$props, ...$attrs}"
+            @click="$emit('click')">
     <div class="d-notification-wrapper__content">
-      <FadeTransition group :delay="0">
-        <DNotification v-for="notification in notifications" :notification="notification" color="primary"
-                        :key="notification.created"/>
+      <FadeTransition group :duration="50">
+        <DNotification v-for="notification in notifications" :notification="notification"
+                       :key="notification.value.created"/>
       </FadeTransition>
     </div>
   </DWrapper>
@@ -17,22 +17,24 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {computed, inject} from "vue";
+import {computed, inject, Ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DNotification from "./DNotification.vue";
 import {FadeTransition} from "v3-transitions";
+import Notification from "./Notification";
 
-const vuelize: any = inject('vuelize');
+const vuelize: Vuelize = inject('vuelize') as Vuelize;
 
-const props = defineProps({
-  permanent: {type: Boolean},
-})
+console.log(vuelize.notifications)
+const notifications = computed<Array<Ref<Notification>>>(() => vuelize.notifications.value.filter((notification) => {
+  console.log(notification)
+  return notification.value.active
+}))
 
-const notifications = computed(() => {
-  return props.permanent ?
-      vuelize.notification.notifications
-      : vuelize.notification.notifications.filter((notification: { active: boolean; }) => notification.active)
-})
+watch(vuelize.notifications, (data) => {
+  console.log(data)
+}, {deep: true})
+
 </script>
 
 <style scoped lang="scss">
