@@ -6,7 +6,7 @@ export default class Notification {
     content: string = "";
     type: State = State.Success;
     options: Notifications.Options = {color: "", icon: "", timeout: 5000};
-    active: Ref<boolean> = ref(true);
+    active: Ref<boolean> | boolean = ref(true);
     timeout: any = null;
     created: Date = new Date();
 
@@ -32,7 +32,13 @@ export default class Notification {
     }
 
     close() {
-        console.log('close')
-        this.active.value = false;
+        //whyyyyyyyyyyyyyyyyyyyyyyyyyyyy?????!!
+        //fuck refs
+        if (typeof this.active === "boolean") {
+            this.active = false;
+        } else {
+            this.active.value = false;
+
+        }
     }
 }

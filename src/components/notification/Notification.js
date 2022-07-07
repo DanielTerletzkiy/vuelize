@@ -27,8 +27,14 @@ export default class Notification {
         }
     }
     close() {
-        console.log('close');
-        this.active.value = false;
+        //whyyyyyyyyyyyyyyyyyyyyyyyyyyyy?????!!
+        //fuck refs
+        if (typeof this.active === "boolean") {
+            this.active = false;
+        }
+        else {
+            this.active.value = false;
+        }
     }
 }
 //# sourceMappingURL=Notification.js.map
