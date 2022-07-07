@@ -24,7 +24,6 @@ export default class Notification {
         }, timeoutTime);
     }
     removeTimeout() {
-        console.log(this.timeout);
         if (this.timeout) {
             clearTimeout(this.timeout);
         }
@@ -32,7 +31,6 @@ export default class Notification {
     close() {
         //whyyyyyyyyyyyyyyyyyyyyyyyyyyyy?????!!
         //fuck refs, but kinda dont...
-        console.log(this.active);
         if (typeof this.active === "boolean") {
             this.active = false;
         }

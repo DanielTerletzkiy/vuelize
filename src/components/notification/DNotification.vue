@@ -54,8 +54,6 @@ const props = defineProps({
   notification: {type: Object as PropType<Ref<Notification>>, required: true}
 })
 
-console.log(props.notification.value)
-
 const hover = ref<boolean>(false);
 const options = ref<Notifications.Options>({icon: '', color: '', timeout: 5000});
 

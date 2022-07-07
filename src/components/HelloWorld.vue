@@ -56,7 +56,21 @@
           <DAvatar color="primary">
             <DIcon name="flask" :color="vuelize.getColorContrast('currentColor', 0)"/>
           </DAvatar>
-          <DTooltip color="error" filled position="right">
+          <DTooltip color="error" filled position="left">
+            <DAvatar color="error" :tint="100">
+              <DIcon name="flask" color="error" :tint="0" :size="40"/>
+            </DAvatar>
+            <template v-slot:tooltip>
+              Erroreeeeeeeeeeee
+            </template>
+          </DTooltip>
+          <DTooltip color="primary" filled position="right">
+            <DIconButton color="primary" name="flask" active/>
+            <template v-slot:tooltip>
+              This is content
+            </template>
+          </DTooltip>
+          <DTooltip color="error" filled position="top">
             <DAvatar color="error" :tint="100">
               <DIcon name="flask" color="error" :tint="0" :size="40"/>
             </DAvatar>
@@ -380,7 +394,7 @@ function changeTheme(): void {
 }
 
 onMounted(async () => {
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 6; i++) {
     await new Promise(resolve => setTimeout(resolve, Math.random() * 500))
     vuelize.notify(i.toString(), 'test body', State.Error);
   }
