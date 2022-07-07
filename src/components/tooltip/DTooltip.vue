@@ -1,19 +1,21 @@
 <template>
   <DWrapper :classes="['d-tooltip', position]">
-    <div class="d-tooltip__slot" @mouseover="hoverState=true" @mouseleave="hoverState=false">
+    <div class="d-tooltip__slot" ref="trigger" @mouseover="hoverState=true" @mouseleave="hoverState=false">
       <slot name="default" v-bind="{...$props, ...$attrs}">
       </slot>
     </div>
     <FadeTransition :duration="200">
-      <div class="d-tooltip__wrapper" v-show="hoverState">
-        <DLabel class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :filled="filled" :glow="!filled"
-                glowing :style="stylesObject" ref="tooltip">
-          <DCardSubtitle :style="{color: useFontColor + '!important'}" class="pa-0">
-            <slot name="tooltip">
-            </slot>
-          </DCardSubtitle>
-        </DLabel>
-      </div>
+      <suspense>
+        <div class="d-tooltip__wrapper" :style="stylesObject" v-show="hoverState" ref="tooltip">
+          <DLabel class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :filled="filled" :glow="!filled"
+                  glowing>
+            <DCardSubtitle :style="{color: useFontColor + '!important'}" class="pa-0">
+              <slot name="tooltip">
+              </slot>
+            </DCardSubtitle>
+          </DLabel>
+        </div>
+      </suspense>
     </FadeTransition>
   </DWrapper>
 </template>
@@ -25,7 +27,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {computed, getCurrentInstance, inject, reactive, ref, watch} from "vue";
+import {computed, getCurrentInstance, inject, nextTick, reactive, ref, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DLabel from "../label/DLabel.vue";
@@ -49,7 +51,6 @@ const props = defineProps({
 
 const padding = 4;
 const hoverState = ref(false);
-const tooltip = ref<HTMLElement | null>(null);
 const offset = reactive({
   top: 'initial',
   right: 'initial',
@@ -57,22 +58,42 @@ const offset = reactive({
   left: 'initial',
 })
 
+let trigger = ref<any | null>(null);
+let tooltip = ref<any | null>(null);
+
 watch(() => hoverState.value, () => {
-  onHover();
+  nextTick().then(() => onHover())
 })
 
 async function onHover() {
+  //console.log(tooltip)
   if (hoverState.value && tooltip.value) {
-    // TODO
-    // @ts-ignore
-    /*const clientRect = tooltip.value.el.getBoundingClientRect();
+    console.log(trigger.value.clientHeight)
+    console.log(trigger, trigger.value.offsetParent.offsetTop, trigger.value.offsetParent.offsetLeft)
 
-    if (clientRect.right >= window.innerWidth) {
-      offset.right = Math.round(clientRect.right - window.innerWidth) + padding + 'px';
+    switch (props.position) {
+      case 'top': {
+        console.log(tooltip.value.clientHeight)
+        offset.left = (trigger.value.offsetParent.offsetLeft - (tooltip.value.clientWidth / 2) + (trigger.value.clientWidth / 2)) + 'px';
+        offset.top = (trigger.value.offsetParent.offsetTop - (trigger.value.clientHeight - tooltip.value.clientHeight / 2)) - 16 + 'px';
+        break;
+      }
+      case 'bottom': {
+        offset.left = (trigger.value.offsetParent.offsetLeft - (tooltip.value.clientWidth / 2) + (trigger.value.clientWidth / 2)) + 'px';
+        offset.top = (trigger.value.offsetParent.offsetTop + (trigger.value.clientHeight)) + 'px';
+        break;
+      }
+      case 'right': {
+        offset.left = (trigger.value.offsetParent.offsetLeft + trigger.value.clientWidth) + 'px';
+        offset.top = (trigger.value.offsetParent.offsetTop + ((trigger.value.clientHeight / 2) - tooltip.value.clientHeight / 2)) + 'px';
+        break;
+      }
+      case 'left': {
+        offset.left = (trigger.value.offsetParent.offsetLeft - tooltip.value.clientWidth) + 'px';
+        offset.top = (trigger.value.offsetParent.offsetTop + ((trigger.value.clientHeight / 2) - tooltip.value.clientHeight / 2)) + 'px';
+        break;
+      }
     }
-    if (clientRect.left <= 0) {
-      offset.left = Math.round(clientRect.left * -1) + padding + 'px';
-    }*/
   }
 }
 
@@ -98,12 +119,12 @@ const useFontColor = computed(() => {
 
   &__wrapper {
     z-index: 12;
-    width: 100%;
-    padding: $gap;
-    position: absolute;
+    padding: $gap*2;
+    position: fixed;
     display: flex;
     justify-content: center;
     border-radius: inherit;
+    pointer-events: none;
 
     &__content {
       position: relative;
@@ -126,7 +147,7 @@ const useFontColor = computed(() => {
     }
   }
 
-  &.left {
+  /*&.left {
     display: flex;
     align-items: center;
 
@@ -156,6 +177,6 @@ const useFontColor = computed(() => {
     .d-tooltip__wrapper {
       bottom: calc(100% + #{$gap});
     }
-  }
+  }*/
 }
 </style>
