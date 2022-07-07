@@ -6,7 +6,7 @@ export const ThemeStore = defineStore('theme', {
         themes: {
             dark: {
                 primary: '#A8B2FF',
-                secondary: '#363642',
+                secondary: '#9ea7ad',
                 success: '#74ec38',
                 error: '#ff6b6b',
                 warning: '#fca121',
