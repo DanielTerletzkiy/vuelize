@@ -72,7 +72,7 @@ async function onHover() {
   if (hoverState.value && tooltip.value) {
     const triggerRect = trigger.value.getBoundingClientRect();
     const tooltipRect = tooltip.value.getBoundingClientRect();
-    console.log('triggerRect: ', triggerRect, 'tooltipRect:', tooltipRect)
+    //console.log('triggerRect: ', triggerRect, 'tooltipRect:', tooltipRect)
 
     switch (props.position) {
       case Position.Top: {
