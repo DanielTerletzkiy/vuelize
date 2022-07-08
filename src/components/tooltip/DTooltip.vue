@@ -77,7 +77,7 @@ async function onHover() {
     switch (props.position) {
       case Position.Top: {
         offset.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
-        offset.top = (triggerRect.top - (triggerRect.height + 4)) + 'px';
+        offset.top = (triggerRect.top - (tooltipRect.height)) + 'px';
         break;
       }
       case Position.Bottom: {
