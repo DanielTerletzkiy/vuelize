@@ -17,6 +17,14 @@ export const enum Round {
     None = "none"
 }
 
+export const enum Position {
+    Top = 'top',
+    Bottom = 'bottom',
+    Left = 'left',
+    Right = 'right'
+}
+
+
 declare global {
     interface Vuelize {
         app: App;

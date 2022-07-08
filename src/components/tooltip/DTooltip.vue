@@ -4,7 +4,7 @@
       <slot name="default" v-bind="{...$props, ...$attrs}">
       </slot>
     </div>
-    <FadeTransition :duration="200">
+    <component :is="transitionComponent" :duration="200">
       <suspense>
         <div class="d-tooltip__wrapper" :style="stylesObject" v-show="hoverState" ref="tooltip">
           <DLabel class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :filled="filled" :glow="!filled"
@@ -16,7 +16,7 @@
           </DLabel>
         </div>
       </suspense>
-    </FadeTransition>
+    </component>
   </DWrapper>
 </template>
 
@@ -27,12 +27,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {computed, getCurrentInstance, inject, nextTick, reactive, ref, watch} from "vue";
+import {computed, getCurrentInstance, inject, nextTick, PropType, reactive, ref, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DLabel from "../label/DLabel.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
-import {FadeTransition} from "v3-transitions";
+import {SlideYDownTransition, SlideXLeftTransition, SlideXRightTransition, SlideYUpTransition} from "v3-transitions";
+import {Position} from "../../types/Vuelize";
 
 const vuelize: any = inject('vuelize');
 const instance: any = getCurrentInstance();
@@ -41,7 +42,8 @@ const props = defineProps({
   filled: Boolean,
   fontColor: String,
   position: {
-    type: String,
+    type: String as PropType<Position>,
+    default: 'bottom',
     validator: function (value) {
       return ['top', 'bottom', 'left', 'right'].indexOf(value as string) !== -1
     }
@@ -68,29 +70,29 @@ watch(() => hoverState.value, () => {
 async function onHover() {
   //console.log(tooltip)
   if (hoverState.value && tooltip.value) {
-    console.log(trigger.value.clientHeight)
-    console.log(trigger, trigger.value.offsetParent.offsetTop, trigger.value.offsetParent.offsetLeft)
+    const triggerRect = trigger.value.getBoundingClientRect();
+    const tooltipRect = tooltip.value.getBoundingClientRect();
+    console.log('triggerRect: ', triggerRect, 'tooltipRect:', tooltipRect)
 
     switch (props.position) {
-      case 'top': {
-        console.log(tooltip.value.clientHeight)
-        offset.left = (trigger.value.offsetParent.offsetLeft - (tooltip.value.clientWidth / 2) + (trigger.value.clientWidth / 2)) + 'px';
-        offset.top = (trigger.value.offsetParent.offsetTop - (trigger.value.clientHeight - tooltip.value.clientHeight / 2)) - 16 + 'px';
+      case Position.Top: {
+        offset.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
+        offset.top = (triggerRect.top - (triggerRect.height + 4)) + 'px';
         break;
       }
-      case 'bottom': {
-        offset.left = (trigger.value.offsetParent.offsetLeft - (tooltip.value.clientWidth / 2) + (trigger.value.clientWidth / 2)) + 'px';
-        offset.top = (trigger.value.offsetParent.offsetTop + (trigger.value.clientHeight)) + 'px';
+      case Position.Bottom: {
+        offset.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
+        offset.top = (triggerRect.top + (triggerRect.height)) + 'px';
         break;
       }
-      case 'right': {
-        offset.left = (trigger.value.offsetParent.offsetLeft + trigger.value.clientWidth) + 'px';
-        offset.top = (trigger.value.offsetParent.offsetTop + ((trigger.value.clientHeight / 2) - tooltip.value.clientHeight / 2)) + 'px';
+      case Position.Right: {
+        offset.left = (triggerRect.left + triggerRect.width) + 'px';
+        offset.top = (triggerRect.top + ((triggerRect.height / 2) - tooltipRect.height / 2)) + 'px';
         break;
       }
-      case 'left': {
-        offset.left = (trigger.value.offsetParent.offsetLeft - tooltip.value.clientWidth) + 'px';
-        offset.top = (trigger.value.offsetParent.offsetTop + ((trigger.value.clientHeight / 2) - tooltip.value.clientHeight / 2)) + 'px';
+      case Position.Left: {
+        offset.left = (triggerRect.left - tooltipRect.width) + 'px';
+        offset.top = (triggerRect.top + ((triggerRect.height / 2) - tooltipRect.height / 2)) + 'px';
         break;
       }
     }
@@ -99,6 +101,23 @@ async function onHover() {
 
 const stylesObject = computed(() => {
   return offset
+})
+
+const transitionComponent = computed(() => {
+  switch (props.position) {
+    case Position.Top: {
+      return SlideYDownTransition;
+    }
+    case Position.Bottom: {
+      return SlideYUpTransition;
+    }
+    case Position.Right: {
+      return SlideXLeftTransition;
+    }
+    case Position.Left: {
+      return SlideXRightTransition;
+    }
+  }
 })
 
 const useFontColor = computed(() => {
@@ -119,7 +138,7 @@ const useFontColor = computed(() => {
 
   &__wrapper {
     z-index: 12;
-    padding: $gap*2;
+    padding: $gap;
     position: fixed;
     display: flex;
     justify-content: center;
@@ -135,7 +154,7 @@ const useFontColor = computed(() => {
 
       &:not(.filled) {
         background: transparent !important;
-        backdrop-filter: blur(1px);
+        backdrop-filter: saturate(120%) blur(10px);
       }
 
       word-break: keep-all;
