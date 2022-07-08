@@ -14,4 +14,11 @@ export var Round;
     Round["MD"] = "md";
     Round["None"] = "none";
 })(Round || (Round = {}));
+export var Position;
+(function (Position) {
+    Position["Top"] = "top";
+    Position["Bottom"] = "bottom";
+    Position["Left"] = "left";
+    Position["Right"] = "right";
+})(Position || (Position = {}));
 //# sourceMappingURL=Vuelize.js.map
