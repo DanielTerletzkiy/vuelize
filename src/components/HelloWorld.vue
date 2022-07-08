@@ -1,13 +1,13 @@
 <template>
   <DCard elevation-light block>
-    <div class="pa-4">
+    <d-card class="pa-4" outlined outline-color="primary" outline-width="2px" outline-offset="4px">
       <DAccordion outlined>
         <template v-slot:header>
           This is an Accordion
         </template>
         This is the content
       </DAccordion>
-    </div>
+    </d-card>
 
     <DCardTitle color="primary">
       This is a title

@@ -1,7 +1,7 @@
 <template>
   <component :is="componentTag" :to="link" :disabled="disabled"
              :class="[classes, themeClass, elevationClass, globalClasses]"
-             :style="{color, height, width}"
+             :style="{color, height, width, ...outline}"
              @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
   </component>
@@ -63,6 +63,14 @@ const themeClass = computed(() => {
 
 const color = computed(() => {
   return vuelize.getColor(props.color, props.tint);
+})
+
+const outline = computed(() => {
+  return {
+    outlineOffset: props.outlineOffset,
+    outlineWidth: props.outlineWidth,
+    outlineColor: vuelize.getColor(props.outlineColor)
+  };
 })
 
 </script>
