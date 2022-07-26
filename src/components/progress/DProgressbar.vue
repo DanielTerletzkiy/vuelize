@@ -1,16 +1,16 @@
 <template>
-  <DWrapper elevation="n4" :classes="['d-progressbar']" v-bind="{...$props, ...$attrs}"
+  <DWrapper elevation="n4" :classes="['d-progressbar', {label: showLabel}]" v-bind="{...$props, ...$attrs}"
             @click="$emit('click')">
     <DCard class="d-progressbar__wrapper" :color="props.color" block :rounded="props.rounded">
       <DCard class="d-progressbar__wrapper__indicator" :width="`${progress}%`" :rounded="props.rounded"
              :color="props.color">
-        <DCardSubtitle v-if="showLabel" class="d-progressbar__wrapper__indicator__label" :rounded="props.rounded"
-                       :color="$vuelize.getColorContrast(props.color, props.tint)">
-          <slot name="progress" :progress="progress">
-            {{ progress }} %
-          </slot>
-        </DCardSubtitle>
       </DCard>
+      <DCardSubtitle v-if="showLabel" class="d-progressbar__wrapper__label" :rounded="props.rounded"
+                     :color="$vuelize.getColorContrast(props.color, props.tint)">
+        <slot name="progress" :progress="progress">
+          {{ progress }} %
+        </slot>
+      </DCardSubtitle>
     </DCard>
   </DWrapper>
 </template>
@@ -55,6 +55,12 @@ function getPercentage(partialValue: number, totalValue: number): number {
   position: relative;
   user-select: none;
 
+  &.label {
+    .d-progressbar__wrapper {
+      height: 20px !important;
+    }
+  }
+
   &__wrapper {
     padding: 0;
     overflow: hidden;
@@ -75,23 +81,22 @@ function getPercentage(partialValue: number, totalValue: number): number {
 
     &__indicator {
       transition-duration: .5s;
+      height: 100%;
       min-height: 6px;
       background: currentColor !important;
       box-shadow: 0 2px 10px -5px currentColor;
-
-      &__label {
-        font-weight: 600;
-        padding: 4px 12px;
-        width: max-content;
-      }
     }
-  }
 
-  &__label {
-    min-width: 54px;
-    position: absolute;
-    top: -3px;
-    right: 0;
+    &__label {
+      height: 20px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-weight: 600;
+      padding: 0 12px;
+      width: max-content;
+      filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+    }
   }
 }
 </style>
