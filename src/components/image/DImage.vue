@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-image']" root-tag="img" :src="src" draggable="false"
+  <DWrapper :classes="['d-image']" root-tag="img" :style="styles" draggable="false"
             v-bind="{...$props, ...$attrs}"/>
 </template>
 
@@ -12,10 +12,17 @@ export default {
 <script setup lang="ts">
 import DWrapper from "../DWrapper.vue";
 import defaultProps from "../../mixins/DefaultProps";
+import {computed} from "vue";
 
-defineProps({
+const props = defineProps({
   src: {type: String, required: true},
   ...defaultProps
+})
+
+const styles = computed(() => {
+  return {
+    backgroundImage: `url(${props.src})`,
+  }
 })
 </script>
 
@@ -24,5 +31,7 @@ defineProps({
   user-select: none;
   display: block;
   object-fit: cover;
+  background-size: cover;
+  background-position: center;
 }
 </style>

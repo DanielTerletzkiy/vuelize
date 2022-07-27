@@ -7,10 +7,6 @@ export default {
     title: 'DDialog',
     component: DDialog,
     argTypes: {
-        label: {control: 'text'},
-        color: {control: 'color'},
-        outlined: {control: 'boolean'},
-        glow: {control: 'boolean'},
     },
 };
 

@@ -5,10 +5,6 @@ export default {
     component: DButton,
     argTypes: {
         label: {control: 'text'},
-        color: {control: 'color'},
-        filled: {control: 'boolean'},
-        outlined: {control: 'boolean'},
-        glow: {control: 'boolean'},
     },
 };
 
@@ -40,6 +36,6 @@ Outlined.args = {
 
 export const Glow = Template.bind({});
 Glow.args = {
-    label: 'Outlined',
+    label: 'Glow',
     glow: true
 };

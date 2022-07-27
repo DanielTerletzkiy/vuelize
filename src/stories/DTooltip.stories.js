@@ -6,10 +6,6 @@ export default {
     title: 'DTooltip',
     component: DTooltip,
     argTypes: {
-        label: {control: 'text'},
-        color: {control: 'color'},
-        outlined: {control: 'boolean'},
-        glow: {control: 'boolean'},
     },
 };
 
