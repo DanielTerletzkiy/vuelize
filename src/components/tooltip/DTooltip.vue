@@ -4,7 +4,7 @@
       <slot name="default" v-bind="{...$props, ...$attrs}">
       </slot>
     </div>
-    <component :is="transitionComponent" :duration="200">
+    <component :is="transitionComponent" :duration="100">
       <suspense>
         <div class="d-tooltip__wrapper" :style="stylesObject" v-show="hoverState" ref="tooltip">
           <DLabel class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :filled="filled" :glow="!filled"
