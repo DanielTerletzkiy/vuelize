@@ -6,11 +6,6 @@ export default {
     title: 'DRadio',
     components: [DRadioGroup, DRadioItem],
     argTypes: {
-        label: {control: 'text'},
-        color: {control: 'color'},
-        filled: {control: 'boolean'},
-        outlined: {control: 'boolean'},
-        glow: {control: 'boolean'},
     },
 };
 
