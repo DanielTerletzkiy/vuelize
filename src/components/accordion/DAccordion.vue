@@ -1,17 +1,18 @@
 <template>
   <DWrapper :classes="['d-accordion']"
             v-bind="{...$props, ...$attrs}">
-    <div @click="onClick" style="border-radius: inherit">
-      <DCardTitle class="d-accordion__header" :color="headerColor" glow :glowing="open"
-                  v-ripple>
-        <slot name="header"></slot>
-        <DIcon :name="angleIcon" class="d-accordion__header__icon"/>
-      </DCardTitle>
-    </div>
+    <DCardTitle @click.self="onClick" class="d-accordion__header" :class="{'pa-0':removePadding}" :color="headerColor"
+                glow :glowing="open"
+                v-ripple>
+      <slot name="header"></slot>
+      <DIcon v-if="showArrow" :name="angleIcon" class="d-accordion__header__icon"/>
+    </DCardTitle>
     <CollapseTransition :duration="60">
-      <DCardContent class="d-accordion__content" v-if="open">
-        <slot name="default"></slot>
-      </DCardContent>
+      <suspense>
+        <DCardContent class="d-accordion__content" v-if="open">
+          <slot name="default"></slot>
+        </DCardContent>
+      </suspense>
     </CollapseTransition>
   </DWrapper>
 </template>
@@ -29,6 +30,7 @@ import DCardTitle from "../card/text/DCardTitle.vue";
 import DCardContent from "../card/content/DCardContent.vue";
 import DIcon from "../icon/DIcon.vue";
 import {CollapseTransition} from 'v3-transitions';
+import defaultProps from "../../mixins/DefaultProps";
 
 const component = getCurrentInstance();
 
@@ -36,6 +38,9 @@ const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: {type: [Boolean, Number]},
   headerColor: {type: String},
+  showArrow: {type: Boolean},
+  removePadding: {type: Boolean},
+  ...defaultProps
 })
 
 const state = ref(props.modelValue);
@@ -45,7 +50,7 @@ watch(() => props.modelValue, () => {
 })
 
 const angleIcon = computed((): string => {
-  return open.value ? 'angle-up' : 'angle-down'
+  return props.disabled ? 'ban' :open.value ? 'angle-up' : 'angle-down'
 })
 const isKeyed = computed((): boolean => {
   return (typeof state.value === "number" && typeof component?.vnode.key === "number")
@@ -60,6 +65,9 @@ const open = computed((): boolean | number => {
 
 function onClick() {
   let value: boolean | number;
+  if (props.disabled) {
+    return;
+  }
   if (isKeyed.value) {
     if (state.value === component?.vnode.key) {
       value = -1;
@@ -87,6 +95,8 @@ function onClick() {
     align-items: center;
     font-size: 1.4em;
     padding: 10px 12px;
+
+    pointer-events: all;
 
     &__icon {
       margin-left: auto;
