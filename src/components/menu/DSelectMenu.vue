@@ -1,14 +1,13 @@
 <template>
-  <DWrapper :classes="['d-select-menu']" v-bind="{...$props, ...$attrs}">
+  <DWrapper :classes="['d-select-menu']">
     <SlideYUpTransition :duration="80">
-      <DCard v-if="open" class="d-select-menu__dropdown pa-0" elevation="4"
-              v-click-outside="hideSelectMenu">
-        <DList :value="modelValue"
-                @input="onInput"
-                color="primary" class="d-select-menu__dropdown__list pa-0" rounded="none">
+      <DCard v-show="open && items" v-bind="{...$props, ...$attrs}" class="d-select-menu__dropdown pa-0" elevation="4">
+        <DList :modelValue="modelValue"
+               @update:modelValue="onInput" :multiple="multiple" :mandatory="mandatory"
+               color="primary" class="d-select-menu__dropdown__list pa-0" rounded="none">
           <DListItem v-for="(item, index) in items" :key="index"
-                       :color="item.color || ''"
-                       :tabindex="0" ref="item">
+                     :color="item.color || 'currentColor'"
+                     :tabindex="0" ref="item">
             <slot name="item" :item="item" :index="index">
               {{ item }}
             </slot>
@@ -31,13 +30,16 @@ import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
 import DList from "../list/DList.vue";
 import DListItem from "../list/DListItem.vue";
+import {SlideYUpTransition} from "v3-transitions";
 
 const emit = defineEmits(['update:modelValue', 'update:open']);
 
 const props = defineProps({
   modelValue: [Number, String, Array],
   open: {type: Boolean},
-  items: {type: Array}
+  items: {type: Array},
+  multiple: {type: Boolean},
+  mandatory: {type: Boolean},
 })
 
 const currentItem = ref(-1);
@@ -53,11 +55,14 @@ watch(() => props.items, () => {
 })
 
 function hideSelectMenu() {
-  emit('update:open', false)
+  if (!props.multiple) {
+    emit('update:open', false)
+  }
 }
 
-function onInput(e: Event) {
+function onInput(e: number | Array<number>) {
   emit('update:modelValue', e)
+  hideSelectMenu()
 }
 </script>
 

@@ -1,8 +1,8 @@
 <template>
   <DWrapper root-tag="li" :classes="['d-list__item', {selected, center}]"
             :style="stylesObject" v-ripple
-            @focusin="()=>focus = true"
-            @focusout="()=>focus = false"
+            @focusin="focus = true"
+            @focusout="focus = false"
             v-bind="{...$props, ...$attrs}" @click="onClick" :tabindex="disabled?-1:0" @keyup.enter="onClick"
             glow :glowing="!filled && selected">
     <div class="d-list__item__content">
@@ -72,7 +72,7 @@ const stylesObject = computed(() => {
 
 watch(() => selected.value, (state) => {
   if (state) {
-    updateParent();
+    //updateParent();
   }
 })
 
@@ -87,7 +87,7 @@ function onClick(e: Event) {
 
 onMounted(() => {
   if (selected.value) {
-    updateParent();
+    //updateParent();
   }
 })
 </script>

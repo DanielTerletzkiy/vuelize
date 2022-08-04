@@ -1,19 +1,21 @@
 <template>
-  <DWrapper :classes="['d-tooltip', position]">
-    <div class="d-tooltip__slot" ref="trigger" @mouseover="hoverState=true" @mouseleave="hoverState=false">
+  <DWrapper :classes="['d-tooltip', position, popover]" @mouseleave="popover && onHoverLeave()">
+    <div class="d-tooltip__slot" ref="trigger" @mouseover="onHoverOver" @mouseleave="!popover && onHoverLeave()">
       <slot name="default" v-bind="{...$props, ...$attrs}">
       </slot>
     </div>
     <component :is="transitionComponent" :duration="100">
       <suspense>
         <div class="d-tooltip__wrapper" :style="stylesObject" v-show="hoverState" ref="tooltip">
-          <DLabel class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :filled="filled" :glow="!filled"
-                  glowing>
-            <DCardSubtitle :style="{color: useFontColor + '!important'}" class="pa-0">
-              <slot name="tooltip">
-              </slot>
-            </DCardSubtitle>
-          </DLabel>
+          <slot name="tooltip-wrapper">
+            <DLabel class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :filled="filled" :glow="!filled"
+                    glowing>
+              <DCardSubtitle :style="{color: useFontColor + '!important'}" class="pa-0">
+                <slot name="tooltip">
+                </slot>
+              </DCardSubtitle>
+            </DLabel>
+          </slot>
         </div>
       </suspense>
     </component>
@@ -32,7 +34,13 @@ import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DLabel from "../label/DLabel.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
-import {SlideYDownTransition, SlideXLeftTransition, SlideXRightTransition, SlideYUpTransition} from "v3-transitions";
+import {
+  SlideYDownTransition,
+  SlideXLeftTransition,
+  SlideXRightTransition,
+  SlideYUpTransition,
+  FadeTransition
+} from "v3-transitions";
 import {Position} from "../../types/Vuelize";
 
 const vuelize: any = inject('vuelize');
@@ -41,6 +49,9 @@ const instance: any = getCurrentInstance();
 const props = defineProps({
   filled: Boolean,
   fontColor: String,
+  popover: Boolean,
+  simpleFade: Boolean,
+  padding: {type: String, default: '4px'},
   position: {
     type: String as PropType<Position>,
     default: 'bottom',
@@ -51,7 +62,6 @@ const props = defineProps({
   ...defaultProps
 });
 
-const padding = 4;
 const hoverState = ref(false);
 const offset = reactive({
   top: 'initial',
@@ -66,6 +76,14 @@ let tooltip = ref<any | null>(null);
 watch(() => hoverState.value, () => {
   nextTick().then(() => onHover())
 })
+
+function onHoverOver() {
+  hoverState.value = true;
+}
+
+function onHoverLeave() {
+  hoverState.value = false;
+}
 
 async function onHover() {
   //console.log(tooltip)
@@ -104,6 +122,9 @@ const stylesObject = computed(() => {
 })
 
 const transitionComponent = computed(() => {
+  if (props.simpleFade) {
+    return FadeTransition;
+  }
   switch (props.position) {
     case Position.Top: {
       return SlideYDownTransition;
@@ -136,9 +157,15 @@ const useFontColor = computed(() => {
   position: relative;
   width: max-content;
 
+  &.popover {
+    &__wrapper {
+      pointer-events: all;
+    }
+  }
+
   &__wrapper {
     z-index: 12;
-    padding: $gap;
+    padding: v-bind(padding);
     position: fixed;
     display: flex;
     justify-content: center;
@@ -165,37 +192,5 @@ const useFontColor = computed(() => {
       }
     }
   }
-
-  /*&.left {
-    display: flex;
-    align-items: center;
-
-    .d-tooltip__wrapper {
-      display: unset;
-      right: calc(100% + #{$gap});
-    }
-  }
-
-  &.right {
-    display: flex;
-    align-items: center;
-
-    .d-tooltip__wrapper {
-      display: unset;
-      left: calc(100% + #{$gap});
-    }
-  }
-
-  &.bottom {
-    .d-tooltip__wrapper {
-      top: calc(100% + #{$gap});
-    }
-  }
-
-  &.top {
-    .d-tooltip__wrapper {
-      bottom: calc(100% + #{$gap});
-    }
-  }*/
 }
 </style>

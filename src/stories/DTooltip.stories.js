@@ -5,8 +5,7 @@ import DButton from "../components/button/DButton.vue";
 export default {
     title: 'DTooltip',
     component: DTooltip,
-    argTypes: {
-    },
+    argTypes: {},
 };
 
 const Template = (args) => ({
@@ -21,15 +20,25 @@ const Template = (args) => ({
         return {args, positions};
     },
     template: `
-      <d-tooltip v-bind="args" v-for="position in positions" :position="position">
-      <d-button filled color="primary">
-        hello i is btn {{ position }}
-      </d-button>
-      <template v-slot:tooltip>
-        toooooooltip
-      </template>
-      </d-tooltip>
-    `,
+      <d-card class="ma-20 pa-10" elevation>
+      <d-column gap>
+        <d-tooltip v-bind="args" v-for="position in positions" :position="position">
+          <d-button filled color="primary">
+            hello i is btn {{ position }}
+          </d-button>
+          <template v-slot:tooltip-wrapper>
+            <d-card elevation="6">
+              <d-card-title>
+                This is a tooltip
+              </d-card-title>
+              <d-button>
+                hiii :)
+              </d-button>
+            </d-card>
+          </template>
+        </d-tooltip>
+      </d-column>
+      </d-card>`,
 });
 
 export const Primary = Template.bind({});
