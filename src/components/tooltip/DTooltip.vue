@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-tooltip', position, popover]" @mouseleave="popover && onHoverLeave()">
+  <DWrapper :classes="['d-tooltip', position, {popover}]" @mouseleave="popover && onHoverLeave()">
     <div class="d-tooltip__slot" ref="trigger" @mouseover="onHoverOver" @mouseleave="!popover && onHoverLeave()">
       <slot name="default" v-bind="{...$props, ...$attrs}">
       </slot>
@@ -158,7 +158,7 @@ const useFontColor = computed(() => {
   width: max-content;
 
   &.popover {
-    &__wrapper {
+    .d-tooltip__wrapper {
       pointer-events: all;
     }
   }
