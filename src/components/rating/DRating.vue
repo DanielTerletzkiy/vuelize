@@ -23,7 +23,6 @@ import {computed} from "vue";
 import {Style} from "vue3-unicons/types/Unicon";
 import DIconButton from "../button/DIconButton.vue";
 import DIcon from "../icon/DIcon.vue";
-import {toNumber} from "lodash";
 
 const props = defineProps({
   modelValue: {type: Number, default: 0},
@@ -47,7 +46,7 @@ const stars = computed<Star[]>(() => {
     return (number - inMin) / (inMax - inMin) * (outMax - outMin) + outMin;
   }
 
-  const mapped = toNumber(scale(percentage, [0, 100], [0, props.amount]).toPrecision(2));
+  const mapped = parseFloat(scale(percentage, [0, 100], [0, props.amount]).toPrecision(2));
   console.log(percentage, mapped, Math.max(0, Math.min(props.amount, props.modelValue)))
   for (const position of [...Array(props.amount).keys()]) {
 
