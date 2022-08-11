@@ -31,6 +31,8 @@ import DProgressBar from './components/progress/DProgressbar.vue';
 import DTable from './components/table/DTable.vue';
 import DTooltip from './components/tooltip/DTooltip.vue';
 import DTextfield from './components/textfield/DTextfield.vue';
+import DRadioGroup from './components/radio/DRadioGroup.vue';
+import DRadioItem from './components/radio/DRadioItem.vue';
 import DRoot from './components/root/DRoot.vue';
 import DWrapper from './components/DWrapper.vue';
 export const getImports = {
@@ -67,6 +69,8 @@ export const getImports = {
     DTable,
     DTooltip,
     DTextfield,
+    DRadioGroup,
+    DRadioItem,
     DRoot,
     DWrapper,
 };
@@ -104,6 +108,8 @@ export default function importAll(app) {
     app.component('DTable', DTable);
     app.component('DTooltip', DTooltip);
     app.component('DTextfield', DTextfield);
+    app.component('DRadioGroup', DRadioGroup);
+    app.component('DRadioItem', DRadioItem);
     app.component('DRoot', DRoot);
     app.component('DWrapper', DWrapper);
     return app;
