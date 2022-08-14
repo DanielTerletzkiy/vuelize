@@ -1,6 +1,7 @@
 import DTooltip from "../components/tooltip/DTooltip.vue";
 import DCard from "../components/card/DCard.vue";
 import DButton from "../components/button/DButton.vue";
+import {ref} from "vue";
 
 export default {
     title: 'DTooltip',
@@ -17,19 +18,25 @@ const Template = (args) => ({
             'left',
             'right'
         ]
-        return {args, positions};
+        const content = ref(10)
+
+        function changeContent() {
+            content.value = Math.random() * 50000
+        }
+
+        return {args, positions, content, changeContent};
     },
     template: `
       <d-card class="ma-20 pa-10" elevation>
       <d-column gap>
         <d-tooltip v-bind="args" v-for="position in positions" :position="position">
-          <d-button filled color="primary">
+          <d-button filled color="primary" @click="changeContent">
             hello i is btn {{ position }}
           </d-button>
           <template v-slot:tooltip-wrapper>
             <d-card elevation="6">
               <d-card-title>
-                This is a tooltip
+                {{ content }}
               </d-card-title>
               <d-button>
                 hiii :)

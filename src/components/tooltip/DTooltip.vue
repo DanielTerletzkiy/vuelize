@@ -7,15 +7,18 @@
     <component :is="transitionComponent" :duration="100">
       <suspense>
         <div class="d-tooltip__wrapper" :style="stylesObject" v-show="hoverState" ref="tooltip">
-          <slot name="tooltip-wrapper">
-            <DLabel class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :filled="filled" :glow="!filled"
-                    glowing>
-              <DCardSubtitle :style="{color: useFontColor + '!important'}" class="pa-0">
-                <slot name="tooltip">
-                </slot>
-              </DCardSubtitle>
-            </DLabel>
-          </slot>
+          <div id="helper">
+            <slot name="tooltip-wrapper">
+              <DLabel class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :filled="filled"
+                      :glow="!filled"
+                      glowing>
+                <DCardSubtitle :style="{color: useFontColor + '!important'}" class="pa-0">
+                  <slot name="tooltip">
+                  </slot>
+                </DCardSubtitle>
+              </DLabel>
+            </slot>
+          </div>
         </div>
       </suspense>
     </component>
@@ -29,7 +32,18 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {computed, getCurrentInstance, inject, nextTick, PropType, reactive, ref, watch} from "vue";
+import {
+  computed,
+  getCurrentInstance,
+  inject,
+  nextTick, onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  PropType,
+  reactive,
+  ref,
+  watch
+} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DLabel from "../label/DLabel.vue";
@@ -86,11 +100,9 @@ function onHoverLeave() {
 }
 
 async function onHover() {
-  //console.log(tooltip)
   if (hoverState.value && tooltip.value) {
     const triggerRect = trigger.value.getBoundingClientRect();
     const tooltipRect = tooltip.value.getBoundingClientRect();
-    //console.log('triggerRect: ', triggerRect, 'tooltipRect:', tooltipRect)
 
     switch (props.position) {
       case Position.Top: {
@@ -147,6 +159,26 @@ const useFontColor = computed(() => {
       props.fontColor ?
           props.fontColor : 'inherit';
 });
+
+const observer = ref<any>(null);
+
+onMounted(() => {
+  try {
+    observer.value = new MutationObserver(function () {
+      onHover();
+    }.bind(this));
+
+    observer.value.observe(
+        document.getElementById('helper'),
+        {attributes: true, childList: true, characterData: true, subtree: true}
+    );
+  } catch (e) {
+  }
+})
+
+onBeforeUnmount(() => {
+  observer.value.disconnect();
+})
 
 </script>
 
