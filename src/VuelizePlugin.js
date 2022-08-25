@@ -7,6 +7,7 @@ import Notification from "./components/notification/Notification";
 import VWave from "v-wave";
 import Unicon from 'vue3-unicons';
 import 'v3-transitions/dist/style.css';
+import ClickOutside from "./directive/ClickOutside";
 class VuelizePlugin {
     app;
     theme;
@@ -69,6 +70,7 @@ class VuelizePlugin {
 }
 export const Vuelize = {
     install(app) {
+        ClickOutside(app);
         app.use(createPinia());
         app.use(VWave, {
             directive: 'ripple',
