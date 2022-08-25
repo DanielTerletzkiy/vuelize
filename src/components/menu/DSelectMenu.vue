@@ -33,7 +33,7 @@ import DList from "../list/DList.vue";
 import DListItem from "../list/DListItem.vue";
 import {SlideYUpTransition} from "v3-transitions";
 //@ts-ignore
-import ClickOutside from 'click-outside-vue3'
+import {directive} from 'click-outside-vue3'
 import defaultProps from "../../mixins/DefaultProps";
 
 const emit = defineEmits(['update:modelValue', 'update:open']);
@@ -47,7 +47,7 @@ const props = defineProps({
   ...defaultProps
 })
 
-const vClickOutside = ClickOutside.directive
+const vClickOutside = directive
 
 const currentItem = ref(-1);
 
