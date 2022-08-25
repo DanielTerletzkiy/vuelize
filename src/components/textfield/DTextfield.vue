@@ -1,20 +1,20 @@
 <template>
   <DWrapper :classes="['d-text-field', classesObject]" v-bind="{...$props, ...$attrs}"
             :style="textFieldStylesObject"
-            @mouseenter="()=> hover = true" @mouseleave="()=> hover = false">
+            @mouseenter="hover = true" @mouseleave="hover = false">
     <div class="d-text-field__prefix">
       <slot name="prefix"/>
     </div>
     <component v-if="componentType !== 'input'" :is="componentType" v-bind="{...$props, ...$attrs}" :id="instance.uid"
                class="d-text-field__input"
                :placeholder="placeholderActive ? placeholder : ' '"
-               :value="modelValue" @input="onInput"
+               :modelValue="modelValue" @update:modelValue="onInput"
                @removeFocus="removeFocus"
-               @focusin="()=>selected = true" @focusout="()=>selected = false">
-      <template v-if="componentType !== 'input'" slot="label" slot-scope="props">
+               @focusin="selected = true" @focusout="selected = false">
+      <template v-if="componentType !== 'input'" v-slot:label="props">
         <slot name="label" v-bind="props"></slot>
       </template>
-      <template v-if="componentType !== 'input'" slot="item" slot-scope="props">
+      <template v-if="componentType !== 'input'" v-slot:item="props">
         <slot name="item" v-bind="props"></slot>
       </template>
     </component>
@@ -24,7 +24,7 @@
            :value="modelValue" @input="onInput"
            @keyup.enter="$emit('enter')"
            @removeFocus="removeFocus"
-           @focusin="()=>selected = true" @focusout="()=>selected = false"/>
+           @focusin="selected = true" @focusout="selected = false"/>
     <label v-if="label && !solo" :for="instance.uid" class="d-text-field__label" :class="labelClassesObject">{{
         label
       }}</label>
@@ -41,7 +41,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-//import DSelect from "@/components/textfield/variant/Select.vue";
+import DSelect from "./variant/DSelect.vue";
 //import DAutocomplete from "@/components/textfield/variant/Autocomplete.vue";
 import {computed, inject, onMounted, ref} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
@@ -61,6 +61,7 @@ const props = defineProps({
   label: {type: String},
   placeholder: {type: String, default: ''},
   select: {type: Boolean},
+  mandatory: {type: Boolean},
   modelValue: {type: [String, Object]},
   ...defaultProps
 });
@@ -82,7 +83,7 @@ const classesObject = computed(() => {
 
 const componentType = computed(() => {
   if (props.select) {
-    return 'd-select'
+    return DSelect
   } else if (props.autocomplete) {
     return 'd-autocomplete'
   } else {
