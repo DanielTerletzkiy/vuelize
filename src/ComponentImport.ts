@@ -36,6 +36,7 @@ import DTextfield from './components/textfield/DTextfield.vue'
 import DRadioGroup from './components/radio/DRadioGroup.vue'
 import DRadioItem from './components/radio/DRadioItem.vue'
 import DRating from './components/rating/DRating.vue'
+import DProgressbar from './components/progress/DProgressbar.vue'
 import DRoot from './components/root/DRoot.vue'
 import DWrapper from './components/DWrapper.vue'
 
@@ -76,6 +77,7 @@ export const getImports = {
     DRadioGroup,
     DRadioItem,
     DRating,
+    DProgressbar,
     DRoot,
     DWrapper,
 }
@@ -117,6 +119,7 @@ export default function importAll(app: App) {
     app.component('DRadioGroup', DRadioGroup)
     app.component('DRadioItem', DRadioItem)
     app.component('DRating', DRating)
+    app.component('DProgressbar', DProgressbar)
     app.component('DRoot', DRoot)
     app.component('DWrapper', DWrapper)
     return app;

@@ -11,7 +11,7 @@
       </SlideYDownTransition>
     </DIconButton>
     <DSelectMenu :items="items" :modelValue="modelValue" @update:modelValue="onInput"
-                 v-model:open="dropdownOpen" :mandatory="mandatory" :multiple="false" :color="$attrs.color">
+                 v-model:open="dropdownOpen" :mandatory="mandatory" :multiple="false" :color="$props.color">
       <template v-slot:item="props">
         <slot name="item" v-bind="props"></slot>
       </template>
@@ -46,7 +46,7 @@ function onInput(val: any) {
 }
 
 const angleIcon = computed(() => {
-  return dropdownOpen.value ? 'angle-up' : 'angle-down'
+  return dropdownOpen.value ? 'times' : 'angle-down'
 })
 </script>
 
@@ -60,7 +60,6 @@ const angleIcon = computed(() => {
   display: flex;
 
   .d-text-field__input__default {
-    align-self: center;
   }
 
   .d-text-field__input__icon {
