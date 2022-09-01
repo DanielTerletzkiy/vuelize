@@ -1,12 +1,12 @@
 <template>
   <DWrapper elevation="n4" :classes="['d-progressbar', {label: showLabel}]" v-bind="{...$props, ...$attrs}"
             @click="$emit('click')">
-    <DCard class="d-progressbar__wrapper" :color="props.color" block :rounded="props.rounded">
+    <DCard class="d-progressbar__wrapper" color="secondary" block :rounded="props.rounded">
       <DCard class="d-progressbar__wrapper__indicator" :width="`${progress}%`" :rounded="props.rounded"
-             :color="props.color">
+             :color="props.color" glowing>
       </DCard>
       <DCardSubtitle v-if="showLabel" class="d-progressbar__wrapper__label" :rounded="props.rounded"
-                     :color="$vuelize.getColorContrast(props.color, props.tint)">
+                     :color="props.color">
         <slot name="progress" :progress="progress">
           {{ progress }} %
         </slot>
@@ -62,6 +62,7 @@ function getPercentage(partialValue: number, totalValue: number): number {
   }
 
   &__wrapper {
+    min-height: 6px;
     padding: 0;
     overflow: hidden;
     background: transparent !important;
@@ -74,17 +75,29 @@ function getPercentage(partialValue: number, totalValue: number): number {
       left: 0;
       width: 100%;
       height: 100%;
-      opacity: 0.2;
+      opacity: 0.1;
       overflow: hidden;
       background: currentColor;
     }
 
     &__indicator {
+      position: absolute;
+      top: 0;
+      left: 0;
       transition-duration: .5s;
       height: 100%;
       min-height: 6px;
-      background: currentColor !important;
+      background: transparent !important;
       box-shadow: 0 2px 10px -5px currentColor;
+
+      &::before {
+        opacity: 0.2;
+        background: linear-gradient(
+                -90deg,
+                currentColor 0%,
+                rgba(0, 0, 0, 0) 150%
+        );
+      }
     }
 
     &__label {
@@ -95,7 +108,7 @@ function getPercentage(partialValue: number, totalValue: number): number {
       font-weight: 600;
       padding: 0 12px;
       width: max-content;
-      filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+      //filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
     }
   }
 }
