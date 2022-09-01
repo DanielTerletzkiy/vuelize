@@ -23,6 +23,8 @@
   ],
   "dependencies": {
     "@types/estree": "^0.0.47",
+    "focus-trap": "^6.9.4",
+    "focus-trap-vue": "^3.3.1",
     "lodash": "^4.17.21",
     "pinia": "^2.0.14",
     "rollup-plugin-typescript": "^1.0.1",
