@@ -1,10 +1,11 @@
 <template>
-  <DWrapper :classes="['d-select-menu']">
+  <DWrapper :classes="['d-select-menu']" @keyup.esc="hideSelectMenu">
     <SlideYUpTransition :duration="80">
-      <DCard v-show="open && items" v-bind="{...$props, ...$attrs}" class="d-select-menu__dropdown pa-0" elevation="4">
+      <DCard v-if="open && items" v-bind="{...$props, ...$attrs}" class="d-select-menu__dropdown pa-0" elevation="4"
+             v-click-outside="hideSelectMenu">
         <DList :modelValue="modelValue"
                @update:modelValue="onInput" :multiple="multiple" :mandatory="mandatory"
-               color="primary" class="d-select-menu__dropdown__list pa-0" rounded="none">
+               :color="color" class="d-select-menu__dropdown__list pa-0" rounded="none">
           <DListItem v-for="(item, index) in items" :key="index"
                      :color="item.color || 'currentColor'"
                      :tabindex="0" ref="item">
@@ -31,6 +32,7 @@ import DCard from "../card/DCard.vue";
 import DList from "../list/DList.vue";
 import DListItem from "../list/DListItem.vue";
 import {SlideYUpTransition} from "v3-transitions";
+import defaultProps from "../../mixins/DefaultProps";
 
 const emit = defineEmits(['update:modelValue', 'update:open']);
 
@@ -40,6 +42,7 @@ const props = defineProps({
   items: {type: Array},
   multiple: {type: Boolean},
   mandatory: {type: Boolean},
+  ...defaultProps
 })
 
 const currentItem = ref(-1);
