@@ -86,6 +86,11 @@
           </DTooltip>
         </DRow>
         <DTextfield v-model="textfield" filled color="primary" label="Test"/>
+        <DTextfield v-model="textfield" filled color="primary" label="Test">
+          <template v-slot:prefix>
+            <d-icon name="clock"/>
+          </template>
+        </DTextfield>
         <DCheckbox color="primary" off-icon="times" v-model="fill">
           Check for filled List
         </DCheckbox>
