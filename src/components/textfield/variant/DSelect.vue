@@ -11,7 +11,7 @@
       </SlideYDownTransition>
     </DIconButton>
     <DSelectMenu :items="items" :modelValue="modelValue" @update:modelValue="onInput"
-                 v-model:open="dropdownOpen" :mandatory="mandatory" :multiple="false" :color="$props.color">
+                 v-model:open="dropdownOpen" :mandatory="mandatory" :multiple="false" :index-key="indexKey" :color="$props.color">
       <template v-slot:item="props">
         <slot name="item" v-bind="props"></slot>
       </template>
@@ -30,6 +30,7 @@ const emit = defineEmits(['update:modelValue', 'removeFocus'])
 const props = defineProps({
   modelValue: [Number, String],
   items: Array,
+  indexKey: {type: String},
   mandatory: {type: Boolean},
   ...defaultProps
 })
