@@ -23,8 +23,8 @@
           <DDivider block width="100%"/>
         </td>
       </tr>
-      <tr v-for="(row, r) in visibleData" :key="r">
-        <td v-for="(cell, c) in row" :key="r+c" :colspan="cell.colspan">
+      <tr v-for="(row, r) in visibleData" :key="r" @click="$emit(`rowClick`, r)">
+        <td v-for="(cell, c) in row" :key="r+c" :colspan="cell.colspan" @click="$emit(`cellClick`, c)">
           <slot :name="`data(${cell.key})`" :value="cell.value" :key="cell.key" :type="cell.type"
                 :params="cell.params"
                 :row="r"
