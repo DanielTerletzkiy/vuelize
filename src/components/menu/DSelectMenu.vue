@@ -6,7 +6,7 @@
         <DList :modelValue="modelValue"
                @update:modelValue="onInput" :multiple="multiple" :mandatory="mandatory"
                :color="color" class="d-select-menu__dropdown__list pa-0" rounded="none">
-          <DListItem v-for="(item, index) in items" :key="index"
+          <DListItem v-for="(item, index) in items" :key="item[indexKey] || index"
                      :color="item.color || 'currentColor'"
                      :tabindex="0" ref="item">
             <slot name="item" :item="item" :index="index">
@@ -40,6 +40,7 @@ const props = defineProps({
   modelValue: [Number, String, Array],
   open: {type: Boolean},
   items: {type: Array},
+  indexKey: {type: String},
   multiple: {type: Boolean},
   mandatory: {type: Boolean},
   ...defaultProps

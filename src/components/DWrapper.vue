@@ -20,7 +20,7 @@ const props = defineProps({
 })
 
 const componentTag = computed(() => {
-  return props.link ? 'a' : props.rootTag ?? 'div'
+  return props.link ? 'router-link' : props.rootTag ?? 'div'
 })
 
 const globalClasses = computed(() => {

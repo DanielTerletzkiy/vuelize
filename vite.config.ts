@@ -8,7 +8,7 @@ import rollup from "./rollup.config.js";
 export default defineConfig({
     plugins: [vue()],
     resolve: {dedupe: ['vue']},
-    server: {port: 5555},
+    server: {port: 5656},
     build: {
         // @ts-ignore
         rollupOptions: rollup
