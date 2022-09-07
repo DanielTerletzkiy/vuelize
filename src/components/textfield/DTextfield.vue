@@ -63,6 +63,8 @@ const props = defineProps({
   select: {type: Boolean},
   mandatory: {type: Boolean},
   modelValue: {type: [String, Object]},
+  search: {type: Boolean},
+  searchKey: {type: String, default: 'value'},
   ...defaultProps
 });
 
@@ -137,7 +139,7 @@ function removeFocus() {
   display: flex;
   align-items: center;
 
-  &__input, :deep(.d-text-field__input__autocomplete) {
+  &__input, :deep(.d-text-field__input__autocomplete), :deep(.d-text-field__input) {
     position: relative;
     top: 0;
     left: 0;

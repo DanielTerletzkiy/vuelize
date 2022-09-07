@@ -13,17 +13,17 @@ const Template = (args) => ({
         return {args, modelValue};
     },
     template: `
-      <d-textfield v-bind="args" v-model="modelValue" :items="[1,2,3,4]" mandatory>
+      <d-textfield v-bind="args" select search v-model="modelValue" :items="[{value: 'test'}, {value: 'mogus'}, {value: 'foo'}, {value: 'tebar'}]" mandatory>
       <template v-slot:item="{item}">
         <d-tooltip>
-            item: {{ item }}
+            item: {{ item.value }}
           <template v-slot:tooltip>
-            {{item}}
+            {{item.value}}
           </template>
         </d-tooltip>
       </template>
       <template v-slot:label="{item}">
-        selected: {{ item }}
+        selected: {{ item.value }}
       </template>
       </d-textfield>`,
 });
