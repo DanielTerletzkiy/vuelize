@@ -6,8 +6,7 @@ import {ref} from "vue";
 export default {
     title: 'DDialog',
     component: DDialog,
-    argTypes: {
-    },
+    argTypes: {},
 };
 
 const Template = (args) => ({
@@ -17,10 +16,12 @@ const Template = (args) => ({
         return {args, value};
     },
     template: `
-      <d-button @click="value=true">open</d-button>
+      <d-button @click="value = !value">open</d-button>
       <d-dialog v-bind="args" v-model="value">
       <d-card width="200px" height="200px">
-
+        <d-button>
+          Tab me!
+        </d-button>
       </d-card>
       </d-dialog>`,
 });

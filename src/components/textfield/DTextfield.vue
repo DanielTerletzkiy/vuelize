@@ -2,7 +2,7 @@
   <DWrapper :classes="['d-text-field', classesObject]" v-bind="{...$props, ...$attrs}"
             :style="textFieldStylesObject"
             @mouseenter="hover = true" @mouseleave="hover = false">
-    <div class="d-text-field__prefix">
+    <div v-if="!!$slots.prefix" class="d-text-field__prefix">
       <slot name="prefix"/>
     </div>
     <component v-if="componentType !== 'input'" :is="componentType" v-bind="{...$props, ...$attrs}" :id="instance.uid"
@@ -28,7 +28,7 @@
     <label v-if="label && !solo" :for="instance.uid" class="d-text-field__label" :class="labelClassesObject">{{
         label
       }}</label>
-    <div class="d-text-field__suffix">
+    <div v-if="!!$slots.suffix" class="d-text-field__suffix">
       <slot name="suffix"/>
     </div>
   </DWrapper>
@@ -63,6 +63,8 @@ const props = defineProps({
   select: {type: Boolean},
   mandatory: {type: Boolean},
   modelValue: {type: [String, Object]},
+  search: {type: Boolean},
+  searchKey: {type: String, default: 'value'},
   ...defaultProps
 });
 
@@ -137,7 +139,7 @@ function removeFocus() {
   display: flex;
   align-items: center;
 
-  &__input, :deep(.d-text-field__input__autocomplete) {
+  &__input, :deep(.d-text-field__input__autocomplete), :deep(.d-text-field__input) {
     position: relative;
     top: 0;
     left: 0;
@@ -175,6 +177,10 @@ function removeFocus() {
     position: relative;
     left: 0.7rem;
     font-size: 20px;
+
+    & ~ .d-text-field__label {
+      left: 40px;
+    }
   }
 
   &__suffix {
