@@ -25,8 +25,6 @@ const props = defineProps({
 })
 
 provide('updateList', (key: number) => {
-  console.log('props.multiple:', props.multiple, 'props.modelValue:', props.modelValue, 'key:', key)
-
   if (props.multiple) {
     const values = unref(props.modelValue) as Array<number>;
     const index = values.indexOf(key);
@@ -38,7 +36,6 @@ provide('updateList', (key: number) => {
     emits("update:modelValue", values);
   } else {
     if (!props.mandatory && key === props.modelValue as number) {
-      console.log('aaa')
       emits("update:modelValue", -1);
     } else {
       emits("update:modelValue", key);
