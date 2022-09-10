@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-toolbar']" v-bind="{...$props, ...$attrs}">
+  <DWrapper ref="wrapper" :classes="['d-toolbar']" v-bind="{...$props, ...$attrs}">
     <DCard block rounded="none" height="100%">
       <DRow block gap class="px-2">
         <DIconButton v-if="showHamburger" color="primary" @click="onHamburgerClick"
@@ -19,6 +19,10 @@ export default {
 </script>
 
 <script setup lang="ts">
+import {ref} from "vue";
+
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../../DWrapper.vue";
 import DCard from "../../card/DCard.vue";
 import DRow from "../../flex/DRow.vue";

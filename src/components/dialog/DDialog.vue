@@ -1,10 +1,10 @@
 <template>
   <fade-transition :duration="{enter: 200, leave: 150}">
-    <DWrapper :classes="['d-dialog']" v-bind="{...$props, ...$attrs}" v-if="modelValue">
+    <DWrapper ref="wrapper" :classes="['d-dialog']" v-bind="{...$props, ...$attrs}" v-if="modelValue">
       <div class="d-dialog__backdrop" @click.self="handleClick"/>
       <focus-trap v-model:active="modelValue">
         <div class="d-dialog__content" tabindex="-1">
-          <DWrapper class="d-dialog__content__focus" tabindex="0">
+          <DWrapper ref="wrapper" class="d-dialog__content__focus" tabindex="0">
             <slot name="default">
             </slot>
           </DWrapper>
@@ -21,6 +21,10 @@ export default {
 </script>
 
 <script setup lang="ts">
+import {ref} from "vue";
+
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import {FadeTransition} from "v3-transitions";
 import {FocusTrap} from "focus-trap-vue";

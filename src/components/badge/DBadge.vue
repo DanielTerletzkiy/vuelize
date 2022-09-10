@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-badge']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
+  <DWrapper ref="wrapper" :classes="['d-badge']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
     <slot name="default">
     </slot>
     <fade-transition>
@@ -21,6 +21,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";

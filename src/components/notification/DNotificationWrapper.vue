@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-notification-wrapper']" v-bind="{...$props, ...$attrs}"
+  <DWrapper ref="wrapper" :classes="['d-notification-wrapper']" v-bind="{...$props, ...$attrs}"
             @click="$emit('click')">
     <SlideXRightTransition>
       <div class="d-notification-wrapper__content" v-if="notifications.length>0">
@@ -19,7 +19,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {computed, inject, Ref, watch} from "vue";
+const wrapper = ref(null);
+defineExpose({ wrapper });
+import {computed, inject, ref, Ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DNotification from "./DNotification.vue";
 import {FadeTransition, SlideXRightTransition} from "v3-transitions";

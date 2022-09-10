@@ -1,5 +1,5 @@
 <template>
-  <DWrapper root-tag="button" :classes="['d-btn', {filled, block, glow, size}]"
+  <DWrapper ref="wrapper" root-tag="button" :classes="['d-btn', {filled, block, glow, size}]"
             v-bind="{...$props, ...$attrs}"
             @click.capture="$emit('click')" :glow="false">
     <span class="d-btn__content" :style="{color: filled && color ? $vuelize.getColorContrast(color,tint):''}" v-ripple>
@@ -22,6 +22,10 @@ export default {
 </script>
 
 <script setup lang="ts">
+import {ref} from "vue";
+
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import defaultProps from "../../mixins/DefaultProps";
 

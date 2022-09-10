@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-tooltip', position, {popover}]" @mouseleave="popover && onHoverLeave()">
+  <DWrapper ref="wrapper" :classes="['d-tooltip', position, {popover}]" @mouseleave="popover && onHoverLeave()">
     <div class="d-tooltip__slot" ref="trigger" @mouseover="onHoverOver" @mouseleave="!popover && onHoverLeave()">
       <slot name="default" v-bind="{...$props, ...$attrs}">
       </slot>
@@ -32,6 +32,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import {
   computed,
   getCurrentInstance,

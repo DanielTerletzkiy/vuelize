@@ -1,5 +1,5 @@
 <template>
-  <DWrapper root-tag="li" :classes="['d-list__item', {selected, center}]"
+  <DWrapper ref="wrapper" root-tag="li" :classes="['d-list__item', {selected, center}]"
             :style="stylesObject" v-ripple
             @focusin="focus = true"
             @focusout="focus = false"
@@ -18,6 +18,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import {computed, getCurrentInstance, inject, onMounted, ref, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";

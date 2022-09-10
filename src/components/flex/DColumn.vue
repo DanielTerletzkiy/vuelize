@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-column', flexClasses($props)]" v-bind="{...$props, ...$attrs}"
+  <DWrapper ref="wrapper" :classes="['d-column', flexClasses($props)]" v-bind="{...$props, ...$attrs}"
             @click="$emit('click')">
     <slot>
     </slot>
@@ -13,6 +13,10 @@ export default {
 </script>
 
 <script setup lang="ts">
+import {ref} from "vue";
+
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import defaultProps from "../../mixins/DefaultProps";
 import flexProps, {flexClasses} from "../../mixins/FlexProps";

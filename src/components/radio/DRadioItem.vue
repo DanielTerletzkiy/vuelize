@@ -1,5 +1,5 @@
 <template>
-  <DWrapper root-tag="li" :classes="['d-radio-item', {selected, center}]" v-ripple
+  <DWrapper ref="wrapper" root-tag="li" :classes="['d-radio-item', {selected, center}]" v-ripple
             v-bind="{...$props, ...$attrs}" @click="onClick" :tabindex="disabled?-1:0" @keyup.enter="onClick"
             glow :glowing="selected">
     <d-card class="d-radio-item__dot" :color="itemColor" outlined :depressed="!selected" background-color="transparent"
@@ -24,7 +24,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {computed, getCurrentInstance, inject, onMounted, watch} from "vue";
+const wrapper = ref(null);
+defineExpose({ wrapper });
+import {computed, getCurrentInstance, inject, onMounted, ref, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";

@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-notification']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
+  <DWrapper ref="wrapper" :classes="['d-notification']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
     <slot name="default" :notification="notification">
       <DCardContent class="d-notification__content" :color="options.color" glow glowing
                     outlined="!options.color"
@@ -35,6 +35,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import {inject, onBeforeUnmount, onMounted, PropType, Ref, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCardContent from "../card/content/DCardContent.vue";

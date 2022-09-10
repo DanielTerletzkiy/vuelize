@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-text-field', classesObject]" v-bind="{...$props, ...$attrs}"
+  <DWrapper ref="wrapper" :classes="['d-text-field', classesObject]" v-bind="{...$props, ...$attrs}"
             :style="textFieldStylesObject"
             @mouseenter="hover = true" @mouseleave="hover = false">
     <div v-if="!!$slots.prefix" class="d-text-field__prefix">
@@ -41,6 +41,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DSelect from "./variant/DSelect.vue";
 //import DAutocomplete from "@/components/textfield/variant/Autocomplete.vue";
 import {computed, inject, onMounted, ref} from "vue";

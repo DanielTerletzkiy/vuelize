@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-tab-list', {'pa-1': outlined}]" v-bind="{...$props, ...$attrs}">
+  <DWrapper ref="wrapper" :classes="['d-tab-list', {'pa-1': outlined}]" v-bind="{...$props, ...$attrs}">
     <slot ref="item"></slot>
     <DDivider v-if="showIndicator" class="d-tab-list__indicator" :color="currentColor" size="2px"
               :style="indicatorStylesObject"/>
@@ -13,6 +13,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import {computed, getCurrentInstance, nextTick, onMounted, provide, ref, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";

@@ -22,6 +22,8 @@
 </template>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import {computed, nextTick, onBeforeMount, onMounted, Ref, ref, toRef, watch} from "vue";
 import DSelectMenu from "../../menu/DSelectMenu.vue";
 import DIconButton from "../../button/DIconButton.vue";

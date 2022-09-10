@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-divider', {block, vertical, horizontal: !vertical}]"
+  <DWrapper ref="wrapper" :classes="['d-divider', {block, vertical, horizontal: !vertical}]"
             v-bind="{...$props, ...$attrs}"/>
 </template>
 
@@ -10,6 +10,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import {ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 

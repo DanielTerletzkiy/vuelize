@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-table']" v-bind="{...$props, ...$attrs}" @click="$emit('click')"
+  <DWrapper ref="wrapper" :classes="['d-table']" v-bind="{...$props, ...$attrs}" @click="$emit('click')"
             width="100%">
     <table style="width: 100%; border-radius: inherit">
       <tr style="border-radius: inherit">
@@ -51,6 +51,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";

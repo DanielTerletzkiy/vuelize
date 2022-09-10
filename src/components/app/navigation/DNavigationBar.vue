@@ -1,6 +1,6 @@
 <template>
   <slide-x-left-transition :duration="100">
-    <DWrapper root-tag="nav" :classes="['d-navigation-bar', {permanent, temporary}]"
+    <DWrapper ref="wrapper" root-tag="nav" :classes="['d-navigation-bar', {permanent, temporary}]"
               v-bind="{...$props, ...$attrs}"
               v-show="modelValue">
       <DCard block :backgroundColor="permanent && 'transparent'" class="d-navigation-bar__content" rounded="none">
@@ -23,6 +23,10 @@ export default {
 </script>
 
 <script setup lang="ts">
+import {ref} from "vue";
+
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../../DWrapper.vue";
 import DRow from "../../flex/DRow.vue";
 import DCard from "../../card/DCard.vue";

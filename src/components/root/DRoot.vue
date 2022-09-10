@@ -24,6 +24,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import {inject, onMounted, ref, watch} from "vue";
 
 const vuelize: any = inject('vuelize');

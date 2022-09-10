@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-select-menu']" @keyup.esc="hideSelectMenu">
+  <DWrapper ref="wrapper" :classes="['d-select-menu']" @keyup.esc="hideSelectMenu">
     <SlideYUpTransition :duration="80">
       <DCard v-if="open && items" v-bind="{...$props, ...$attrs}" class="d-select-menu__dropdown pa-0" elevation="4"
              v-click-outside="hideSelectMenu">
@@ -26,6 +26,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import {ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
