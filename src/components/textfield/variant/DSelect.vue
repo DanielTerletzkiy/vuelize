@@ -3,7 +3,7 @@
        @focusin="focusIn" @focusout="focusOut" @click.self="toggleDropdown" @keypress.enter="dropdownOpen = true"
        tabindex="0">
     <slot v-if="search ? !dropdownOpen : true" name="label" :item="itemsCopy[modelValue]" :index="modelValue">
-      <span class="d-text-field__input__default">{{ itemsCopy[modelValue] }}</span>
+      <span class="d-text-field__input__default">{{ itemsCopy[modelValue].value }}</span>
     </slot>
     <input v-show="dropdownOpen && search" v-model="searchInput" class="d-text-field__input d-text-field__input__search" ref="searchBox"/>
     <DIconButton size="24" rounded="md" class="d-text-field__input__icon" tabindex="-1" @click="toggleDropdown">
@@ -15,7 +15,9 @@
                  v-model:open="dropdownOpen" :mandatory="mandatory" :multiple="false" :index-key="indexKey"
                  :color="$props.color">
       <template v-slot:item="props">
-        <slot name="item" v-bind="props"></slot>
+        <slot name="item" v-bind="props">
+          <span class="d-text-field__select__default">{{ props.value }}</span>
+        </slot>
       </template>
     </DSelectMenu>
   </div>
