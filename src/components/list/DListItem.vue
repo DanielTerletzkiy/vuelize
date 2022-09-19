@@ -6,7 +6,7 @@
             @mouseenter="focus = true"
             @mouseleave="focus = false"
             v-bind="{...$props, ...$attrs}" @click="onClick" :tabindex="disabled?-1:0" @keyup.enter="onClick"
-            glow :glowing="!filled && selected" :color="focus?itemColor:''">
+            glow :glowing="!filled && selected" :color="focus||(!filled && selected)?itemColor:''">
     <slot></slot>
   </DWrapper>
 </template>
