@@ -10,8 +10,7 @@
           <div id="helper">
             <slot name="tooltip-wrapper">
               <DLabel class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :filled="filled"
-                      :glow="!filled"
-                      glowing>
+                      :glow="!filled" glowing :color="props.color || 'inherit'" >
                 <DCardSubtitle :style="{color: useFontColor + '!important'}" class="pa-0">
                   <slot name="tooltip">
                   </slot>
@@ -33,7 +32,7 @@ export default {
 
 <script setup lang="ts">
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import {
   computed,
   getCurrentInstance,
