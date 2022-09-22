@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-checkbox']" v-bind="{...$props, ...$attrs}"
+  <DWrapper ref="wrapper" :classes="['d-checkbox']" v-bind="{...$props, ...$attrs}"
             @click="click">
     <div class="d-checkbox__box" :class="classes" v-ripple
          :tabindex="disabled?-1:0" @keyup.enter="click">
@@ -20,6 +20,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import {computed, inject, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DIcon from "../icon/DIcon.vue";

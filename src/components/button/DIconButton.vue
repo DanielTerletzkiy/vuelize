@@ -1,5 +1,5 @@
 <template>
-  <DWrapper root-tag="button" :classes="['d-icon-button', {glow: true, 'glow--active': props.active}]"
+  <DWrapper ref="wrapper" root-tag="button" :classes="['d-icon-button', {glow: true, 'glow--active': props.active}]"
             v-bind="{...$props, ...$attrs}" @click="$emit('click')">
     <span class="d-icon-button__content" v-ripple>
       <slot name="default">
@@ -17,6 +17,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import {computed, ref} from "vue";
 import DIcon from "../icon/DIcon.vue";

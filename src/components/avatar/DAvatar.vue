@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-avatar']" v-bind="{...$props, ...$attrs}">
+  <DWrapper ref="wrapper" :classes="['d-avatar']" v-bind="{...$props, ...$attrs}">
     <slot>
       <DImage class="d-avatar__image" :src="src" :rounded="rounded"/>
     </slot>
@@ -13,6 +13,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import DImage from "../image/DImage.vue";
 import {computed, ref} from "vue";

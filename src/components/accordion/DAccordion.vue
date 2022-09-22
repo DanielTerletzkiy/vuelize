@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-accordion']"
+  <DWrapper ref="wrapper" :classes="['d-accordion']"
             v-bind="{...$props, ...$attrs}">
     <DCardTitle @click.self="onClick" class="d-accordion__header" :class="{'pa-0':removePadding}" :color="headerColor"
                 glow :glowing="open"
@@ -24,6 +24,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import {computed, getCurrentInstance, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCardTitle from "../card/text/DCardTitle.vue";

@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-elevation-loader']" v-bind="{...$props, ...$attrs}">
+  <DWrapper ref="wrapper" :classes="['d-elevation-loader']" v-bind="{...$props, ...$attrs}">
     <DRow class="d-elevation-loader__container" :width="(defaultSize*columns)+'px'">
       <DCard class="d-elevation-loader__container__pillar" v-for="item in amount" :key="item" :rounded="Round.None"
              :elevation="elevationMap[item-1]"
@@ -18,6 +18,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import {Round} from "../../types/Vuelize";
 import defaultProps from "../../mixins/DefaultProps";
 import {onMounted, ref, watch} from "vue";

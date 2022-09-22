@@ -66,6 +66,8 @@
 </template>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DRow from '../../../src/components/flex/DRow.vue'
 import DColumn from '../../../src/components/flex/DColumn.vue'
 import DSpacer from '../../../src/components/flex/DSpacer.vue'

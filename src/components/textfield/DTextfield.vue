@@ -1,11 +1,11 @@
 <template>
-  <DWrapper :classes="['d-text-field', classesObject]" v-bind="{...$props, ...$attrs}"
+  <DWrapper ref="wrapper" :classes="['d-text-field', classesObject]" v-bind="{...$props, ...$attrs}"
             :style="textFieldStylesObject"
             @mouseenter="hover = true" @mouseleave="hover = false">
     <div v-if="!!$slots.prefix" class="d-text-field__prefix">
       <slot name="prefix"/>
     </div>
-    <component v-if="componentType !== 'input'" :is="componentType" v-bind="{...$props, ...$attrs}" :id="instance.uid"
+    <component ref="input" v-if="componentType !== 'input'" :is="componentType" v-bind="{...$props, ...$attrs}" :id="instance.uid"
                class="d-text-field__input"
                :placeholder="placeholderActive ? placeholder : ' '"
                :modelValue="modelValue" @update:modelValue="onInput"
@@ -18,7 +18,7 @@
         <slot name="item" v-bind="props"></slot>
       </template>
     </component>
-    <input v-else v-bind="{...$props, ...$attrs}" :id="instance.uid"
+    <input ref="input" v-else v-bind="{...$props, ...$attrs}" :id="instance.uid"
            class="d-text-field__input"
            :placeholder="placeholderActive ? placeholder : ' '"
            :value="modelValue" @input="onInput"
@@ -41,6 +41,9 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+const input = ref(null);
+defineExpose({ wrapper, input });
 import DSelect from "./variant/DSelect.vue";
 //import DAutocomplete from "@/components/textfield/variant/Autocomplete.vue";
 import {computed, inject, onMounted, ref} from "vue";

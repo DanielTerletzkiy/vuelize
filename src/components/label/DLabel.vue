@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-label', {filled, 'glow': true, 'glow--active': !filled, clickable}]"
+  <DWrapper ref="wrapper" :classes="['d-label', {filled, 'glow': true, 'glow--active': !filled, clickable}]"
             v-bind="{...$props, ...$attrs}"
             @click="$emit('click')" v-ripple="clickable && {
               color: filled ? contrast :'currentColor'
@@ -27,9 +27,11 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
-import {computed, inject} from "vue";
+import {computed, inject, ref} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 
 const vuelize: any = inject('vuelize');

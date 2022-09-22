@@ -1,7 +1,7 @@
 {
   "name": "vuelize",
   "private": false,
-  "version": "0.1.17",
+  "version": "0.1.21",
   "repository": {
     "type": "git",
     "url": "https://github.com/DanielTerletzkiy/vuelize"
@@ -33,7 +33,7 @@
     "v3-transitions": "^0.2.0",
     "vue": "^3.2.37",
     "vue-material-design-ripple": "^1.0.0",
-    "vue3-unicons": "^0.0.5"
+    "vue3-unicons": "^0.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",

@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-dot-loader']" v-bind="{...$props, ...$attrs}">
+  <DWrapper ref="wrapper" :classes="['d-dot-loader']" v-bind="{...$props, ...$attrs}">
     <DRow class="d-dot-loader__container" :wrap="false" gap>
       <DAvatar class="d-dot-loader__container__dot" v-for="i in Array.from(Array(amount).keys())" :key="i"
                ref="dot"
@@ -19,6 +19,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import defaultProps from "../../mixins/DefaultProps";
 import {onMounted, reactive, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";

@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-radio-group']" v-bind="{...$props, ...$attrs}">
+  <DWrapper ref="wrapper" :classes="['d-radio-group']" v-bind="{...$props, ...$attrs}">
     <slot/>
   </DWrapper>
 </template>
@@ -11,9 +11,11 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import defaultProps from "../../mixins/DefaultProps";
-import {provide} from "vue";
+import {provide, ref} from "vue";
 
 const emits = defineEmits(['update:modelValue']);
 const props = defineProps({

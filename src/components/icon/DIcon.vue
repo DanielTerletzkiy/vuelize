@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-icon']" v-bind="{...$props, ...$attrs}"
+  <DWrapper ref="wrapper" :classes="['d-icon']" v-bind="{...$props, ...$attrs}"
             @click="$emit('click')" :style="{width: size+'px', height: size+'px'}">
     <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
       <linearGradient :id="uid" x1="0%" y1="0%" x2="100%" y2="0%"
@@ -22,7 +22,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {getCurrentInstance, inject, PropType} from "vue";
+const wrapper = ref(null);
+defineExpose({ wrapper });
+import {getCurrentInstance, inject, PropType, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import {FadeTransition} from "v3-transitions";
 import {Style} from "vue3-unicons/types/Unicon"

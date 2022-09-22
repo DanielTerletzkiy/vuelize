@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-image']" root-tag="img" :style="styles" draggable="false"
+  <DWrapper ref="wrapper" :classes="['d-image']" root-tag="img" :style="styles" draggable="false"
             v-bind="{...$props, ...$attrs}"/>
 </template>
 
@@ -10,9 +10,11 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import defaultProps from "../../mixins/DefaultProps";
-import {computed} from "vue";
+import {computed, ref} from "vue";
 
 const props = defineProps({
   src: {type: String, required: true},

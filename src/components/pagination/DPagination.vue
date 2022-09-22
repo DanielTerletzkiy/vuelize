@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-pagination']" v-bind="{...$props, ...$attrs}"
+  <DWrapper ref="wrapper" :classes="['d-pagination']" v-bind="{...$props, ...$attrs}"
             @click="$emit('click')">
     <DRow gap>
       <DIconButton name="angle-left" :disabled="isPreviousDisabled" :rounded="props.rounded" :size="size"
@@ -36,13 +36,15 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DIconButton from "../button/DIconButton.vue";
 import DRow from "../flex/DRow.vue";
 import DButton from "../button/DButton.vue";
 import DCard from "../card/DCard.vue";
-import {computed} from "vue";
+import {computed, ref} from "vue";
 
 const emit = defineEmits(['update:modelValue', 'click']);
 

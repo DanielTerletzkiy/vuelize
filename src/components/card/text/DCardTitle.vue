@@ -1,5 +1,5 @@
 <template>
-  <DWrapper :classes="['d-title']" v-bind="{...$props, ...$attrs}">
+  <DWrapper ref="wrapper" :classes="['d-title']" v-bind="{...$props, ...$attrs}">
     <slot></slot>
   </DWrapper>
 </template>
@@ -11,6 +11,10 @@ export default {
 </script>
 
 <script setup lang="ts">
+import {ref} from "vue";
+
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../../DWrapper.vue";
 </script>
 

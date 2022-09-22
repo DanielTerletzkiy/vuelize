@@ -1,5 +1,5 @@
 <template>
-  <component :is="componentTag" :to="link" :disabled="disabled"
+  <component ref="wrapper" :is="componentTag" :to="link" :disabled="disabled"
              :class="[classes, themeClass, elevationClass, globalClasses]"
              :style="{color, height, width, ...outline}"
              @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
@@ -8,7 +8,9 @@
 </template>
 
 <script setup lang="ts">
-import {computed, inject} from "vue";
+const wrapper = ref(null);
+defineExpose({ wrapper });
+import {computed, inject, ref} from "vue";
 import defaultProps from "../mixins/DefaultProps";
 
 const vuelize: any = inject('vuelize');

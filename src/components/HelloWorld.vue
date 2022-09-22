@@ -94,8 +94,8 @@
         <DCheckbox color="primary" off-icon="times" v-model="fill">
           Check for filled List
         </DCheckbox>
-        <DList v-model="list" color="primary" class="font-weight-bold" :filled="fill" elevation-dark="2">
-          <DListItem v-for="i in 10" :key="i">
+        <DList v-model="list" class="font-weight-bold" :filled="fill" elevation-dark="2">
+          <DListItem v-for="i in 10" :key="i" :color="i%2===0?'primary':'warning'">
             List number {{ i }}
             <DSpacer/>
             <DLabel>

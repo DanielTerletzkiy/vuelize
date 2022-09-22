@@ -1,13 +1,13 @@
 <template>
-  <DWrapper root-tag="li" :classes="['d-list__item', {selected, center}]"
+  <DWrapper ref="wrapper" root-tag="li" :classes="['d-list__item', {selected, center}]"
             :style="stylesObject" v-ripple
             @focusin="focus = true"
             @focusout="focus = false"
+            @mouseenter="focus = true"
+            @mouseleave="focus = false"
             v-bind="{...$props, ...$attrs}" @click="onClick" :tabindex="disabled?-1:0" @keyup.enter="onClick"
-            glow :glowing="!filled && selected">
-    <div class="d-list__item__content">
-      <slot></slot>
-    </div>
+            glow :glowing="!filled && selected" :color="focus||(!filled && selected)?itemColor:''">
+    <slot></slot>
   </DWrapper>
 </template>
 
@@ -18,6 +18,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({wrapper});
 import {computed, getCurrentInstance, inject, onMounted, ref, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
@@ -63,7 +65,8 @@ const stylesObject = computed(() => {
   if (filled.value) {
     return {
       background: selected.value ? vuelize.getColor(itemColor.value, itemTint.value) : 'transparent',
-      color: selected.value ? vuelize.getColorContrast(itemColor.value, itemTint.value) : '',
+      color: selected.value ? vuelize.getColorContrast(itemColor.value, itemTint.value) :
+          (focus.value ? vuelize.getColor(itemColor.value, itemTint.value) : ''),
     }
   } else {
     return {}
@@ -100,21 +103,24 @@ onMounted(() => {
 
   border-radius: inherit;
   min-height: 36px;
-  padding: 4px;
   cursor: pointer;
 
   list-style: none;
   margin: 0;
 
-  transition-duration: 0.1s;
+  //transition-duration: 0.1s;
+
+  width: 100%;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: $gap*2;
 
   &.center {
     flex: 1;
     text-align: center;
-
-    .d-list__item__content {
-      justify-content: center;
-    }
+    justify-content: center;
   }
 
   &:focus-visible {
@@ -122,17 +128,9 @@ onMounted(() => {
     outline-offset: 2px;
   }
 
-  .d-list__item__content {
-    width: 100%;
-    padding: 6px 12px;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    gap: $gap*2;
-  }
-
-  &:not(.selected) {
-    color: darken($dark_card_text, 14) !important;
+  &:not(.selected):hover::before {
+    //color: darken($dark_card_text, 14) !important;
+    opacity: 0.05 !important;
   }
 }
 </style>

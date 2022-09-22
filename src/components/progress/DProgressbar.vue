@@ -1,5 +1,5 @@
 <template>
-  <DWrapper elevation="n4" :classes="['d-progressbar', {label: showLabel}]" v-bind="{...$props, ...$attrs}"
+  <DWrapper ref="wrapper" elevation="n4" :classes="['d-progressbar', {label: showLabel}]" v-bind="{...$props, ...$attrs}"
             @click="$emit('click')">
     <DCard class="d-progressbar__wrapper" color="secondary" block :rounded="props.rounded">
       <DCard class="d-progressbar__wrapper__indicator" :width="`${progress}%`" :rounded="props.rounded"
@@ -22,9 +22,11 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 

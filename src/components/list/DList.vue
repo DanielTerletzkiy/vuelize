@@ -1,5 +1,5 @@
 <template>
-  <DWrapper root-tag="ul" :classes="['d-list', {'pa-1': outlined}]" v-bind="{...$props, ...$attrs}">
+  <DWrapper ref="wrapper" root-tag="ul" :classes="['d-list', {'pa-1': outlined}]" v-bind="{...$props, ...$attrs}">
     <slot></slot>
   </DWrapper>
 </template>
@@ -11,9 +11,11 @@ export default {
 </script>
 
 <script setup lang="ts">
+const wrapper = ref(null);
+defineExpose({ wrapper });
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
-import {provide, unref} from "vue";
+import {provide, ref, unref} from "vue";
 
 const emits = defineEmits(['update:modelValue']);
 const props = defineProps({
@@ -25,8 +27,6 @@ const props = defineProps({
 })
 
 provide('updateList', (key: number) => {
-  console.log('props.multiple:', props.multiple, 'props.modelValue:', props.modelValue, 'key:', key)
-
   if (props.multiple) {
     const values = unref(props.modelValue) as Array<number>;
     const index = values.indexOf(key);
@@ -38,7 +38,6 @@ provide('updateList', (key: number) => {
     emits("update:modelValue", values);
   } else {
     if (!props.mandatory && key === props.modelValue as number) {
-      console.log('aaa')
       emits("update:modelValue", -1);
     } else {
       emits("update:modelValue", key);
