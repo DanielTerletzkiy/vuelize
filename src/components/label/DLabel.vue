@@ -42,7 +42,7 @@ const props = defineProps({
   ...defaultProps
 })
 
-const color = computed(() => vuelize.getColor(props.color, props.tint));
+const color = computed(() => props.color ? vuelize.getColor(props.color, props.tint) : 'primary');
 const contrast = computed(() => vuelize.getColorContrast(props.color, props.tint));
 </script>
 
