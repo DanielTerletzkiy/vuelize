@@ -1,11 +1,12 @@
 <template>
   <DWrapper ref="wrapper" :classes="['d-text-field', classesObject]" v-bind="{...$props, ...$attrs}"
             :style="textFieldStylesObject"
-            @mouseenter="hover = true" @mouseleave="hover = false">
+            @mouseenter="hover = true" @mouseleave="hover = false" @click="onClick">
     <div v-if="!!$slots.prefix" class="d-text-field__prefix">
       <slot name="prefix"/>
     </div>
-    <component ref="input" v-if="componentType !== 'input'" :is="componentType" v-bind="{...$props, ...$attrs}" :id="instance.uid"
+    <component ref="input" v-if="componentType !== 'input'" :is="componentType" v-bind="{...$props, ...$attrs}"
+               :id="instance.uid"
                class="d-text-field__input"
                :placeholder="placeholderActive ? placeholder : ' '"
                :modelValue="modelValue" @update:modelValue="onInput"
@@ -42,8 +43,8 @@ export default {
 
 <script setup lang="ts">
 const wrapper = ref(null);
-const input = ref(null);
-defineExpose({ wrapper, input });
+const input = ref<HTMLElement | null>(null);
+defineExpose({wrapper, input});
 import DSelect from "./variant/DSelect.vue";
 //import DAutocomplete from "@/components/textfield/variant/Autocomplete.vue";
 import {computed, inject, onMounted, ref} from "vue";
@@ -123,6 +124,12 @@ function onInput(e: { target: HTMLInputElement }) {
   emit('update:modelValue', typeof e === 'object' ? e.target.value : e)
 }
 
+function onClick() {
+  if (input.value) {
+    input.value.focus();
+  }
+}
+
 function removeFocus() {
   hover.value = false;
   selected.value = false;
@@ -141,6 +148,7 @@ function removeFocus() {
   caret-color: currentColor;
   display: flex;
   align-items: center;
+  cursor: text;
 
   &__input, :deep(.d-text-field__input__autocomplete), :deep(.d-text-field__input) {
     position: relative;
@@ -153,7 +161,7 @@ function removeFocus() {
     font-family: inherit;
     font-size: inherit;
     outline: none;
-    padding: 0 1.25em;
+    margin: 0 1.25em;
     background: none;
     align-items: center;
 
@@ -220,20 +228,20 @@ function removeFocus() {
     }
 
     .d-text-field__input {
-      padding-top: 12px !important;
-      padding-bottom: 0 !important;
-      padding-left: 1.2em;
-      padding-right: 1.2em;
+      margin-top: 12px !important;
+      margin-bottom: 0 !important;
+      margin-left: 1.2em;
+      margin-right: 1.2em;
     }
 
     &:not(.d-text-field--solo) {
 
       .d-text-field__prefix {
-        padding-top: 12px;
+        margin-top: 12px;
       }
 
       .d-text-field__suffix {
-        padding-top: 12px;
+        margin-top: 12px;
       }
     }
   }
@@ -242,7 +250,8 @@ function removeFocus() {
     height: 3rem !important;
 
     .d-text-field__input {
-      padding: 0 1.25em !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
     }
 
     .d-text-field__label {

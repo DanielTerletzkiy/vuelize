@@ -30,7 +30,7 @@
   }
 
   @for $i from 1 through 24 {
-    $darkness: $i + 1%;
+    $darkness: $i + 5%;
     &.elevation-n#{$i}, .elevation-light-n#{$i} {
       background-color: darken($light_sheet, $darkness) !important;
     }

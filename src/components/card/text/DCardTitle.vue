@@ -22,8 +22,7 @@ import DWrapper from "../../DWrapper.vue";
 @import "../../../styles/variables";
 
 .d-title {
-  min-height: 34px;
-  font-size: 2rem;
+  font-size: 36px;
   padding: 8px;
   display: flex;
   align-items: center;

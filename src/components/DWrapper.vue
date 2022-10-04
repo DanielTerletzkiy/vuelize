@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import {computed, inject, ref} from "vue";
 import defaultProps from "../mixins/DefaultProps";
 

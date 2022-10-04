@@ -1,57 +1,48 @@
 <template>
-  <DCard elevation-light block>
-    <d-card class="pa-4" outlined outline-color="primary" outline-width="2px" outline-offset="4px">
-      <DAccordion outlined>
-        <template v-slot:header>
-          This is an Accordion
+  <DCardTitle color="primary">
+    This is a title
+  </DCardTitle>
+  <DCardSubtitle>
+    This is a subtitle
+  </DCardSubtitle>
+
+  <DCardContent>
+    <DColumn gap>
+      <DButton color="primary" glow elevation-light="4" @click="changeTheme">dark {{ $vuelize.theme.dark }}
+        <template v-slot:prefix>
+          <DIcon name="flask"/>
         </template>
-        This is the content
-      </DAccordion>
-    </d-card>
-
-    <DCardTitle color="primary">
-      This is a title
-    </DCardTitle>
-    <DCardSubtitle>
-      This is a subtitle
-    </DCardSubtitle>
-
-    <DCardContent>
-      <DColumn gap>
-        <DButton color="primary" glow elevation-light="4" @click="changeTheme">dark {{ $vuelize.theme.dark }}
-          <template v-slot:prefix>
-            <DIcon name="flask"/>
-          </template>
-          <template v-slot:suffix>
-            <DIcon name="angle-right-b"/>
-          </template>
-        </DButton>
-        <DRow gap space-between
-              v-for="(option, i) in [
+        <template v-slot:suffix>
+          <DIcon name="angle-right-b"/>
+        </template>
+      </DButton>
+      <DRow gap space-between
+            v-for="(option, i) in [
                   {filled: false, outlined: true, depressed: false},
                   {filled: false, outlined: true, depressed: true},
                   {filled: false, outlined: false, depressed: true},
                   {filled: true, outlined: false, depressed: false}]" :key="i">
-          <DLabel
-              style="text-transform: capitalize"
-              v-for="(label,x) in [
+        <DLabel
+            style="text-transform: capitalize"
+            v-for="(label,x) in [
                 {color: 'success',rounded:'md',icon:'check'},
                 {color: 'error',rounded:'lg',icon:'exclamation-triangle'},
                 {color: 'warning',rounded:'xl',icon:'exclamation-octagon'},
                 {color: 'info',rounded:'pill',icon:'info-circle'},
                 {color: 'currentColor',rounded:'none',icon:'info-circle'},]"
-              :key="x"
-              v-bind="{...option, ...label}"
-              clickable>
-            <template v-slot:prefix>
-              <DIcon :name="label.icon" size="20"/>
-            </template>
-            <template v-slot:suffix>
-              <span style="font-size: 0.6rem">{{ label.rounded }}</span>
-            </template>
-            {{ label.color }}
-          </DLabel>
-        </DRow>
+            :key="x"
+            v-bind="{...option, ...label}"
+            clickable>
+          <template v-slot:prefix>
+            <DIcon :name="label.icon" size="20"/>
+          </template>
+          <template v-slot:suffix>
+            <span style="font-size: 0.6rem">{{ label.rounded }}</span>
+          </template>
+          {{ label.color }}
+        </DLabel>
+      </DRow>
+      <DCard class="pa-2">
         <DRow gap>
           <DAvatar color="primary">
             <DIcon name="flask" :color="vuelize.getColorContrast('currentColor', 0)"/>
@@ -85,60 +76,75 @@
             </template>
           </DTooltip>
         </DRow>
+      </DCard>
+      <d-row root-tag="form" gap>
         <DTextfield v-model="textfield" filled color="primary" label="Test"/>
-        <DTextfield v-model="textfield" filled color="primary" label="Test">
+        <DTextfield v-model="textfield" filled solo color="primary" label="Test"/>
+        <DTextfield v-model="textfield" outlined color="primary" label="Test" type="name"/>
+        <DTextfield v-model="textfield" filled outlined color="primary" label="Test" type="email">
           <template v-slot:prefix>
             <d-icon name="clock"/>
           </template>
         </DTextfield>
-        <DCheckbox color="primary" off-icon="times" v-model="fill">
-          Check for filled List
-        </DCheckbox>
-        <DList v-model="list" class="font-weight-bold" :filled="fill" elevation-dark="2">
-          <DListItem v-for="i in 10" :key="i" :color="i%2===0?'primary':'warning'">
-            List number {{ i }}
-            <DSpacer/>
-            <DLabel>
-              <template v-slot:prefix>
-                <DIcon name="check" size="20"/>
-              </template>
-              Status
-            </DLabel>
-          </DListItem>
-        </DList>
-        <DTabList v-model="list" color="primary" class="font-weight-bold" :filled="fill" elevation-dark="2"
-                  showIndicator outlined>
-          <DListItem v-for="i in 4" :key="i">
-            Tab number {{ i }}
-            <DSpacer/>
-            <DLabel>
-              <template v-slot:prefix>
-                <DIcon name="check" size="20"/>
-              </template>
-              Status
-            </DLabel>
-          </DListItem>
-        </DTabList>
-        <DDotLoader :model-value="true" color="primary" :amount="20" :speed="page*100" side-to-side/>
-        <DElevationLoader :model-value="true" color="primary" :amount="100" :default-size="50" :columns="10"
-                          :speed="page*100"/>
-        <DProgressbar v-model="page" :max="10" color="primary"/>
-        <DPagination v-model="page" :total="10" :visible-buttons="4" color="primary" rounded="circle"/>
-        <DDivider class="my-2"/>
-        <DTable outlined :headers="table.headers" :data="table.data" :visible-items="page">
-          <template #data(name)="{value, color, params}">
-            <DCardSubtitle :color="color">
-              <DAvatar :src="params.url" size="34"/>
-              {{ value }}
-            </DCardSubtitle>
-          </template>
-          <template #data(status)="{value, color}">
-            <DLabel :color="color">{{ value }}</DLabel>
-          </template>
-        </DTable>
-      </DColumn>
-    </DCardContent>
-  </DCard>
+      </d-row>
+      <DCard>
+        <d-card-title>
+          Test
+        </d-card-title>
+        <d-card-subtitle>
+          Test
+        </d-card-subtitle>
+        <d-card elevation="n4" class="pa-3 ma-2" block glow rounded="md">
+          This is a test
+        </d-card>
+      </DCard>
+      <DCheckbox color="primary" off-icon="times" v-model="fill">
+        Check for filled List
+      </DCheckbox>
+      <DList v-model="list" class="font-weight-bold" :filled="fill" elevation-dark="2">
+        <DListItem v-for="i in 10" :key="i" :color="i%2===0?'primary':'warning'">
+          List number {{ i }}
+          <DSpacer/>
+          <DLabel>
+            <template v-slot:prefix>
+              <DIcon name="check" size="20"/>
+            </template>
+            Status
+          </DLabel>
+        </DListItem>
+      </DList>
+      <DTabList v-model="list" color="primary" class="font-weight-bold" :filled="fill" elevation-dark="2"
+                showIndicator outlined>
+        <DListItem v-for="i in 4" :key="i">
+          Tab number {{ i }}
+          <DSpacer/>
+          <DLabel>
+            <template v-slot:prefix>
+              <DIcon name="check" size="20"/>
+            </template>
+            Status
+          </DLabel>
+        </DListItem>
+      </DTabList>
+      <DDotLoader :model-value="true" color="primary" :amount="20" :speed="page*100" side-to-side/>
+      <DElevationLoader :model-value="true" color="primary" :amount="100" :default-size="50" :columns="10"
+                        :speed="page*100"/>
+      <DProgressbar v-model="page" :max="10" color="primary"/>
+      <DPagination v-model="page" :total="10" :visible-buttons="4" color="primary" rounded="circle"/>
+      <DDivider class="my-2"/>
+      <DTable outlined :headers="table.headers" :data="table.data" :visible-items="page">
+        <template #data(name)="{value, color, params}">
+          <DCardSubtitle :color="color">
+            <DAvatar :src="params.url" size="34"/>
+            {{ value }}
+          </DCardSubtitle>
+        </template>
+        <template #data(status)="{value, color}">
+          <DLabel :color="color">{{ value }}</DLabel>
+        </template>
+      </DTable>
+    </DColumn>
+  </DCardContent>
 </template>
 
 <script setup lang="ts">

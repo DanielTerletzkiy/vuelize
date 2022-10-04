@@ -25,7 +25,7 @@ defineProps({...defaultProps})
 @import "../../../styles/variables";
 
 .d-subtitle {
-  font-size: 1rem;
+  font-size: 16px;
   padding: 8px;
   display: flex;
   align-items: center;
