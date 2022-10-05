@@ -228,6 +228,7 @@ function removeFocus() {
     }
 
     .d-text-field__input {
+      height: calc(100% - 12px);
       margin-top: 12px !important;
       margin-bottom: 0 !important;
       margin-left: 1.2em;

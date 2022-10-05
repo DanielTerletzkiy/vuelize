@@ -12,6 +12,8 @@
   display: flex;
   align-items: center;
 
+  transform-style: preserve-3d;
+
   &::before {
     position: absolute;
     border-radius: inherit;
@@ -27,6 +29,8 @@
 
     content: '';
     transition-duration: 0.15s;
+
+    transform: translateZ(-1px);
 
   }
 
