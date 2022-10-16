@@ -30,7 +30,8 @@
     content: '';
     transition-duration: 0.15s;
 
-    transform: translateZ(-1px);
+    //todo: fix tooltips not behaving with this
+    //transform: translateZ(-1px);
 
   }
 
