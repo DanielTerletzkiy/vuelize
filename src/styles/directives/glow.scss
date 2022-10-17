@@ -12,7 +12,8 @@
   display: flex;
   align-items: center;
 
-  transform-style: preserve-3d;
+  //todo: fix tooltips not behaving with this
+  //transform-style: preserve-3d;
 
   &::before {
     position: absolute;
