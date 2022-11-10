@@ -10,7 +10,7 @@
           <div id="helper">
             <slot name="tooltip-wrapper">
               <DLabel class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :filled="filled"
-                      :glow="!filled" glowing :color="props.color || 'inherit'" >
+                      :glow="!filled" glowing :color="props.color || 'inherit'">
                 <DCardSubtitle :style="{color: useFontColor + '!important'}" class="pa-0">
                   <slot name="tooltip">
                   </slot>
@@ -66,6 +66,7 @@ const props = defineProps({
   fontColor: String,
   popover: Boolean,
   simpleFade: Boolean,
+  inactive: Boolean,
   padding: {type: String, default: '4px'},
   position: {
     type: String as PropType<Position>,
@@ -93,6 +94,7 @@ watch(() => hoverState.value, () => {
 })
 
 function onHoverOver() {
+  if (props.inactive) return;
   hoverState.value = true;
 }
 

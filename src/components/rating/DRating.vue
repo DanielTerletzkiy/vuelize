@@ -42,14 +42,13 @@ type Star = {
 
 const stars = computed<Star[]>(() => {
   let array: Star[] = [];
-  const percentage = (100 * props.modelValue) / (props.max ? props.max : props.amount);
+  const percentage = (100 * props.modelValue) / (props.max || props.amount);
 
   const scale = (number: number, [inMin, inMax]: number[], [outMin, outMax]: number[]) => {
     return (number - inMin) / (inMax - inMin) * (outMax - outMin) + outMin;
   }
 
   const mapped = parseFloat(scale(percentage, [0, 100], [0, props.amount]).toPrecision(2));
-  console.log(percentage, mapped, Math.max(0, Math.min(props.amount, props.modelValue)))
   for (const position of [...Array(props.amount).keys()]) {
 
     const isHalve = mapped < position + 1 && mapped > position;

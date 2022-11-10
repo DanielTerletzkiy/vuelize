@@ -125,7 +125,12 @@ function onInput(e: { target: HTMLInputElement }) {
 }
 
 function onClick() {
+  console.log()
   if (input.value) {
+    if (input.value?.wrapper) {
+      //input.value?.wrapper.click()
+      return;
+    }
     input.value.focus();
   }
 }

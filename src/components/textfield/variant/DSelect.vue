@@ -1,11 +1,12 @@
 <template>
-  <div class="d-select" v-bind="{...$props, ...$attrs}" @keyup.esc="dropdownOpen = false"
+  <div ref="wrapper" class="d-select" v-bind="{...$props, ...$attrs}" @keyup.esc="dropdownOpen = false"
        @focusin="focusIn" @focusout="focusOut" @click.self="toggleDropdown" @keypress.enter="dropdownOpen = true"
        tabindex="0">
     <slot v-if="search ? !dropdownOpen : true" name="label" :item="itemsCopy[modelValue]" :index="modelValue">
       <span class="d-text-field__input__default">{{ itemsCopy[modelValue].value }}</span>
     </slot>
-    <input v-show="dropdownOpen && search" v-model="searchInput" class="d-text-field__input d-text-field__input__search" ref="searchBox"/>
+    <input v-show="dropdownOpen && search" v-model="searchInput" class="d-text-field__input d-text-field__input__search"
+           ref="searchBox"/>
     <DIconButton size="24" rounded="md" class="d-text-field__input__icon" tabindex="-1" @click="toggleDropdown">
       <SlideYDownTransition group :duration="150">
         <DIcon :name="angleIcon" color="currentColor"/>
@@ -24,8 +25,10 @@
 </template>
 
 <script setup lang="ts">
+import DElevationLoader from "../../loader/DElevationLoader.vue";
+
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import {computed, nextTick, onBeforeMount, onMounted, Ref, ref, toRef, watch} from "vue";
 import DSelectMenu from "../../menu/DSelectMenu.vue";
 import DIconButton from "../../button/DIconButton.vue";
@@ -49,15 +52,15 @@ const searchBox = ref<HTMLElement | null>(null);
 const searchInput = ref("");
 
 watch(searchInput, mapItems)
-watch(()=>props.items, mapItems)
+watch(() => props.items, mapItems)
 
-function mapItems(){
+function mapItems() {
   itemsCopy.value = props.items;
-  if(!itemsCopy.value || !props.items){
+  if (!itemsCopy.value || !props.items) {
     return;
   }
-  const copy = props.items.map((item: any, i: number)=>{
-    if(!item[props.searchKey] || !searchInput.value.toLowerCase()){
+  const copy = props.items.map((item: any, i: number) => {
+    if (!item[props.searchKey] || !searchInput.value.toLowerCase()) {
       return {...item, _show: true};
     }
     item = {...item, _show: item[props.searchKey].toString().toLowerCase().includes(searchInput.value.toLowerCase())};
@@ -103,15 +106,20 @@ onBeforeMount(mapItems)
 </script>
 
 <style scoped lang="scss">
+:deep(.d-select-menu__dropdown) {
+  left: -1.2em;
+  width: calc(100% + (1.2em * 2));
+}
+
 .d-text-field__input {
   user-select: none;
   position: relative;
-  padding-top: 0.5em !important;
-  padding-bottom: 0.5em !important;
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
   display: flex;
 
   &__search {
-    padding-left: 0 !important;
+    margin-left: 0 !important;
   }
 
   &__icon {
