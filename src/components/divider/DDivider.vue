@@ -10,21 +10,26 @@ export default {
 </script>
 
 <script setup lang="ts">
+import defaultProps from "../../mixins/DefaultProps";
+
 const wrapper = ref(null);
-defineExpose({ wrapper });
-import {ref} from "vue";
+defineExpose({wrapper});
+import {computed, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 
 const props = defineProps({
   block: {type: Boolean},
   vertical: {type: Boolean},
   size: {type: String, default: '1px'},
-  height: {type: String},
-  width: {type: String},
+  ...defaultProps
 })
 
-const height = ref(!props.vertical ? props.size : props.height)
-const width = ref(props.vertical ? props.size : props.width)
+const height = computed(() => {
+  return !props.vertical ? props.size : props.height
+})
+const width = computed(() => {
+  return props.vertical ? props.size : props.width
+})
 </script>
 
 <style scoped lang="scss">

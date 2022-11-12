@@ -20,7 +20,7 @@ export default {
 
 <script setup lang="ts">
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import {computed, inject, ref, Ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DNotification from "./DNotification.vue";

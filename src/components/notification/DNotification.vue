@@ -6,7 +6,7 @@
                     depressed min-width="100%" max-width="500px"
                     @mouseover="hover = true" @mouseleave="hover = false">
         <DRow class="pa-2">
-          <DColumn class="pa-0">
+          <DColumn no-padding>
             <DIconButton :color="(options.color)" @click="onCloseClick">
               <SlideXLeftTransition group>
                 <DIcon v-if="hover" :size="40" name="multiply"></DIcon>
@@ -14,7 +14,7 @@
               </SlideXLeftTransition>
             </DIconButton>
           </DColumn>
-          <d-column class="pa-0" style="align-self: stretch; justify-content: center; gap: 16px">
+          <d-column no-padding style="align-self: stretch; justify-content: center; gap: 16px">
             <DCardTitle v-if="notification.value.title" class="py-0 font-size-medium" :color="(options.color)">
               {{ notification.value.title }}
             </DCardTitle>
@@ -35,6 +35,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+import defaultProps from "../../mixins/DefaultProps";
+
 const wrapper = ref(null);
 defineExpose({ wrapper });
 import {inject, onBeforeUnmount, onMounted, PropType, Ref, ref, watch} from "vue";
@@ -53,7 +55,7 @@ import Notification from "./Notification";
 const vuelize: any = inject("vuelize");
 
 const props = defineProps({
-  notification: {type: Object as PropType<Ref<Notification>>, required: true}
+  notification: {type: Object as PropType<Ref<Notification>>, required: true, ...defaultProps}
 })
 
 const hover = ref<boolean>(false);

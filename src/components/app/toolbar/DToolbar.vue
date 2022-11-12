@@ -28,11 +28,13 @@ import DCard from "../../card/DCard.vue";
 import DRow from "../../flex/DRow.vue";
 import DIconButton from "../../button/DIconButton.vue";
 import DIcon from "../../icon/DIcon.vue";
+import defaultProps from "../../../mixins/DefaultProps";
 
 const emit = defineEmits(['hamburgerClick'])
 
 defineProps({
-  showHamburger: {type: Boolean, default: false}
+  showHamburger: {type: Boolean, default: false},
+  ...defaultProps
 })
 
 function onHamburgerClick(e: Event) {

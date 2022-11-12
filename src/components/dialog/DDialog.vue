@@ -2,7 +2,7 @@
   <fade-transition :duration="{enter: 200, leave: 150}">
     <DWrapper ref="wrapper" :classes="['d-dialog']" v-bind="{...$props, ...$attrs}" v-if="modelValue">
       <div class="d-dialog__backdrop" @click.self="handleClick"/>
-      <focus-trap v-model:active="modelValue">
+      <focus-trap :active="modelValue">
         <div class="d-dialog__content" tabindex="-1">
           <DWrapper ref="wrapper" class="d-dialog__content__focus" tabindex="0">
             <slot name="default">
@@ -28,11 +28,13 @@ defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import {FadeTransition} from "v3-transitions";
 import {FocusTrap} from "focus-trap-vue";
+import defaultProps from "../../mixins/DefaultProps";
 
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
   modelValue: {type: Boolean},
   persistent: {type: Boolean},
+  ...defaultProps
 })
 
 function handleClick() {

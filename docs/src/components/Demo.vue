@@ -1,21 +1,21 @@
 <template>
   <d-card block>
     <d-row align="unset">
-      <d-column block outlined class="ma-2">
-        <d-card-title>
+      <d-column block outlined class="ma-2" no-padding>
+        <d-card-title class="font-size-medium">
           {{ name }}
         </d-card-title>
-        <d-divider/>
-        <d-column class="pa-4" block style="justify-content: center; position: relative" v-if="activeProps">
+        <d-card class="pa-4" block style="display: flex; justify-content: center; align-items: center" v-if="activeProps"
+                elevation="n1">
           <slot :activeProps="activeProps"></slot>
-        </d-column>
+        </d-card>
       </d-column>
       <d-column gap block elevation="2" class="ma-2">
         <d-card-subtitle class="font-size-medium">
           Props
         </d-card-subtitle>
         <d-column gap>
-          <d-column gap v-for="type in ['Boolean', 'String', 'Number','Array']">
+          <d-column gap v-for="type in ['Boolean', 'String', 'Number','Array']" v-show="getUniqueProps(type).length">
             <d-row gap>
               <d-card-subtitle class="pa-0 font-weight-bold" color="primary" tint="40">{{ type }}</d-card-subtitle>
               type
@@ -28,8 +28,9 @@
                 {{ prop.name }}
               </d-checkbox>
               <d-textfield v-model="activeProps[prop.name]"
-                           v-if="prop.type.name !== 'Boolean' && prop.type.name === type" full-width filled solo
-                           color="primary" :placeholder="prop.name.charAt(0).toUpperCase() + prop.name.slice(1)"/>
+                           v-if="prop.type.name !== 'Boolean'" full-width filled :type="type"
+                           color="primary" :label="prop.name.charAt(0).toUpperCase() + prop.name.slice(1)"
+                           placeholder="-"/>
             </d-row>
           </d-column>
         </d-column>
@@ -38,7 +39,7 @@
           <template v-slot:header>
             Default Props
           </template>
-          <template v-slot:content>
+          <template v-slot:default>
             <d-column gap>
               <d-column gap v-for="type in ['Boolean', 'String', 'Number']">
                 <d-row gap>
@@ -53,8 +54,9 @@
                     {{ prop.name }}
                   </d-checkbox>
                   <d-textfield v-model="activeProps[prop.name]"
-                               v-if="prop.type.name !== 'Boolean' && prop.type.name === type" full-width filled solo
-                               color="primary" :placeholder="prop.name.charAt(0).toUpperCase() + prop.name.slice(1)"/>
+                               v-if="prop.type.name !== 'Boolean'" full-width filled :type="type"
+                               color="primary" :label="prop.name.charAt(0).toUpperCase() + prop.name.slice(1)"
+                               placeholder="-"/>
                 </d-row>
               </d-column>
             </d-column>
@@ -67,7 +69,7 @@
 
 <script setup lang="ts">
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import DRow from '../../../src/components/flex/DRow.vue'
 import DColumn from '../../../src/components/flex/DColumn.vue'
 import DSpacer from '../../../src/components/flex/DSpacer.vue'
@@ -82,14 +84,12 @@ import DefaultProps from '../../../src/mixins/DefaultProps'
 import {getCurrentInstance, reactive, ref} from "vue";
 
 const instance: any = getCurrentInstance()
-console.log(instance.slots.default())
 const availableProps = instance.slots.default()[0].type.props;
 const activeProps = reactive(instance.slots.default()[0].props || {});
 
 for (const key in availableProps) {
   const prop = availableProps[key];
   if (prop.default) {
-    console.log(key, prop.default, activeProps)
     activeProps[key] = prop.default
   }
 }
@@ -97,7 +97,6 @@ for (const key in availableProps) {
 let uniqueProps = Object.keys(availableProps).filter(function (obj: string) {
   return Object.keys(DefaultProps).indexOf(obj) == -1;
 });
-console.log(uniqueProps)
 
 const accordion = ref(false)
 
@@ -107,9 +106,8 @@ const props = defineProps({
 
 const getUniqueProps = (type: string) => {
   const props: any = availableProps;
-  return Object.keys(props).filter(x => Array.isArray(props[x].type) ?
-      props[x].type.find((y: any) => y.name === type) :
-      props[x].type.name === type && uniqueProps.indexOf(x) > -1).map(x => {
+  return Object.keys(props).filter(x => props[x].type?.name === type && (Array.isArray(props[x].type) ?
+      props[x].type.find((y: any) => y.name === type) : uniqueProps.indexOf(x) > -1)).map(x => {
     return {...props[x], name: x}
   })
 }

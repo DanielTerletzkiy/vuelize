@@ -65,7 +65,6 @@ class VuelizePlugin {
             return (yiq > 160) ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.85)';
         }
         catch (e) {
-            console.error(e, color, tint);
             return this.getColor('error');
         }
     }

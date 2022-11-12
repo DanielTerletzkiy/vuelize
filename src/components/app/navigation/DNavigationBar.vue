@@ -33,6 +33,7 @@ import DCard from "../../card/DCard.vue";
 import DColumn from "../../flex/DColumn.vue";
 import DDivider from "../../divider/DDivider.vue";
 import {SlideXLeftTransition, FadeTransition} from "v3-transitions";
+import defaultProps from "../../../mixins/DefaultProps";
 
 const emit = defineEmits(['update:modelValue']);
 
@@ -40,6 +41,8 @@ defineProps({
   modelValue: {type: Boolean, default: true},
   permanent: {type: Boolean},
   temporary: {type: Boolean},
+  ...defaultProps
+
 })
 
 function onClose() {

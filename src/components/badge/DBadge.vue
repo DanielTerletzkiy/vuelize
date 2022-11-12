@@ -21,6 +21,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+import defaultProps from "../../mixins/DefaultProps";
+
 const wrapper = ref(null);
 defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
@@ -32,6 +34,7 @@ const props = defineProps({
   value: {type: Boolean, default: true},
   size: {type: [String, Number], default: 22},
   color: {type: String},
+  ...defaultProps
 })
 
 const size = ref(props.size + 'px');

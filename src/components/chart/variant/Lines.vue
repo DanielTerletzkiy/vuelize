@@ -109,7 +109,6 @@ export default {
     updateCursor: debounce(function (e) {
       const rect = this.$refs.chart.getBoundingClientRect();
       const x = e.clientX - rect.left;
-      console.log(Math.round(x / this.columnSpacing))
       this.cursorPosition = Math.round(x / this.columnSpacing) * this.columnSpacing;
     }, 1)
   },

@@ -16,6 +16,11 @@ import {ref} from "vue";
 const wrapper = ref(null);
 defineExpose({ wrapper });
 import DWrapper from "../../DWrapper.vue";
+import defaultProps from "../../../mixins/DefaultProps";
+
+defineProps({
+  ...defaultProps
+})
 </script>
 
 <style lang="scss">
