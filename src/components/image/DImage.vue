@@ -1,7 +1,8 @@
 <template>
   <DWrapper ref="wrapper" :classes="['d-image']"
             v-bind="{...$props, ...$attrs}">
-    <DRow class="d-image-content" :class="{diffuse}" draggable="false" v-bind="{...$props, ...$attrs}"/>
+    <component :is="diffuse?DRow:'img'" class="d-image-content" :class="{diffuse}" draggable="false"
+               v-bind="{...$props, ...$attrs}"/>
   </DWrapper>
 </template>
 
@@ -43,6 +44,7 @@ const height = ref('0px');
 watch(background, watchLoad)
 
 function watchLoad() {
+  if(!props.diffuse) return;
   const img = new Image();
   img.onload = function () {
     //@ts-ignore
