@@ -62,8 +62,6 @@ onMounted(watchLoad)
 <style scoped lang="scss">
 .d-image {
   overflow: v-bind(overflow);
-  width: 100%;
-  height: 100%;
 
   &-content {
     user-select: none;
@@ -71,6 +69,8 @@ onMounted(watchLoad)
     object-fit: cover;
     background-size: cover;
     background-position: center;
+    width: inherit;
+    height: inherit;
 
     &.diffuse {
       height: v-bind(height);
