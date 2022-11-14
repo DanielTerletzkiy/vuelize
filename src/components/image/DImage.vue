@@ -62,11 +62,10 @@ onMounted(watchLoad)
 <style scoped lang="scss">
 .d-image {
   overflow: v-bind(overflow);
+  width: 100%;
+  height: 100%;
 
   &-content {
-    height: v-bind(height);
-    width: v-bind(width);
-    background: v-bind(background) !important;
     user-select: none;
     display: block;
     object-fit: cover;
@@ -74,11 +73,12 @@ onMounted(watchLoad)
     background-position: center;
 
     &.diffuse {
+      height: v-bind(height);
+      width: v-bind(width);
       align-self: center;
       object-fit: contain;
       background-origin: content-box;
-      background-position: center;
-      background-repeat: no-repeat;
+      background: no-repeat center;
       position: relative;
       transform-style: preserve-3d;
       z-index: 0;
