@@ -76,9 +76,10 @@ button {
     color: $light_card_text;
   }
 
-  //noinspection ALL TODO proper way to handle content shift
   main {
-    overflow: overlay;
+    overflow: auto;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
   }
 }
 
