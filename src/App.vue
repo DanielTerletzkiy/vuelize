@@ -2,9 +2,7 @@
 import HelloWorld from './components/HelloWorld.vue'
 import DRoot from "./components/root/DRoot.vue";
 import DToolbar from "./components/app/toolbar/DToolbar.vue";
-import DCardSubtitle from "./components/card/text/DCardSubtitle.vue";
 import DCardTitle from "./components/card/text/DCardTitle.vue";
-import DImage from "./components/image/DImage.vue";
 import DNotificationWrapper from "./components/notification/DNotificationWrapper.vue";
 import DNavigationBar from "./components/app/navigation/DNavigationBar.vue";
 import {ref} from "vue";
@@ -26,13 +24,12 @@ const navOpen = ref(false);
         test
       </d-navigation-bar>
     </template>
-    <DNotificationWrapper/>
     <HelloWorld/>
+    <template v-slot:notifications>
+      <DNotificationWrapper/>
+    </template>
   </DRoot>
 </template>
 
 <style>
-#app {
-
-}
 </style>

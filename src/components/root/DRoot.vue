@@ -3,17 +3,18 @@
     <header style="position: sticky; top: 0; width: 100%; max-height: 54px; z-index: 10;" :class="theme">
       <slot name="toolbar"></slot>
     </header>
-    <div style="display: flex; height: calc(100% - 54px);" :class="theme">
-      <aside>
+    <div style="position: relative;display: flex;" :class="theme">
+      <aside style="position: sticky;">
         <slot name="navbar"></slot>
       </aside>
-      <main style="flex: 1;" class="pa-3" :class="theme">
+      <main style="flex: 1;" :class="theme">
         <slot name="default"></slot>
       </main>
     </div>
     <footer :class="theme">
       <slot name="footer"></slot>
     </footer>
+    <slot name="notifications"/>
   </div>
 </template>
 
@@ -25,7 +26,7 @@ export default {
 
 <script setup lang="ts">
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import {inject, onMounted, ref, watch} from "vue";
 
 const vuelize: any = inject('vuelize');

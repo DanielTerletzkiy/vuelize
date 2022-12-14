@@ -55,6 +55,5 @@ provide('parentProps', props)
   flex-direction: column;
   padding: 8px;
   margin: 0;
-  gap: $gap;
 }
 </style>

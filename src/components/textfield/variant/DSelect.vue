@@ -2,9 +2,11 @@
   <div ref="wrapper" class="d-select" v-bind="{...$props, ...$attrs}" @keyup.esc="dropdownOpen = false"
        @focusin="focusIn" @focusout="focusOut" @click.self="toggleDropdown" @keypress.enter="dropdownOpen = true"
        tabindex="0">
-    <slot v-if="search ? !dropdownOpen : true" name="label" :item="itemsCopy[modelValue]" :index="modelValue">
-      <span class="d-text-field__input__default">{{ itemsCopy[modelValue].value }}</span>
-    </slot>
+    <span v-if="search ? !dropdownOpen : true"  @click="toggleDropdown" style="width: 100%">
+      <slot name="label" :item="itemsCopy[modelValue]" :index="modelValue">
+        <span class="d-text-field__input__default">{{ itemsCopy[modelValue].value }}</span>
+      </slot>
+    </span>
     <input v-show="dropdownOpen && search" v-model="searchInput" class="d-text-field__input d-text-field__input__search"
            ref="searchBox"/>
     <DIconButton size="24" rounded="md" class="d-text-field__input__icon" tabindex="-1" @click="toggleDropdown">
@@ -25,11 +27,9 @@
 </template>
 
 <script setup lang="ts">
-import DElevationLoader from "../../loader/DElevationLoader.vue";
-
 const wrapper = ref(null);
 defineExpose({wrapper});
-import {computed, nextTick, onBeforeMount, onMounted, Ref, ref, toRef, watch} from "vue";
+import {computed, nextTick, onBeforeMount, ref, watch} from "vue";
 import DSelectMenu from "../../menu/DSelectMenu.vue";
 import DIconButton from "../../button/DIconButton.vue";
 import DIcon from "../../icon/DIcon.vue";
@@ -59,14 +59,13 @@ function mapItems() {
   if (!itemsCopy.value || !props.items) {
     return;
   }
-  const copy = props.items.map((item: any, i: number) => {
+  itemsCopy.value = props.items.map((item: any, i: number) => {
     if (!item[props.searchKey] || !searchInput.value.toLowerCase()) {
       return {...item, _show: true};
     }
     item = {...item, _show: item[props.searchKey].toString().toLowerCase().includes(searchInput.value.toLowerCase())};
     return item;
-  })
-  itemsCopy.value = copy;
+  });
 }
 
 const dropdownOpen = ref(false);
@@ -112,6 +111,7 @@ onBeforeMount(mapItems)
 }
 
 .d-text-field__input {
+  cursor: pointer;
   user-select: none;
   position: relative;
   margin-top: 0.5em !important;
@@ -120,6 +120,7 @@ onBeforeMount(mapItems)
 
   &__search {
     margin-left: 0 !important;
+    cursor: text;
   }
 
   &__icon {

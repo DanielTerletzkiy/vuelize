@@ -15,8 +15,8 @@ export default {
 <script setup lang="ts">
 
 const wrapper = ref(null);
-defineExpose({ wrapper });
-import {computed, getCurrentInstance, nextTick, onMounted, provide, ref, watch} from "vue";
+defineExpose({wrapper});
+import {computed, getCurrentInstance, provide, ref} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DDivider from "../divider/DDivider.vue";
@@ -73,7 +73,6 @@ provide('parentProps', props)
 .d-tab-list {
   display: flex;
   position: relative;
-  gap: $gap;
 
   &.dark {
     border-color: rgba(45, 49, 59, 1);
