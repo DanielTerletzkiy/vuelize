@@ -2,7 +2,7 @@
   <div ref="wrapper" class="d-select" v-bind="{...$props, ...$attrs}" @keyup.esc="dropdownOpen = false"
        @focusin="focusIn" @focusout="focusOut" @click.self="toggleDropdown" @keypress.enter="dropdownOpen = true"
        tabindex="0">
-    <span v-if="search ? !dropdownOpen : true"  @click="toggleDropdown" style="width: 100%">
+    <span v-if="search ? !dropdownOpen : true" @click="toggleDropdown" class="d-select-label">
       <slot name="label" :item="itemsCopy[modelValue]" :index="modelValue">
         <span class="d-text-field__input__default">{{ itemsCopy[modelValue].value }}</span>
       </slot>
@@ -108,6 +108,11 @@ onBeforeMount(mapItems)
 :deep(.d-select-menu__dropdown) {
   left: -1.2em;
   width: calc(100% + (1.2em * 2));
+}
+
+.d-select-label {
+  width: 100%;
+  display: flex;
 }
 
 .d-text-field__input {
