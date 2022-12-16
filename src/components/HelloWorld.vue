@@ -174,6 +174,7 @@ import DTextfield from "./textfield/DTextfield.vue";
 import DAccordion from "./accordion/DAccordion.vue";
 import DTooltip from "./tooltip/DTooltip.vue";
 import DElevationLoader from "./loader/DElevationLoader.vue";
+import DTabList from "./tab/DTabList.vue";
 
 const vuelize: Vuelize = inject('vuelize') as Vuelize;
 

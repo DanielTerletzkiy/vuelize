@@ -1,5 +1,6 @@
 <template>
-  <DWrapper root-tag="ul" ref="wrapper" :classes="['d-tab-list', {'pa-1': outlined}, flexClasses({...$props, wrap: false})]"
+  {{gap}}
+  <DWrapper root-tag="ul" ref="wrapper" :classes="['d-tab-list', {'pa-1': outlined}]"
             v-bind="{...$props, ...$attrs}">
     <slot ref="item"></slot>
     <DDivider v-if="showIndicator" class="d-tab-list__indicator" :color="currentColor" size="2px"
@@ -15,11 +16,10 @@ export default {
 
 <script setup lang="ts">
 
-import flexProps from "../../mixins/FlexProps";
 
 const wrapper = ref(null);
 defineExpose({wrapper});
-import {computed, getCurrentInstance, provide, ref} from "vue";
+import {computed, ComputedRef, getCurrentInstance, provide, ref} from "vue";
 import {flexClasses} from "../../mixins/FlexProps";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
@@ -30,9 +30,11 @@ const props = defineProps({
   modelValue: {type: [String, Number]},
   showIndicator: {type: Boolean},
   filled: {type: Boolean},
-  ...flexProps,
+  gap: {type: Boolean},
   ...defaultProps
 });
+
+const gapSize: ComputedRef<string> = computed(() => props.gap ? '4px' : '');
 
 const instance: any = getCurrentInstance();
 
@@ -78,6 +80,7 @@ provide('parentProps', props)
 .d-tab-list {
   display: flex;
   position: relative;
+  gap: v-bind(gapSize);
 
   &.dark {
     border-color: rgba(45, 49, 59, 1);
