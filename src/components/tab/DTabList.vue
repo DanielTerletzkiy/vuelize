@@ -1,5 +1,4 @@
 <template>
-  {{gap}}
   <DWrapper root-tag="ul" ref="wrapper" :classes="['d-tab-list', {'pa-1': outlined}]"
             v-bind="{...$props, ...$attrs}">
     <slot ref="item"></slot>
