@@ -1,5 +1,5 @@
 <template>
-  <DWrapper ref="wrapper" root-tag="ul" :classes="['d-list', {'pa-1': outlined}]" v-bind="{...$props, ...$attrs}">
+  <DWrapper ref="wrapper" root-tag="ul" :classes="['d-list', {'pa-1': outlined}, flexClasses($props)]" v-bind="{...$props, ...$attrs}">
     <slot></slot>
   </DWrapper>
 </template>
@@ -11,9 +11,11 @@ export default {
 </script>
 
 <script setup lang="ts">
+
 const wrapper = ref(null);
 defineExpose({ wrapper });
 import defaultProps from "../../mixins/DefaultProps";
+import flexProps, {flexClasses} from "../../mixins/FlexProps";
 import DWrapper from "../DWrapper.vue";
 import {provide, ref, unref} from "vue";
 
@@ -23,6 +25,7 @@ const props = defineProps({
   filled: {type: Boolean},
   multiple: {type: Boolean},
   mandatory: {type: Boolean},
+  ...flexProps,
   ...defaultProps
 })
 

@@ -1,5 +1,6 @@
 <template>
-  <DWrapper root-tag="ul" ref="wrapper" :classes="['d-tab-list', {'pa-1': outlined}]" v-bind="{...$props, ...$attrs}">
+  <DWrapper root-tag="ul" ref="wrapper" :classes="['d-tab-list', {'pa-1': outlined}, flexClasses($props)]"
+            v-bind="{...$props, ...$attrs}">
     <slot ref="item"></slot>
     <DDivider v-if="showIndicator" class="d-tab-list__indicator" :color="currentColor" size="2px"
               :style="indicatorStylesObject"/>
@@ -14,9 +15,12 @@ export default {
 
 <script setup lang="ts">
 
+import flexProps from "../../mixins/FlexProps";
+
 const wrapper = ref(null);
 defineExpose({wrapper});
 import {computed, getCurrentInstance, provide, ref} from "vue";
+import {flexClasses} from "../../mixins/FlexProps";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DDivider from "../divider/DDivider.vue";
@@ -26,6 +30,7 @@ const props = defineProps({
   modelValue: {type: [String, Number]},
   showIndicator: {type: Boolean},
   filled: {type: Boolean},
+  ...flexProps,
   ...defaultProps
 });
 
