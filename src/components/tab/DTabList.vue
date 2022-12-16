@@ -1,5 +1,5 @@
 <template>
-  <DWrapper root-tag="ul" ref="wrapper" :classes="['d-tab-list', {'pa-1': outlined}, flexClasses($props)]"
+  <DWrapper root-tag="ul" ref="wrapper" :classes="['d-tab-list', {'pa-1': outlined}, flexClasses({...$props, wrap: false})]"
             v-bind="{...$props, ...$attrs}">
     <slot ref="item"></slot>
     <DDivider v-if="showIndicator" class="d-tab-list__indicator" :color="currentColor" size="2px"
