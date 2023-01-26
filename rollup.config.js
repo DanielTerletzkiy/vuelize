@@ -95,7 +95,7 @@ if (!argv.format || argv.format === 'es') {
         input: 'src/index.ts',
         external,
         output: {
-            file: pkg.module,
+            file: 'build.js',
             format: 'esm',
             exports: 'named',
             name,
@@ -123,7 +123,7 @@ if (!argv.format || argv.format === 'es') {
     buildFormats.push(esConfig)
 }
 
-if (!argv.format || argv.format === 'cjs') {
+/*if (!argv.format || argv.format === 'cjs') {
     const umdConfig = {
         ...baseConfig,
         external,
@@ -176,7 +176,7 @@ if (!argv.format || argv.format === 'iife') {
     }
 
     buildFormats.push(unpkgConfig)
-}
+}*/
 
 // Export config
 export default buildFormats
