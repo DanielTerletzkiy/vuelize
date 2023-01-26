@@ -1,10 +1,12 @@
 import {defineStore} from 'pinia'
 
-const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+const isServer = !(typeof window != 'undefined' && window.document);
+
+const prefersDark = isServer || window.matchMedia("(prefers-color-scheme: dark)").matches;
 export const ThemeStore = defineStore('theme', {
     state: () =>
         ({
-            dark: prefersDark.matches,
+            dark: prefersDark,
             rounded: 'lg',
             themes: {
                 dark: {
