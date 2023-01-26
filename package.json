@@ -17,6 +17,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "type": "module",
   "main": "src/index.js",
   "files": [
     "src"
