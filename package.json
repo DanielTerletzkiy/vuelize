@@ -17,8 +17,13 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "type": "module",
+  "target": "esnext",
+  "module": "commonjs",
   "main": "src/index.js",
+  "exports": {
+    ".": "src/index.js",
+    "./build.js": "src/build.js"
+  },
   "files": [
     "src"
   ],
