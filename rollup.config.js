@@ -95,7 +95,7 @@ if (!argv.format || argv.format === 'es') {
         input: 'src/index.ts',
         external,
         output: {
-            file: 'build.js',
+            file: 'src/build.js',
             format: 'esm',
             exports: 'named',
             name,
