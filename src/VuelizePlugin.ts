@@ -9,7 +9,7 @@ import Notification from "./components/notification/Notification";
 import VWave from "v-wave";
 import Unicon from 'vue3-unicons'
 
-import 'v3-transitions/dist/style.css'
+import '../node_modules/v3-transitions/dist/style.css'
 import ClickOutside from "./directive/ClickOutside";
 
 class VuelizePlugin implements Vuelize {
