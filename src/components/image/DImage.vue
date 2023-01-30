@@ -64,6 +64,7 @@ onMounted(watchLoad)
   overflow: v-bind(overflow);
 
   &-content {
+    border-radius: inherit;
     user-select: none;
     display: block;
     object-fit: cover;
