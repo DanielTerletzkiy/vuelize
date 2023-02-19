@@ -1,7 +1,7 @@
 {
   "name": "vuelize",
   "private": false,
-  "version": "0.1.51",
+  "version": "0.1.52",
   "repository": {
     "type": "git",
     "url": "https://github.com/DanielTerletzkiy/vuelize"
@@ -17,13 +17,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "target": "esnext",
-  "module": "commonjs",
   "main": "src/index.js",
-  "exports": {
-    ".": "src/index.js",
-    "./build.js": "src/build.js"
-  },
   "files": [
     "src"
   ],
