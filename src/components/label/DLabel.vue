@@ -4,7 +4,7 @@
             @click="$emit('click')" v-ripple="clickable && {
               color: filled ? contrast :'currentColor'
             }">
-    <DCardSubtitle class="d-label__wrapper__content py-1 px-4"
+    <DCardSubtitle class="d-label__wrapper__content pa-0" v-bind="{...$attrs}"
                    :color="filled?contrast:'inherit'"
                    rounded="inherit">
       <span class="prefix" v-if="!!$slots.prefix">
@@ -28,7 +28,7 @@ export default {
 
 <script setup lang="ts">
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import DWrapper from "../DWrapper.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 import {computed, inject, ref} from "vue";
@@ -51,6 +51,7 @@ const contrast = computed(() => vuelize.getColorContrast(props.color, props.tint
   height: min-content;
   width: max-content;
   font-weight: 600;
+  padding: 4px 16px;
 
   &.filled {
     background: v-bind(color);

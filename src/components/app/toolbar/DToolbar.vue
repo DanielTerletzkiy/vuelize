@@ -57,7 +57,7 @@ function onHamburgerClick(e: Event) {
   border-radius: 0;
 
   &.dark {
-    box-shadow: 0 2px 30px -2px rgba(31, 33, 40, 1);
+    box-shadow: 0 0 30px 0 darken($dark_background, 5);
   }
 
   &.light {

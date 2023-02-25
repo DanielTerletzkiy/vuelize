@@ -11,7 +11,7 @@
 .inlined, .outlined {
   outline: 1px solid currentColor;
   &.depressed.dark {
-    outline: 1px solid rgba(255, 255, 255, 0.06);
+    outline: 1px solid rgba(#333337, 0.45);
   }
   &.depressed.light {
     outline: 1px solid rgba(0, 0, 0, 0.12);

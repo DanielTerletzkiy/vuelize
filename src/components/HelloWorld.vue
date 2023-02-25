@@ -6,6 +6,23 @@
     This is a subtitle
   </DCardSubtitle>
 
+  <d-column gap>
+    <d-card elevation width="150px" height="150px">
+      <d-label class="font-size-medium">
+        {{ `default` }}
+      </d-label>
+    </d-card>
+    <d-row v-for="prefix in ['','n']" gap>
+      <d-card v-for="i in 24" :elevation="`${prefix}${i}`" width="150px" height="150px">
+        <d-row>
+          <d-label class="font-size-medium">
+            {{ `${prefix}${i}` }}
+          </d-label>
+        </d-row>
+      </d-card>
+    </d-row>
+  </d-column>
+
   <DCardContent>
     <DColumn gap>
       <DButton color="primary" glow elevation-light="4" @click="changeTheme">dark {{ $vuelize.theme.dark }}
