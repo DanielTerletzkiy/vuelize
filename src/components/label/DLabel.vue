@@ -4,7 +4,7 @@
             @click="$emit('click')" v-ripple="clickable && {
               color: filled ? contrast :'currentColor'
             }">
-    <DCardSubtitle class="d-label__wrapper__content pa-0" v-bind="{...$attrs}"
+    <DCardSubtitle class="d-label__wrapper__content pa-0"
                    :color="filled?contrast:'inherit'"
                    rounded="inherit">
       <span class="prefix" v-if="!!$slots.prefix">

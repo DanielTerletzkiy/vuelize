@@ -5,7 +5,7 @@
     $brightness: $i;
     &.elevation-#{$i}, .elevation-dark-#{$i} {
       background: lighten($dark_sheet, $brightness) !important;
-      box-shadow: darken($dark_sheet, $brightness) 2px 4px 8px -4px;
+      //box-shadow: darken($dark_sheet, $brightness) 2px 4px 8px -4px;
     }
   }
 
