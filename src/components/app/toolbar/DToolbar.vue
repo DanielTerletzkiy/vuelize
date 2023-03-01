@@ -22,7 +22,7 @@ export default {
 import {ref} from "vue";
 
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import DWrapper from "../../DWrapper.vue";
 import DCard from "../../card/DCard.vue";
 import DRow from "../../flex/DRow.vue";
@@ -57,7 +57,7 @@ function onHamburgerClick(e: Event) {
   border-radius: 0;
 
   &.dark {
-    box-shadow: 0 0 30px 0 darken($dark_background, 5);
+    box-shadow: 0 0 30px -20px darken($dark_background, 5);
   }
 
   &.light {

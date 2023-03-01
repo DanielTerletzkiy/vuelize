@@ -118,12 +118,11 @@ button {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(82, 82, 87, 0.4);
+    background-color: rgba(66, 66, 66, 0.5);
     border-radius: $gap * 2;
-    transition-duration: 2s;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: rgba(154, 154, 163, 0.35);
+    background: rgba(66, 66, 66, 0.8);
   }
 }
