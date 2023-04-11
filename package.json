@@ -33,7 +33,7 @@
     "v3-transitions": "^0.2.0",
     "vue": "^3.2.37",
     "vue-material-design-ripple": "^1.0.0",
-    "vue3-unicons": "^0.0.7"
+    "vue3-unicons": "^0.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
