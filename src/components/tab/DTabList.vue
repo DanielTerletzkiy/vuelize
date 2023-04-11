@@ -18,7 +18,8 @@ export default {
 
 const wrapper = ref(null);
 defineExpose({wrapper});
-import {computed, ComputedRef, getCurrentInstance, provide, ref} from "vue";
+import {computed, getCurrentInstance, provide, ref} from "vue";
+import type {ComputedRef} from "vue";
 import {flexClasses} from "../../mixins/FlexProps";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";

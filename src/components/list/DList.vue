@@ -16,7 +16,8 @@ const wrapper = ref(null);
 defineExpose({wrapper});
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
-import {computed, ComputedRef, provide, ref, unref} from "vue";
+import {computed, provide, ref, unref} from "vue";
+import type {ComputedRef} from "vue";
 
 const emits = defineEmits(['update:modelValue']);
 const props = defineProps({

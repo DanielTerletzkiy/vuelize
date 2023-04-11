@@ -1,4 +1,6 @@
-import {App, Plugin, Ref, ref} from 'vue';
+import {ref} from 'vue';
+import type {Plugin, App} from "vue";
+import type {Ref} from "vue";
 import {createPinia} from "pinia";
 import {ThemeStore} from './store/ThemeStore'
 import importAll from "./ComponentImport";

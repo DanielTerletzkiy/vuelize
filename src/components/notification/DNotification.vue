@@ -39,7 +39,8 @@ import defaultProps from "../../mixins/DefaultProps";
 
 const wrapper = ref(null);
 defineExpose({ wrapper });
-import {inject, onBeforeUnmount, onMounted, Ref, ref, watch} from "vue";
+import {inject, onBeforeUnmount, onMounted, ref, watch} from "vue";
+import type {Ref} from "vue";
 import type {PropType} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCardContent from "../card/content/DCardContent.vue";

@@ -1,4 +1,5 @@
-import {App, ref, Ref} from "vue";
+import type {App} from "vue";
+import type {Ref} from "vue";
 import Notification from "../components/notification/Notification";
 
 export const enum State {

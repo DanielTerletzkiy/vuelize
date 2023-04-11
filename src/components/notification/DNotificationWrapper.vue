@@ -21,7 +21,8 @@ export default {
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({wrapper});
-import {computed, inject, ref, Ref, watch} from "vue";
+import {computed, inject, ref, watch} from "vue";
+import type {Ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DNotification from "./DNotification.vue";
 import {FadeTransition, SlideXRightTransition} from "v3-transitions";
