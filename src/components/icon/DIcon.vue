@@ -24,7 +24,8 @@ export default {
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });
-import {getCurrentInstance, inject, PropType, ref} from "vue";
+import {getCurrentInstance, inject, ref} from "vue";
+import type {PropType} from "vue";
 import DWrapper from "../DWrapper.vue";
 import {FadeTransition} from "v3-transitions";
 import {Style} from "vue3-unicons/types/Unicon"

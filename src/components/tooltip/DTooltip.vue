@@ -39,12 +39,11 @@ import {
   inject,
   nextTick, onBeforeUnmount,
   onMounted,
-  onUpdated,
-  PropType,
   reactive,
   ref,
   watch
 } from "vue";
+import type {PropType} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DLabel from "../label/DLabel.vue";

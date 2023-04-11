@@ -1,5 +1,5 @@
 import {Round, State} from "../types/Vuelize";
-import {PropType} from "vue";
+import type {PropType} from "vue";
 
 export default {
     link: {type: String, default: null},
