@@ -15,6 +15,7 @@ import DCheckbox from './components/checkbox/DCheckbox.vue'
 import DDivider from './components/divider/DDivider.vue'
 import DDialog from './components/dialog/DDialog.vue'
 import DColumn from './components/flex/DColumn.vue'
+import DGrid from './components/flex/DGrid.vue'
 import DRow from './components/flex/DRow.vue'
 import DSpacer from './components/flex/DSpacer.vue'
 import DIcon from './components/icon/DIcon.vue'
@@ -56,6 +57,7 @@ export const getImports = {
     DDivider,
     DDialog,
     DColumn,
+    DGrid,
     DRow,
     DSpacer,
     DIcon,
@@ -98,6 +100,7 @@ export default function importAll(app: App) {
     app.component('DDivider', DDivider)
     app.component('DDialog', DDialog)
     app.component('DColumn', DColumn)
+    app.component('DGrid', DGrid)
     app.component('DRow', DRow)
     app.component('DSpacer', DSpacer)
     app.component('DIcon', DIcon)
