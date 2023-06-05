@@ -1,5 +1,7 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-grid']" v-bind="{...$props, ...$attrs}"/>
+  <DWrapper ref="wrapper" :classes="['d-grid']" v-bind="{...$props, ...$attrs}">
+    <slot/>
+  </DWrapper>
 </template>
 
 <script lang="ts">
