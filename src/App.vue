@@ -1,35 +1,21 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import DRoot from "./components/root/DRoot.vue";
-import DToolbar from "./components/app/toolbar/DToolbar.vue";
-import DCardTitle from "./components/card/text/DCardTitle.vue";
-import DNotificationWrapper from "./components/notification/DNotificationWrapper.vue";
-import DNavigationBar from "./components/app/navigation/DNavigationBar.vue";
-import {ref} from "vue";
-
-const navOpen = ref(false);
+import {colorSurface, useColor} from "./composables/color.ts";
+import colors from "tailwindcss/colors";
 </script>
 
 <template>
-  <DRoot>
-    <template v-slot:toolbar>
-      <DToolbar show-hamburger @hamburgerClick="navOpen = !navOpen">
-        <d-card-title color="primary" class="font-size-medium">
-          Vuelize
-        </d-card-title>
-      </DToolbar>
-    </template>
-    <template v-slot:navbar>
-      <d-navigation-bar v-model="navOpen" permanent>
-        test
-      </d-navigation-bar>
-    </template>
-    <HelloWorld/>
-    <template v-slot:notifications>
-      <DNotificationWrapper/>
-    </template>
-  </DRoot>
+  <div>
+    <a :class="useColor({color: 'blue',tint: 200,prefix: colorSurface.Text})" href="https://vitejs.dev" target="_blank">
+      yooo
+      <img src="/vite.svg" class="logo" alt="Vite logo" />
+    </a>
+    <a class="text-2xl text-blue-400" href="https://vuejs.org/" target="_blank">
+      yoo
+      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
+    </a>
+  </div>
 </template>
 
-<style>
+<style scoped>
+
 </style>
