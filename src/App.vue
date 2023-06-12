@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import {colorSurface, useColor} from "./composables/color.ts";
-import colors from "tailwindcss/colors";
+import {ColorSurface, GeneralColor, useColorOpacity, useGeneralColor} from "./composables/color.ts";
+import {RoundedFactor, useRounded} from "./composables/rounded.ts";
 </script>
 
 <template>
   <div>
-    <a :class="useColor({color: 'blue',tint: 200,prefix: colorSurface.Text})" href="https://vitejs.dev" target="_blank">
+    <a href="https://vitejs.dev"
+       :class="[useGeneralColor(GeneralColor.Primary,ColorSurface.Text), useGeneralColor(GeneralColor.Warning,ColorSurface.Background), useRounded(RoundedFactor.XLarge)]"
+       target="_blank">
       yooo
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>
-    <a class="text-2xl text-blue-400" href="https://vuejs.org/" target="_blank">
+    <a class="text-2xl"
+       :class="[useGeneralColor(GeneralColor.Primary,ColorSurface.Background), useGeneralColor(GeneralColor.Primary,ColorSurface.Text), useRounded(RoundedFactor.XLarge), useColorOpacity(3,ColorSurface.Background)]"
+       href="https://vuejs.org/" target="_blank">
       yoo
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
 </template>
