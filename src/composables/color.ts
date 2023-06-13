@@ -160,3 +160,51 @@ export function useColorOpacity(amount: number, surface?: ColorSurface) {
 
     return surface ? result[surface] : result;
 }
+
+export enum CardElevation {
+    DEFAULT = 0,
+    E100 = 100,
+    E200 = 200,
+    E300 = 300,
+    E400 = 400,
+    E500 = 500,
+    E600 = 600,
+    E700 = 700,
+    E800 = 800,
+    E900 = 900,
+    N100 = "n100",
+    N200 = "n200",
+    N300 = "n300",
+}
+
+export function useCardElevation(elevation: CardElevation = CardElevation.DEFAULT) {
+    switch (elevation){
+        case CardElevation.DEFAULT:
+            return "bg-card-default"
+        case CardElevation.E100:
+            return "bg-card-100"
+        case CardElevation.E200:
+            return "bg-card-200"
+        case CardElevation.E300:
+            return "bg-card-300"
+        case CardElevation.E400:
+            return "bg-card-400"
+        case CardElevation.E500:
+            return "bg-card-500"
+        case CardElevation.E600:
+            return "bg-card-600"
+        case CardElevation.E700:
+            return "bg-card-700"
+        case CardElevation.E800:
+            return "bg-card-800"
+        case CardElevation.E900:
+            return "bg-card-900"
+        case CardElevation.N100:
+            return "bg-card-n100"
+        case CardElevation.N200:
+            return "bg-card-n200"
+        case CardElevation.N300:
+            return "bg-card-n300"
+
+    }
+}

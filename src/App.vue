@@ -1,20 +1,27 @@
 <script setup lang="ts">
-import {ColorSurface, GeneralColor, useColorOpacity, useGeneralColor} from "./composables/color.ts";
-import {RoundedFactor, useRounded} from "./composables/rounded.ts";
+import VButton from "./components/VButton.vue";
+import {GeneralColor} from "./composables/color.ts";
+import VCard from "./components/VCard.vue";
+import VToolbar from "./components/VToolbar.vue";
 </script>
 
 <template>
   <div>
-    <a href="https://vitejs.dev"
-       :class="[useGeneralColor(GeneralColor.Primary,ColorSurface.Text), useGeneralColor(GeneralColor.Warning,ColorSurface.Background), useRounded(RoundedFactor.XLarge)]"
-       target="_blank">
+    <v-toolbar>
       yooo
-    </a>
-    <a class="text-2xl"
-       :class="[useGeneralColor(GeneralColor.Primary,ColorSurface.Background), useGeneralColor(GeneralColor.Primary,ColorSurface.Text), useRounded(RoundedFactor.XLarge), useColorOpacity(3,ColorSurface.Background)]"
-       href="https://vuejs.org/" target="_blank">
-      yoo
-    </a>
+    </v-toolbar>
+
+    <v-card class="m-32">
+      <template v-slot:header>
+        This is a header
+      </template>
+      Lorem Ipsum bla bla
+      <template v-slot:actions>
+        <v-button :color="GeneralColor.Primary">
+          Lol
+        </v-button>
+      </template>
+    </v-card>
   </div>
 </template>
 
