@@ -2,9 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "dist/types",
-    "declaration": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true
+    "declaration": false,
+    "declarationMap": false,
+    "emitDeclarationOnly": false
   },
   "include": [
     "src/interfaces/index.ts"
