@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
 import DRoot from "./components/root/DRoot.vue";
 import DToolbar from "./components/app/toolbar/DToolbar.vue";
 import DCardTitle from "./components/card/text/DCardTitle.vue";
@@ -24,7 +23,6 @@ const navOpen = ref(false);
         test
       </d-navigation-bar>
     </template>
-    <HelloWorld/>
     <template v-slot:notifications>
       <DNotificationWrapper/>
     </template>
