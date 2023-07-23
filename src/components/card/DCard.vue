@@ -49,15 +49,8 @@ const backgroundColor = computed(()=>{
     flex: 1;
   }
 
-  &.dark {
-    background: $dark_sheet;
-    color: $dark_card_text;
-  }
-
-  &.light {
-    background: $light_sheet;
-    color: $light_card_text;
-  }
+  background: var(--sheet-card);
+  color: var(--text-card);
 }
 
 </style>

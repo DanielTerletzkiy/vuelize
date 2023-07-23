@@ -1,23 +1,21 @@
-import {Round, State} from "../types/Vuelize";
+import {Round} from "../types/Vuelize";
 import type {PropType} from "vue";
+import {ColorSettings, ElevationSettings, OutlinedSettings, ThemeColorProperty} from "../types/Theme";
 
 export default {
     link: {type: String, default: null},
-    color: {type: [String as any, String as PropType<State>]},
-    tint: {type: Number, default: 0},
+    color: {type: Object as PropType<ColorSettings | ThemeColorProperty | string>}, //
     rounded: {type: String as PropType<Round>, default: Round.LG},
-    outlined: {type: Boolean},
-    outlineOffset: {type: String, default: "0px"},
-    outlineWidth: {type: String, default: "1px"},
-    outlineColor: {type: String, default: 'none'},
-    depressed: {type: Boolean, default: true},
-    elevation: {type: [String, Number]},
-    elevationLight: {type: [String, Number]},
-    elevationDark: {type: [String, Number]},
+    //
+    outlined: {type: Object as PropType<OutlinedSettings | boolean>},
+    //
+    elevation: {type: Object as PropType<ElevationSettings | string | number>}, //
+    //
     disabled: {type: Boolean},
-    glow: {type: Boolean},
+    //
+    glow: {type: Boolean}, //
     glowing: {type: Boolean},
-    filledGlow: {type: Boolean},
+    //
     height: {type: String, default: ''},
     width: {type: String, default: ''},
 }

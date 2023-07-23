@@ -29,7 +29,6 @@ export const enum Position {
 declare global {
     interface Vuelize {
         app: App;
-        theme: Theme.ThemeStore;
         notifications: Ref<Array<Ref<Notification>>>;
 
         notify(title: string, content: string, type: State, options?: object | undefined): void;
@@ -45,37 +44,6 @@ declare global {
             color: string,
             icon: string,
             timeout: number
-        }
-    }
-
-    namespace Theme {
-        interface ThemeStore {
-            dark: boolean
-            rounded: string
-            themes: Themes
-        }
-
-        interface Themes {
-            dark: Dark
-            light: Light
-        }
-
-        interface Dark {
-            primary: string
-            secondary: string
-            success: string
-            error: string
-            warning: string
-            info: string
-        }
-
-        interface Light {
-            primary: string
-            secondary: string
-            success: string
-            error: string
-            warning: string
-            info: string
         }
     }
 }

@@ -2,14 +2,14 @@ import {ref} from 'vue';
 import type {Plugin, App} from "vue";
 import type {Ref} from "vue";
 import {createPinia} from "pinia";
-import {ThemeStore} from './store/ThemeStore'
+import {useVuelizeTheme} from './store/ThemeStore'
 import importAll from "./ComponentImport";
 import {State} from "./types/Vuelize";
 import Notification from "./components/notification/Notification";
 
 // @ts-ignore no ripple types available
 import VWave from "v-wave";
-import Unicon from 'vue3-unicons'
+//import Unicon from 'vue3-unicons'
 
 import 'v3-transitions/dist/style.css'
 import ClickOutside from "./directive/ClickOutside";
@@ -21,7 +21,7 @@ class VuelizePlugin implements Vuelize {
 
     constructor(app: App) {
         this.app = app;
-        this.theme = ThemeStore();
+        this.theme = useVuelizeTheme();
         this.notifications.value;
     }
 
@@ -30,31 +30,13 @@ class VuelizePlugin implements Vuelize {
     }
 
     getColor(color: string, tint?: number | string | undefined): string {
-        let colorOut: string;
-        if (this.theme.dark) {
-            colorOut = this.theme.themes.dark[color as keyof Theme.Dark];
-        } else {
-            colorOut = this.theme.themes.light[color as keyof Theme.Light];
-        }
-        if (!colorOut) {
-            colorOut = color;
-        }
+        let colorOut: string = "unset";
 
-        if (tint && ['currentColor', 'transparent'].indexOf(colorOut) === -1) {
-            try {
-                if (typeof tint === "string") {
-                    tint = parseInt(tint)
-                }
-                colorOut = this.#tintColor(colorOut, tint);
-            } catch (e) {
-                console.warn(e)
-            }
-        }
         return colorOut;
     }
 
     getColorContrast(color: string, tint?: number | string | undefined): string {
-        try {
+        /*try {
             let hexColor = this.getColor(color, tint);
             if (hexColor.slice(0, 1) === '#') {
                 hexColor = hexColor.slice(1);
@@ -74,7 +56,8 @@ class VuelizePlugin implements Vuelize {
             return (yiq > 160) ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.85)';
         } catch (e) {
             return this.getColor('error')
-        }
+        }*/
+        return "test"
     }
 
     #tintColor = function adjust(color: string, amount: number): string {
@@ -93,7 +76,7 @@ export const Vuelize: Plugin = {
             duration: 0.2,
             finalOpacity: 0.2
         });
-        app.use(Unicon);
+        //app.use(Unicon);
 
         app.config.globalProperties.$vuelize = new VuelizePlugin(app);
         app.provide('vuelize', app.config.globalProperties.$vuelize);

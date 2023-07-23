@@ -1,19 +1,27 @@
 <template>
   <component ref="wrapper" :is="componentTag" :to="link" :disabled="disabled"
-             :class="[classes, themeClass, elevationClass, globalClasses]"
-             :style="{color, height, width, ...outline}"
+             :class="[classes, mode, elevationClass, globalClasses]"
+             :style="{height, width, ...outline}"
              @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
   </component>
 </template>
 
 <script setup lang="ts">
+import {useVuelizeTheme} from "../store/ThemeStore";
+import {computed, inject, nextTick, onMounted, ref, watch} from "vue";
+import defaultProps from "../mixins/DefaultProps";
+import {storeToRefs} from "pinia";
+import {useColor, useSetColor, useSetColors} from "../composables/Color.composable";
+import {Color, ThemeAllPropertyType, ThemeColorProperty} from "../types/Theme";
+
 const wrapper = ref(null);
 defineExpose({wrapper});
-import {computed, inject, ref} from "vue";
-import defaultProps from "../mixins/DefaultProps";
 
 const vuelize: any = inject('vuelize');
+
+const vuelizeTheme = useVuelizeTheme()
+const {mode, currentTheme} = storeToRefs(vuelizeTheme)
 
 const props = defineProps({
   classes: {type: Array},
@@ -28,12 +36,10 @@ const componentTag = computed(() => {
 const globalClasses = computed(() => {
   return {
     [`rounded-${props.rounded}`]: props.rounded,
-    outlined: props.outlined,
-    depressed: props.depressed,
+    outlined: props.outlined !== undefined,
     disabled: props.disabled,
     glow: props.glow,
     ['glow--active glow']: props.glowing,
-    ['glow--filled glow']: props.filledGlow,
   }
 })
 
@@ -44,8 +50,8 @@ const elevationClass = computed(() => {
   } else if (props.elevation) {
     elevationObject[`elevation-${props.elevation}`] = true
   }
-
-  if (props.elevationDark === '') {
+  // TODO
+  /*if (props.elevationDark === '') {
     elevationObject['elevation-dark'] = true
   } else if (props.elevationDark) {
     elevationObject[`elevation-dark-${props.elevationDark}`] = true
@@ -55,26 +61,34 @@ const elevationClass = computed(() => {
     elevationObject['elevation-light'] = true
   } else if (props.elevationLight) {
     elevationObject[`elevation-light-${props.elevationLight}`] = true
-  }
+  }*/
   return elevationObject
 })
 
-const themeClass = computed(() => {
-  return vuelize.theme.dark ? 'dark' : 'light';
-})
-
-const color = computed(() => {
-  return vuelize.getColor(props.color, props.tint);
-})
-
 const outline = computed(() => {
+  if (typeof props.outlined !== "object") {
+    return {}
+  }
   return {
-    outlineOffset: props.outlineOffset,
-    outlineWidth: props.outlineWidth,
-    outlineColor: vuelize.getColor(props.outlineColor)
+    outlineOffset: props.outlined.offset,
+    outlineWidth: props.outlined.width,
+    //outlineColor: vuelize.getColor(props.outlineColor)
   };
 })
 
+watch(() => props.color, () => {
+  if(!wrapper.value || !props.color){
+    return;
+  }
+  useSetColors(wrapper.value, props.color)
+});
+
+onMounted(() => {
+  if(!wrapper.value || !props.color){
+    return;
+  }
+  useSetColors(wrapper.value, props.color)
+})
 </script>
 
 <style scoped lang="scss">

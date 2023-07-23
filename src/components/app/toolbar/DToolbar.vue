@@ -2,8 +2,8 @@
   <DWrapper ref="wrapper" :classes="['d-toolbar']" v-bind="{...$props, ...$attrs}">
     <DCard block rounded="none" height="100%">
       <DRow block gap class="px-2">
-        <DIconButton v-if="showHamburger" color="primary" @click="onHamburgerClick"
-                     style="margin-left: -8px">
+        <DIconButton v-if="showHamburger" @click="onHamburgerClick"
+                     style="margin-left: -8px" :color="ThemeColorProperty.primary">
           <DIcon name="bars"/>
         </DIconButton>
         <slot></slot>
@@ -29,6 +29,7 @@ import DRow from "../../flex/DRow.vue";
 import DIconButton from "../../button/DIconButton.vue";
 import DIcon from "../../icon/DIcon.vue";
 import defaultProps from "../../../mixins/DefaultProps";
+import {ThemeColorProperty} from "../../../types/Theme";
 
 const emit = defineEmits(['hamburgerClick'])
 

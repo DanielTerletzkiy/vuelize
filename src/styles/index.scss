@@ -69,15 +69,8 @@ button {
   scrollbar-gutter: stable;
   scrollbar-width: thin;
 
-  &.dark {
-    background: $dark_background;
-    color: $dark_card_text;
-  }
-
-  &.light {
-    background: $light_background;
-    color: $light_card_text;
-  }
+  background: var(--sheet-background);
+  color: var(--text-card);
 }
 
 ::-webkit-scrollbar-corner {
