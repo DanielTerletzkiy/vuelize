@@ -1,17 +1,17 @@
 <template>
   <div ref="wrapper" class="d-root" id="root" :class="mode">
-    <header style="position: sticky; top: 0; width: 100%; max-height: 54px; z-index: 10;" :class="mode">
+    <header class="header" :class="mode">
       <slot name="toolbar"></slot>
     </header>
-    <div style="position: relative;display: flex;" :class="mode">
-      <aside style="position: sticky;">
+    <div class="content" :class="mode">
+      <aside class="navbar">
         <slot name="navbar"></slot>
       </aside>
-      <main style="flex: 1;" :class="mode">
+      <main class="view" :class="mode">
         <slot name="default"></slot>
       </main>
     </div>
-    <footer :class="mode">
+    <footer class="footer" :class="mode">
       <slot name="footer"></slot>
     </footer>
     <slot name="notifications"/>
@@ -86,4 +86,25 @@ function setTheme() {
 @import "../../styles/index";
 
 
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-height: $navbarHeight;
+  z-index: 10;
+}
+
+.content {
+  position: relative;
+  display: flex;
+
+  .navbar {
+    position: sticky;
+    z-index: 9;
+  }
+
+  .view {
+    flex: 1;
+  }
+}
 </style>

@@ -1,19 +1,16 @@
 <template>
   <slide-x-left-transition :duration="100">
-    <DWrapper ref="wrapper" root-tag="nav" :classes="['d-navigation-bar', {permanent, temporary}]"
+    <DWrapper ref="wrapper" root-tag="nav" :classes="['d-navigation-bar', {permanent, temporary: !permanent}]"
               v-bind="{...$props, ...$attrs}"
               v-show="modelValue">
-      <DCard block :backgroundColor="permanent && 'transparent'" class="d-navigation-bar__content" rounded="none">
-        <DRow block align="unset" height="100%">
-          <DColumn block>
-            <slot></slot>
-          </DColumn>
-          <DDivider v-if="permanent" vertical class="d-navigation-bar__content__divider my-3"/>
-        </DRow>
-      </DCard>
+      <DRow block align="unset" height="100%" class="content" :class="[permanent]" rounded="none">
+        <DColumn block>
+          <slot></slot>
+        </DColumn>
+      </DRow>
     </DWrapper>
   </slide-x-left-transition>
-  <div v-if="temporary && modelValue" class="d-navigation-bar__backdrop" @click.self="onClose"/>
+  <div v-if="!permanent && modelValue" class="d-navigation-bar__backdrop" @click.self="onClose"/>
 </template>
 
 <script lang="ts">
@@ -26,7 +23,7 @@ export default {
 import {ref} from "vue";
 
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import DWrapper from "../../DWrapper.vue";
 import DRow from "../../flex/DRow.vue";
 import DCard from "../../card/DCard.vue";
@@ -40,7 +37,6 @@ const emit = defineEmits(['update:modelValue']);
 defineProps({
   modelValue: {type: Boolean, default: true},
   permanent: {type: Boolean},
-  temporary: {type: Boolean},
   ...defaultProps
 
 })
@@ -54,22 +50,36 @@ function onClose() {
 @import "../../../styles/variables";
 
 .d-navigation-bar {
-  height: 100vh;
+  height: 100dvh;
   width: 300px;
-
-  z-index: 9;
 
   &.temporary {
     position: fixed;
+
+    .content {
+      backdrop-filter: blur(10px);
+    }
   }
 
   &.permanent {
     position: sticky;
-    top: 54px;
-    height: calc(100vh - 54px) !important;
+    top: $navbarHeight;
+    height: calc(100dvh - $navbarHeight) !important;
   }
 
-  &__content {
+  .content {
+    background-color: color-mix(in srgb, var(--sheet-card), transparent 90%);
+
+    border-right: 2px solid color-mix(
+            in srgb,
+            color-mix(
+                    in srgb,
+                    var(--sheet-card),
+                    #fff 10%
+            ),
+            transparent 60%
+    );
+
     height: inherit;
     width: inherit;
     overflow: overlay;
@@ -90,14 +100,6 @@ function onClose() {
     opacity: 0.5;
     user-select: none;
     z-index: 1;
-  }
-
-  &.dark {
-    background-color: $dark_background;
-  }
-
-  &.light {
-    background-color: $light_background;
   }
 }
 </style>

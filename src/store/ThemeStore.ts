@@ -10,26 +10,28 @@ export const useVuelizeTheme = defineStore('vuelizeTheme', () => {
         dark: {
             colors: {
                 primary: '#A8B2FF',
-                secondary: '#9ea7ad',
+                secondary: '#1B1B18',
+                accent: '#8080BD',
                 success: '#74ec38',
                 error: '#ff6b6b',
                 warning: '#fca121',
                 info: '#2ea2e0'
             },
             sheets: {
-                background: "#0c0c0c",
+                background: "#080808",
                 card: "#171717",
                 glow: "currentColor",
             },
             text: {
                 header: "#eaeaea",
-                card: "#8b8b8b"
+                card: "#FAFAFA"
             }
         },
         light: {
             colors: {
                 primary: '#3075FF',
                 secondary: '#424242',
+                accent: '#B0B5B2',
                 success: '#62c62f',
                 error: '#ff6b6b',
                 warning: '#ffa600',

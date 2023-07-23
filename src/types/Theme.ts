@@ -28,6 +28,7 @@ type ThemeText = {
 export enum ThemeColorProperty {
     primary = 'color-primary',
     secondary = 'color-secondary',
+    accent = 'color-accent',
     success = 'color-success',
     error = 'color-error',
     warning = 'color-warning',

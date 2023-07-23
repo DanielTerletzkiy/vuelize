@@ -1,14 +1,12 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-toolbar']" v-bind="{...$props, ...$attrs}">
-    <DCard block rounded="none" height="100%">
-      <DRow block gap class="px-2">
-        <DIconButton v-if="showHamburger" @click="onHamburgerClick"
-                     style="margin-left: -8px" :color="ThemeColorProperty.primary">
-          <DIcon name="bars"/>
-        </DIconButton>
-        <slot></slot>
-      </DRow>
-    </DCard>
+  <DWrapper ref="wrapper" :classes="['d-toolbar']" :rounded="Round.None" v-bind="{...$props, ...$attrs}">
+    <DRow block gap class="px-2">
+      <DIconButton v-if="showHamburger" @click="onHamburgerClick"
+                   style="margin-left: -8px" :color="ThemeColorProperty.primary">
+        <DIcon name="bars"/>
+      </DIconButton>
+      <slot></slot>
+    </DRow>
   </DWrapper>
 </template>
 
@@ -30,6 +28,7 @@ import DIconButton from "../../button/DIconButton.vue";
 import DIcon from "../../icon/DIcon.vue";
 import defaultProps from "../../../mixins/DefaultProps";
 import {ThemeColorProperty} from "../../../types/Theme";
+import {Round} from "../../../types/Vuelize";
 
 const emit = defineEmits(['hamburgerClick'])
 
@@ -50,15 +49,28 @@ function onHamburgerClick(e: Event) {
   position: sticky;
   top: 0;
 
+  background-color: color-mix(in srgb, var(--sheet-card), transparent 50%);
+  backdrop-filter: blur(10px);
+
+  border-bottom: 2px solid color-mix(
+          in srgb,
+          color-mix(
+                  in srgb,
+                  var(--sheet-card),
+                  #fff 10%
+          ),
+          transparent 60%
+  );
+
   width: 100%;
-  height: 54px;
-  max-height: 54px;
+  height: $navbarHeight;
+  max-height: $navbarHeight;
   z-index: 10;
 
-  border-radius: 0;
+  border-radius: 0 !important;
 
   &.dark {
-    box-shadow: 0 0 30px -20px darken($dark_background, 5);
+    //box-shadow: 0 0 30px -20px darken($dark_background, 5);
   }
 
   &.light {
