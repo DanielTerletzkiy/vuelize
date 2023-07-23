@@ -1,7 +1,7 @@
 <template>
   <DWrapper ref="wrapper" root-tag="button" :classes="['d-btn', {filled, block, glow, size}]"
             v-bind="{...$props, ...$attrs}"
-            @click.capture="$emit('click')" :glow="false">
+            @click.capture="$emit('click')">
     <span class="d-btn__content" :style="{color: filled && color ? $vuelize.getColorContrast(color,tint):''}" v-ripple>
       <span class="prefix" v-if="!!$slots.prefix">
         <slot name="prefix"></slot>

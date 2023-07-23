@@ -6,7 +6,7 @@ import DNotificationWrapper from "./components/notification/DNotificationWrapper
 import DNavigationBar from "./components/app/navigation/DNavigationBar.vue";
 import {ref} from "vue";
 import DButton from "./components/button/DButton.vue";
-import {ThemeColorProperty} from "./types/Theme";
+import {ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
 import DCard from "./components/card/DCard.vue";
 
 const navOpen = ref(false);
@@ -39,7 +39,7 @@ const navOpen = ref(false);
         }
     ]}">
       TEST
-      <d-button :color="ThemeColorProperty.success">
+      <d-button glow :color="ThemeColorProperty.success">
         success but cyan
       </d-button>
     </d-card>
@@ -56,6 +56,39 @@ const navOpen = ref(false);
     <d-button :color="ThemeColorProperty.success" outlined>
       this is a button
     </d-button>
+    <d-card :glow="{active: false, central: true}" width="200px" height="200px" :color="{
+      map: [{
+        color: '#f3f33f',
+        property: ThemeSheetProperty.glow
+      }]
+    }">
+      <d-card :glow="{
+        active: true,
+        central: true
+      }" width="100px" height="100px" :color="{
+      map: [{
+        color: ThemeColorProperty.primary,
+        property: ThemeSheetProperty.glow
+      }]
+    }">
+        central
+      </d-card>
+      <d-card glow width="100px" height="100px" :color="{
+        map: [
+            {
+              color: null,
+              property: ThemeSheetProperty.card
+            },
+            {
+
+             color: ThemeColorProperty.warning,
+             property: ThemeSheetProperty.glow
+            }
+        ]
+      }">
+        return original
+      </d-card>
+    </d-card>
   </DRoot>
 </template>
 

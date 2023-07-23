@@ -1,5 +1,5 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-card', {block}]" v-bind="{...$props, ...$attrs}" :style="{backgroundColor}"
+  <DWrapper ref="wrapper" :classes="['d-card', {block}]" v-bind="{...$props, ...$attrs}"
             @click="$emit('click')">
     <slot></slot>
   </DWrapper>
@@ -12,27 +12,22 @@ export default {
 </script>
 
 <script setup lang="ts">
+
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import DWrapper from "../DWrapper.vue";
-import {computed, inject, ref} from "vue";
+import {computed, inject, ref, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
+import {ThemeSheetProperty} from "../../types/Theme";
 
 const vuelize: any = inject('vuelize');
 
 const props = defineProps({
   block: {type: Boolean},
-  backgroundColor: {type: String},
   minWidth: {type: String},
   maxWidth: {type: String},
   ...defaultProps
 });
-
-const backgroundColor = computed(()=>{
-  if(props.backgroundColor){
-    return vuelize.getColor(props.backgroundColor, props.tint)
-  }
-})
 
 </script>
 

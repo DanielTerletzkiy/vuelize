@@ -7,11 +7,17 @@ export function useColor(ref: HTMLElement, colorProperty: ThemeAllPropertyType |
     return hasProperty(colorProperty) ? `var(--${colorProperty})` : colorProperty
 }
 
-export function useSetColor(ref: HTMLElement, color: string, colorProperty?: ThemeAllPropertyType) {
+export function useSetColor(ref: HTMLElement, color: string | null, colorProperty?: ThemeAllPropertyType) {
     //console.log()
+    if(color === null && !!colorProperty){
+        const originalColor = getComputedStyle(document.documentElement).getPropertyValue(`--${colorProperty}`)
+        ref.style.setProperty(`--${colorProperty}`, originalColor)
+        return;
+    }
+
     if (ref.tagName === "HTML" || !!colorProperty) {
         ref.style.setProperty(`--${colorProperty}`, color)
-    } else {
+    } else if(typeof color === "string") {
         color = hasProperty(color) ? `var(--${color})` : color;
         ref.style.setProperty(`color`, color)
 
@@ -24,8 +30,6 @@ function hasProperty(prop: ThemeAllPropertyType | string) {
 }
 
 export function useSetColors(ref: HTMLElement, inputColor: ColorSettings | ThemeColorProperty | string) {
-    const rand = Math.random() *1000
-    console.time("tick"+rand)
     nextTick().then(() => {
         if (!inputColor) {
             //useSetColor(ref, ThemeColorProperty.primary)
@@ -47,8 +51,6 @@ export function useSetColors(ref: HTMLElement, inputColor: ColorSettings | Theme
                 }
                 break;
         }
-
-        console.timeEnd("tick"+rand)
     })
 }
 

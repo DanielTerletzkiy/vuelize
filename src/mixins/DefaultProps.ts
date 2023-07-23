@@ -1,6 +1,6 @@
 import {Round} from "../types/Vuelize";
 import type {PropType} from "vue";
-import {ColorSettings, ElevationSettings, OutlinedSettings, ThemeColorProperty} from "../types/Theme";
+import {ColorSettings, ElevationSettings, GlowSettings, OutlinedSettings, ThemeColorProperty} from "../types/Theme";
 
 export default {
     link: {type: String, default: null},
@@ -13,8 +13,7 @@ export default {
     //
     disabled: {type: Boolean},
     //
-    glow: {type: Boolean}, //
-    glowing: {type: Boolean},
+    glow: {type: Object as PropType<GlowSettings | boolean>},
     //
     height: {type: String, default: ''},
     width: {type: String, default: ''},

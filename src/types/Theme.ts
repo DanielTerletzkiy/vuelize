@@ -37,6 +37,7 @@ export enum ThemeColorProperty {
 export enum ThemeSheetProperty {
     background = 'sheet-background',
     card = 'sheet-card',
+    glow = 'sheet-glow',
 }
 
 export enum ThemeTextProperty {
@@ -73,4 +74,9 @@ export type OutlinedSettings = {
 export type ElevationSettings = {
     light: string,
     dark: string,
+}
+
+export type GlowSettings = {
+    active: boolean,
+    central: boolean,
 }

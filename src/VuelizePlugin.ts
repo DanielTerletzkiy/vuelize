@@ -13,6 +13,8 @@ import VWave from "v-wave";
 
 import 'v3-transitions/dist/style.css'
 import ClickOutside from "./directive/ClickOutside";
+import {Theme, Themes} from "./types/Theme";
+import {merge, values} from "lodash";
 
 class VuelizePlugin implements Vuelize {
     app;
@@ -59,16 +61,10 @@ class VuelizePlugin implements Vuelize {
         }*/
         return "test"
     }
-
-    #tintColor = function adjust(color: string, amount: number): string {
-        return '#' + color.replace(/^#/, '').replace(/../g, color =>
-            ('0' + Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16))
-                .substr(-2));
-    }
 }
 
 export const Vuelize: Plugin = {
-    install(app: App) {
+    install(app: App, themesOptions: Partial<Themes> ) {
         ClickOutside(app);
         app.use(createPinia());
         app.use(VWave, {
@@ -78,7 +74,11 @@ export const Vuelize: Plugin = {
         });
         //app.use(Unicon);
 
-        app.config.globalProperties.$vuelize = new VuelizePlugin(app);
+        const plugin =  new VuelizePlugin(app);
+
+        plugin.theme.themes = (merge(plugin.theme.themes,themesOptions));
+
+        app.config.globalProperties.$vuelize = plugin;
         app.provide('vuelize', app.config.globalProperties.$vuelize);
 
         importAll(app);

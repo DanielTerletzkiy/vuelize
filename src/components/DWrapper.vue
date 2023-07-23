@@ -9,11 +9,10 @@
 
 <script setup lang="ts">
 import {useVuelizeTheme} from "../store/ThemeStore";
-import {computed, inject, nextTick, onMounted, ref, watch} from "vue";
+import {computed, inject, onMounted, ref, watch} from "vue";
 import defaultProps from "../mixins/DefaultProps";
 import {storeToRefs} from "pinia";
-import {useColor, useSetColor, useSetColors} from "../composables/Color.composable";
-import {Color, ThemeAllPropertyType, ThemeColorProperty} from "../types/Theme";
+import {useSetColors} from "../composables/Color.composable";
 
 const wrapper = ref(null);
 defineExpose({wrapper});
@@ -34,14 +33,22 @@ const componentTag = computed(() => {
 })
 
 const globalClasses = computed(() => {
+  console.log(props.glow)
+  const glowActive = typeof props.glow === "object" && props.glow.active;
+  const glowCentral = typeof props.glow === "object" && props.glow.central;
   return {
-    [`rounded-${props.rounded}`]: props.rounded,
-    outlined: props.outlined !== undefined,
     disabled: props.disabled,
-    glow: props.glow,
-    ['glow--active glow']: props.glowing,
+    [`rounded-${props.rounded}`]: props.rounded,
+    outlined: checkPropTrue(props.outlined),
+    glow: checkPropTrue(props.glow),
+    glowActive: glowActive,
+    glowCentral: glowCentral,
   }
 })
+
+function checkPropTrue(prop: unknown): boolean{
+  return prop !== undefined && prop !== false
+}
 
 const elevationClass = computed(() => {
   let elevationObject: any = {}
@@ -77,14 +84,14 @@ const outline = computed(() => {
 })
 
 watch(() => props.color, () => {
-  if(!wrapper.value || !props.color){
+  if (!wrapper.value || !props.color) {
     return;
   }
   useSetColors(wrapper.value, props.color)
 });
 
 onMounted(() => {
-  if(!wrapper.value || !props.color){
+  if (!wrapper.value || !props.color) {
     return;
   }
   useSetColors(wrapper.value, props.color)

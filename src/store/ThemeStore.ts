@@ -19,6 +19,7 @@ export const useVuelizeTheme = defineStore('vuelizeTheme', () => {
             sheets: {
                 background: "#0c0c0c",
                 card: "#171717",
+                glow: "currentColor",
             },
             text: {
                 header: "#eaeaea",
@@ -37,6 +38,7 @@ export const useVuelizeTheme = defineStore('vuelizeTheme', () => {
             sheets: {
                 background: "#fafafa",
                 card: "#fefefe",
+                glow: "currentColor",
             },
             text: {
                 header: "#020202",

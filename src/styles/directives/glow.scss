@@ -1,100 +1,61 @@
 @import "../variables";
 
 .glow {
-    user-select: none;
-    position: relative;
+  position: relative;
+  border-radius: inherit;
 
-    border-radius: inherit;
+  &Central {
+    user-select: none;
 
     list-style: none;
     margin: 0;
 
     display: flex;
     align-items: center;
+  }
 
-    //z-index: 0;
 
+  &::before {
+    position: absolute;
+    border-radius: inherit;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: var(--sheet-glow);
+    opacity: 0;
+
+    content: '';
+    transition-duration: 0.15s;
+
+  }
+
+  &:hover {
     &::before {
-        position: absolute;
-        border-radius: inherit;
+      background: var(--sheet-glow);
+      opacity: 0.08;
+    }
+  }
 
-        top: 0;
-        left: 0;
+  &:not(:is(&Active)) {
+    color: var(--text-card);
+  }
 
-        width: 100%;
-        height: 100%;
-
-        background: currentColor;
-        opacity: 0;
-
-        content: '';
-        transition-duration: 0.15s;
-
-        //z-index: -1;
+  &Active {
+    &::before {
+      background: var(--sheet-glow);
+      opacity: 0.1;
     }
 
     &:hover {
-        &::before {
-            background: currentColor;
-            opacity: 0.08;
-        }
+      &::before {
+        background: var(--sheet-glow);
+        opacity: 0.2;
+      }
     }
-
-    &:not(:is(&--active)) {
-        &.dark {
-            color: $dark_card_text
-        }
-
-        &.light {
-            color: $light_card_text
-        }
-    }
-
-    &--active {
-        &::before {
-            background: currentColor;
-            opacity: 0.1;
-        }
-
-        &:hover {
-            &::before {
-                background: currentColor;
-                opacity: 0.2;
-            }
-        }
-    }
-
-    &--filled {
-        box-sizing: content-box;
-
-        & > * {
-            z-index: 1;
-        }
-
-        &::before {
-            content: "";
-            top: 50%;
-            left: 0;
-            background: var(--fill-background) !important;
-            border-radius: inherit;
-            position: absolute;
-            transform: translate(0%, -50%);
-            transition: ease-in 0.15s;
-            width: 0;
-            height: 0;
-            opacity: 1 !important;
-        }
-
-        &:hover {
-            & * {
-                color: var(--fill-contrast) !important;
-            }
-
-            &:before {
-                width: 100% !important;
-                height: 100% !important;
-            }
-        }
-    }
+  }
 
 }
