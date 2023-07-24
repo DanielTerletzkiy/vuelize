@@ -22,7 +22,6 @@ import {ref} from "vue";
 const wrapper = ref(null);
 defineExpose({wrapper});
 import DWrapper from "../../DWrapper.vue";
-import DCard from "../../card/DCard.vue";
 import DRow from "../../flex/DRow.vue";
 import DIconButton from "../../button/DIconButton.vue";
 import DIcon from "../../icon/DIcon.vue";
@@ -49,7 +48,7 @@ function onHamburgerClick(e: Event) {
   position: sticky;
   top: 0;
 
-  background-color: color-mix(in srgb, var(--sheet-card), transparent 50%);
+  background-color: color-mix(in srgb, var(--sheet-card), transparent 35%);
   backdrop-filter: blur(10px);
 
   border-bottom: 2px solid color-mix(

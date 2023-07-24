@@ -1,6 +1,6 @@
 <template>
   <component ref="wrapper" :is="componentTag" :to="link" :disabled="disabled"
-             :class="[classes, mode, elevationClass, globalClasses]"
+             :class="[classes, mode, elevationClass, globalClasses, glowClasses, blurClasses]"
              :style="{height, width, ...outline}"
              @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
@@ -12,7 +12,8 @@ import {useVuelizeTheme} from "../store/ThemeStore";
 import {computed, inject, onMounted, ref, watch} from "vue";
 import defaultProps from "../mixins/DefaultProps";
 import {storeToRefs} from "pinia";
-import {useSetColors} from "../composables/Color.composable";
+import {useColor, useSetColors} from "../composables/Color.composable";
+import {BlurAmount} from "../types/Theme";
 
 const wrapper = ref(null);
 defineExpose({wrapper});
@@ -33,20 +34,40 @@ const componentTag = computed(() => {
 })
 
 const globalClasses = computed(() => {
-  console.log(props.glow)
-  const glowActive = typeof props.glow === "object" && props.glow.active;
-  const glowCentral = typeof props.glow === "object" && props.glow.central;
   return {
     disabled: props.disabled,
     [`rounded-${props.rounded}`]: props.rounded,
     outlined: checkPropTrue(props.outlined),
+  }
+})
+
+const glowClasses = computed(() => {
+  const disabled = typeof props.glow === "object" && props.glow.disabled;
+  if (disabled) {
+    return {}
+  }
+  const glowActive = typeof props.glow === "object" && props.glow.active;
+  const glowCentral = typeof props.glow === "object" && props.glow.central;
+  return {
     glow: checkPropTrue(props.glow),
     glowActive: glowActive,
     glowCentral: glowCentral,
   }
 })
 
-function checkPropTrue(prop: unknown): boolean{
+const blurClasses = computed(() => {
+  const disabled = typeof props.blur === "object" && props.blur.disabled;
+  if (disabled) {
+    return {}
+  }
+  const blurAmount = (typeof props.blur === "object" && props.blur.amount) || BlurAmount.medium;
+  return {
+    blur: checkPropTrue(props.blur),
+    [`blur--${blurAmount}`]: blurAmount,
+  }
+})
+
+function checkPropTrue(prop: unknown): boolean {
   return prop !== undefined && prop !== false
 }
 
@@ -73,13 +94,18 @@ const elevationClass = computed(() => {
 })
 
 const outline = computed(() => {
-  if (typeof props.outlined !== "object") {
+  if (typeof props.outlined !== "object" || !wrapper.value) {
     return {}
   }
+
+  if (props.outlined.disabled) {
+    return {}
+  }
+
   return {
     outlineOffset: props.outlined.offset,
     outlineWidth: props.outlined.width,
-    //outlineColor: vuelize.getColor(props.outlineColor)
+    outlineColor: useColor(wrapper.value, props.outlined.color)
   };
 })
 

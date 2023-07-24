@@ -1,8 +1,8 @@
 <template>
-  <DWrapper ref="wrapper" root-tag="button" :classes="['d-btn', {filled, block, glow, size}]"
+  <DWrapper ref="wrapper" root-tag="button" :classes="['d-button', size, {filled, block, glow}]"
             v-bind="{...$props, ...$attrs}"
             @click.capture="$emit('click')">
-    <span class="d-btn__content" :style="{color: filled && color ? $vuelize.getColorContrast(color,tint):''}" v-ripple>
+    <span class="d-button__content" v-ripple>
       <span class="prefix" v-if="!!$slots.prefix">
         <slot name="prefix"></slot>
       </span>
@@ -22,30 +22,26 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {PropType, ref} from "vue";
 
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import DWrapper from "../DWrapper.vue";
 import defaultProps from "../../mixins/DefaultProps";
+import {Size} from "../../types/components/DButton";
 
 defineEmits(['click'])
 
 defineProps({
   filled: {type: Boolean},
   block: {type: Boolean},
-
-  size: {
-    type: String, validator: function (value: string) {
-      return ['small', 'regular', 'large'].indexOf(value) !== -1
-    }
-  },
+  size: {type: Object as PropType<Size>, default: Size.regular},
   ...defaultProps
 })
 </script>
 
 <style scoped lang="scss">
-.d-btn {
+.d-button {
   user-select: none;
   position: relative;
   background: none;
@@ -94,6 +90,10 @@ defineProps({
   }
 
   &.filled {
+    .d-button__content {
+      color: var(--text-card); // TODO: use color-contrast when it finally comes out!
+    }
+
     &::before {
       opacity: 1;
     }
@@ -120,10 +120,11 @@ defineProps({
   &.block {
     //noinspection CssInvalidPropertyValue
     width: -webkit-fill-available; //Its valid...
+    //noinspection CssInvalidPropertyValue
     width: -moz-available;
   }
 
-  .d-btn__content {
+  .d-button__content {
     min-height: inherit;
     height: 100%;
     width: 100%;
@@ -149,14 +150,16 @@ defineProps({
     }
   }
 
-  &.small .d-btn {
-    padding: 0;
+  &.small .d-button__content {
+    font-size: 0.65rem;
+    padding: 0.4rem;
   }
 
-  &.large .d-btn__content {
+  &.large .d-button__content {
     min-height: 50px;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: normal;
+    padding: 10px;
 
   }
 }

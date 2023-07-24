@@ -6,10 +6,10 @@ import DNotificationWrapper from "./components/notification/DNotificationWrapper
 import DNavigationBar from "./components/app/navigation/DNavigationBar.vue";
 import {ref} from "vue";
 import DButton from "./components/button/DButton.vue";
-import {ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
+import {BlurAmount, ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
 import DCard from "./components/card/DCard.vue";
 
-const navOpen = ref(false);
+const navOpen = ref(true);
 </script>
 
 <template>
@@ -53,7 +53,14 @@ const navOpen = ref(false);
         this is a button
       </d-button>
     </d-card>
-    <d-button :color="ThemeColorProperty.success" outlined>
+    <d-button :color="ThemeColorProperty.success" :outlined="{
+      color: ThemeColorProperty.primary,
+      offset: '-2px',
+      width: '4px'
+    }">
+      this is a button
+    </d-button>
+    <d-button :color="ThemeColorProperty.primary" filled>
       this is a button
     </d-button>
     <d-card :glow="{active: false, central: true}" width="200px" height="200px" :color="{
@@ -73,7 +80,7 @@ const navOpen = ref(false);
     }">
         central
       </d-card>
-      <d-card glow width="100px" height="100px" :color="{
+      <d-card glow width="100px" height="100px" blur :color="{
         map: [
             {
               color: null,

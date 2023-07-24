@@ -67,6 +67,7 @@ export type ColorSetting = {
 }
 
 export type OutlinedSettings = {
+    disabled?: boolean,
     color: Color,
     offset: string,
     width: string,
@@ -78,6 +79,18 @@ export type ElevationSettings = {
 }
 
 export type GlowSettings = {
+    disabled?: boolean,
     active: boolean,
     central: boolean,
+}
+
+export enum BlurAmount {
+    low = 'low',
+    medium = 'medium',
+    strong = 'strong',
+}
+
+export type BlurSettings = {
+    disabled?: boolean,
+    amount: BlurAmount,
 }

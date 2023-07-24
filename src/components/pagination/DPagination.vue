@@ -91,7 +91,7 @@ const isNextDisabled = computed(() => {
   min-height: unset;
   letter-spacing: normal;
 
-  :deep(.d-btn__content) {
+  :deep(.d-button__content) {
     padding: 0;
   }
 }
