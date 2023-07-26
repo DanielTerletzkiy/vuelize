@@ -10,6 +10,7 @@ import {ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
 import DCard from "./components/card/DCard.vue";
 import DColumn from "./components/flex/DColumn.vue";
 import DRow from "./components/flex/DRow.vue";
+import {Size} from "./types/components/DButton";
 
 const navOpen = ref(true);
 </script>
@@ -65,7 +66,7 @@ const navOpen = ref(true);
     <d-card block>
       <d-column>
         <d-row gap>
-          <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color" filled>
+          <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color" filled :size="Size.small">
             {{ color }}
           </d-button>
         </d-row>
@@ -79,7 +80,7 @@ const navOpen = ref(true);
       </d-column>
       <d-column>
         <d-row gap>
-          <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color" glow>
+          <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color" glow :size="Size.large">
             {{ color }}
           </d-button>
         </d-row>

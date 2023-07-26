@@ -133,7 +133,7 @@ defineProps({
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 0 8px;
+    padding: 0 1rem;
     //justify-content: center;
 
     .prefix {
@@ -150,16 +150,18 @@ defineProps({
     }
   }
 
-  &.small .d-button__content {
-    font-size: 0.65rem;
-    padding: 0.4rem;
+  &.small {
+    min-height: unset;
+
+    .d-button__content {
+      font-size: 0.65rem;
+      padding: 0.4rem;
+    }
   }
 
   &.large .d-button__content {
-    min-height: 50px;
     font-size: 1.4rem;
-    font-weight: normal;
-    padding: 10px;
+    padding: 10px 1rem;
 
   }
 }
