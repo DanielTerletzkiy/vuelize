@@ -10,7 +10,7 @@ export const useVuelizeTheme = defineStore('vuelizeTheme', () => {
         dark: {
             colors: {
                 primary: '#A8B2FF',
-                secondary: '#1B1B18',
+                secondary: '#383838',
                 accent: '#8080BD',
                 success: '#74ec38',
                 error: '#ff6b6b',
@@ -24,7 +24,8 @@ export const useVuelizeTheme = defineStore('vuelizeTheme', () => {
             },
             text: {
                 header: "#eaeaea",
-                card: "#FAFAFA"
+                card: "#FAFAFA",
+                contrast: "currentColor"
             }
         },
         light: {
@@ -44,7 +45,8 @@ export const useVuelizeTheme = defineStore('vuelizeTheme', () => {
             },
             text: {
                 header: "#020202",
-                card: "#363636"
+                card: "#363636",
+                contrast: "currentColor"
             }
         },
     })

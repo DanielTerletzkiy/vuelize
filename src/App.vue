@@ -6,8 +6,10 @@ import DNotificationWrapper from "./components/notification/DNotificationWrapper
 import DNavigationBar from "./components/app/navigation/DNavigationBar.vue";
 import {ref} from "vue";
 import DButton from "./components/button/DButton.vue";
-import {BlurAmount, ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
+import {ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
 import DCard from "./components/card/DCard.vue";
+import DColumn from "./components/flex/DColumn.vue";
+import DRow from "./components/flex/DRow.vue";
 
 const navOpen = ref(true);
 </script>
@@ -60,9 +62,29 @@ const navOpen = ref(true);
     }">
       this is a button
     </d-button>
-    <d-button :color="ThemeColorProperty.primary" filled>
-      this is a button
-    </d-button>
+    <d-card block>
+      <d-column>
+        <d-row gap>
+          <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color" filled>
+            {{ color }}
+          </d-button>
+        </d-row>
+      </d-column>
+      <d-column>
+        <d-row gap>
+          <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color">
+            {{ color }}
+          </d-button>
+        </d-row>
+      </d-column>
+      <d-column>
+        <d-row gap>
+          <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color" glow>
+            {{ color }}
+          </d-button>
+        </d-row>
+      </d-column>
+    </d-card>
     <d-card :glow="{active: false, central: true}" width="200px" height="200px" :color="{
       map: [{
         color: '#f3f33f',

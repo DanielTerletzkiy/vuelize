@@ -27,8 +27,8 @@ type ThemeText = {
 
 export enum ThemeColorProperty {
     primary = 'color-primary',
-    secondary = 'color-secondary',
     accent = 'color-accent',
+    secondary = 'color-secondary',
     success = 'color-success',
     error = 'color-error',
     warning = 'color-warning',
@@ -44,6 +44,7 @@ export enum ThemeSheetProperty {
 export enum ThemeTextProperty {
     header = 'text-header',
     card = 'text-card',
+    contrast = 'text-contrast',
 }
 
 export const ThemeAllPropertyEnum = {

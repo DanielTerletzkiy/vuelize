@@ -1,15 +1,7 @@
-/*.outlined {
-  box-shadow: 0 0 0 1.4px currentColor;
-  &.depressed.dark {
-    box-shadow: 0 0 0 1.4px rgba(255, 255, 255, 0.12);
-  }
-  &.depressed.light {
-    box-shadow: 0 0 0 1.4px rgba(0, 0, 0, 0.12);
-  }
-}*/
+@import "../variables";
 
 .inlined, .outlined {
-  outline: 1px solid currentColor;
+  outline: $outline;
   &.depressed.dark {
     outline: 1px solid rgba(#333337, 0.45);
   }

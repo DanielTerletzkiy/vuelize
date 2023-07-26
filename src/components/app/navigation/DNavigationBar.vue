@@ -70,15 +70,7 @@ function onClose() {
   .content {
     background-color: color-mix(in srgb, var(--sheet-card), transparent 90%);
 
-    border-right: 2px solid color-mix(
-            in srgb,
-            color-mix(
-                    in srgb,
-                    var(--sheet-card),
-                    #fff 10%
-            ),
-            transparent 60%
-    );
+    border-right: $outline;
 
     height: inherit;
     width: inherit;

@@ -91,7 +91,7 @@ defineProps({
 
   &.filled {
     .d-button__content {
-      color: var(--text-card); // TODO: use color-contrast when it finally comes out!
+      color: var(--text-contrast); //var(--text-card); // TODO: use color-contrast when it finally comes out!
     }
 
     &::before {

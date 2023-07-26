@@ -51,15 +51,7 @@ function onHamburgerClick(e: Event) {
   background-color: color-mix(in srgb, var(--sheet-card), transparent 35%);
   backdrop-filter: blur(10px);
 
-  border-bottom: 2px solid color-mix(
-          in srgb,
-          color-mix(
-                  in srgb,
-                  var(--sheet-card),
-                  #fff 10%
-          ),
-          transparent 60%
-  );
+  border-bottom: $outline;
 
   width: 100%;
   height: $navbarHeight;
