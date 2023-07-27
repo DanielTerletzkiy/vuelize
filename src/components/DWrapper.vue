@@ -1,5 +1,5 @@
 <template>
-  <component ref="wrapper" :is="componentTag" :to="link" :disabled="disabled"
+  <component ref="wrapper" :is="componentTag" :href="link" :disabled="disabled"
              :class="[classes, mode, elevationClass, globalClasses, glowClasses, blurClasses]"
              :style="{height, width, ...outline}"
              @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
@@ -30,7 +30,7 @@ const props = defineProps({
 })
 
 const componentTag = computed(() => {
-  return props.link ? 'router-link' : props.rootTag ?? 'div'
+  return props.link ? 'a' : props.rootTag ?? 'div'
 })
 
 const globalClasses = computed(() => {
@@ -105,7 +105,7 @@ const outline = computed(() => {
   return {
     outlineOffset: props.outlined.offset,
     outlineWidth: props.outlined.width,
-    outlineColor: useColor(wrapper.value, props.outlined.color)
+    outlineColor: props.outlined.color && useColor(wrapper.value, props.outlined.color)
   };
 })
 
@@ -114,7 +114,7 @@ watch(() => props.color, () => {
     return;
   }
   useSetColors(wrapper.value, props.color)
-});
+}, {deep: true});
 
 onMounted(() => {
   if (!wrapper.value || !props.color) {

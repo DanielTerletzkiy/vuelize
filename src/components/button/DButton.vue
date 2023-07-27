@@ -132,7 +132,7 @@ defineProps({
     position: relative;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 0.5rem;
     padding: 0 1rem;
     //justify-content: center;
 

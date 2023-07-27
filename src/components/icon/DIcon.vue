@@ -5,12 +5,12 @@
       <linearGradient :id="uid" x1="0%" y1="0%" x2="100%" y2="0%"
                       :gradientTransform="`rotate(${gradientRotation})`" v-if="gradient">
         <stop v-for="{offset, color} in gradient" :key="offset" :offset="offset+'%'"
-              :stop-color="vuelize.getColor(color || 'currentColor')"/>
+              :stop-color="'currentColor'"/>
       </linearGradient>
     </svg>
     <fade-transition :duration="120">
       <unicon :name="name" :size="size" :icon-style="iconStyle"
-              :color="`url(#${uid}) ${vuelize.getColor(color || 'currentColor',tint)}`"></unicon>
+              :color="`url(#${uid}) ${'currentColor'}`"></unicon>
     </fade-transition>
   </DWrapper>
 </template>

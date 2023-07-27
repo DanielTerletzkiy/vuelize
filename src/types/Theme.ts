@@ -57,21 +57,21 @@ export type ThemeAllPropertyType = ThemeColorProperty | ThemeSheetProperty | The
 export type Color = ThemeAllPropertyType | string
 
 export type ColorSettings = {
-    color: Color,
-    map: ColorSetting[],
+    color?: Color,
+    map?: ColorSetting[],
 }
 
 export type ColorSetting = {
-    color: Color,
+    color?: Color,
     property?: ThemeAllPropertyType,
     tint?: number,
 }
 
 export type OutlinedSettings = {
     disabled?: boolean,
-    color: Color,
-    offset: string,
-    width: string,
+    color?: Color,
+    offset?: string,
+    width?: string,
 }
 
 export type ElevationSettings = {
