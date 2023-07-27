@@ -3,6 +3,7 @@ import Layout from './Layout.vue'
 import './style.css'
 import {App} from "vue";
 import Vuelize from "../../../";
+import Header from "../../components/Header.vue";
 
 type Enhanced = {
     app: App,
@@ -14,6 +15,7 @@ export default {
     enhanceApp(data: Enhanced) {
         const {app} = data;
         app.use(Vuelize)
+        app.component("Header", Header)
     }
 }
 

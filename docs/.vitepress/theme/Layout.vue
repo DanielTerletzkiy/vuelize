@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {repository} from "../../../package.json"
-import {useData} from 'vitepress'
+import {useData, useRoute} from 'vitepress'
 import DRoot from "../../../src/components/root/DRoot.vue";
 import DToolbar from "../../../src/components/app/toolbar/DToolbar.vue";
 import DCardTitle from "../../../src/components/card/text/DCardTitle.vue";
@@ -11,12 +11,21 @@ import {ThemeColorProperty} from "../../../src/types/Theme";
 import DSpacer from "../../../src/components/flex/DSpacer.vue";
 import DButton from "../../../src/components/button/DButton.vue";
 import DIcon from "../../../src/components/icon/DIcon.vue";
-import {Size} from "../../../src/types/components/DButton";
 import DList from "../../../src/components/list/DList.vue";
 import DListItem from "../../../src/components/list/DListItem.vue";
+import DRow from "../../../src/components/flex/DRow.vue";
+
+import DImage from "../../../src/components/image/DImage.vue";
+import {computed} from "vue";
+import DDivider from "../../../src/components/divider/DDivider.vue";
 
 // https://vitepress.dev/reference/runtime-api#usedata
-const {site, frontmatter} = useData()
+const {site,page} = useData()
+const {themeConfig} = site.value;
+
+const route = useRoute();
+
+const repo = computed(() => repository)
 
 </script>
 
@@ -24,12 +33,17 @@ const {site, frontmatter} = useData()
   <d-root>
     <template v-slot:toolbar>
       <d-toolbar>
-        <d-column height="50px" :wrap="false" link="/" glow>
-          <d-card-title class="font-size-medium pt-0">{{ site.title }}</d-card-title>
-          <d-card-subtitle class="pb-0">{{ site.description }}</d-card-subtitle>
-        </d-column>
+        <d-row height="50px" :wrap="false" link="/" glow width="max-content" class="pl-2">
+          <d-image class="logo" :src="themeConfig.logo" height="calc(100% - 10px)" rounded="none"/>
+          <d-column height="50px" :wrap="false">
+            <d-card-title class="font-size-medium pt-0">{{ site.title }}</d-card-title>
+            <d-card-subtitle class="pb-0">{{ site.description }}</d-card-subtitle>
+          </d-column>
+        </d-row>
+        <d-divider vertical block class="my-3 mx-2"/>
         <d-spacer/>
-        <d-button :link="repository.url" glow :color="ThemeColorProperty.warning">
+        <d-divider vertical block class="my-3 mx-2"/>
+        <d-button :link="repo.url" glow :color="ThemeColorProperty.warning" target="_blank">
           <template v-slot:prefix>
             <d-icon name="github"/>
           </template>
@@ -52,3 +66,10 @@ const {site, frontmatter} = useData()
     <Content/>
   </d-root>
 </template>
+
+<style scoped lang="scss">
+.logo {
+  display: flex;
+  align-items: center;
+}
+</style>

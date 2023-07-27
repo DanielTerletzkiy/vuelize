@@ -3,7 +3,10 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Vuelize",
-  description: "Vuelize component Lib",
+  description: "Realize the Impossible",
+  themeConfig: {
+    logo: "/logo.svg"
+  },
   markdown: {
     config: (md) => {
 

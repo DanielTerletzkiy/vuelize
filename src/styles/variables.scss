@@ -15,7 +15,7 @@ $gap: 4px;
 
 $navbarHeight: 50px;
 
-$outline: 2px solid color-mix(
+$outlineColor: color-mix(
                 in srgb,
                 color-mix(
                                 in srgb,
@@ -23,3 +23,5 @@ $outline: 2px solid color-mix(
                                 #fff 10%
                 ),
                 transparent 45%);
+
+$outline: 2px solid $outlineColor;

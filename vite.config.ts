@@ -9,6 +9,7 @@ export default defineConfig({
     plugins: [vue()],
     resolve: {dedupe: ['vue']},
     server: {port: 5656},
+    publicDir: "public",
     build: {
         // @ts-ignore
         rollupOptions: rollup

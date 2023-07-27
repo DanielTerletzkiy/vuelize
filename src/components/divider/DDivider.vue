@@ -20,7 +20,7 @@ import DWrapper from "../DWrapper.vue";
 const props = defineProps({
   block: {type: Boolean},
   vertical: {type: Boolean},
-  size: {type: String, default: '1px'},
+  size: {type: String, default: '2px'},
   ...defaultProps
 })
 
@@ -64,13 +64,7 @@ const width = computed(() => {
     }
   }
 
-  &.dark {
-    color: darken($dark_card_text, 55);
-  }
-
-  &.light {
-    color: lighten($light_card_text, 60);
-  }
+  color: $outlineColor;
 }
 
 
