@@ -1,6 +1,6 @@
 <template>
   <DWrapper ref="wrapper" :classes="['d-select-menu']" @keyup.esc="hideSelectMenu">
-    <SlideYUpTransition :duration="80">
+    <TransitionSlide :duration="80">
       <DCard v-if="open && items" v-bind="{...$props, ...$attrs}" class="d-select-menu__dropdown pa-0" elevation="4"
              v-click-outside="hideSelectMenu">
         <DList :modelValue="modelValue"
@@ -15,7 +15,7 @@
           </DListItem>
         </DList>
       </DCard>
-    </SlideYUpTransition>
+    </TransitionSlide>
   </DWrapper>
 </template>
 
@@ -33,7 +33,7 @@ import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
 import DList from "../list/DList.vue";
 import DListItem from "../list/DListItem.vue";
-import {SlideYUpTransition} from "v3-transitions";
+import {TransitionSlide} from "@morev/vue-transitions";
 import defaultProps from "../../mixins/DefaultProps";
 
 const emit = defineEmits(['update:modelValue', 'update:open']);

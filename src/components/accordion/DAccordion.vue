@@ -7,13 +7,13 @@
       <slot name="header"></slot>
       <DIcon v-if="showArrow" :name="angleIcon" class="d-accordion__header__icon"/>
     </DCardTitle>
-    <CollapseTransition :duration="60">
+    <TransitionExpand :duration="60">
       <suspense>
         <DCardContent class="d-accordion__content" v-if="open">
           <slot name="default"></slot>
         </DCardContent>
       </suspense>
-    </CollapseTransition>
+    </TransitionExpand>
   </DWrapper>
 </template>
 
@@ -31,7 +31,7 @@ import DWrapper from "../DWrapper.vue";
 import DCardTitle from "../card/text/DCardTitle.vue";
 import DCardContent from "../card/content/DCardContent.vue";
 import DIcon from "../icon/DIcon.vue";
-import {CollapseTransition} from 'v3-transitions';
+import {TransitionExpand} from '@morev/vue-transitions';
 import defaultProps from "../../mixins/DefaultProps";
 
 const component = getCurrentInstance();

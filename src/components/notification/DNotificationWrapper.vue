@@ -1,14 +1,14 @@
 <template>
   <DWrapper ref="wrapper" :classes="['d-notification-wrapper']" v-bind="{...$props, ...$attrs}"
             @click="$emit('click')">
-    <SlideXRightTransition>
+    <TransitionSlide>
       <div class="d-notification-wrapper__content" v-if="notifications.length>0">
-        <FadeTransition group :duration="100">
+        <TransitionFade group :duration="100">
           <DNotification v-for="notification in notifications" :notification="notification"
                          :key="notification.value.key"/>
-        </FadeTransition>
+        </TransitionFade>
       </div>
-    </SlideXRightTransition>
+    </TransitionSlide>
   </DWrapper>
 </template>
 
@@ -25,7 +25,7 @@ import {computed, inject, ref, watch} from "vue";
 import type {Ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DNotification from "./DNotification.vue";
-import {FadeTransition, SlideXRightTransition} from "v3-transitions";
+import {TransitionFade, TransitionSlide} from "@morev/vue-transitions";
 import Notification from "./Notification";
 
 const vuelize: Vuelize = inject('vuelize') as Vuelize;

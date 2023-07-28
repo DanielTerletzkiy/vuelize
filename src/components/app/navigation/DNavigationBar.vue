@@ -1,5 +1,5 @@
 <template>
-  <slide-x-left-transition :duration="100">
+  <TransitionSlide :duration="100" :offset="['-100%', 0]">
     <DWrapper ref="wrapper" root-tag="nav" :classes="['d-navigation-bar', {permanent, temporary: !permanent}]"
               v-bind="{...$props, ...$attrs}"
               v-show="modelValue">
@@ -9,7 +9,7 @@
         </DColumn>
       </DRow>
     </DWrapper>
-  </slide-x-left-transition>
+  </TransitionSlide>
   <div v-if="!permanent && modelValue" class="d-navigation-bar__backdrop" @click.self="onClose"/>
 </template>
 
@@ -26,10 +26,8 @@ const wrapper = ref(null);
 defineExpose({wrapper});
 import DWrapper from "../../DWrapper.vue";
 import DRow from "../../flex/DRow.vue";
-import DCard from "../../card/DCard.vue";
 import DColumn from "../../flex/DColumn.vue";
-import DDivider from "../../divider/DDivider.vue";
-import {SlideXLeftTransition, FadeTransition} from "v3-transitions";
+import {TransitionSlide} from "@morev/vue-transitions";
 import defaultProps from "../../../mixins/DefaultProps";
 
 const emit = defineEmits(['update:modelValue']);

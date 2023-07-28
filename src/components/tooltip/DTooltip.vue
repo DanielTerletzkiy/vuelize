@@ -49,12 +49,9 @@ import DWrapper from "../DWrapper.vue";
 import DLabel from "../label/DLabel.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 import {
-  SlideYDownTransition,
-  SlideXLeftTransition,
-  SlideXRightTransition,
-  SlideYUpTransition,
-  FadeTransition
-} from "v3-transitions";
+  TransitionSlide, //TODO: add slide offset definitions
+  TransitionFade
+} from "@morev/vue-transitions";
 import {Position} from "../../types/Vuelize";
 
 const vuelize: any = inject('vuelize');
@@ -136,8 +133,9 @@ const stylesObject = computed(() => {
 })
 
 const transitionComponent = computed(() => {
-  if (props.simpleFade) {
-    return FadeTransition;
+  return TransitionFade;
+  /*if (props.simpleFade) {
+    return TransitionFade;
   }
   switch (props.position) {
     case Position.Top: {
@@ -152,7 +150,7 @@ const transitionComponent = computed(() => {
     case Position.Left: {
       return SlideXRightTransition;
     }
-  }
+  }*/
 })
 
 const useFontColor = computed(() => {

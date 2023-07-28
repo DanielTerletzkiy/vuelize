@@ -19,7 +19,7 @@ const appName = computed(() => name);
       {{ appName }}
     </d-card-title>
     <d-row justify="center">
-      <d-image :src="themeConfig.logo" width="40vw" height="100%" rounded="none"/>
+      <d-image :src="themeConfig.logo.toString()" width="30vw" height="100%" rounded="none"/>
     </d-row>
   </d-column>
 </template>

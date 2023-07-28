@@ -8,10 +8,10 @@
               :stop-color="'currentColor'"/>
       </linearGradient>
     </svg>
-    <fade-transition :duration="120">
+    <TransitionFade :duration="120">
       <unicon :name="name" :size="size" :icon-style="iconStyle"
               :color="`url(#${uid}) ${'currentColor'}`"></unicon>
-    </fade-transition>
+    </TransitionFade>
   </DWrapper>
 </template>
 
@@ -27,7 +27,7 @@ defineExpose({ wrapper });
 import {getCurrentInstance, inject, ref} from "vue";
 import type {PropType} from "vue";
 import DWrapper from "../DWrapper.vue";
-import {FadeTransition} from "v3-transitions";
+import {TransitionFade} from "@morev/vue-transitions";
 import {Style} from "vue3-unicons/types/Unicon"
 import defaultProps from "../../mixins/DefaultProps";
 import Unicon from "vue3-unicons/src/components/Unicon.vue"

@@ -9,12 +9,11 @@ import Notification from "./components/notification/Notification";
 
 // @ts-ignore no ripple types available
 import VWave from "v-wave";
-//import Unicon from 'vue3-unicons'
 
-import 'v3-transitions/dist/style.css'
+import '@morev/vue-transitions/styles';
 import ClickOutside from "./directive/ClickOutside";
-import {Theme, Themes} from "./types/Theme";
-import {merge, values} from "lodash";
+import {Themes} from "./types/Theme";
+import {merge} from "lodash";
 
 class VuelizePlugin implements Vuelize {
     app;
@@ -59,7 +58,7 @@ class VuelizePlugin implements Vuelize {
         } catch (e) {
             return this.getColor('error')
         }*/
-        return "test"
+        return "red"
     }
 }
 
@@ -72,7 +71,6 @@ export const Vuelize: Plugin = {
             duration: 0.2,
             finalOpacity: 0.2
         });
-        //app.use(Unicon);
 
         const plugin =  new VuelizePlugin(app);
 

@@ -8,10 +8,10 @@
         <DRow class="pa-2">
           <DColumn no-padding>
             <DIconButton :color="(options.color)" @click="onCloseClick">
-              <SlideXLeftTransition group>
+              <TransitionSlide group>
                 <DIcon v-if="hover" :size="40" name="multiply"></DIcon>
                 <DIcon v-else :size="40" :name="options.icon"></DIcon>
-              </SlideXLeftTransition>
+              </TransitionSlide>
             </DIconButton>
           </DColumn>
           <d-column no-padding style="align-self: stretch; justify-content: center; gap: 16px">
@@ -50,7 +50,7 @@ import DIconButton from "../button/DIconButton.vue";
 import DIcon from "../icon/DIcon.vue";
 import DCardTitle from "../card/text/DCardTitle.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
-import {SlideXLeftTransition} from "v3-transitions";
+import {TransitionSlide} from "@morev/vue-transitions";
 
 import Notification from "./Notification";
 

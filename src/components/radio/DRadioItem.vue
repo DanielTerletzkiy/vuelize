@@ -5,13 +5,13 @@
     <d-card class="d-radio-item__dot" :color="itemColor" outlined :depressed="!selected" background-color="transparent"
             rounded="circle" width="14px"
             height="14px">
-      <ZoomCenterTransition>
+      <TransitionFade>
         <Suspense>
           <d-card v-if="selected" :background-color="selected ? itemColor : 'transparent'" rounded="circle"
                   width="8px"
                   height="8px"/>
         </Suspense>
-      </ZoomCenterTransition>
+      </TransitionFade>
     </d-card>
     <slot></slot>
   </DWrapper>
@@ -30,7 +30,7 @@ import {computed, getCurrentInstance, inject, onMounted, ref, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
-import {ZoomCenterTransition} from "v3-transitions";
+import {TransitionFade} from "@morev/vue-transitions";
 
 const vuelize: any = inject('vuelize');
 const updateList: any = inject('updateList');

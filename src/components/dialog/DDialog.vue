@@ -1,5 +1,5 @@
 <template>
-  <fade-transition :duration="{enter: 200, leave: 150}">
+  <TransitionFade :duration="{enter: 200, leave: 150}">
     <DWrapper ref="wrapper" :classes="['d-dialog']" v-bind="{...$props, ...$attrs}" v-if="modelValue">
       <div class="d-dialog__backdrop" @click.self="handleClick"/>
       <focus-trap :active="modelValue">
@@ -11,7 +11,7 @@
         </div>
       </focus-trap>
     </DWrapper>
-  </fade-transition>
+  </TransitionFade>
 </template>
 
 <script lang="ts">
@@ -26,7 +26,7 @@ import {ref} from "vue";
 const wrapper = ref(null);
 defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
-import {FadeTransition} from "v3-transitions";
+import {TransitionFade} from "@morev/vue-transitions";
 import {FocusTrap} from "focus-trap-vue";
 import defaultProps from "../../mixins/DefaultProps";
 

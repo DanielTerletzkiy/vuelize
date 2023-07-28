@@ -3,9 +3,9 @@
             @click="click">
     <div class="d-checkbox__box" :class="classes" v-ripple
          :tabindex="disabled?-1:0" @keyup.enter="click">
-      <SlideYDownTransition group :duration="150">
+      <TransitionSlide group :duration="150">
         <DIcon v-if="icon" :key="icon" :name="icon" :size="size" :color="'currentColor'"/>
-      </SlideYDownTransition>
+      </TransitionSlide>
     </div>
     <div class="d-checkbox__label" v-if="!!$slots.default">
       <slot></slot>
@@ -25,7 +25,7 @@ defineExpose({ wrapper });
 import {computed, inject, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DIcon from "../icon/DIcon.vue";
-import { SlideYDownTransition } from 'v3-transitions';
+import { TransitionSlide } from '@morev/vue-transitions';
 import defaultProps from "../../mixins/DefaultProps";
 
 const vuelize: any = inject('vuelize');
