@@ -34,7 +34,7 @@ const repo = computed(() => repository)
     <d-root>
       <template v-slot:toolbar>
         <d-toolbar>
-          <d-row height="50px" :wrap="false" link="/" glow width="max-content" class="pl-2">
+          <d-row height="50px" :wrap="false" link="/vuelize/" glow width="max-content" class="pl-2">
             <d-image class="logo" :src="themeConfig.logo.toString()" height="calc(100% - 10px)" rounded="none"/>
             <d-column height="50px" :wrap="false">
               <d-card-title class="font-size-medium pt-0">{{ site.title }}</d-card-title>
@@ -55,10 +55,10 @@ const repo = computed(() => repository)
       <template v-slot:navbar>
         <d-navigation-bar permanent>
           <d-list>
-            <d-list-item link="/markdown-examples.html">
+            <d-list-item link="/vuelize/markdown-examples.html">
               Markdown Examples
             </d-list-item>
-            <d-list-item link="/api-examples.html">
+            <d-list-item link="/vuelize/api-examples.html">
               API Examples
             </d-list-item>
           </d-list>
