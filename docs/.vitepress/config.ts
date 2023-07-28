@@ -7,6 +7,7 @@ export default defineConfig({
     themeConfig: {
         logo: "/logo.svg"
     },
+    base: "/vuelize/",
     vite: {
         ssr: {
             noExternal: [
