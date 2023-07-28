@@ -5,7 +5,7 @@ export default defineConfig({
     title: "Vuelize",
     description: "Realize the Impossible",
     themeConfig: {
-        logo: "/logo.svg"
+        logo: "/vuelize/logo.svg"
     },
     base: "/vuelize/",
     vite: {
