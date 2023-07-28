@@ -20,7 +20,7 @@ export default {
     //
     disabled: {type: Boolean},
     //
-    glow: {type: Object as PropType<GlowSettings | boolean>},
+    glow: {type: Object as PropType<Partial<GlowSettings> | boolean>},
     //
     blur: {type: Object as PropType<BlurSettings | string | boolean>},
     //

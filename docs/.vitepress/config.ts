@@ -5,8 +5,25 @@ export default defineConfig({
     title: "Vuelize",
     description: "Realize the Impossible",
     themeConfig: {
-        logo: "/vuelize/logo.svg"
+        logo: "/vuelize/logo.svg",
+        sidebar: [
+            {
+                text: "Introduction",
+                collapsed: false,
+                items: [
+                    {
+                        text: "What is it?",
+                        link: "/introduction/what"
+                    },
+                    {
+                        text: "Getting Started",
+                        link: "/introduction/getting-started"
+                    },
+                ]
+            }
+        ]
     },
+    cleanUrls: true,
     base: "/vuelize/",
     vite: {
         ssr: {

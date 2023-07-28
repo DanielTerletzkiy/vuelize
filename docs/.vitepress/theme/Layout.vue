@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {repository} from "../../../package.json"
+import {author, repository} from "../../../package.json"
 import {useData, useRoute} from 'vitepress'
 import DRoot from "../../../src/components/root/DRoot.vue";
 import DToolbar from "../../../src/components/app/toolbar/DToolbar.vue";
@@ -7,7 +7,7 @@ import DCardTitle from "../../../src/components/card/text/DCardTitle.vue";
 import DCardSubtitle from "../../../src/components/card/text/DCardSubtitle.vue";
 import DColumn from "../../../src/components/flex/DColumn.vue";
 import DNavigationBar from "../../../src/components/app/navigation/DNavigationBar.vue";
-import {ThemeColorProperty} from "../../../src/types/Theme";
+import {ThemeColorProperty, ThemeSheetProperty} from "../../../src/types/Theme";
 import DSpacer from "../../../src/components/flex/DSpacer.vue";
 import DButton from "../../../src/components/button/DButton.vue";
 import DIcon from "../../../src/components/icon/DIcon.vue";
@@ -16,16 +16,25 @@ import DListItem from "../../../src/components/list/DListItem.vue";
 import DRow from "../../../src/components/flex/DRow.vue";
 
 import DImage from "../../../src/components/image/DImage.vue";
-import {computed} from "vue";
+import {computed, onMounted, ref} from "vue";
 import DDivider from "../../../src/components/divider/DDivider.vue";
+import DAccordion from "../../../src/components/accordion/DAccordion.vue";
 
 // https://vitepress.dev/reference/runtime-api#usedata
 const {site, page} = useData()
 const {themeConfig} = site.value;
+const {sidebar} = themeConfig;
 
 const route = useRoute();
 
 const repo = computed(() => repository)
+const creator = computed(() => author)
+
+const accordionMap = ref<Map<string, boolean>>(new Map())
+
+onMounted(() => {
+  sidebar.forEach((group) => accordionMap.value.set(group.text, !group.collapsed))
+})
 
 </script>
 
@@ -54,17 +63,57 @@ const repo = computed(() => repository)
       </template>
       <template v-slot:navbar>
         <d-navigation-bar permanent>
-          <d-list>
-            <d-list-item link="/vuelize/markdown-examples.html">
-              Markdown Examples
-            </d-list-item>
-            <d-list-item link="/vuelize/api-examples.html">
-              API Examples
-            </d-list-item>
-          </d-list>
+          <d-accordion v-for="group in sidebar" :model-value="accordionMap.get(group.text)"
+                       @update:model-value="(value)=>accordionMap.set(group.text,value)" remove-padding>
+            <template v-slot:header>
+              <d-card-subtitle width="100%" style="user-select: none;">
+                {{ group.text }}
+                <d-divider block/>
+              </d-card-subtitle>
+            </template>
+            <d-list v-model="route.path" mandatory :color="ThemeColorProperty.primary" class="pa-0">
+              <d-list-item v-for="item in group.items" :link="`/vuelize${item.link}`" :key="`/vuelize${item.link}`">
+                {{ item.text }}
+              </d-list-item>
+            </d-list>
+          </d-accordion>
         </d-navigation-bar>
       </template>
       <Content/>
+      <template v-slot:footer>
+        <d-divider/>
+        <d-row justify="center">
+          <d-column>
+            <d-card-title class="font-size-medium font-weight-bold">
+              Author
+            </d-card-title>
+            <d-row>
+              <d-divider vertical block :color="{
+                map: [
+                    {
+                      color: ThemeColorProperty.primary,
+                      property: ThemeSheetProperty.card
+                    }
+                ]
+              }"/>
+              <d-column no-padding :link="`mailto:${creator.email}?subject=${site.title} Feedback&body=Message`">
+                <d-card-title class="font-size-medium">
+                  {{ creator.name }}
+                </d-card-title>
+                <d-card-subtitle>
+                  Name
+                </d-card-subtitle>
+                <d-card-title class="font-size-small">
+                  {{ creator.email }}
+                </d-card-title>
+                <d-card-subtitle>
+                  E-Mail
+                </d-card-subtitle>
+              </d-column>
+            </d-row>
+          </d-column>
+        </d-row>
+      </template>
     </d-root>
   </ClientOnly>
 </template>

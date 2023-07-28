@@ -12,7 +12,7 @@ import {useVuelizeTheme} from "../store/ThemeStore";
 import {computed, inject, onMounted, ref, watch} from "vue";
 import defaultProps from "../mixins/DefaultProps";
 import {storeToRefs} from "pinia";
-import {useColor, useSetColors} from "../composables/Color.composable";
+import {useClearColors, useColor, useSetColors} from "../composables/Color.composable";
 import {BlurAmount} from "../types/Theme";
 
 const wrapper = ref(null);
@@ -110,7 +110,11 @@ const outline = computed(() => {
 })
 
 watch(() => props.color, () => {
-  if (!wrapper.value || !props.color) {
+  if (!wrapper.value) {
+    return;
+  }
+  if (!props.color) {
+    useClearColors(wrapper.value)
     return;
   }
   useSetColors(wrapper.value, props.color)

@@ -1,13 +1,18 @@
 <template>
-  <DWrapper ref="wrapper" root-tag="li" :classes="['d-list__item', {selected, center}]"
-            :style="stylesObject" v-ripple
+  <DWrapper ref="wrapper" root-tag="li" :classes="['d-list__item', {filled: isFilled, selected, center}]" v-ripple
             @focusin="focus = true"
             @focusout="focus = false"
             @mouseenter="focus = true"
             @mouseleave="focus = false"
             v-bind="{...$props, ...$attrs}" @click="onClick" :tabindex="disabled?-1:0" @keyup.enter="onClick"
-            glow :glowing="!filled && selected" :color="focus||(!filled && selected)?itemColor:''">
-    <slot></slot>
+            :glow="{
+              active:!filled && selected
+            }"
+            :color="color"
+  >
+    <span class="d-list__item__content">
+      <slot></slot>
+    </span>
   </DWrapper>
 </template>
 
@@ -18,12 +23,15 @@ export default {
 </script>
 
 <script setup lang="ts">
-const wrapper = ref(null);
+import {useClearColors, useSetColor} from "../../composables/Color.composable";
+
+const wrapper = ref<Wrapper>();
 defineExpose({wrapper});
-import {computed, getCurrentInstance, inject, onMounted, ref, watch} from "vue";
+import {computed, getCurrentInstance, inject, nextTick, onMounted, ref, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
+import {Wrapper} from "../../types/components/Wrapper";
 
 const vuelize: any = inject('vuelize');
 const updateList: any = inject('updateList');
@@ -39,12 +47,8 @@ const focus = ref(false);
 
 const instance: any = getCurrentInstance();
 
-const itemColor = computed(() => {
+const itemColor = computed<string>(() => {
   return props.color || parentProps.color;
-})
-
-const itemTint = computed(() => {
-  return props.tint || parentProps.tint;
 })
 
 const isMultiple = computed(() => {
@@ -61,22 +65,15 @@ const filled = computed(() => {
   return instance.parent.parent.props.filled
 })
 
-const stylesObject = computed(() => {
-  if (filled.value) {
-    return {
-      background: selected.value ? vuelize.getColor(itemColor.value, itemTint.value) : 'transparent',
-      color: selected.value ? vuelize.getColorContrast(itemColor.value, itemTint.value) :
-          (focus.value ? vuelize.getColor(itemColor.value, itemTint.value) : ''),
-    }
-  } else {
-    return {}
-  }
+const isFilled = computed(() => {
+  return filled.value && selected.value
 })
 
-watch(() => selected.value, (state) => {
-  if (state) {
-    //updateParent();
+const color = computed<string>(() => {
+  if (isFilled.value) {
+    return itemColor.value;
   }
+  return focus.value || (!filled.value && selected.value) ? itemColor.value : ''
 })
 
 function updateParent() {
@@ -107,15 +104,9 @@ onMounted(() => {
 
   list-style: none;
   margin: 0;
-
-  //transition-duration: 0.1s;
-
   width: 100%;
-  padding: 6px 12px;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  gap: $gap*2;
+
+  transition-duration: 0.1s;
 
   &.center {
     flex: 1;
@@ -131,6 +122,25 @@ onMounted(() => {
   &:not(.selected):hover::before {
     //color: darken($dark_card_text, 14) !important;
     opacity: 0.05 !important;
+  }
+
+  &.filled {
+    .d-list__item__content {
+      color: var(--text-contrast); //var(--text-card); // TODO: use color-contrast when it finally comes out!
+    }
+
+    background: currentColor;
+  }
+
+  &__content {
+    width: 100%;
+    height: inherit;
+
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    gap: $gap*2;
   }
 }
 </style>

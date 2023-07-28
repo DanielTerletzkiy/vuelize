@@ -87,17 +87,28 @@ export function useSetColors(ref: HTMLElement, inputColor: ColorSettings | Theme
                     modifyColor(inputColor);
                     break;
                 case "object":
-                    modifyColor(inputColor.color);
-                    for (const {color, property} of inputColor.map) {
-                        modifyColor(color, property)
+                    if (inputColor.color) {
+                        modifyColor(inputColor.color);
+                    }
+                    if (inputColor.map) {
+                        for (const {color, property} of inputColor.map) {
+                            modifyColor(color, property)
+                        }
                     }
                     break;
             }
         }
-        nextTick().then(()=>{
+        nextTick().then(() => {
             useContrastTextColor(ref);
         })
     })
+}
+
+export function useClearColors(ref: HTMLElement) {
+    for (const property of Object.keys(ThemeAllPropertyEnum)) {
+        ref.style.removeProperty(`--${property}`)
+    }
+    ref.style.removeProperty(`color`)
 }
 
 /*const getMatchedCSSRules = (el: HTMLElement, css = el.ownerDocument.styleSheets) =>

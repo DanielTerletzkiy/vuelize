@@ -24,8 +24,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-const wrapper = ref(null);
-defineExpose({ wrapper });
+import {Wrapper} from "../../types/components/Wrapper";
+
+const wrapper = ref<Wrapper>();
+defineExpose({wrapper});
 import {computed, getCurrentInstance, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCardTitle from "../card/text/DCardTitle.vue";
@@ -38,7 +40,7 @@ const component = getCurrentInstance();
 
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
-  modelValue: {type: [Boolean, Number]},
+  modelValue: {type: Boolean, required: true},
   headerColor: {type: String},
   showArrow: {type: Boolean},
   removePadding: {type: Boolean},
@@ -52,38 +54,18 @@ watch(() => props.modelValue, () => {
 })
 
 const angleIcon = computed((): string => {
-  return props.disabled ? 'ban' :open.value ? 'angle-up' : 'angle-down'
+  return props.disabled ? 'ban' : open.value ? 'angle-up' : 'angle-down'
 })
-const isKeyed = computed((): boolean => {
-  return (typeof state.value === "number" && typeof component?.vnode.key === "number")
-})
+
 const open = computed((): boolean | number => {
-  if (isKeyed.value) {
-    return state.value === component?.vnode.key
-  } else {
-    return !!state.value;
-  }
+  return !!state.value;
 })
 
 function onClick() {
-  let value: boolean | number;
   if (props.disabled) {
     return;
   }
-  if (isKeyed.value) {
-    if (state.value === component?.vnode.key) {
-      value = -1;
-    } else {
-      value = component?.vnode.key as number;
-    }
-  } else {
-    value = !state.value;
-  }
-  if (props.modelValue) {
-    emit('update:modelValue', value)
-  } else {
-    state.value = value;
-  }
+  emit('update:modelValue', !state.value)
 }
 </script>
 
