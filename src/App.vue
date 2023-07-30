@@ -11,6 +11,7 @@ import DCard from "./components/card/DCard.vue";
 import DColumn from "./components/flex/DColumn.vue";
 import DRow from "./components/flex/DRow.vue";
 import {Size} from "./types/components/DButton";
+import {Round} from "./types/Vuelize";
 
 const navOpen = ref(true);
 </script>
@@ -63,7 +64,7 @@ const navOpen = ref(true);
     }">
       this is a button
     </d-button>
-    <d-card block>
+    <d-card block elevation="n6">
       <d-column>
         <d-row gap>
           <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color" filled :size="Size.small">
@@ -73,7 +74,7 @@ const navOpen = ref(true);
       </d-column>
       <d-column>
         <d-row gap>
-          <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color">
+          <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color" elevation="4">
             {{ color }}
           </d-button>
         </d-row>
@@ -119,6 +120,14 @@ const navOpen = ref(true);
         return original
       </d-card>
     </d-card>
+    <d-column gap block>
+      <d-row gap v-for="x in ['','n']">
+        <d-card v-for="e in 30" :glow="{central: true}" :elevation="`${x}${e}`" width="100px" height="50px"
+                :rounded="Round.Pill" :outlined="{offset: '1px'}">
+          {{ e }}
+        </d-card>
+      </d-row>
+    </d-column>
   </DRoot>
 </template>
 

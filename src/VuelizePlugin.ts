@@ -29,37 +29,6 @@ class VuelizePlugin implements Vuelize {
     notify(title: string, content: string, type: State, options: Notifications.Options) {
         this.notifications.value.push(ref<Notification>(new Notification(title, content, type, options)))
     }
-
-    getColor(color: string, tint?: number | string | undefined): string {
-        let colorOut: string = "unset";
-
-        return colorOut;
-    }
-
-    getColorContrast(color: string, tint?: number | string | undefined): string {
-        /*try {
-            let hexColor = this.getColor(color, tint);
-            if (hexColor.slice(0, 1) === '#') {
-                hexColor = hexColor.slice(1);
-            }
-            if (hexColor.length === 3) {
-                hexColor = hexColor.split('').map(function (hex: string) {
-                    return hex + hex;
-                }).join('');
-            }
-            // Convert to RGB value
-            const r = parseInt(hexColor.substr(0, 2), 16);
-            const g = parseInt(hexColor.substr(2, 2), 16);
-            const b = parseInt(hexColor.substr(4, 2), 16);
-            // Get YIQ ratio
-            let yiq = (r * 0.299) + (g * 0.587) + (b * 0.114);
-            // Check contrast
-            return (yiq > 160) ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.85)';
-        } catch (e) {
-            return this.getColor('error')
-        }*/
-        return "red"
-    }
 }
 
 export const Vuelize: Plugin = {

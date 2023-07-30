@@ -32,10 +32,6 @@ declare global {
         notifications: Ref<Array<Ref<Notification>>>;
 
         notify(title: string, content: string, type: State, options?: object | undefined): void;
-
-        getColor(color: string, tint?: number | string | undefined): string;
-
-        getColorContrast(color: string, tint?: number | string | undefined): string;
     }
 
     namespace Notifications {

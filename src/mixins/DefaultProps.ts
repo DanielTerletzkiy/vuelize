@@ -14,15 +14,15 @@ export default {
     color: {type: Object as PropType<ColorSettings | ThemeColorProperty | string>}, //
     rounded: {type: String as PropType<Round>, default: Round.LG},
     //
-    outlined: {type: Object as PropType<OutlinedSettings | boolean>},
+    outlined: {type: Object as PropType<Partial<OutlinedSettings> | boolean>},
     //
-    elevation: {type: Object as PropType<ElevationSettings | string | number>}, //
+    elevation: {type: Object as PropType</*Partial<ElevationSettings>*/ | string | number | boolean>}, //
     //
     disabled: {type: Boolean},
     //
     glow: {type: Object as PropType<Partial<GlowSettings> | boolean>},
     //
-    blur: {type: Object as PropType<BlurSettings | string | boolean>},
+    blur: {type: Object as PropType<Partial<BlurSettings> | string | boolean>},
     //
     height: {type: String, default: ''},
     width: {type: String, default: ''},

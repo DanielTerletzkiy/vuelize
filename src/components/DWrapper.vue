@@ -1,6 +1,6 @@
 <template>
-  <component ref="wrapper" :is="componentTag" :href="link" :disabled="disabled"
-             :class="[classes, mode, elevationClass, globalClasses, glowClasses, blurClasses]"
+  <component ref="wrapper" class="vuelize" :is="componentTag" :href="link" :disabled="disabled"
+             :class="[classes, mode, globalClasses, elevationClasses, glowClasses, blurClasses]"
              :style="{height, width, ...outline}"
              @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
     <slot></slot>
@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import {useVuelizeTheme} from "../store/ThemeStore";
-import {computed, inject, onMounted, ref, watch} from "vue";
+import {computed, inject, nextTick, onMounted, ref, watch} from "vue";
 import defaultProps from "../mixins/DefaultProps";
 import {storeToRefs} from "pinia";
 import {useClearColors, useColor, useSetColors} from "../composables/Color.composable";
@@ -71,25 +71,13 @@ function checkPropTrue(prop: unknown): boolean {
   return prop !== undefined && prop !== false
 }
 
-const elevationClass = computed(() => {
+const elevationClasses = computed(() => {
   let elevationObject: any = {}
   if (props.elevation === '') {
     elevationObject['elevation'] = true
   } else if (props.elevation) {
     elevationObject[`elevation-${props.elevation}`] = true
   }
-  // TODO
-  /*if (props.elevationDark === '') {
-    elevationObject['elevation-dark'] = true
-  } else if (props.elevationDark) {
-    elevationObject[`elevation-dark-${props.elevationDark}`] = true
-  }
-
-  if (props.elevationLight === '') {
-    elevationObject['elevation-light'] = true
-  } else if (props.elevationLight) {
-    elevationObject[`elevation-light-${props.elevationLight}`] = true
-  }*/
   return elevationObject
 })
 
@@ -117,15 +105,27 @@ watch(() => props.color, () => {
     useClearColors(wrapper.value)
     return;
   }
-  useSetColors(wrapper.value, props.color)
+  nextTick(() => {
+    if (wrapper.value && props.color) {
+      useSetColors(wrapper.value, props.color)
+    }
+  })
 }, {deep: true});
 
 onMounted(() => {
-  if (!wrapper.value || !props.color) {
+  if (!wrapper.value) {
     return;
   }
-  useSetColors(wrapper.value, props.color)
+  nextTick(() => {
+    if (!wrapper.value) {
+      return;
+    }
+    if (props.color) {
+      useSetColors(wrapper.value, props.color)
+    }
+  })
 })
+
 </script>
 
 <style scoped lang="scss">
