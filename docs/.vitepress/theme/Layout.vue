@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {author, repository} from "../../../package.json"
+import {author, repository, version} from "../../../package.json"
 import {useData, useRoute} from 'vitepress'
 import DRoot from "../../../src/components/root/DRoot.vue";
 import DToolbar from "../../../src/components/app/toolbar/DToolbar.vue";
@@ -7,7 +7,7 @@ import DCardTitle from "../../../src/components/card/text/DCardTitle.vue";
 import DCardSubtitle from "../../../src/components/card/text/DCardSubtitle.vue";
 import DColumn from "../../../src/components/flex/DColumn.vue";
 import DNavigationBar from "../../../src/components/app/navigation/DNavigationBar.vue";
-import {ThemeColorProperty, ThemeSheetProperty} from "../../../src/types/Theme";
+import {BlurAmount, ThemeColorProperty, ThemeSheetProperty} from "../../../src/types/Theme";
 import DSpacer from "../../../src/components/flex/DSpacer.vue";
 import DButton from "../../../src/components/button/DButton.vue";
 import DIcon from "../../../src/components/icon/DIcon.vue";
@@ -29,6 +29,7 @@ const route = useRoute();
 
 const repo = computed(() => repository)
 const creator = computed(() => author)
+const versionText = computed(() => version)
 
 const accordionMap = ref<Map<string, boolean>>(new Map())
 
@@ -53,6 +54,9 @@ onMounted(() => {
           <d-divider vertical block class="my-3 mx-2"/>
           <d-spacer/>
           <d-divider vertical block class="my-3 mx-2"/>
+          <d-card-subtitle :blur="{amount:BlurAmount.strong}" glow>
+            {{ versionText }}
+          </d-card-subtitle>
           <d-button :link="repo.url" glow :color="ThemeColorProperty.warning" target="_blank">
             <template v-slot:prefix>
               <d-icon name="github"/>
