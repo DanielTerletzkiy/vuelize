@@ -72,9 +72,14 @@ const navOpen = ref(true);
           </d-button>
         </d-row>
       </d-column>
-      <d-column>
+      <d-column gap outlined>
         <d-row gap>
-          <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color" elevation="4">
+          <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color">
+            {{ color }}
+          </d-button>
+        </d-row>
+        <d-row gap>
+          <d-button v-for="color in Object.values(ThemeColorProperty)" :color="color" flat>
             {{ color }}
           </d-button>
         </d-row>

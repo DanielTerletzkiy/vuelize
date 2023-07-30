@@ -1,7 +1,7 @@
 <template>
   <DWrapper ref="wrapper" root-tag="button" :classes="['d-button', size, {filled, block, glow}]"
             v-bind="{...$props, ...$attrs}"
-            @click.capture="$emit('click')">
+            @click.capture="$emit('click')" :elevation="typeof $props.glow === 'undefined' && !filled && !flat ? 2 : 0">
     <span class="d-button__content" v-ripple>
       <span class="prefix" v-if="!!$slots.prefix">
         <slot name="prefix"></slot>
@@ -33,6 +33,7 @@ import {Size} from "../../types/components/DButton";
 defineEmits(['click'])
 
 defineProps({
+  flat: {type: Boolean},
   filled: {type: Boolean},
   block: {type: Boolean},
   size: {type: Object as PropType<Size>, default: Size.regular},

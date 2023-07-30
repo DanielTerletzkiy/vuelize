@@ -56,13 +56,17 @@ const glowClasses = computed(() => {
 })
 
 const blurClasses = computed(() => {
+  const active = checkPropTrue(props.blur);
+  if(!active){
+    return {};
+  }
   const disabled = typeof props.blur === "object" && props.blur.disabled;
   if (disabled) {
     return {}
   }
   const blurAmount = (typeof props.blur === "object" && props.blur.amount) || BlurAmount.medium;
   return {
-    blur: checkPropTrue(props.blur),
+    blur: active,
     [`blur--${blurAmount}`]: blurAmount,
   }
 })

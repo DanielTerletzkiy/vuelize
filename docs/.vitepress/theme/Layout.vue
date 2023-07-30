@@ -79,7 +79,9 @@ onMounted(() => {
           </d-accordion>
         </d-navigation-bar>
       </template>
-      <Content/>
+      <d-column class="pa-8">
+        <Content/>
+      </d-column>
       <template v-slot:footer>
         <d-divider/>
         <d-row justify="center">

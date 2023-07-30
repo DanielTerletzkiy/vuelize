@@ -38,6 +38,9 @@ const appName = computed(() => name);
     text-decoration-color: var(--color-accent);
     text-underline-offset: 30px;
 
+    background: linear-gradient(to right, var(--color-primary),var(--color-error),var(--color-warning),var(--color-info));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 </style>

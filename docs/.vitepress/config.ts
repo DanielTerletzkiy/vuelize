@@ -35,6 +35,9 @@ export default defineConfig({
         }
     },
     markdown: {
+        anchor: {
+
+        },
         config: (md) => {
 
         }
