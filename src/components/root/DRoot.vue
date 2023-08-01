@@ -53,7 +53,6 @@ function setTheme() {
   if (!wrapper.value) {
     return;
   }
-  console.log(currentTheme);
 
   for (const key of Object.keys(ThemeColorProperty)) {
     useSetColor(

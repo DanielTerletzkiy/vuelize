@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import {author, repository, version} from "../../../package.json"
 import {useData, useRoute} from 'vitepress'
+import {BlurAmount, ThemeColorProperty, ThemeSheetProperty} from "../../../src/types/Theme";
 import DRoot from "../../../src/components/root/DRoot.vue";
 import DToolbar from "../../../src/components/app/toolbar/DToolbar.vue";
 import DCardTitle from "../../../src/components/card/text/DCardTitle.vue";
 import DCardSubtitle from "../../../src/components/card/text/DCardSubtitle.vue";
 import DColumn from "../../../src/components/flex/DColumn.vue";
 import DNavigationBar from "../../../src/components/app/navigation/DNavigationBar.vue";
-import {BlurAmount, ThemeColorProperty, ThemeSheetProperty} from "../../../src/types/Theme";
 import DSpacer from "../../../src/components/flex/DSpacer.vue";
 import DButton from "../../../src/components/button/DButton.vue";
 import DIcon from "../../../src/components/icon/DIcon.vue";

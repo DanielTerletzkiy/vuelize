@@ -1,17 +1,8 @@
 <script setup lang="ts">
-import DRoot from "./components/root/DRoot.vue";
-import DToolbar from "./components/app/toolbar/DToolbar.vue";
-import DCardTitle from "./components/card/text/DCardTitle.vue";
-import DNotificationWrapper from "./components/notification/DNotificationWrapper.vue";
-import DNavigationBar from "./components/app/navigation/DNavigationBar.vue";
 import {ref} from "vue";
-import DButton from "./components/button/DButton.vue";
 import {ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
-import DCard from "./components/card/DCard.vue";
-import DColumn from "./components/flex/DColumn.vue";
-import DRow from "./components/flex/DRow.vue";
-import {Size} from "./types/components/DButton";
 import {Round} from "./types/Vuelize";
+import {Size} from "./types/components/DButton";
 
 const navOpen = ref(true);
 </script>

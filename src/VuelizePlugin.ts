@@ -1,9 +1,8 @@
+import type {App, Plugin, Ref} from "vue";
 import {ref} from 'vue';
-import type {Plugin, App} from "vue";
-import type {Ref} from "vue";
 import {createPinia} from "pinia";
 import {useVuelizeTheme} from './store/ThemeStore'
-import importAll from "./ComponentImport";
+import * as Components from "./ComponentImport";
 import {State} from "./types/Vuelize";
 import Notification from "./components/notification/Notification";
 
@@ -32,7 +31,7 @@ class VuelizePlugin implements Vuelize {
 }
 
 export const Vuelize: Plugin = {
-    install(app: App, themesOptions: Partial<Themes> ) {
+    install(app: App, themesOptions: Partial<Themes>) {
         ClickOutside(app);
         app.use(createPinia());
         app.use(VWave, {
@@ -41,13 +40,25 @@ export const Vuelize: Plugin = {
             finalOpacity: 0.2
         });
 
-        const plugin =  new VuelizePlugin(app);
+        const plugin = new VuelizePlugin(app);
 
-        plugin.theme.themes = (merge(plugin.theme.themes,themesOptions));
+        plugin.theme.themes = (merge(plugin.theme.themes, themesOptions));
 
         app.config.globalProperties.$vuelize = plugin;
         app.provide('vuelize', app.config.globalProperties.$vuelize);
 
-        importAll(app);
+        return importAll(app);
     }
+}
+
+
+function importAll(app: App) {
+    const keys = Object.keys(Components);
+    for (const key of keys) {
+        // @ts-ignore
+        const component = Components[key]
+        const name = component.default.name;
+        app.component(name, component.default)
+    }
+    return app;
 }
