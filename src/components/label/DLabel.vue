@@ -1,11 +1,14 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-label', {filled, 'glow': true, 'glow--active': !filled, clickable}]"
-            v-bind="{...$props, ...$attrs}"
+  <DWrapper ref="wrapper" :classes="['d-label', {filled, clickable}]"
+            v-bind="{...$props, ...$attrs}" :glow="{
+              disabled: filled,
+              active: true
+            }"
             @click="$emit('click')" v-ripple="clickable && {
-              color: filled ? contrast :'currentColor'
+              color: filled ? color :'currentColor'
             }">
     <DCardSubtitle class="d-label__wrapper__content pa-0"
-                   :color="filled?contrast:'inherit'"
+                   :color="color"
                    rounded="inherit">
       <span class="prefix" v-if="!!$slots.prefix">
             <slot name="prefix"></slot>
@@ -34,16 +37,11 @@ import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 import {computed, inject, ref} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 
-const vuelize: any = inject('vuelize');
-
 const props = defineProps({
   filled: {type: Boolean},
   clickable: {type: Boolean},
   ...defaultProps
 })
-
-const color = computed(() => props.color ? vuelize.getColor(props.color, props.tint) : 'primary');
-const contrast = computed(() => vuelize.getColorContrast(props.color, props.tint));
 </script>
 
 <style scoped lang="scss">
@@ -54,7 +52,7 @@ const contrast = computed(() => vuelize.getColorContrast(props.color, props.tint
   padding: 4px 16px;
 
   &.filled {
-    background: v-bind(color);
+    background: currentColor;
   }
 
   &.clickable {

@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import {ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
-import {Round} from "./types/Vuelize";
+import {BlurAmount, ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
+import {Position, Round} from "./types/Vuelize";
 import {Size} from "./types/components/DButton";
+import DCard from "./components/card/DCard.vue";
+import DCardTitle from "./components/card/text/DCardTitle.vue";
+import DButton from "./components/button/DButton.vue";
+import DTooltip from "./components/tooltip/DTooltip.vue";
 
 const navOpen = ref(true);
+
+const dialog = ref(false);
 </script>
 
 <template>
@@ -24,7 +30,14 @@ const navOpen = ref(true);
     <template v-slot:notifications>
       <DNotificationWrapper/>
     </template>
-    <d-button :color="ThemeColorProperty.warning">
+    <d-dialog v-model="dialog">
+      <d-card :blur="{amount:BlurAmount.strong}" width="600px" height="400px">
+        <d-card-title>
+          Hello there
+        </d-card-title>
+      </d-card>
+    </d-dialog>
+    <d-button @click="dialog = true" :color="ThemeColorProperty.warning">
       this is a button
     </d-button>
     <d-card :color="{ color: 'orange',map: [
@@ -124,6 +137,22 @@ const navOpen = ref(true);
         </d-card>
       </d-row>
     </d-column>
+    <d-tooltip :color="ThemeColorProperty.primary" stay>
+      <d-button :color="ThemeColorProperty.primary">
+        testtesttesttesttesttesttesttest
+      </d-button>
+      <template v-slot:tooltip>
+        test
+      </template>
+    </d-tooltip>
+    <d-tooltip :color="ThemeColorProperty.primary" :position="Position.Top" stay filled>
+      <d-button :color="ThemeColorProperty.primary">
+        testtesttesttesttesttesttesttest
+      </d-button>
+      <template v-slot:tooltip>
+        test
+      </template>
+    </d-tooltip>
   </DRoot>
 </template>
 

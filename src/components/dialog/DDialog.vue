@@ -24,7 +24,7 @@ export default {
 import {ref} from "vue";
 
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import DWrapper from "../DWrapper.vue";
 import {TransitionFade} from "@morev/vue-transitions";
 import {FocusTrap} from "focus-trap-vue";
@@ -65,8 +65,8 @@ function close() {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: black;
-    opacity: 0.5;
+    background-color: color-mix(in srgb, var(--sheet-background), transparent 50%);
+    //backdrop-filter: blur(2px);
     user-select: none;
   }
 
