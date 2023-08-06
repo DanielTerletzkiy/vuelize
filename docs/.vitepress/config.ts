@@ -1,4 +1,5 @@
 import {defineConfig} from 'vitepress'
+import {useCode} from "./md/Code";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -39,7 +40,7 @@ export default defineConfig({
 
         },
         config: (md) => {
-
+            useCode(md);
         }
     }
 })
