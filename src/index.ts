@@ -1,4 +1,3 @@
-import {Vuelize} from "./VuelizePlugin";
-//import {getImports} from "./ComponentImport";
+export * from "./VuelizePlugin";
+export * from "./ComponentImport"
 
-export default Vuelize;
