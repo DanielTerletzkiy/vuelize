@@ -20,14 +20,16 @@ export default defineConfig({
         vue(),
         tsconfigPaths(),
         dts({
+            //rollupTypes: true,
             insertTypesEntry: true,
+            outDir: "types"
         }),
     ],
     build: {
         lib: {
             name: "Vuelize",
             fileName: "vuelize",
-            entry: "src/index.ts",
+            entry: "src/entry.ts",
             formats: ["es", "umd", "cjs"],
         },
         rollupOptions: {

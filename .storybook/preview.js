@@ -2,7 +2,7 @@ import DRoot from "../src/components/root/DRoot.vue";
 import DCheckbox from "../src/components/checkbox/DCheckbox.vue";
 import DDivider from "../src/components/divider/DDivider.vue";
 import {app} from '@storybook/vue3';
-import Vuelize from "../src/index";
+import Vuelize from "@/entry.js";
 
 app.use(Vuelize);
 

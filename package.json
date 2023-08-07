@@ -26,16 +26,17 @@
   },
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "main": "./dist/vuelize.cjs.js",
   "module": "./dist/vuelize.es.js",
-  "types": "./dist/types.d.ts",
+  "types": "./types/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/vuelize.es.js",
       "require": "./dist/vuelize.cjs.js",
-      "types": "./dist/types.d.ts"
+      "types": "./types/index.d.ts"
     }
   },
   "dependencies": {
