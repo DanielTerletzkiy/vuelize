@@ -13,6 +13,7 @@ import '@morev/vue-transitions/styles';
 import ClickOutside from "./directive/ClickOutside";
 import {Themes} from "./types/Theme";
 import {merge} from "lodash";
+import {importAll} from "./ComponentImport";
 
 class VuelizePlugin implements Vuelize {
     app;
@@ -51,14 +52,3 @@ export const Vuelize: Plugin = {
     }
 }
 
-
-function importAll(app: App) {
-    const keys = Object.keys(Components);
-    for (const key of keys) {
-        // @ts-ignore
-        const component = Components[key]
-        const name = component.default.name;
-        app.component(name, component.default)
-    }
-    return app;
-}

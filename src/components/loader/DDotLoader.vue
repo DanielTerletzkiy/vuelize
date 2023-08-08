@@ -12,12 +12,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DDotLoader',
-}
-</script>
-
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });

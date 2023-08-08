@@ -44,12 +44,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DTable',
-}
-</script>
-
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });

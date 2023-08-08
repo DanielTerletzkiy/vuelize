@@ -6,12 +6,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DImage',
-}
-</script>
-
 <script setup lang="ts">
 import DRow from "../flex/DRow.vue";
 

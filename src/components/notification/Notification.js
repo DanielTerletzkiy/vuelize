@@ -39,4 +39,3 @@ export default class Notification {
         }
     }
 }
-//# sourceMappingURL=Notification.js.map

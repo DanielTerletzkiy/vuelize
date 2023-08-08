@@ -18,12 +18,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DRoot',
-}
-</script>
-
 <script setup lang="ts">
 import {Theme, ThemeColorProperty, ThemeSheetProperty, ThemeTextProperty} from "../../types/Theme";
 

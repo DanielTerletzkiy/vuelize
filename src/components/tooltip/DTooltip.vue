@@ -23,12 +23,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DTooltip',
-}
-</script>
-
 <script setup lang="ts">
 import {ThemeTextProperty} from "../../types/Theme";
 

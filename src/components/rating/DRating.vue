@@ -8,12 +8,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DRating',
-}
-</script>
-
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });

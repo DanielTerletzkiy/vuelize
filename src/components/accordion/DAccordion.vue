@@ -17,12 +17,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DAccordion',
-}
-</script>
-
 <script setup lang="ts">
 import {Wrapper} from "../../types/components/Wrapper";
 

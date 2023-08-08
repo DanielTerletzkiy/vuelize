@@ -14,12 +14,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DBadge',
-}
-</script>
-
 <script setup lang="ts">
 import defaultProps from "../../mixins/DefaultProps";
 

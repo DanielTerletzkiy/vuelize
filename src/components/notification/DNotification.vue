@@ -28,12 +28,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DNotification',
-}
-</script>
-
 <script setup lang="ts">
 import defaultProps from "../../mixins/DefaultProps";
 

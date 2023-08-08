@@ -19,12 +19,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DSelectMenu',
-}
-</script>
-
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });

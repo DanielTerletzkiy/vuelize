@@ -6,12 +6,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DAvatar',
-}
-</script>
-
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });

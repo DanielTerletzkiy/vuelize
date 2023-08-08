@@ -26,17 +26,21 @@
   },
   "type": "module",
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
-  "main": "./dist/vuelize.cjs.js",
-  "module": "./dist/vuelize.es.js",
-  "types": "./types/index.d.ts",
+  "main": "./dist/vuelize.cjs",
+  "module": "./dist/vuelize.es",
+  "types": "./dist/vuelize",
   "exports": {
     ".": {
-      "import": "./dist/vuelize.es.js",
-      "require": "./dist/vuelize.cjs.js",
-      "types": "./types/index.d.ts"
+      "types": "./dist/vuelize",
+      "import": "./dist/vuelize.es",
+      "require": "./dist/vuelize.cjs"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.d.ts",
+      "require": "./dist/types/index.d.ts"
     }
   },
   "dependencies": {

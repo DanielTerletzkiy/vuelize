@@ -15,12 +15,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DIcon',
-}
-</script>
-
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });

@@ -13,12 +13,6 @@
   <div v-if="!permanent && modelValue" class="d-navigation-bar__backdrop" @click.self="onClose"/>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DNavigationBar',
-}
-</script>
-
 <script setup lang="ts">
 import {ref} from "vue";
 

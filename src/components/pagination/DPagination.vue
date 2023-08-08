@@ -29,12 +29,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DPagination',
-}
-</script>
-
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });

@@ -13,12 +13,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DCheckbox',
-}
-</script>
-
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });

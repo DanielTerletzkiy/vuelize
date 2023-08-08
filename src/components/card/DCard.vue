@@ -5,12 +5,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DCard',
-}
-</script>
-
 <script setup lang="ts">
 
 const wrapper = ref(null);

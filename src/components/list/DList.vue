@@ -4,14 +4,7 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DList',
-}
-</script>
-
 <script setup lang="ts">
-
 const wrapper = ref(null);
 defineExpose({wrapper});
 import defaultProps from "../../mixins/DefaultProps";

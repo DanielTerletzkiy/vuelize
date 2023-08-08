@@ -7,15 +7,7 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DTabList',
-}
-</script>
-
 <script setup lang="ts">
-
-
 const wrapper = ref(null);
 defineExpose({wrapper});
 import {computed, getCurrentInstance, provide, ref} from "vue";

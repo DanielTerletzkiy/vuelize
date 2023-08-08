@@ -6,12 +6,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DRow',
-}
-</script>
-
 <script setup lang="ts">
 import {ref} from "vue";
 

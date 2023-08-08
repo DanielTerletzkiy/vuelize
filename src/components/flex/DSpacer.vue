@@ -2,12 +2,6 @@
   <DWrapper ref="wrapper" :classes="['d-spacer']" v-bind="{...$props, ...$attrs}"/>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DSpacer',
-}
-</script>
-
 <script setup lang="ts">
 import {ref} from "vue";
 

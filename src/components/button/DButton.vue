@@ -15,12 +15,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DButton',
-}
-</script>
-
 <script setup lang="ts">
 import {PropType, ref} from "vue";
 

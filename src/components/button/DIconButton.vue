@@ -10,12 +10,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DIconButton',
-}
-</script>
-
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });

@@ -4,12 +4,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DRadioGroup',
-}
-</script>
-
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });

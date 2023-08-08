@@ -4,12 +4,6 @@
   </DWrapper>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DCardSubtitle',
-}
-</script>
-
 <script setup lang="ts">
 import {ref} from "vue";
 
