@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 
 // @ts-ignore
 import tsconfigPaths from 'vite-tsconfig-paths'
+// @ts-ignore
 import dts from "vite-plugin-dts";
 
 // https://vitejs.dev/config/
@@ -20,9 +21,8 @@ export default defineConfig({
         vue(),
         tsconfigPaths(),
         dts({
-            //rollupTypes: true,
             insertTypesEntry: true,
-            outDir: "types"
+            rollupTypes: false,
         }),
     ],
     build: {
