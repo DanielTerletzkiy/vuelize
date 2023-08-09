@@ -1,28 +1,27 @@
-import type {App} from "vue";
-import type {Ref} from "vue";
+import type {App, Ref} from "vue";
 import Notification from "../components/notification/Notification";
 
-export const enum State {
-    Success = "success",
-    Error = "error",
-    Warning = "warning",
-    Info = "info"
+export enum State {
+    success = "success",
+    error = "error",
+    warning = "warning",
+    info = "info"
 }
 
-export const enum Round {
-    Circle = "circle",
-    Pill = "pill",
-    XL = "xl",
-    LG = "lg",
-    MD = "md",
-    None = "none"
+export enum Rounded {
+    circle = "circle",
+    pill = "pill",
+    xl = "xl",
+    lg = "lg",
+    md = "md",
+    none = "none"
 }
 
-export const enum Position {
-    Top = 'top',
-    Bottom = 'bottom',
-    Left = 'left',
-    Right = 'right'
+export enum Position {
+    top = 'top',
+    bottom = 'bottom',
+    left = 'left',
+    right = 'right'
 }
 
 

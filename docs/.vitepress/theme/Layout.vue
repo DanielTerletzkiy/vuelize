@@ -1,24 +1,27 @@
 <script setup lang="ts">
 import {author, repository, version} from "../../../package.json"
+import {computed, onMounted, ref} from "vue";
 import {useData, useRoute} from 'vitepress'
 import {BlurAmount, ThemeColorProperty, ThemeSheetProperty} from "../../../src/types/Theme";
-import DRoot from "../../../src/components/root/DRoot.vue";
-import DToolbar from "../../../src/components/app/toolbar/DToolbar.vue";
-import DCardTitle from "../../../src/components/card/text/DCardTitle.vue";
-import DCardSubtitle from "../../../src/components/card/text/DCardSubtitle.vue";
-import DColumn from "../../../src/components/flex/DColumn.vue";
-import DNavigationBar from "../../../src/components/app/navigation/DNavigationBar.vue";
-import DSpacer from "../../../src/components/flex/DSpacer.vue";
-import DButton from "../../../src/components/button/DButton.vue";
-import DIcon from "../../../src/components/icon/DIcon.vue";
-import DList from "../../../src/components/list/DList.vue";
-import DListItem from "../../../src/components/list/DListItem.vue";
-import DRow from "../../../src/components/flex/DRow.vue";
-
-import DImage from "../../../src/components/image/DImage.vue";
-import {computed, onMounted, ref} from "vue";
-import DDivider from "../../../src/components/divider/DDivider.vue";
-import DAccordion from "../../../src/components/accordion/DAccordion.vue";
+import {Rounded} from "../../../src/types/Vuelize";
+import {
+  DAccordion,
+  DButton,
+  DCard,
+  DCardSubtitle,
+  DCardTitle,
+  DColumn,
+  DDivider,
+  DIcon,
+  DImage,
+  DList,
+  DListItem,
+  DNavigationBar,
+  DRoot,
+  DRow,
+  DSpacer,
+  DToolbar
+} from "../../../src/ComponentImport";
 
 // https://vitepress.dev/reference/runtime-api#usedata
 const {site, page} = useData()
@@ -87,38 +90,79 @@ onMounted(() => {
         <Content/>
       </d-column>
       <template v-slot:footer>
-        <d-divider/>
-        <d-row justify="center">
-          <d-column>
-            <d-card-title class="font-size-medium font-weight-bold">
-              Author
-            </d-card-title>
-            <d-row>
-              <d-divider vertical block :color="{
+        <d-card :rounded="Rounded.none" block elevation="n15" height="400px">
+          <d-row align="center" height="100%" justify="space-evenly">
+            <d-column elevation="n2" gap height="320px" width="250px">
+              <d-image :src="themeConfig.logo.toString()" class="logo" rounded="none" width="100%"/>
+              <d-row justify="center">
+                <d-column :wrap="false" height="50px">
+                  <d-card-title class="font-size-large pt-0">{{ site.title }}</d-card-title>
+                  <d-card-subtitle class="pb-0">{{ site.description }}</d-card-subtitle>
+                </d-column>
+              </d-row>
+            </d-column>
+            <d-row gap width="max-content">
+              <d-column :rounded="Rounded.xl" elevation="n10" no-padding width="max-content">
+                <d-card-title class="font-size-medium font-weight-bold" elevation="n2">
+                  Author
+                </d-card-title>
+                <d-row class="pa-4" justify="start">
+                  <d-divider :color="{
                 map: [
                     {
-                      color: ThemeColorProperty.primary,
+                      color: ThemeColorProperty.accent,
                       property: ThemeSheetProperty.card
                     }
                 ]
-              }"/>
-              <d-column no-padding :link="`mailto:${creator.email}?subject=${site.title} Feedback&body=Message`">
-                <d-card-title class="font-size-medium">
-                  {{ creator.name }}
+              }" block size="8px" vertical/>
+                  <d-column :link="`mailto:${creator.email}?subject=${site.title} Feedback&body=Message`" no-padding>
+                    <d-card-title class="font-size-medium">
+                      {{ creator.name }}
+                    </d-card-title>
+                    <d-card-subtitle>
+                      Name
+                    </d-card-subtitle>
+                    <d-card-title class="font-size-medium">
+                      {{ creator.email }}
+                    </d-card-title>
+                    <d-card-subtitle>
+                      E-Mail
+                    </d-card-subtitle>
+                  </d-column>
+                </d-row>
+              </d-column>
+              <d-column :rounded="Rounded.xl" elevation="n10" no-padding width="max-content">
+                <d-card-title class="font-size-medium font-weight-bold" elevation="n2">
+                  Made with
                 </d-card-title>
-                <d-card-subtitle>
-                  Name
-                </d-card-subtitle>
-                <d-card-title class="font-size-small">
-                  {{ creator.email }}
-                </d-card-title>
-                <d-card-subtitle>
-                  E-Mail
-                </d-card-subtitle>
+                <d-row class="pa-4" justify="starts">
+                  <d-divider :color="{
+                map: [
+                    {
+                      color: ThemeColorProperty.secondary,
+                      property: ThemeSheetProperty.card
+                    }
+                ]
+              }" block size="8px" vertical/>
+                  <d-column no-padding>
+                    <d-card-title class="font-size-medium">
+                      VitePress
+                    </d-card-title>
+                    <d-card-subtitle>
+                      Docs
+                    </d-card-subtitle>
+                    <d-card-title class="font-size-medium">
+                      Vite
+                    </d-card-title>
+                    <d-card-subtitle>
+                      Engine
+                    </d-card-subtitle>
+                  </d-column>
+                </d-row>
               </d-column>
             </d-row>
-          </d-column>
-        </d-row>
+          </d-row>
+        </d-card>
       </template>
     </d-root>
   </ClientOnly>

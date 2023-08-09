@@ -24,29 +24,17 @@
 </template>
 
 <script setup lang="ts">
-import {ThemeTextProperty} from "../../types/Theme";
-
-const wrapper = ref(null);
-defineExpose({wrapper});
-import {
-  computed,
-  getCurrentInstance,
-  inject,
-  nextTick,
-  reactive,
-  ref, useSlots,
-  watch
-} from "vue";
 import type {PropType} from "vue";
+import {computed, getCurrentInstance, nextTick, reactive, ref, useSlots, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DLabel from "../label/DLabel.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
-import {
-  TransitionSlide, //TODO: add slide offset definitions
-  TransitionFade
-} from "@morev/vue-transitions";
+import {TransitionFade} from "@morev/vue-transitions";
 import {Position} from "../../types/Vuelize";
+
+const wrapper = ref(null);
+defineExpose({wrapper});
 
 const instance: any = getCurrentInstance();
 const slots = useSlots()
@@ -60,7 +48,7 @@ const props = defineProps({
   padding: {type: String, default: '4px'},
   position: {
     type: String as PropType<Position>,
-    default: Position.Bottom,
+    default: Position.bottom,
   },
   ...defaultProps
 });
@@ -98,22 +86,22 @@ async function onHover() {
   const triggerRect = trigger.value.getBoundingClientRect();
   const tooltipRect = tooltip.value.getBoundingClientRect();
   switch (props.position) {
-    case Position.Top: {
+    case Position.top: {
       offset.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
       offset.top = (triggerRect.top - (tooltipRect.height)) + 'px';
       break;
     }
-    case Position.Bottom: {
+    case Position.bottom: {
       offset.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
       offset.top = (triggerRect.top + (triggerRect.height)) + 'px';
       break;
     }
-    case Position.Right: {
+    case Position.right: {
       offset.left = (triggerRect.left + triggerRect.width) + 'px';
       offset.top = (triggerRect.top + ((triggerRect.height / 2) - tooltipRect.height / 2)) + 'px';
       break;
     }
-    case Position.Left: {
+    case Position.left: {
       offset.left = (triggerRect.left - tooltipRect.width) + 'px';
       offset.top = (triggerRect.top + ((triggerRect.height / 2) - tooltipRect.height / 2)) + 'px';
       break;

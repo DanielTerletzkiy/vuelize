@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import tsconfigPaths from 'vite-tsconfig-paths'
 // @ts-ignore
 import dts from "vite-plugin-dts";
+import libCss from 'vite-plugin-libcss';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,17 +20,19 @@ export default defineConfig({
     },
     plugins: [
         vue(),
-        tsconfigPaths(),
+        //tsconfigPaths(),
         dts({
             insertTypesEntry: true,
-            rollupTypes: false,
+            rollupTypes: true,
         }),
+        libCss()
     ],
     build: {
+        //cssCodeSplit: true,
         lib: {
             name: "Vuelize",
             fileName: "vuelize",
-            entry: "src/entry.ts",
+            entry: "src/index.ts",
             formats: ["es", "umd", "cjs"],
         },
         rollupOptions: {

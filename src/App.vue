@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {BlurAmount, ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
-import {Position, Round} from "./types/Vuelize";
+import {Position, Rounded} from "./types/Vuelize";
 import {Size} from "./types/components/DButton";
 import DCard from "./components/card/DCard.vue";
 import DCardTitle from "./components/card/text/DCardTitle.vue";
@@ -132,7 +132,7 @@ const dialog = ref(false);
     <d-column gap block>
       <d-row gap v-for="x in ['','n']">
         <d-card v-for="e in 30" :glow="{central: true}" :elevation="`${x}${e}`" width="100px" height="50px"
-                :rounded="Round.Pill" :outlined="{offset: '1px'}">
+                :outlined="{offset: '1px'}" :rounded="Rounded.pill">
           {{ e }}
         </d-card>
       </d-row>
@@ -145,7 +145,7 @@ const dialog = ref(false);
         test
       </template>
     </d-tooltip>
-    <d-tooltip :color="ThemeColorProperty.primary" :position="Position.Top" stay filled>
+    <d-tooltip :color="ThemeColorProperty.primary" :position="Position.top" filled stay>
       <d-button :color="ThemeColorProperty.primary">
         testtesttesttesttesttesttesttest
       </d-button>

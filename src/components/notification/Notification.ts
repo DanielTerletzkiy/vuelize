@@ -4,7 +4,7 @@ import {ref, Ref} from "vue";
 export default class Notification {
     title: string = "";
     content: string = "";
-    type: State = State.Success;
+    type: State = State.success;
     options: Notifications.Options = {color: "", icon: "", timeout: 5000};
     active: Ref<boolean> | boolean = ref(true);
     timeout: any = null;

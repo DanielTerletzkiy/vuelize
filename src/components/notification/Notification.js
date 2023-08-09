@@ -1,9 +1,10 @@
-import { State } from "../../types/Vuelize";
-import { ref } from "vue";
+import {State} from "../../types/Vuelize";
+import {ref} from "vue";
+
 export default class Notification {
     title = "";
     content = "";
-    type = State.Success;
+    type = State.success;
     options = { color: "", icon: "", timeout: 5000 };
     active = ref(true);
     timeout = null;

@@ -1,5 +1,5 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-toolbar']" :rounded="Round.None" v-bind="{...$props, ...$attrs}">
+  <DWrapper ref="wrapper" :classes="['d-toolbar']" :rounded="Rounded.none" v-bind="{...$props, ...$attrs}">
     <DRow block gap class="px-2">
       <DIconButton v-if="showHamburger" @click="onHamburgerClick"
                    style="margin-left: -8px" :color="ThemeColorProperty.primary">
@@ -12,16 +12,16 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
-
-const wrapper = ref(null);
-defineExpose({wrapper});
 import DWrapper from "../../DWrapper.vue";
 import DRow from "../../flex/DRow.vue";
 import DIconButton from "../../button/DIconButton.vue";
 import DIcon from "../../icon/DIcon.vue";
 import defaultProps from "../../../mixins/DefaultProps";
 import {ThemeColorProperty} from "../../../types/Theme";
-import {Round} from "../../../types/Vuelize";
+import {Rounded} from "../../../types/Vuelize";
+
+const wrapper = ref(null);
+defineExpose({wrapper});
 
 const emit = defineEmits(['hamburgerClick'])
 

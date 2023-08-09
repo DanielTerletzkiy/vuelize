@@ -1,6 +1,6 @@
 import {defineStore} from 'pinia'
 import {computed, ref} from "vue";
-import {ThemeColorProperty, Themes, ThemeSheetProperty, ThemeTextProperty} from "../types/Theme";
+import {Themes} from "../types";
 
 const isServer = !(typeof window != 'undefined' && window.document);
 

@@ -1,18 +1,11 @@
-import {Round} from "../types/Vuelize";
+import {Rounded} from "../types/Vuelize";
 import type {PropType} from "vue";
-import {
-    BlurSettings,
-    ColorSettings,
-    ElevationSettings,
-    GlowSettings,
-    OutlinedSettings,
-    ThemeColorProperty
-} from "../types/Theme";
+import {BlurSettings, ColorSettings, GlowSettings, OutlinedSettings, ThemeColorProperty} from "../types/Theme";
 
 export default {
     link: {type: String, default: null},
     color: {type: Object as PropType<ColorSettings | ThemeColorProperty | string>}, //
-    rounded: {type: String as PropType<Round>, default: Round.LG},
+    rounded: {type: String as PropType<Rounded>, default: Rounded.lg},
     //
     outlined: {type: Object as PropType<Partial<OutlinedSettings> | boolean>},
     //

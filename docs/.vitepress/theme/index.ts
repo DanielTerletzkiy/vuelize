@@ -2,7 +2,7 @@
 import Layout from './Layout.vue'
 import './style.css'
 import {App} from "vue";
-import Vuelize from "../../../";
+import {Vuelize} from "../../../src/VuelizePlugin";
 import Header from "../../components/Header.vue";
 
 type Enhanced = {
