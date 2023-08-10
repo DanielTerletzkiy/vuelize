@@ -19,10 +19,7 @@
     "build:publish": "np --yolo --no-yarn --any-branch --branch next",
     "publish:dev": "npm publish --tag=develop",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "build-storybook": "build-storybook"
   },
   "type": "module",
   "files": [
@@ -39,15 +36,14 @@
     }
   },
   "dependencies": {
+    "sass": "^1.49.10",
     "@morev/vue-transitions": "^2.3.6",
-    "focus-trap": "^6.9.4",
     "focus-trap-vue": "^3.3.1",
     "lodash": "^4.17.21",
     "pinia": "^2.0.14",
     "v-wave": "^1.3.3",
-    "vue": "^3.2.37",
-    "vue-material-design-ripple": "^1.0.0",
-    "vue3-unicons": "^0.0.9"
+    "vue3-unicons": "^0.0.9",
+    "vue": "^3.2.37"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
@@ -72,7 +68,6 @@
     "@storybook/builder-vite": "^0.1.38",
     "@storybook/testing-library": "^0.0.13",
     "@storybook/vue3": "^6.5.9",
-    "@types/markdown-it-container": "^2.0.6",
     "@vitejs/plugin-vue": "^2.2.0",
     "@vue/cli-plugin-babel": "^5.0.4",
     "@vue/cli-plugin-typescript": "^5.0.4",
@@ -85,7 +80,6 @@
     "git-cz": "^4.7.4",
     "husky": "^4.3.0",
     "lint-staged": "^10.4.2",
-    "markdown-it-container": "^3.0.0",
     "minimist": "^1.2.6",
     "postcss": "^8.0.0",
     "postcss-import": "12.0.1",
@@ -101,14 +95,12 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "0.28.0",
     "rollup-plugin-vue": "^6.0.0",
-    "sass": "^1.49.10",
     "storybook-dark-mode": "^1.1.0",
     "typescript": "^4.5.4",
     "vite": "^2.9.16",
     "vite-plugin-dts": "^3.5.1",
     "vite-plugin-libcss": "^1.1.1",
     "vite-tsconfig-paths": "^4.2.0",
-    "vitepress": "^1.0.0-beta.5",
     "vue-cli-plugin-webpack-bundle-analyzer": "^4.0.0",
     "vue-loader": "^16.8.3",
     "vue-tsc": "^0.29.8"

@@ -1,7 +1,8 @@
 <template>
   <DWrapper ref="wrapper" root-tag="button" :classes="['d-button', size, {filled, block, glow}]"
             v-bind="{...$props, ...$attrs}"
-            @click.capture="$emit('click')" :elevation="typeof $props.glow === 'undefined' && !filled && !flat ? 2 : 0">
+            :elevation="typeof $props.glow === 'undefined' && !filled && !flat ? 2 : $props.elevation || 0"
+            @click.capture="$emit('click')">
     <span class="d-button__content" v-ripple>
       <span class="prefix" v-if="!!$slots.prefix">
         <slot name="prefix"></slot>
@@ -17,12 +18,12 @@
 
 <script setup lang="ts">
 import {PropType, ref} from "vue";
-
-const wrapper = ref(null);
-defineExpose({wrapper});
 import DWrapper from "../DWrapper.vue";
 import defaultProps from "../../mixins/DefaultProps";
 import {Size} from "../../types/components/DButton";
+
+const wrapper = ref(null);
+defineExpose({wrapper});
 
 defineEmits(['click'])
 

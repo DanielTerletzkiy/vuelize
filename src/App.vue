@@ -7,6 +7,9 @@ import DCard from "./components/card/DCard.vue";
 import DCardTitle from "./components/card/text/DCardTitle.vue";
 import DButton from "./components/button/DButton.vue";
 import DTooltip from "./components/tooltip/DTooltip.vue";
+import DImage from "./components/image/DImage.vue";
+import DImageDiffuse from "./components/image/DImageDiffuse.vue";
+import DRow from "./components/flex/DRow.vue";
 
 const navOpen = ref(true);
 
@@ -30,6 +33,11 @@ const dialog = ref(false);
     <template v-slot:notifications>
       <DNotificationWrapper/>
     </template>
+    <d-row gap>
+      <d-image :rounded="Rounded.none" height="200px" src="/logo.svg" width="200px"/>
+      <d-image-diffuse :rounded="Rounded.xl" blur-amount="100px" elevation="n4" sharp-edge src="/logo.svg"
+                       width="500px"/>
+    </d-row>
     <d-dialog v-model="dialog">
       <d-card :blur="{amount:BlurAmount.strong}" width="600px" height="400px">
         <d-card-title>

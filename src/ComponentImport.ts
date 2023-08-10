@@ -18,6 +18,7 @@ import DSpacer from './components/flex/DSpacer.vue'
 import DGrid from './components/flex/DGrid.vue'
 import DIcon from './components/icon/DIcon.vue'
 import DImage from './components/image/DImage.vue'
+import DImageDiffuse from './components/image/DImageDiffuse.vue'
 import DLabel from './components/label/DLabel.vue'
 import DList from './components/list/DList.vue'
 import DListItem from './components/list/DListItem.vue'
@@ -29,13 +30,13 @@ import DNotification from './components/notification/DNotification.vue'
 import DNotificationWrapper from './components/notification/DNotificationWrapper.vue'
 import DPagination from './components/pagination/DPagination.vue'
 import DProgressBar from './components/progress/DProgressbar.vue'
+import DProgressbar from './components/progress/DProgressbar.vue'
 import DTable from './components/table/DTable.vue'
 import DTooltip from './components/tooltip/DTooltip.vue'
 import DTextfield from './components/textfield/DTextfield.vue'
 import DRadioGroup from './components/radio/DRadioGroup.vue'
 import DRadioItem from './components/radio/DRadioItem.vue'
 import DRating from './components/rating/DRating.vue'
-import DProgressbar from './components/progress/DProgressbar.vue'
 import DRoot from './components/root/DRoot.vue'
 import DWrapper from './components/DWrapper.vue'
 import {App} from "vue/dist/vue";
@@ -61,6 +62,7 @@ export {
     DGrid,
     DIcon,
     DImage,
+    DImageDiffuse,
     DLabel,
     DList,
     DListItem,
@@ -97,6 +99,7 @@ export function importAll(app: App) {
     app.component("DColumn", DColumn)
     app.component("DGrid", DGrid)
     app.component("DImage", DImage)
+    app.component("DImageDiffuse", DImageDiffuse)
     app.component("DLabel", DLabel)
     app.component("DList", DList)
     app.component("DListItem", DListItem)
