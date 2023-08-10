@@ -104,7 +104,7 @@
     "sass": "^1.49.10",
     "storybook-dark-mode": "^1.1.0",
     "typescript": "^4.5.4",
-    "vite": "^2.9.13",
+    "vite": "^2.9.16",
     "vite-plugin-dts": "^3.5.1",
     "vite-plugin-libcss": "^1.1.1",
     "vite-tsconfig-paths": "^4.2.0",
