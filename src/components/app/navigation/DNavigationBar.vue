@@ -55,8 +55,8 @@ function onClose() {
 
   &.permanent {
     position: sticky;
-    top: $navbarHeight;
-    height: calc(100dvh - $navbarHeight) !important;
+    top: $toolbarHeight;
+    height: calc(100dvh - $toolbarHeight) !important;
   }
 
   .content {

@@ -15,11 +15,11 @@
 
 <script setup lang="ts">
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 import {computed, inject, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DIcon from "../icon/DIcon.vue";
-import { TransitionSlide } from '@morev/vue-transitions';
+import {TransitionSlide} from '@morev/vue-transitions';
 import defaultProps from "../../mixins/DefaultProps";
 
 const vuelize: any = inject('vuelize');
@@ -41,7 +41,7 @@ function click() {
 const icon = computed(() => props.modelValue ? props.onIcon : props.offIcon)
 
 const size = ref(props.size + 'px');
-const color = ref(props.modelValue ? vuelize.getColor(props.color, props.tint) : vuelize.getColor('currentColor'));
+//const color = ref(props.modelValue ? vuelize.getColor(props.color, props.tint) : vuelize.getColor('currentColor'));
 const classes = computed(() => {
   return {
     'd-checkbox--checked': props.modelValue,
@@ -59,7 +59,7 @@ const classes = computed(() => {
 @import "../../styles/variables";
 
 .d-checkbox {
-  color: v-bind(color);
+  //color: v-bind(color);
   flex-direction: v-bind(flexDirection);
   user-select: none;
 
@@ -85,25 +85,14 @@ const classes = computed(() => {
     }
   }
 
-  &.dark {
-    .d-checkbox__label {
-      color: $dark_card_text
-    }
-
-    .d-checkbox__box:not(.d-checkbox--checked) {
-      color: darken($dark_card_text, 16);
-    }
+  .d-checkbox__label {
+    color: var(--text-card);
   }
 
-  &.light {
-    .d-checkbox__label {
-      color: $light_card_text
-    }
-
-    .d-checkbox__box:not(.d-checkbox--checked) {
-      color: lighten($light_card_text, 24) !important;
-    }
+  .d-checkbox__box:not(.d-checkbox--checked) {
+    color: var(--text-contrast);
   }
+
 
 }
 </style>

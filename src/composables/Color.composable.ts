@@ -55,18 +55,22 @@ export function useContrastTextColor(ref: HTMLElement): string {
 
 export function useSetColor(ref: HTMLElement, color: string | null, colorProperty?: ThemeAllPropertyType) {
     //console.log()
-    if (color === null && !!colorProperty) {
-        const originalColor = getComputedStyle(document.documentElement).getPropertyValue(`--${colorProperty}`)
-        ref.style.setProperty(`--${colorProperty}`, originalColor)
-        return;
-    }
+    try {
+        if (color === null && !!colorProperty) {
+            const originalColor = getComputedStyle(document.documentElement).getPropertyValue(`--${colorProperty}`)
+            ref.style.setProperty(`--${colorProperty}`, originalColor)
+            return;
+        }
 
-    if (ref.tagName === "HTML" || !!colorProperty) {
-        ref.style.setProperty(`--${colorProperty}`, color)
-    } else if (typeof color === "string") {
-        color = hasProperty(color) ? `var(--${color})` : color;
-        ref.style.setProperty(`color`, color)
+        if (ref.tagName === "HTML" || !!colorProperty) {
+            ref.style.setProperty(`--${colorProperty}`, color)
+        } else if (typeof color === "string") {
+            color = hasProperty(color) ? `var(--${color})` : color;
+            ref.style.setProperty(`color`, color)
 
+        }
+    } catch (e) {
+        console.error({e, ref, color, colorProperty})
     }
 }
 

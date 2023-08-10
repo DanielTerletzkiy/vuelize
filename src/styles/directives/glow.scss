@@ -42,7 +42,7 @@
   }
 
   &:not(:is(&Active)) {
-    color: var(--text-card);
+    color: color-mix(in srgb, var(--text-card), #fff 15%);
   }
 
   &Active {

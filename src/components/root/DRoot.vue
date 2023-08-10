@@ -75,7 +75,7 @@ function setTheme() {
 
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "../../styles/index";
 
 
@@ -83,7 +83,7 @@ function setTheme() {
   position: sticky;
   top: 0;
   width: 100%;
-  max-height: $navbarHeight;
+  max-height: $toolbarHeight;
   z-index: 10;
 }
 

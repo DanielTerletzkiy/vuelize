@@ -99,8 +99,8 @@ const labelClassesObject = computed(() => {
 
 const textFieldStylesObject = computed(() => {
   return {
-    color: (hover.value || selected.value) ? vuelize.getColor(props.color, props.tint) : null,
-    caretColor: (hover.value || selected.value) ? vuelize.getColor(props.color, props.tint) : null,
+    //color: (hover.value || selected.value) ? vuelize.getColor(props.color, props.tint) : null,
+    //caretColor: (hover.value || selected.value) ? vuelize.getColor(props.color, props.tint) : null,
     width: props.width,
     'min-width': props.fullWidth ? '100%' : 'unset',
   }

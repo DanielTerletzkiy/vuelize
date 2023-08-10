@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import tsconfigPaths from 'vite-tsconfig-paths'
 // @ts-ignore
 import dts from "vite-plugin-dts";
+// @ts-ignore
 import libCss from 'vite-plugin-libcss';
 
 // https://vitejs.dev/config/

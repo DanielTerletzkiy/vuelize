@@ -1,6 +1,6 @@
 <template>
   <DWrapper ref="wrapper" :classes="['d-toolbar']" :rounded="Rounded.none" v-bind="{...$props, ...$attrs}">
-    <DRow block gap class="px-2">
+    <DRow block gap class="px-2 d-toolbar__content" align="center">
       <DIconButton v-if="showHamburger" @click="onHamburgerClick"
                    style="margin-left: -8px" :color="ThemeColorProperty.primary">
         <DIcon name="bars"/>
@@ -48,11 +48,15 @@ function onHamburgerClick(e: Event) {
   border-bottom: $outline;
 
   width: 100%;
-  height: $navbarHeight;
-  max-height: $navbarHeight;
-  z-index: 10;
+  height: $toolbarHeight;
+  max-height: $toolbarHeight;
+  z-index: 15;
 
   border-radius: 0 !important;
+
+  &__content {
+    height: $toolbarHeight;
+  }
 
   &.dark {
     //box-shadow: 0 0 30px -20px darken($dark_background, 5);
