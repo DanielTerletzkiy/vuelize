@@ -1,15 +1,18 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-divider', {block, vertical, horizontal: !vertical}]"
-            v-bind="{...$props, ...$attrs}"/>
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-divider', {block, vertical, horizontal: !vertical}]"
+    v-bind="{...$props, ...$attrs}"
+  />
 </template>
 
 <script setup lang="ts">
 import defaultProps from "../../mixins/DefaultProps";
+import {computed, ref} from "vue";
+import DWrapper from "../DWrapper.vue";
 
 const wrapper = ref(null);
 defineExpose({wrapper});
-import {computed, ref} from "vue";
-import DWrapper from "../DWrapper.vue";
 
 const props = defineProps({
   block: {type: Boolean},

@@ -1,19 +1,42 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-tooltip', position, {stay}]" @mouseleave="stay && onHoverLeave()"
-            :color="color">
-    <div class="d-tooltip__slot" ref="trigger" @mouseover="onHoverOver" @mouseleave="!stay && onHoverLeave()">
-      <slot name="default" v-bind="{...$props, ...$attrs}">
-      </slot>
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-tooltip', position, {stay}]"
+    :color="color"
+    @mouseleave="stay && onHoverLeave()"
+  >
+    <div
+      ref="trigger"
+      class="d-tooltip__slot"
+      @mouseover="onHoverOver"
+      @mouseleave="!stay && onHoverLeave()"
+    >
+      <slot
+        name="default"
+        v-bind="{...$props, ...$attrs}"
+      />
     </div>
-    <component :is="transitionComponent" :duration="100">
+    <component
+      :is="transitionComponent"
+      :duration="100"
+    >
       <suspense>
-        <div class="d-tooltip__wrapper" :style="stylesObject" v-if="hoverState" ref="tooltip">
+        <div
+          v-if="hoverState"
+          ref="tooltip"
+          class="d-tooltip__wrapper"
+          :style="stylesObject"
+        >
           <slot name="tooltip-wrapper">
-            <DLabel class="d-tooltip__wrapper__content" v-bind="{...$props, ...$attrs}" :filled="filled"
-                    :glow="{disabled: filled, active: true}" :color="props.color">
+            <DLabel
+              class="d-tooltip__wrapper__content"
+              v-bind="{...$props, ...$attrs}"
+              :filled="filled"
+              :glow="{disabled: filled, active: true}"
+              :color="props.color"
+            >
               <DCardSubtitle class="pa-0 d-tooltip__wrapper__content__text">
-                <slot name="tooltip">
-                </slot>
+                <slot name="tooltip" />
               </DCardSubtitle>
             </DLabel>
           </slot>
@@ -25,7 +48,7 @@
 
 <script setup lang="ts">
 import type {PropType} from "vue";
-import {computed, getCurrentInstance, nextTick, reactive, ref, useSlots, watch} from "vue";
+import {computed, nextTick, reactive, ref, useSlots, watch} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DLabel from "../label/DLabel.vue";
@@ -36,7 +59,6 @@ import {Position} from "../../types/Vuelize";
 const wrapper = ref(null);
 defineExpose({wrapper});
 
-const instance: any = getCurrentInstance();
 const slots = useSlots()
 
 const props = defineProps({
@@ -61,8 +83,8 @@ const offset = reactive({
   left: 'initial',
 })
 
-let trigger = ref<any | null>(null);
-let tooltip = ref<any | null>(null);
+let trigger = ref<HTMLElement | null>(null);
+let tooltip = ref<HTMLElement | null>(null);
 
 watch([() => hoverState.value, () => slots.tooltip ? slots.tooltip() : null], () => {
   nextTick().then(() => onHover())
@@ -80,7 +102,7 @@ function onHoverLeave() {
 }
 
 async function onHover() {
-  if (!(hoverState.value && tooltip.value)) {
+  if (!(hoverState.value && tooltip.value) || !trigger.value) {
     return;
   }
   const triggerRect = trigger.value.getBoundingClientRect();
@@ -134,12 +156,12 @@ const transitionComponent = computed(() => {
   }*/
 })
 
-const useFontColor = computed(() => {
+/*const useFontColor = computed(() => {
   /*return !props.fontColor && props.filled ?
       vuelize.getColorContrast(props.color, props.tint) :
       props.fontColor ?
-          props.fontColor : 'inherit';*/
-});
+          props.fontColor : 'inherit';
+});*/
 
 </script>
 

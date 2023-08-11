@@ -1,31 +1,66 @@
 <template>
-  <d-function-wrapper :classes="['d-chart']" v-bind="{...$props, ...$attrs}">
-    <d-row class="d-chart__container" elevation-dark="1" elevation-light="n2">
-      <d-column :wrap="false" class="py-0" style="width:30px" v-if="showLabels">
-        <d-spacer/>
-        <d-card-subtitle :style="{'align-self': 'end', transform: `translate(0px,${rowSpacing/2}px)`}" class="pa-0 px-2" :height="`${rowSpacing}px`"
-                         v-for="(i, x) in rowItems" :key="x">
+  <d-function-wrapper
+    :classes="['d-chart']"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <d-row
+      class="d-chart__container"
+      elevation-dark="1"
+      elevation-light="n2"
+    >
+      <d-column
+        v-if="showLabels"
+        :wrap="false"
+        class="py-0"
+        style="width:30px"
+      >
+        <d-spacer />
+        <d-card-subtitle
+          v-for="(i, x) in rowItems"
+          :key="x"
+          :style="{'align-self': 'end', transform: `translate(0px,${rowSpacing/2}px)`}"
+          class="pa-0 px-2"
+          :height="`${rowSpacing}px`"
+        >
           <span v-if="(x !== 0 ? (rowItems[x]<rowItems[x-1]):x===0)">{{ i }}</span>
         </d-card-subtitle>
-        <div style="height: 30px"/>
+        <div style="height: 30px" />
       </d-column>
-      <d-column block class="pa-0"
-                :style="{overflow: 'auto', maxWidth: this.$innerWidth()-80 + 'px', borderRadius: '0 8px 0 0 !important'}"
-                :wrap="false">
-        <d-card elevation-dark="6" class="d-chart__container__chart" :class="{'hidden-labels': !showLabels}"
-                :style="`width: ${columnSpacing*(columnItems.length-1)}px !important; height: ${rowSpacing*(rowItems.length-1)}px !important`">
-          <component :is="variant" v-bind="{...$props, ...$attrs}" v-model="value" :columns="columnItems"
-                     :maxValue="maxValue"/>
+      <d-column
+        block
+        class="pa-0"
+        :style="{overflow: 'auto', maxWidth: $innerWidth()-80 + 'px', borderRadius: '0 8px 0 0 !important'}"
+        :wrap="false"
+      >
+        <d-card
+          elevation-dark="6"
+          class="d-chart__container__chart"
+          :class="{'hidden-labels': !showLabels}"
+          :style="`width: ${columnSpacing*(columnItems.length-1)}px !important; height: ${rowSpacing*(rowItems.length-1)}px !important`"
+        >
+          <component
+            :is="variant"
+            v-bind="{...$props, ...$attrs}"
+            v-model="value"
+            :columns="columnItems"
+            :max-value="maxValue"
+          />
         </d-card>
-        <d-row :wrap="false" v-if="showLabels">
-          <d-card-subtitle class="pa-0 px-2"
-                           :style="{'justify-content': 'center',
-                           'min-width': `${columnSpacing}px`,
-                           'max-width': `${columnSpacing}px`,
-                            height: '30px',
-                            transform: `translate(-${columnSpacing/2}px,0px)`}"
-                           height="30px" v-for="i in columnItems"
-                           :key="i">
+        <d-row
+          v-if="showLabels"
+          :wrap="false"
+        >
+          <d-card-subtitle
+            v-for="i in columnItems"
+            :key="i"
+            class="pa-0 px-2"
+            :style="{'justify-content': 'center',
+                     'min-width': `${columnSpacing}px`,
+                     'max-width': `${columnSpacing}px`,
+                     height: '30px',
+                     transform: `translate(-${columnSpacing/2}px,0px)`}"
+            height="30px"
+          >
             {{ i }}
           </d-card-subtitle>
         </d-row>
@@ -38,7 +73,7 @@
 import lines from "./variant/Lines"
 
 export default {
-  name: "d-chart",
+  name: "DChart",
   components: {
     lines
   },

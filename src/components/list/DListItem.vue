@@ -1,31 +1,36 @@
 <template>
-  <DWrapper ref="wrapper" root-tag="li" :classes="['d-list__item', {filled: isFilled, selected, center}]" v-ripple
-            @focusin="focus = true"
-            @focusout="focus = false"
-            @mouseenter="focus = true"
-            @mouseleave="focus = false"
-            v-bind="{...$props, ...$attrs}" @click="onClick" :tabindex="disabled?-1:0" @keyup.enter="onClick"
-            :glow="{
-              active:!filled && selected
-            }"
-            :color="color"
+  <DWrapper
+    ref="wrapper"
+    v-ripple
+    root-tag="li"
+    :classes="['d-list__item', {filled: isFilled, selected, center}]"
+    v-bind="{...$props, ...$attrs}"
+    :tabindex="disabled?-1:0"
+    :glow="{
+      active:!filled && selected
+    }"
+    :color="color"
+    @focusin="focus = true"
+    @focusout="focus = false"
+    @mouseenter="focus = true"
+    @mouseleave="focus = false"
+    @click="onClick"
+    @keyup.enter="onClick"
   >
     <span class="d-list__item__content">
-      <slot></slot>
+      <slot />
     </span>
   </DWrapper>
 </template>
 
 <script setup lang="ts">
-import {useClearColors, useSetColor} from "../../composables/Color.composable";
+import {computed, getCurrentInstance, inject, onMounted, ref} from "vue";
+import defaultProps from "../../mixins/DefaultProps";
+import DWrapper from "../DWrapper.vue";
+import {Wrapper} from "../../types/components/Wrapper";
 
 const wrapper = ref<Wrapper>();
 defineExpose({wrapper});
-import {computed, getCurrentInstance, inject, nextTick, onMounted, ref, watch} from "vue";
-import defaultProps from "../../mixins/DefaultProps";
-import DWrapper from "../DWrapper.vue";
-import DCard from "../card/DCard.vue";
-import {Wrapper} from "../../types/components/Wrapper";
 
 const vuelize: any = inject('vuelize');
 const updateList: any = inject('updateList');

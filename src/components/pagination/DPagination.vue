@@ -1,30 +1,73 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-pagination']" v-bind="{...$props, ...$attrs}"
-            @click="$emit('click')">
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-pagination']"
+    v-bind="{...$props, ...$attrs}"
+    @click="$emit('click')"
+  >
     <DRow gap>
-      <DIconButton name="angle-left" :disabled="isPreviousDisabled" :rounded="props.rounded" :size="size"
-                   @click="previous"/>
-      <DRow gap width="max-content">
-        <DRow gap width="max-content" v-if="modelValue <= visibleButtons">
-          <DCard v-for="i in visibleButtons - modelValue + 1" :key="i" :rounded="props.rounded" :width="`${size}px`"
-                 :height="`${size}px`" outlined/>
+      <DIconButton
+        name="angle-left"
+        :disabled="isPreviousDisabled"
+        :rounded="props.rounded"
+        :size="size"
+        @click="previous"
+      />
+      <DRow
+        gap
+        width="max-content"
+      >
+        <DRow
+          v-if="modelValue <= visibleButtons"
+          gap
+          width="max-content"
+        >
+          <DCard
+            v-for="i in visibleButtons - modelValue + 1"
+            :key="i"
+            :rounded="props.rounded"
+            :width="`${size}px`"
+            :height="`${size}px`"
+            outlined
+          />
         </DRow>
-        <DButton v-for="page in props.total" :key="page" class="page" v-show="isVisible(page)"
-                 :style="{minWidth: `${size}px`,fontSize: `${size/28}rem`}"
-                 :height="`${size}px`"
-                 :rounded="props.rounded"
-                 :filled="modelValue===page"
-                 :glow="modelValue!==page"
-                 :color="props.color"
-                 @click="setPage(page)">
+        <DButton
+          v-for="page in props.total"
+          v-show="isVisible(page)"
+          :key="page"
+          class="page"
+          :style="{minWidth: `${size}px`,fontSize: `${size/28}rem`}"
+          :height="`${size}px`"
+          :rounded="props.rounded"
+          :filled="modelValue===page"
+          :glow="modelValue!==page"
+          :color="props.color"
+          @click="setPage(page)"
+        >
           {{ page }}
         </DButton>
-        <DRow gap width="max-content" v-if="total - modelValue < visibleButtons">
-          <DCard v-for="i in visibleButtons - total + modelValue" :key="i" :rounded="props.rounded" :width="`${size}px`"
-                 :height="`${size}px`" outlined/>
+        <DRow
+          v-if="total - modelValue < visibleButtons"
+          gap
+          width="max-content"
+        >
+          <DCard
+            v-for="i in visibleButtons - total + modelValue"
+            :key="i"
+            :rounded="props.rounded"
+            :width="`${size}px`"
+            :height="`${size}px`"
+            outlined
+          />
         </DRow>
       </DRow>
-      <DIconButton name="angle-right" :disabled="isNextDisabled" :rounded="props.rounded" :size="size" @click="next"/>
+      <DIconButton
+        name="angle-right"
+        :disabled="isNextDisabled"
+        :rounded="props.rounded"
+        :size="size"
+        @click="next"
+      />
     </DRow>
   </DWrapper>
 </template>

@@ -1,11 +1,22 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-elevation-loader']" v-bind="{...$props, ...$attrs}">
-    <DRow class="d-elevation-loader__container" :width="(defaultSize*columns)+'px'">
-      <DCard v-for="item in amount" :key="item" :rounded="Rounded.none" class="d-elevation-loader__container__pillar"
-             :elevation="elevationMap[item-1]"
-             :width="defaultSize+'px'"
-             :height="defaultSize+'px'"
-             :style="{transition: speed+'ms'}"
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-elevation-loader']"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <DRow
+      class="d-elevation-loader__container"
+      :width="(defaultSize*columns)+'px'"
+    >
+      <DCard
+        v-for="item in amount"
+        :key="item"
+        :rounded="Rounded.none"
+        class="d-elevation-loader__container__pillar"
+        :elevation="elevationMap[item-1]"
+        :width="defaultSize+'px'"
+        :height="defaultSize+'px'"
+        :style="{transition: speed+'ms'}"
       />
     </DRow>
   </DWrapper>

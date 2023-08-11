@@ -1,16 +1,20 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-title']" v-bind="{...$props, ...$attrs}">
-    <slot></slot>
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-title']"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <slot />
   </DWrapper>
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue";
+import DWrapper from "../../DWrapper.vue";
+import defaultProps from "../../../mixins/DefaultProps";
 
 const wrapper = ref(null);
 defineExpose({ wrapper });
-import DWrapper from "../../DWrapper.vue";
-import defaultProps from "../../../mixins/DefaultProps";
 
 defineProps({
   ...defaultProps

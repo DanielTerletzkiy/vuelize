@@ -1,6 +1,11 @@
 <template>
-  <DWrapper ref="wrapper" root-tag="ul" :classes="['d-list', {'pa-1': outlined}]" v-bind="{...$props, ...$attrs}">
-    <slot></slot>
+  <DWrapper
+    ref="wrapper"
+    root-tag="ul"
+    :classes="['d-list', {'pa-1': outlined}]"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <slot />
   </DWrapper>
 </template>
 
@@ -9,8 +14,8 @@ const wrapper = ref(null);
 defineExpose({wrapper});
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
-import {computed, provide, ref, unref} from "vue";
 import type {ComputedRef} from "vue";
+import {computed, provide, ref, unref} from "vue";
 
 const emits = defineEmits(['update:modelValue']);
 const props = defineProps({

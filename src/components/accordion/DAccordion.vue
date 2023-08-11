@@ -1,16 +1,32 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-accordion']"
-            v-bind="{...$props, ...$attrs}">
-    <DCardTitle @click.self="onClick" class="d-accordion__header" :class="{'pa-0':removePadding}" :color="headerColor"
-                glow :glowing="open"
-                v-ripple>
-      <slot name="header"></slot>
-      <DIcon v-if="showArrow" :name="angleIcon" class="d-accordion__header__icon"/>
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-accordion']"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <DCardTitle
+      v-ripple
+      class="d-accordion__header"
+      :class="{'pa-0':removePadding}"
+      :color="headerColor"
+      glow
+      :glowing="open"
+      @click.self="onClick"
+    >
+      <slot name="header" />
+      <DIcon
+        v-if="showArrow"
+        :name="angleIcon"
+        class="d-accordion__header__icon"
+      />
     </DCardTitle>
     <TransitionExpand :duration="60">
       <suspense>
-        <DCardContent class="d-accordion__content" v-if="open">
-          <slot name="default"></slot>
+        <DCardContent
+          v-if="open"
+          class="d-accordion__content"
+        >
+          <slot name="default" />
         </DCardContent>
       </suspense>
     </TransitionExpand>
@@ -19,9 +35,6 @@
 
 <script setup lang="ts">
 import {Wrapper} from "../../types/components/Wrapper";
-
-const wrapper = ref<Wrapper>();
-defineExpose({wrapper});
 import {computed, getCurrentInstance, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCardTitle from "../card/text/DCardTitle.vue";
@@ -29,6 +42,9 @@ import DCardContent from "../card/content/DCardContent.vue";
 import DIcon from "../icon/DIcon.vue";
 import {TransitionExpand} from '@morev/vue-transitions';
 import defaultProps from "../../mixins/DefaultProps";
+
+const wrapper = ref<Wrapper>();
+defineExpose({wrapper});
 
 const component = getCurrentInstance();
 

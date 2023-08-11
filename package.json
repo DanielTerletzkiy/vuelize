@@ -19,7 +19,9 @@
     "build:publish": "np --yolo --no-yarn --any-branch --branch next",
     "publish:dev": "npm publish --tag=develop",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "lint": "eslint --ext .js,.vue,.ts src/",
+    "lint:fix": "eslint --fix --ext .js,.vue,.ts src/"
   },
   "type": "module",
   "files": [
@@ -36,14 +38,14 @@
     }
   },
   "dependencies": {
-    "sass": "^1.49.10",
     "@morev/vue-transitions": "^2.3.6",
     "focus-trap-vue": "^3.3.1",
     "lodash": "^4.17.21",
     "pinia": "^2.0.14",
+    "sass": "^1.49.10",
     "v-wave": "^1.3.3",
-    "vue3-unicons": "^0.0.9",
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "vue3-unicons": "^0.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
@@ -68,6 +70,8 @@
     "@storybook/builder-vite": "^0.1.38",
     "@storybook/testing-library": "^0.0.13",
     "@storybook/vue3": "^6.5.9",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "@typescript-eslint/parser": "^6.3.0",
     "@vitejs/plugin-vue": "^2.2.0",
     "@vue/cli-plugin-babel": "^5.0.4",
     "@vue/cli-plugin-typescript": "^5.0.4",
@@ -77,6 +81,8 @@
     "babel-loader": "^8.2.5",
     "cross-env": "^7.0.2",
     "cz-conventional-changelog": "^3.0.1",
+    "eslint": "^8.46.0",
+    "eslint-plugin-vue": "^9.17.0",
     "git-cz": "^4.7.4",
     "husky": "^4.3.0",
     "lint-staged": "^10.4.2",

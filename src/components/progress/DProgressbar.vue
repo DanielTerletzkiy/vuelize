@@ -1,13 +1,34 @@
 <template>
-  <DWrapper ref="wrapper" elevation="n4" :classes="['d-progressbar', {label: showLabel}]" v-bind="{...$props, ...$attrs}"
-            @click="$emit('click')">
-    <DCard class="d-progressbar__wrapper" color="secondary" block :rounded="props.rounded">
-      <DCard class="d-progressbar__wrapper__indicator" :width="`${progress}%`" :rounded="props.rounded"
-             :color="props.color" glowing>
-      </DCard>
-      <DCardSubtitle v-if="showLabel" class="d-progressbar__wrapper__label" :rounded="props.rounded"
-                     :color="props.color">
-        <slot name="progress" :progress="progress">
+  <DWrapper
+    ref="wrapper"
+    elevation="n4"
+    :classes="['d-progressbar', {label: showLabel}]"
+    v-bind="{...$props, ...$attrs}"
+    @click="$emit('click')"
+  >
+    <DCard
+      class="d-progressbar__wrapper"
+      color="secondary"
+      block
+      :rounded="props.rounded"
+    >
+      <DCard
+        class="d-progressbar__wrapper__indicator"
+        :width="`${progress}%`"
+        :rounded="props.rounded"
+        :color="props.color"
+        glowing
+      />
+      <DCardSubtitle
+        v-if="showLabel"
+        class="d-progressbar__wrapper__label"
+        :rounded="props.rounded"
+        :color="props.color"
+      >
+        <slot
+          name="progress"
+          :progress="progress"
+        >
           {{ progress }} %
         </slot>
       </DCardSubtitle>

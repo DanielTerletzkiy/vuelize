@@ -1,18 +1,31 @@
 <template>
-  <DWrapper ref="wrapper" root-tag="button" :classes="['d-button', size, {filled, block, glow}]"
-            v-bind="{...$props, ...$attrs}"
-            :elevation="typeof $props.glow === 'undefined' && !filled && !flat ? 2 : $props.elevation || 0"
-            @click.capture="$emit('click')">
-    <span class="d-button__content" v-ripple>
-      <span class="prefix" v-if="!!$slots.prefix">
-        <slot name="prefix"></slot>
+  <DWrapper
+    ref="wrapper"
+    root-tag="button"
+    :classes="['d-button', size, {filled, block, glow}]"
+    v-bind="{...$props, ...$attrs}"
+    :elevation="typeof $props.glow === 'undefined' && !filled && !flat ? 2 : $props.elevation || 0"
+    @click.capture="$emit('click')"
+  >
+    <span
+      v-ripple
+      class="d-button__content"
+    >
+      <span
+        v-if="!!$slots.prefix"
+        class="prefix"
+      >
+        <slot name="prefix" />
       </span>
-      <span class="center"><slot name="default"></slot></span>
-      <span class="suffix" v-if="!!$slots.suffix">
-        <slot name="suffix"></slot>
+      <span class="center"><slot name="default" /></span>
+      <span
+        v-if="!!$slots.suffix"
+        class="suffix"
+      >
+        <slot name="suffix" />
       </span>
     </span>
-    <slot name="misc"></slot>
+    <slot name="misc" />
   </DWrapper>
 </template>
 

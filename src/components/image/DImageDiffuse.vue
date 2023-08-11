@@ -1,8 +1,14 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-image-diffuse']"
-            v-bind="{...$props, ...$attrs}">
-    <div class="d-image-diffuse__content" draggable="false"
-         v-bind="{...$props, ...$attrs}"/>
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-image-diffuse']"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <div
+      class="d-image-diffuse__content"
+      draggable="false"
+      v-bind="{...$props, ...$attrs}"
+    />
   </DWrapper>
 </template>
 

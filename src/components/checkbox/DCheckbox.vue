@@ -1,14 +1,35 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-checkbox']" v-bind="{...$props, ...$attrs}"
-            @click="click">
-    <div class="d-checkbox__box" :class="classes" v-ripple
-         :tabindex="disabled?-1:0" @keyup.enter="click">
-      <TransitionSlide group :duration="150">
-        <DIcon v-if="icon" :key="icon" :name="icon" :size="size" :color="'currentColor'"/>
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-checkbox']"
+    v-bind="{...$props, ...$attrs}"
+    @click="click"
+  >
+    <div
+      v-ripple
+      class="d-checkbox__box"
+      :class="classes"
+      :tabindex="disabled?-1:0"
+      @keyup.enter="click"
+    >
+      <TransitionSlide
+        group
+        :duration="150"
+      >
+        <DIcon
+          v-if="icon"
+          :key="icon"
+          :name="icon"
+          :size="size"
+          :color="'currentColor'"
+        />
       </TransitionSlide>
     </div>
-    <div class="d-checkbox__label" v-if="!!$slots.default">
-      <slot></slot>
+    <div
+      v-if="!!$slots.default"
+      class="d-checkbox__label"
+    >
+      <slot />
     </div>
   </DWrapper>
 </template>

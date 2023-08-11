@@ -1,27 +1,34 @@
 <template>
-  <component ref="wrapper" class="vuelize" :is="componentTag" :href="link" :disabled="disabled"
-             :class="[classes, mode, globalClasses, elevationClasses, glowClasses, blurClasses]"
-             :style="{height, width, ...outline}"
-             @mouseenter="$emit('mouseenter')" @mouseleave="$emit('mouseleave')">
-    <slot></slot>
+  <component
+    :is="componentTag"
+    ref="wrapper"
+    class="vuelize"
+    :href="link"
+    :disabled="disabled"
+    :class="[classes, mode, globalClasses, elevationClasses, glowClasses, blurClasses]"
+    :style="{height, width, ...outline}"
+    @mouseenter="emit('mouseenter')"
+    @mouseleave="emit('mouseleave')"
+  >
+    <slot />
   </component>
 </template>
 
 <script setup lang="ts">
 import {useVuelizeTheme} from "../store/ThemeStore";
-import {computed, inject, nextTick, onMounted, ref, watch} from "vue";
+import {computed, nextTick, onMounted, ref, watch} from "vue";
 import defaultProps from "../mixins/DefaultProps";
 import {storeToRefs} from "pinia";
 import {useClearColors, useColor, useSetColors} from "../composables/Color.composable";
 import {BlurAmount} from "../types/Theme";
 
-const wrapper = ref(null);
+const wrapper = ref<HTMLElement | null>(null);
 defineExpose({wrapper});
 
-const vuelize: any = inject('vuelize');
+const emit = defineEmits(['mouseenter', 'mouseleave'])
 
 const vuelizeTheme = useVuelizeTheme()
-const {mode, currentTheme} = storeToRefs(vuelizeTheme)
+const {mode} = storeToRefs(vuelizeTheme)
 
 const props = defineProps({
   classes: {type: Array},
@@ -46,18 +53,22 @@ const glowClasses = computed(() => {
   if (disabled) {
     return {}
   }
-  const glowActive = typeof props.glow === "object" && props.glow.active;
-  const glowCentral = typeof props.glow === "object" && props.glow.central;
+  const isObject = typeof props.glow === "object";
+  
+  const glowActive = isObject && props.glow.active;
+  const glowCentral = isObject && props.glow.central;
+  const glowSelectable = isObject && props.glow.selectable;
   return {
     glow: checkPropTrue(props.glow),
-    glowActive: glowActive,
-    glowCentral: glowCentral,
+    glowActive,
+    glowCentral,
+    glowSelectable,
   }
 })
 
 const blurClasses = computed(() => {
   const active = checkPropTrue(props.blur);
-  if(!active){
+  if (!active) {
     return {};
   }
   const disabled = typeof props.blur === "object" && props.blur.disabled;
@@ -76,6 +87,7 @@ function checkPropTrue(prop: unknown): boolean {
 }
 
 const elevationClasses = computed(() => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let elevationObject: any = {}
   if (props.elevation === '') {
     elevationObject['elevation'] = true

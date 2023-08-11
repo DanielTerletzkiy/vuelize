@@ -1,41 +1,84 @@
 <template>
-  <d-function-wrapper :classes="['d-code-line']" v-bind="{...$props, ...$attrs}">
-    <d-card block depressed class="d-code-line__card" elevation-dark="n4" elevation-light="0">
-      <d-row class="d-code-line__title" elevation-dark="n2" elevation-light="0">
+  <d-function-wrapper
+    :classes="['d-code-line']"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <d-card
+      block
+      depressed
+      class="d-code-line__card"
+      elevation-dark="n4"
+      elevation-light="0"
+    >
+      <d-row
+        class="d-code-line__title"
+        elevation-dark="n2"
+        elevation-light="0"
+      >
         <d-column>
           <d-card-subtitle color="primary">
             {{ label }}
           </d-card-subtitle>
         </d-column>
-        <d-spacer/>
+        <d-spacer />
         <d-card-subtitle root-tag="pre">
           {{ language }}
         </d-card-subtitle>
-        <d-divider vertical block size="2px" class="my-3" :color="hover.includes(-1)?'primary':''"/>
+        <d-divider
+          vertical
+          block
+          size="2px"
+          class="my-3"
+          :color="hover.includes(-1)?'primary':''"
+        />
         <d-column>
-          <d-icon-button size="40" color="primary" @click="copySequence"
-                         v-hover="{ over: ()=>{setHover(true, -1)}, leave: ()=>{setHover(false, -1)} }">
-            <d-icon name="clipboard-notes"/>
+          <d-icon-button
+            v-hover="{ over: ()=>{setHover(true, -1)}, leave: ()=>{setHover(false, -1)} }"
+            size="40"
+            color="primary"
+            @click="copySequence"
+          >
+            <d-icon name="clipboard-notes" />
           </d-icon-button>
         </d-column>
       </d-row>
 
-      <d-row class="d-code-line__row" v-for="(code, c) in this.codeArray" :key="c">
+      <d-row
+        v-for="(code, c) in codeArray"
+        :key="c"
+        class="d-code-line__row"
+      >
         <d-column>
           <d-card-subtitle class="d-code-line__row__number">
             {{ c + 1 }}
           </d-card-subtitle>
         </d-column>
         <d-column>
-          <d-card-title v-highlightjs="code" class="d-code-snippet__code__row__code font-size-small"><code
-              :class="language"></code></d-card-title>
+          <d-card-title
+            v-highlightjs="code"
+            class="d-code-snippet__code__row__code font-size-small"
+          >
+            <code
+              :class="language"
+            />
+          </d-card-title>
         </d-column>
-        <d-spacer></d-spacer>
-        <d-divider vertical block size="2px" class="my-3" :color="hover.includes(c)?'primary':''"/>
+        <d-spacer />
+        <d-divider
+          vertical
+          block
+          size="2px"
+          class="my-3"
+          :color="hover.includes(c)?'primary':''"
+        />
         <d-column>
-          <d-icon-button size="40" color="primary" @click="()=>copy(code)"
-                         v-hover="{ over: ()=>{setHover(true, c)}, leave: ()=>{setHover(false, c)} }">
-            <d-icon name="clipboard"/>
+          <d-icon-button
+            v-hover="{ over: ()=>{setHover(true, c)}, leave: ()=>{setHover(false, c)} }"
+            size="40"
+            color="primary"
+            @click="()=>copy(code)"
+          >
+            <d-icon name="clipboard" />
           </d-icon-button>
         </d-column>
       </d-row>
@@ -50,7 +93,7 @@ import VueHighlightJS from 'vue-highlightjs'
 Vue.use(VueHighlightJS)
 
 export default {
-  name: "d-code-line",
+  name: "DCodeLine",
 
   props: {
     label: {type: String, required: true},

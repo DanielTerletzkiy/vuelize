@@ -1,8 +1,21 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-rating']" v-bind="{...$props, ...$attrs}">
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-rating']"
+    v-bind="{...$props, ...$attrs}"
+  >
     <DRow disabled>
-      <DIconButton v-for="star in stars" :key="star" :color="color" :size="size">
-        <DIcon :name="star.icon" :icon-style="star.iconType" :size="size"/>
+      <DIconButton
+        v-for="star in stars"
+        :key="star"
+        :color="color"
+        :size="size"
+      >
+        <DIcon
+          :name="star.icon"
+          :icon-style="star.iconType"
+          :size="size"
+        />
       </DIconButton>
     </DRow>
   </DWrapper>

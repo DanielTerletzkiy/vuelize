@@ -83,6 +83,7 @@ export type GlowSettings = {
     disabled?: boolean,
     active: boolean,
     central: boolean,
+    selectable: boolean,
 }
 
 export enum BlurAmount {

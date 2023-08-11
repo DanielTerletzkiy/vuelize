@@ -1,24 +1,66 @@
 <template>
-  <div ref="wrapper" class="d-select" v-bind="{...$props, ...$attrs}" @keyup.esc="dropdownOpen = false"
-       @focusin="focusIn" @focusout="focusOut" @click.self="toggleDropdown" @keypress.enter="dropdownOpen = true"
-       tabindex="0">
-    <span v-if="search ? !dropdownOpen : true" @click="toggleDropdown" class="d-select-label">
-      <slot name="label" :item="itemsCopy[modelValue]" :index="modelValue">
+  <div
+    ref="wrapper"
+    class="d-select"
+    v-bind="{...$props, ...$attrs}"
+    tabindex="0"
+    @keyup.esc="dropdownOpen = false"
+    @focusin="focusIn"
+    @focusout="focusOut"
+    @click.self="toggleDropdown"
+    @keypress.enter="dropdownOpen = true"
+  >
+    <span
+      v-if="search ? !dropdownOpen : true"
+      class="d-select-label"
+      @click="toggleDropdown"
+    >
+      <slot
+        name="label"
+        :item="itemsCopy[modelValue]"
+        :index="modelValue"
+      >
         <span class="d-text-field__input__default">{{ itemsCopy[modelValue].value }}</span>
       </slot>
     </span>
-    <input v-show="dropdownOpen && search" v-model="searchInput" class="d-text-field__input d-text-field__input__search"
-           ref="searchBox"/>
-    <DIconButton size="24" rounded="md" class="d-text-field__input__icon" tabindex="-1" @click="toggleDropdown">
-      <SlideYDownTransition group :duration="150">
-        <DIcon :name="angleIcon" color="currentColor"/>
+    <input
+      v-show="dropdownOpen && search"
+      ref="searchBox"
+      v-model="searchInput"
+      class="d-text-field__input d-text-field__input__search"
+    >
+    <DIconButton
+      size="24"
+      rounded="md"
+      class="d-text-field__input__icon"
+      tabindex="-1"
+      @click="toggleDropdown"
+    >
+      <SlideYDownTransition
+        group
+        :duration="150"
+      >
+        <DIcon
+          :name="angleIcon"
+          color="currentColor"
+        />
       </SlideYDownTransition>
     </DIconButton>
-    <DSelectMenu :items="itemsCopy" :modelValue="modelValue" @update:modelValue="onInput"
-                 v-model:open="dropdownOpen" :mandatory="mandatory" :multiple="false" :index-key="indexKey"
-                 :color="$props.color">
-      <template v-slot:item="props">
-        <slot name="item" v-bind="props">
+    <DSelectMenu
+      v-model:open="dropdownOpen"
+      :items="itemsCopy"
+      :model-value="modelValue"
+      :mandatory="mandatory"
+      :multiple="false"
+      :index-key="indexKey"
+      :color="$props.color"
+      @update:modelValue="onInput"
+    >
+      <template #item="props">
+        <slot
+          name="item"
+          v-bind="props"
+        >
           <span class="d-text-field__select__default">{{ props.value }}</span>
         </slot>
       </template>

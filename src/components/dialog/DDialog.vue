@@ -1,12 +1,26 @@
 <template>
   <TransitionFade :duration="{enter: 200, leave: 150}">
-    <DWrapper ref="wrapper" :classes="['d-dialog']" v-bind="{...$props, ...$attrs}" v-if="modelValue">
-      <div class="d-dialog__backdrop" @click.self="handleClick"/>
+    <DWrapper
+      v-if="modelValue"
+      ref="wrapper"
+      :classes="['d-dialog']"
+      v-bind="{...$props, ...$attrs}"
+    >
+      <div
+        class="d-dialog__backdrop"
+        @click.self="handleClick"
+      />
       <focus-trap :active="modelValue">
-        <div class="d-dialog__content" tabindex="-1">
-          <DWrapper ref="wrapper" class="d-dialog__content__focus" tabindex="0">
-            <slot name="default">
-            </slot>
+        <div
+          class="d-dialog__content"
+          tabindex="-1"
+        >
+          <DWrapper
+            ref="wrapper"
+            class="d-dialog__content__focus"
+            tabindex="0"
+          >
+            <slot name="default" />
           </DWrapper>
         </div>
       </focus-trap>
@@ -16,13 +30,13 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
-
-const wrapper = ref(null);
-defineExpose({wrapper});
 import DWrapper from "../DWrapper.vue";
 import {TransitionFade} from "@morev/vue-transitions";
 import {FocusTrap} from "focus-trap-vue";
 import defaultProps from "../../mixins/DefaultProps";
+
+const wrapper = ref(null);
+defineExpose({wrapper});
 
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
@@ -49,7 +63,7 @@ function close() {
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 4;
+  z-index: 9;
   display: flex;
   justify-content: center;
   align-items: center;

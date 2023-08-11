@@ -1,37 +1,89 @@
 <template>
-  <d-function-wrapper :classes="['d-lines', ...classesObject]" v-bind="{...$props, ...$attrs}" :color="color">
-    <fade-transition group style="width: 100%; height: 100%; position: absolute" v-if="hover">
-      <d-label root-tag="d-card" v-for="(dataPoint, i) in $refs[hover][0].getDataPoints" :key="dataPoint"
-               ref="dataPointLabel"
-               class="d-lines__label"
-               filled
-               :color="$refs[hover][0].color"
-               :style="{left: dataPoint.split(',')[0].replace(/\D/g, '') + 'px', bottom: dataPoint.split(',')[1].replace(/\D/g, '') + 'px'}">
+  <d-function-wrapper
+    :classes="['d-lines', ...classesObject]"
+    v-bind="{...$props, ...$attrs}"
+    :color="color"
+  >
+    <fade-transition
+      v-if="hover"
+      group
+      style="width: 100%; height: 100%; position: absolute"
+    >
+      <d-label
+        v-for="(dataPoint, i) in $refs[hover][0].getDataPoints"
+        :key="dataPoint"
+        ref="dataPointLabel"
+        root-tag="d-card"
+        class="d-lines__label"
+        filled
+        :color="$refs[hover][0].color"
+        :style="{left: dataPoint.split(',')[0].replace(/\D/g, '') + 'px', bottom: dataPoint.split(',')[1].replace(/\D/g, '') + 'px'}"
+      >
         <span class="d-lines__label__content">{{ getDataPointValue($refs[hover][0].value.points[i]) }}</span>
       </d-label>
     </fade-transition>
-    <svg class="d-lines__flip" v-hover="{over: ()=>{this.mainHover = true}, leave:()=>{this.mainHover = false}}">
+    <svg
+      v-hover="{over: ()=>{mainHover = true}, leave:()=>{mainHover = false}}"
+      class="d-lines__flip"
+    >
       <defs v-if="showGrid">
-        <pattern id="grid" :width="columnSpacing" :height="rowSpacing" patternUnits="userSpaceOnUse">
-          <path :d="`M ${columnSpacing} 0 L 0 0 0 ${rowSpacing}`" fill="none" stroke-width="1"
-                class="d-lines__grid"></path>
+        <pattern
+          id="grid"
+          :width="columnSpacing"
+          :height="rowSpacing"
+          patternUnits="userSpaceOnUse"
+        >
+          <path
+            :d="`M ${columnSpacing} 0 L 0 0 0 ${rowSpacing}`"
+            fill="none"
+            stroke-width="1"
+            class="d-lines__grid"
+          />
         </pattern>
       </defs>
-      <rect x="0" width="100%" height="100%" fill="url(#grid)"></rect>
+      <rect
+        x="0"
+        width="100%"
+        height="100%"
+        fill="url(#grid)"
+      />
 
-      <svg class="d-line__flip" ref="chart" :key="key">
-        <SvgLine :ref="data.name" :value="data" v-for="(data, i) in value" :key="i" :columns="columns"
-                 :color="data.color"
-                 :id="data.name" @hover="setHover" v-bind="{...$props, ...$attrs}" :maxValue="maxValue"/>
+      <svg
+        ref="chart"
+        :key="key"
+        class="d-line__flip"
+      >
+        <SvgLine
+          v-for="(data, i) in value"
+          :id="data.name"
+          :ref="data.name"
+          :key="i"
+          :value="data"
+          :columns="columns"
+          :color="data.color"
+          v-bind="{...$props, ...$attrs}"
+          :max-value="maxValue"
+          @hover="setHover"
+        />
         <fade-transition>
-          <use v-if="hover" id="use" :key="hover" :xlink:href="'#'+hover"
-               v-hover="{over: ()=>{this.hoverLock = true}, leave:()=>{this.hoverLock = false}}"/>
+          <use
+            v-if="hover"
+            id="use"
+            :key="hover"
+            v-hover="{over: ()=>{hoverLock = true}, leave:()=>{hoverLock = false}}"
+            :xlink:href="'#'+hover"
+          />
         </fade-transition>
       </svg>
 
-      <path ref="cursor" :d="`M${cursorPosition} 0 v0 ${(rowLines+1)*rowSpacing}`" stroke-width="2"
-            stroke-linecap="round" style="transition: 0.2s"
-            stroke="currentColor"></path>
+      <path
+        ref="cursor"
+        :d="`M${cursorPosition} 0 v0 ${(rowLines+1)*rowSpacing}`"
+        stroke-width="2"
+        stroke-linecap="round"
+        style="transition: 0.2s"
+        stroke="currentColor"
+      />
     </svg>
   </d-function-wrapper>
 </template>
@@ -43,7 +95,7 @@ import debounce from "lodash/debounce";
 import Vivus from "vivus"
 
 export default {
-  name: "d-lines",
+  name: "DLines",
   components: {SvgLine},
   props: {
     value: Array,
@@ -117,7 +169,7 @@ export default {
     this.animatePaths();
   },
 
-  destroyed() {
+  unmounted() {
     window.removeEventListener('mousemove', this.updateCursor);
   }
 }

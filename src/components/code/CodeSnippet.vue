@@ -1,61 +1,128 @@
 <template>
-  <d-function-wrapper :classes="['d-code-snippet']" v-bind="{...$props, ...$attrs}">
-    <d-card block depressed class="d-code-snippet__card" elevation-dark="n4" elevation-light="0">
-      <d-row class="d-code-snippet__title" elevation-dark="n2" elevation-light="0">
+  <d-function-wrapper
+    :classes="['d-code-snippet']"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <d-card
+      block
+      depressed
+      class="d-code-snippet__card"
+      elevation-dark="n4"
+      elevation-light="0"
+    >
+      <d-row
+        class="d-code-snippet__title"
+        elevation-dark="n2"
+        elevation-light="0"
+      >
         <d-column>
           <d-card-subtitle color="primary">
             {{ label }}
           </d-card-subtitle>
         </d-column>
-        <d-row width="max-content" v-if="splitVueTags">
-          <d-divider vertical block size="2px" class="my-4 mr-2"/>
+        <d-row
+          v-if="splitVueTags"
+          width="max-content"
+        >
+          <d-divider
+            vertical
+            block
+            size="2px"
+            class="my-4 mr-2"
+          />
           <d-tab-list v-model="currentVueTag">
-            <d-tab-item height="0px" :color="currentVueTag === tag ? color : ''" v-for="{tag, icon, color} in vueTags"
-                        :key="tag">
-              <d-icon :name="icon"/>
-              <d-card-subtitle color="inherit" root-tag="pre">{{ tag }}</d-card-subtitle>
+            <d-tab-item
+              v-for="{tag, icon, color} in vueTags"
+              :key="tag"
+              height="0px"
+              :color="currentVueTag === tag ? color : ''"
+            >
+              <d-icon :name="icon" />
+              <d-card-subtitle
+                color="inherit"
+                root-tag="pre"
+              >
+                {{ tag }}
+              </d-card-subtitle>
             </d-tab-item>
           </d-tab-list>
         </d-row>
-        <d-spacer/>
+        <d-spacer />
         <d-card-subtitle root-tag="pre">
           {{ currentLanguage }}
         </d-card-subtitle>
-        <d-divider vertical block size="2px" class="my-3" :color="hover?'primary':''"/>
+        <d-divider
+          vertical
+          block
+          size="2px"
+          class="my-3"
+          :color="hover?'primary':''"
+        />
         <d-column>
-          <d-icon-button size="40" color="primary" @click="copy"
-                         v-hover="{ over: ()=>{this.hover = true}, leave: ()=>{this.hover = false} }">
-            <d-icon name="clipboard-notes"/>
+          <d-icon-button
+            v-hover="{ over: ()=>{hover = true}, leave: ()=>{hover = false} }"
+            size="40"
+            color="primary"
+            @click="copy"
+          >
+            <d-icon name="clipboard-notes" />
           </d-icon-button>
         </d-column>
       </d-row>
       <d-row wrap>
         <d-column class="d-code-snippet__code my-2">
           <d-card-content class="pa-0">
-            <d-row v-for="(line, l) in parsedCode" :key="l" class="d-code-snippet__code__row">
+            <d-row
+              v-for="(line, l) in parsedCode"
+              :key="l"
+              class="d-code-snippet__code__row"
+            >
               <d-column>
-                <d-card-subtitle class="d-code-snippet__code__row__number">{{ l + 1 }}</d-card-subtitle>
+                <d-card-subtitle class="d-code-snippet__code__row__number">
+                  {{ l + 1 }}
+                </d-card-subtitle>
               </d-column>
               <d-column>
-                <d-card-title v-highlightjs="line" :key="currentLanguage" class="d-code-snippet__code__row__code font-size-small"><code
-                    :class="currentLanguage"></code></d-card-title>
+                <d-card-title
+                  :key="currentLanguage"
+                  v-highlightjs="line"
+                  class="d-code-snippet__code__row__code font-size-small"
+                >
+                  <code
+                    :class="currentLanguage"
+                  />
+                </d-card-title>
               </d-column>
             </d-row>
           </d-card-content>
         </d-column>
-        <d-column v-if="showPreview" class="d-code-snippet__preview pa-0 ma-3" elevation-dark="n1" elevation-light>
-          <d-card-content flex column no-gap>
+        <d-column
+          v-if="showPreview"
+          class="d-code-snippet__preview pa-0 ma-3"
+          elevation-dark="n1"
+          elevation-light
+        >
+          <d-card-content
+            flex
+            column
+            no-gap
+          >
             <div class="d-code-snippet__preview__title">
               <d-card-subtitle>
-                <d-icon name="eye"/>
+                <d-icon name="eye" />
                 Preview
               </d-card-subtitle>
-              <d-divider size="2px" color="primary" class="mx-3"/>
+              <d-divider
+                size="2px"
+                color="primary"
+                class="mx-3"
+              />
             </div>
             <d-card-content
-                class="mt-3">
+              class="mt-3"
+            >
               <slot>
-                <v-runtime-template :template="code"></v-runtime-template>
+                <v-runtime-template :template="code" />
               </slot>
             </d-card-content>
           </d-card-content>
@@ -68,23 +135,22 @@
 <script>
 import Vue from 'vue'
 import VueHighlightJS from 'vue-highlightjs'
+import VRuntimeTemplate from "v-runtime-template";
 
 Vue.use(VueHighlightJS)
 
-import VRuntimeTemplate from "v-runtime-template";
-
 export default {
-  name: "d-code-snippet",
+  name: "DCodeSnippet",
+
+  components: {
+    VRuntimeTemplate
+  },
   props: {
     label: {type: String, required: true},
     code: String,
     language: {type: String, default: 'html'},
     hidePreview: {type: Boolean, default: false},
     splitVueTags: Boolean,
-  },
-
-  components: {
-    VRuntimeTemplate
   },
 
   data: () => ({
@@ -125,6 +191,10 @@ export default {
     }
   },
 
+  mounted() {
+    this.$forceUpdate()
+  },
+
   methods: {
     copy() {
       navigator.clipboard.writeText(this.parsedCode.map((line) => {
@@ -132,10 +202,6 @@ export default {
       }).join(''));
       this.$notify('Copied', 'Code copied', 'success', {icon: 'clipboard-notes'})
     },
-  },
-
-  mounted() {
-    this.$forceUpdate()
   }
 }
 </script>

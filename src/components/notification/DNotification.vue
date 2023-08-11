@@ -1,24 +1,62 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-notification']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
-    <slot name="default" :notification="notification">
-      <DCardContent class="d-notification__content" :color="options.color" glow glowing
-                    outlined="!options.color"
-                    depressed min-width="100%" max-width="500px"
-                    @mouseover="hover = true" @mouseleave="hover = false">
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-notification']"
+    v-bind="{...$props, ...$attrs}"
+    @click="$emit('click')"
+  >
+    <slot
+      name="default"
+      :notification="notification"
+    >
+      <DCardContent
+        class="d-notification__content"
+        :color="options.color"
+        glow
+        glowing
+        outlined="!options.color"
+        depressed
+        min-width="100%"
+        max-width="500px"
+        @mouseover="hover = true"
+        @mouseleave="hover = false"
+      >
         <DRow class="pa-2">
           <DColumn no-padding>
-            <DIconButton :color="(options.color)" @click="onCloseClick">
+            <DIconButton
+              :color="(options.color)"
+              @click="onCloseClick"
+            >
               <TransitionSlide group>
-                <DIcon v-if="hover" :size="40" name="multiply"></DIcon>
-                <DIcon v-else :size="40" :name="options.icon"></DIcon>
+                <DIcon
+                  v-if="hover"
+                  :size="40"
+                  name="multiply"
+                />
+                <DIcon
+                  v-else
+                  :size="40"
+                  :name="options.icon"
+                />
               </TransitionSlide>
             </DIconButton>
           </DColumn>
-          <d-column no-padding style="align-self: stretch; justify-content: center; gap: 16px">
-            <DCardTitle v-if="notification.value.title" class="py-0 font-size-medium" :color="(options.color)">
+          <d-column
+            no-padding
+            style="align-self: stretch; justify-content: center; gap: 16px"
+          >
+            <DCardTitle
+              v-if="notification.value.title"
+              class="py-0 font-size-medium"
+              :color="(options.color)"
+            >
               {{ notification.value.title }}
             </DCardTitle>
-            <DCardSubtitle v-if="notification.value.content" class="py-0" :color="(options.color)">
+            <DCardSubtitle
+              v-if="notification.value.content"
+              class="py-0"
+              :color="(options.color)"
+            >
               {{ notification.value.content }}
             </DCardSubtitle>
           </d-column>
@@ -30,12 +68,8 @@
 
 <script setup lang="ts">
 import defaultProps from "../../mixins/DefaultProps";
-
-const wrapper = ref(null);
-defineExpose({ wrapper });
+import type {PropType, Ref} from "vue";
 import {inject, onBeforeUnmount, onMounted, ref, watch} from "vue";
-import type {Ref} from "vue";
-import type {PropType} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCardContent from "../card/content/DCardContent.vue";
 import DRow from "../flex/DRow.vue";
@@ -47,6 +81,9 @@ import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 import {TransitionSlide} from "@morev/vue-transitions";
 
 import Notification from "./Notification";
+
+const wrapper = ref(null);
+defineExpose({ wrapper });
 
 const vuelize: any = inject("vuelize");
 

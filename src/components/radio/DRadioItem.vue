@@ -1,19 +1,39 @@
 <template>
-  <DWrapper ref="wrapper" root-tag="li" :classes="['d-radio-item', {selected, center}]" v-ripple
-            v-bind="{...$props, ...$attrs}" @click="onClick" :tabindex="disabled?-1:0" @keyup.enter="onClick"
-            glow :glowing="selected">
-    <d-card class="d-radio-item__dot" :color="itemColor" outlined :depressed="!selected" background-color="transparent"
-            rounded="circle" width="14px"
-            height="14px">
+  <DWrapper
+    ref="wrapper"
+    v-ripple
+    root-tag="li"
+    :classes="['d-radio-item', {selected, center}]"
+    v-bind="{...$props, ...$attrs}"
+    :tabindex="disabled?-1:0"
+    glow
+    :glowing="selected"
+    @click="onClick"
+    @keyup.enter="onClick"
+  >
+    <d-card
+      class="d-radio-item__dot"
+      :color="itemColor"
+      outlined
+      :depressed="!selected"
+      background-color="transparent"
+      rounded="circle"
+      width="14px"
+      height="14px"
+    >
       <TransitionFade>
         <Suspense>
-          <d-card v-if="selected" :background-color="selected ? itemColor : 'transparent'" rounded="circle"
-                  width="8px"
-                  height="8px"/>
+          <d-card
+            v-if="selected"
+            :background-color="selected ? itemColor : 'transparent'"
+            rounded="circle"
+            width="8px"
+            height="8px"
+          />
         </Suspense>
       </TransitionFade>
     </d-card>
-    <slot></slot>
+    <slot />
   </DWrapper>
 </template>
 

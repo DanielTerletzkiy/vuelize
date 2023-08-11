@@ -1,11 +1,24 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-notification-wrapper']" v-bind="{...$props, ...$attrs}"
-            @click="$emit('click')">
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-notification-wrapper']"
+    v-bind="{...$props, ...$attrs}"
+    @click="$emit('click')"
+  >
     <TransitionSlide>
-      <div class="d-notification-wrapper__content" v-if="notifications.length>0">
-        <TransitionFade group :duration="100">
-          <DNotification v-for="notification in notifications" :notification="notification"
-                         :key="notification.value.key"/>
+      <div
+        v-if="notifications.length>0"
+        class="d-notification-wrapper__content"
+      >
+        <TransitionFade
+          group
+          :duration="100"
+        >
+          <DNotification
+            v-for="notification in notifications"
+            :key="notification.value.key"
+            :notification="notification"
+          />
         </TransitionFade>
       </div>
     </TransitionSlide>
@@ -15,8 +28,8 @@
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({wrapper});
-import {computed, inject, ref, watch} from "vue";
 import type {Ref} from "vue";
+import {computed, inject, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DNotification from "./DNotification.vue";
 import {TransitionFade, TransitionSlide} from "@morev/vue-transitions";

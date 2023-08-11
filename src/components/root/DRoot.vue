@@ -1,32 +1,49 @@
 <template>
-  <div ref="wrapper" class="d-root" id="root" :class="mode">
-    <header class="header" :class="mode">
-      <slot name="toolbar"></slot>
+  <div
+    id="root"
+    ref="wrapper"
+    class="d-root"
+    :class="mode"
+  >
+    <header
+      class="header"
+      :class="mode"
+    >
+      <slot name="toolbar" />
     </header>
-    <div class="content" :class="mode">
+    <div
+      class="content"
+      :class="mode"
+    >
       <aside class="navbar">
-        <slot name="navbar"></slot>
+        <slot name="navbar" />
       </aside>
-      <main class="view" :class="mode">
-        <slot name="default"></slot>
+      <main
+        class="view"
+        :class="mode"
+      >
+        <slot name="default" />
       </main>
     </div>
-    <footer class="footer" :class="mode">
-      <slot name="footer"></slot>
+    <footer
+      class="footer"
+      :class="mode"
+    >
+      <slot name="footer" />
     </footer>
-    <slot name="notifications"/>
+    <slot name="notifications" />
   </div>
 </template>
 
 <script setup lang="ts">
 import {Theme, ThemeColorProperty, ThemeSheetProperty, ThemeTextProperty} from "../../types/Theme";
-
-const wrapper = ref<HTMLElement | null>(null);
-defineExpose({wrapper});
 import {inject, onMounted, ref, watch} from "vue";
 import {useSetColor} from "../../composables/Color.composable";
 import {useVuelizeTheme} from "../../store/ThemeStore";
 import {storeToRefs} from "pinia";
+
+const wrapper = ref<HTMLElement | null>(null);
+defineExpose({wrapper});
 
 const vuelize: any = inject('vuelize');
 

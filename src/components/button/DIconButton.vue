@@ -1,12 +1,20 @@
 <template>
-  <DWrapper ref="wrapper" root-tag="button" :classes="['d-icon-button', {glow: true, 'glow--active': props.active}]"
-            v-bind="{...$props, ...$attrs}" @click="$emit('click')">
-    <span class="d-icon-button__content" v-ripple>
+  <DWrapper
+    ref="wrapper"
+    root-tag="button"
+    :classes="['d-icon-button', {glow: true, 'glow--active': props.active}]"
+    v-bind="{...$props, ...$attrs}"
+    @click="$emit('click')"
+  >
+    <span
+      v-ripple
+      class="d-icon-button__content"
+    >
       <slot name="default">
-        <DIcon :name="name"/>
+        <DIcon :name="name" />
       </slot>
     </span>
-    <slot name="misc"></slot>
+    <slot name="misc" />
   </DWrapper>
 </template>
 

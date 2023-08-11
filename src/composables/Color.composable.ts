@@ -31,20 +31,20 @@ export function useContrastTextColor(ref: HTMLElement): string {
 
     const [r, g, b] = match[1].split(",") as unknown as number[];
 
-    let r1 = r / 255;
-    let g1 = g / 255;
-    let b1 = b / 255;
+    const r1 = r / 255;
+    const g1 = g / 255;
+    const b1 = b / 255;
 
     const gammaCorrection = (val: number) => {
         return (val <= 0.03928) ? val / 12.92 : Math.pow((val + 0.055) / 1.055, 2.4);
     }
 
-    let r2 = gammaCorrection(r1);
-    let g2 = gammaCorrection(g1);
-    let b2 = gammaCorrection(b1);
+    const r2 = gammaCorrection(r1);
+    const g2 = gammaCorrection(g1);
+    const b2 = gammaCorrection(b1);
 
     // Calculate the relative luminance
-    let L = 0.2126 * r2 + 0.7152 * g2 + 0.0722 * b2;
+    const L = 0.2126 * r2 + 0.7152 * g2 + 0.0722 * b2;
     const color = (L > 0.179) ? 'black' : 'white';
 
     ref.style.setProperty(`--${ThemeTextProperty.contrast}`, color)

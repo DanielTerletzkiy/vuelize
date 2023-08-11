@@ -1,13 +1,25 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-badge']" v-bind="{...$props, ...$attrs}" @click="$emit('click')">
-    <slot name="default">
-    </slot>
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-badge']"
+    v-bind="{...$props, ...$attrs}"
+    @click="$emit('click')"
+  >
+    <slot name="default" />
     <fade-transition>
-      <DCard v-if="value" v-bind="{...$props, ...$attrs}" :min-width="size+'px'" :height="size+'px'" rounded="pill"
-             class="d-badge__content">
-        <DCardSubtitle :color="$vuelize.getColorContrast(color)" class="d-badge__content__text">
-          <slot name="content">
-          </slot>
+      <DCard
+        v-if="value"
+        v-bind="{...$props, ...$attrs}"
+        :min-width="size+'px'"
+        :height="size+'px'"
+        rounded="pill"
+        class="d-badge__content"
+      >
+        <DCardSubtitle
+          :color="$vuelize.getColorContrast(color)"
+          class="d-badge__content__text"
+        >
+          <slot name="content" />
         </DCardSubtitle>
       </DCard>
     </fade-transition>
@@ -16,13 +28,13 @@
 
 <script setup lang="ts">
 import defaultProps from "../../mixins/DefaultProps";
-
-const wrapper = ref(null);
-defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 import {ref} from "vue";
+
+const wrapper = ref(null);
+defineExpose({ wrapper });
 
 const props = defineProps({
   value: {type: Boolean, default: true},

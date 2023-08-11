@@ -1,6 +1,10 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-radio-group']" v-bind="{...$props, ...$attrs}">
-    <slot/>
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-radio-group']"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <slot />
   </DWrapper>
 </template>
 

@@ -1,12 +1,25 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-dot-loader']" v-bind="{...$props, ...$attrs}">
-    <DRow class="d-dot-loader__container" :wrap="false" gap>
-      <DAvatar class="d-dot-loader__container__dot" v-for="i in Array.from(Array(amount).keys())" :key="i"
-               ref="dot"
-               :style="{transform: currentDot.value === i ? 'scale(200%)' : 'scale(100%)'}"
-               :size="defaultSize"
-               :color="color" rounded="circle">
-        <div/>
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-dot-loader']"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <DRow
+      class="d-dot-loader__container"
+      :wrap="false"
+      gap
+    >
+      <DAvatar
+        v-for="i in Array.from(Array(amount).keys())"
+        :key="i"
+        ref="dot"
+        class="d-dot-loader__container__dot"
+        :style="{transform: currentDot.value === i ? 'scale(200%)' : 'scale(100%)'}"
+        :size="defaultSize"
+        :color="color"
+        rounded="circle"
+      >
+        <div />
       </DAvatar>
     </DRow>
   </DWrapper>
@@ -16,7 +29,7 @@
 const wrapper = ref(null);
 defineExpose({ wrapper });
 import defaultProps from "../../mixins/DefaultProps";
-import {onMounted, reactive, ref, watch} from "vue";
+import {onMounted, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DRow from "../flex/DRow.vue";
 import DAvatar from "../avatar/DAvatar.vue";

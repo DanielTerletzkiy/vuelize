@@ -1,7 +1,11 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-card', {block}]" v-bind="{...$props, ...$attrs}"
-            @click="$emit('click')">
-    <slot></slot>
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-card', {block}]"
+    v-bind="{...$props, ...$attrs}"
+    @click="$emit('click')"
+  >
+    <slot />
   </DWrapper>
 </template>
 
@@ -10,9 +14,8 @@
 const wrapper = ref(null);
 defineExpose({wrapper});
 import DWrapper from "../DWrapper.vue";
-import {computed, inject, ref, watch} from "vue";
+import {inject, ref} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
-import {ThemeSheetProperty} from "../../types/Theme";
 
 const vuelize: any = inject('vuelize');
 

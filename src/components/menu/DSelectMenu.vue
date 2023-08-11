@@ -1,15 +1,39 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-select-menu']" @keyup.esc="hideSelectMenu">
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-select-menu']"
+    @keyup.esc="hideSelectMenu"
+  >
     <TransitionSlide :duration="80">
-      <DCard v-if="open && items" v-bind="{...$props, ...$attrs}" class="d-select-menu__dropdown pa-0" elevation="4"
-             v-click-outside="hideSelectMenu">
-        <DList :modelValue="modelValue"
-               @update:modelValue="onInput" :multiple="multiple" :mandatory="mandatory"
-               :color="color" class="d-select-menu__dropdown__list pa-0" rounded="none">
-          <DListItem v-for="(item, index) in items" v-show="item._show" :key="item[indexKey] || index"
-                     :color="item.color || 'currentColor'"
-                     :tabindex="0" ref="item">
-            <slot name="item" :item="item" :index="index">
+      <DCard
+        v-if="open && items"
+        v-click-outside="hideSelectMenu"
+        v-bind="{...$props, ...$attrs}"
+        class="d-select-menu__dropdown pa-0"
+        elevation="4"
+      >
+        <DList
+          :model-value="modelValue"
+          :multiple="multiple"
+          :mandatory="mandatory"
+          :color="color"
+          class="d-select-menu__dropdown__list pa-0"
+          rounded="none"
+          @update:modelValue="onInput"
+        >
+          <DListItem
+            v-for="(item, index) in items"
+            v-show="item._show"
+            :key="item[indexKey] || index"
+            ref="item"
+            :color="item.color || 'currentColor'"
+            :tabindex="0"
+          >
+            <slot
+              name="item"
+              :item="item"
+              :index="index"
+            >
               {{ item }}
             </slot>
           </DListItem>

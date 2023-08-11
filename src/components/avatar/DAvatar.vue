@@ -1,7 +1,15 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-avatar']" v-bind="{...$props, ...$attrs}">
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-avatar']"
+    v-bind="{...$props, ...$attrs}"
+  >
     <slot>
-      <DImage class="d-avatar__image" :src="src" :rounded="rounded"/>
+      <DImage
+        class="d-avatar__image"
+        :src="src"
+        :rounded="rounded"
+      />
     </slot>
   </DWrapper>
 </template>

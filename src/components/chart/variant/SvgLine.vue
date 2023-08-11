@@ -1,19 +1,53 @@
 <template>
-  <d-function-wrapper root-tag="g" :classes="['d-svg-line', ...classesObject]" v-bind="{...$props, ...$attrs}"
-                      v-hover="{over: ()=>{this.$emit('hover',value.name)}, leave:()=>{this.$emit('hover',null)}}">
-    <linearGradient :id="'grad'+value.color" x1="0%" y1="0%" x2="0%" y2="100%" class="d-svg-line__gradient">
-      <stop offset="0%" class="d-svg-line__gradient__end"></stop>
-      <stop offset="100%" class="d-svg-line__gradient__start"></stop>
+  <d-function-wrapper
+    v-hover="{over: ()=>{$emit('hover',value.name)}, leave:()=>{$emit('hover',null)}}"
+    root-tag="g"
+    :classes="['d-svg-line', ...classesObject]"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <linearGradient
+      :id="'grad'+value.color"
+      x1="0%"
+      y1="0%"
+      x2="0%"
+      y2="100%"
+      class="d-svg-line__gradient"
+    >
+      <stop
+        offset="0%"
+        class="d-svg-line__gradient__end"
+      />
+      <stop
+        offset="100%"
+        class="d-svg-line__gradient__start"
+      />
     </linearGradient>
 
-    <path v-if="showGradient" :fill="`url(#grad${value.color})`" class="d-svg-line__gradient" stroke-width="0"
-          :d="getGradientPoints"></path>
+    <path
+      v-if="showGradient"
+      :fill="`url(#grad${value.color})`"
+      class="d-svg-line__gradient"
+      stroke-width="0"
+      :d="getGradientPoints"
+    />
 
-    <path fill="none" stroke="currentColor" class="d-svg-line__path" style="height:100%; width:100%" stroke-width="2"
-          :d="getDataPoints"></path>
+    <path
+      fill="none"
+      stroke="currentColor"
+      class="d-svg-line__path"
+      style="height:100%; width:100%"
+      stroke-width="2"
+      :d="getDataPoints"
+    />
     <g v-if="showDots">
-      <circle v-for="points in getDataPoints" :key="points" :cx="points.split(',')[0].replace(/\D/g, '')"
-              :cy="points.split(',')[1].replace(/\D/g, '')" r="4" fill="currentColor"></circle>
+      <circle
+        v-for="points in getDataPoints"
+        :key="points"
+        :cx="points.split(',')[0].replace(/\D/g, '')"
+        :cy="points.split(',')[1].replace(/\D/g, '')"
+        r="4"
+        fill="currentColor"
+      />
     </g>
   </d-function-wrapper>
 </template>

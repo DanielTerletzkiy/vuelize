@@ -1,34 +1,71 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-table']" v-bind="{...$props, ...$attrs}" @click="$emit('click')"
-            width="100%">
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-table']"
+    v-bind="{...$props, ...$attrs}"
+    width="100%"
+    @click="$emit('click')"
+  >
     <table style="width: 100%; border-radius: inherit">
       <tr style="border-radius: inherit">
-        <th v-for="header in headers" :key="header.value" :colspan="header.colspan" :style="{width: header.width}"
-            style="display: table-cell; border-radius: inherit" class="glow" @click="handleSorting(header.key)"
-            v-ripple>
+        <th
+          v-for="header in headers"
+          :key="header.value"
+          v-ripple
+          :colspan="header.colspan"
+          :style="{width: header.width}"
+          style="display: table-cell; border-radius: inherit"
+          class="glow"
+          @click="handleSorting(header.key)"
+        >
           <DRow>
-            <slot :name="`header(${header.key})`" :value="header.value" :key="header.key" :type="header.type"
-                  :params="header.params"
-                  :color="header.color">
+            <slot
+              :key="header.key"
+              :name="`header(${header.key})`"
+              :value="header.value"
+              :type="header.type"
+              :params="header.params"
+              :color="header.color"
+            >
               <DCardSubtitle :color="header.color">
                 {{ header.value }}
               </DCardSubtitle>
             </slot>
-            <DIcon v-if="sort.key === header.key" :name="sortIcon"/>
+            <DIcon
+              v-if="sort.key === header.key"
+              :name="sortIcon"
+            />
           </DRow>
         </th>
       </tr>
       <tr>
         <td :colspan="headers.length">
-          <DDivider block width="100%"/>
+          <DDivider
+            block
+            width="100%"
+          />
         </td>
       </tr>
-      <tr v-for="(row, r) in visibleData" :key="r" @click="$emit(`rowClick`, r)">
-        <td v-for="(cell, c) in row" :key="r+c" :colspan="cell.colspan" @click="$emit(`cellClick`, c)">
-          <slot :name="`data(${cell.key})`" :value="cell.value" :key="cell.key" :type="cell.type"
-                :params="cell.params"
-                :row="r"
-                :color="cell.color">
+      <tr
+        v-for="(row, r) in visibleData"
+        :key="r"
+        @click="$emit(`rowClick`, r)"
+      >
+        <td
+          v-for="(cell, c) in row"
+          :key="r+c"
+          :colspan="cell.colspan"
+          @click="$emit(`cellClick`, c)"
+        >
+          <slot
+            :key="cell.key"
+            :name="`data(${cell.key})`"
+            :value="cell.value"
+            :type="cell.type"
+            :params="cell.params"
+            :row="r"
+            :color="cell.color"
+          >
             <DCardSubtitle :color="cell.color">
               {{ cell.value }}
             </DCardSubtitle>
@@ -36,10 +73,24 @@
         </td>
       </tr>
     </table>
-    <DDivider v-if="paginationAvailable" block width="100%"/>
-    <DRow v-if="paginationAvailable" class="pa-2" block>
-      <DSpacer/>
-      <DPagination v-model="currentPage" :color="color||'primary'" :size="24" rounded="md" :total="pages"/>
+    <DDivider
+      v-if="paginationAvailable"
+      block
+      width="100%"
+    />
+    <DRow
+      v-if="paginationAvailable"
+      class="pa-2"
+      block
+    >
+      <DSpacer />
+      <DPagination
+        v-model="currentPage"
+        :color="color||'primary'"
+        :size="24"
+        rounded="md"
+        :total="pages"
+      />
     </DRow>
   </DWrapper>
 </template>

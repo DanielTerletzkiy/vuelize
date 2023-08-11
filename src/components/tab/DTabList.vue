@@ -1,18 +1,26 @@
 <template>
-  <DWrapper root-tag="ul" ref="wrapper" :classes="['d-tab-list', {'pa-1': outlined}]"
-            v-bind="{...$props, ...$attrs}">
-    <slot ref="item"></slot>
-    <DDivider v-if="showIndicator" class="d-tab-list__indicator" :color="currentColor" size="2px"
-              :style="indicatorStylesObject"/>
+  <DWrapper
+    ref="wrapper"
+    root-tag="ul"
+    :classes="['d-tab-list', {'pa-1': outlined}]"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <slot ref="item" />
+    <DDivider
+      v-if="showIndicator"
+      class="d-tab-list__indicator"
+      :color="currentColor"
+      size="2px"
+      :style="indicatorStylesObject"
+    />
   </DWrapper>
 </template>
 
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({wrapper});
-import {computed, getCurrentInstance, provide, ref} from "vue";
 import type {ComputedRef} from "vue";
-import {flexClasses} from "../../mixins/FlexProps";
+import {computed, getCurrentInstance, provide, ref} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 import DWrapper from "../DWrapper.vue";
 import DDivider from "../divider/DDivider.vue";

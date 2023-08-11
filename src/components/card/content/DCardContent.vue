@@ -1,15 +1,19 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-content']" v-bind="{...$props, ...$attrs}">
-    <slot></slot>
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-content']"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <slot />
   </DWrapper>
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue";
+import DWrapper from "../../DWrapper.vue";
 
 const wrapper = ref(null);
 defineExpose({ wrapper });
-import DWrapper from "../../DWrapper.vue";
 </script>
 
 <style scoped lang="scss">

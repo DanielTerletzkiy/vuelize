@@ -1,11 +1,25 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-toolbar']" :rounded="Rounded.none" v-bind="{...$props, ...$attrs}">
-    <DRow block gap class="px-2 d-toolbar__content" align="center">
-      <DIconButton v-if="showHamburger" @click="onHamburgerClick"
-                   style="margin-left: -8px" :color="ThemeColorProperty.primary">
-        <DIcon name="bars"/>
+  <DWrapper
+    ref="wrapper"
+    :classes="['d-toolbar']"
+    :rounded="Rounded.none"
+    v-bind="{...$props, ...$attrs}"
+  >
+    <DRow
+      block
+      gap
+      class="px-2 d-toolbar__content"
+      align="center"
+    >
+      <DIconButton
+        v-if="showHamburger"
+        style="margin-left: -8px"
+        :color="ThemeColorProperty.primary"
+        @click="onHamburgerClick"
+      >
+        <DIcon name="bars" />
       </DIconButton>
-      <slot></slot>
+      <slot />
     </DRow>
   </DWrapper>
 </template>

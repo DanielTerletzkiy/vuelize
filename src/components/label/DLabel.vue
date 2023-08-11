@@ -1,23 +1,36 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-label', {filled, clickable}]"
-            v-bind="{...$props, ...$attrs}" :glow="{
-              disabled: filled,
-              active: true
-            }"
-            @click="$emit('click')" v-ripple="clickable && {
-              color: filled ? color :'currentColor'
-            }">
-    <DCardSubtitle class="d-label__wrapper__content pa-0"
-                   :color="color"
-                   rounded="inherit">
-      <span class="prefix" v-if="!!$slots.prefix">
-            <slot name="prefix"></slot>
+  <DWrapper
+    ref="wrapper"
+    v-ripple="clickable && {
+      color: filled ? color :'currentColor'
+    }"
+    :classes="['d-label', {filled, clickable}]"
+    v-bind="{...$props, ...$attrs}"
+    :glow="{
+      disabled: filled,
+      active: true
+    }"
+    @click="$emit('click')"
+  >
+    <DCardSubtitle
+      class="d-label__wrapper__content pa-0"
+      :color="color"
+      rounded="inherit"
+    >
+      <span
+        v-if="!!$slots.prefix"
+        class="prefix"
+      >
+        <slot name="prefix" />
       </span>
       <span class="center">
-        <slot name="default"></slot>
+        <slot name="default" />
       </span>
-      <span class="suffix" v-if="!!$slots.suffix">
-            <slot name="suffix"></slot>
+      <span
+        v-if="!!$slots.suffix"
+        class="suffix"
+      >
+        <slot name="suffix" />
       </span>
     </DCardSubtitle>
   </DWrapper>
@@ -28,7 +41,7 @@ const wrapper = ref(null);
 defineExpose({wrapper});
 import DWrapper from "../DWrapper.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
-import {computed, inject, ref} from "vue";
+import {ref} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
 
 const props = defineProps({
