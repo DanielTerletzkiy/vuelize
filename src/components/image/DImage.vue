@@ -49,6 +49,7 @@
           :href="src"
           name="cloud-download"
           root-tag="a"
+          target="_blank"
         />
         <d-divider
           block
