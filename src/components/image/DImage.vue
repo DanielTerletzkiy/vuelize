@@ -1,16 +1,104 @@
 <template>
-  <DWrapper ref="wrapper" :classes="['d-image']" :src="src"
-            draggable="false" root-tag="img" v-bind="{...$props, ...$attrs}">
-  </DWrapper>
+  <DWrapper
+      ref="wrapper"
+      :classes="['d-image']"
+      :src="src"
+      draggable="false"
+      root-tag="img"
+      v-bind="{...$props, ...$attrs}"
+      @click="openDialog"
+  />
+  <d-dialog
+      v-model="dialogOpen"
+      class="d-image__dialog"
+  >
+    <d-card
+        :blur="BlurAmount.strong"
+        class="d-image__dialog__container"
+        height="80vh"
+        width="80vw"
+    >
+      <DWrapper
+          ref="dialogImage"
+          :classes="['d-image__dialog__container__image']"
+          :src="src"
+          download="test.png"
+          draggable="false"
+          height="99%"
+          root-tag="img"
+          width="100%"
+      />
+    </d-card>
+    <d-row
+        class="d-image__dialog__actionbar"
+        gap
+        justify="center"
+        width="80vw"
+    >
+      <d-row
+          :wrap="false"
+          blur
+          class="px-4"
+          gap
+          outlined
+          rounded="pill"
+          width="max-content"
+      >
+        <d-icon-button
+            :download="alt || 'downloaded-file'"
+            :href="src"
+            name="cloud-download"
+            root-tag="a"
+        />
+        <d-divider
+            block
+            class="my-3"
+            vertical
+        />
+        <d-icon-button
+            :disabled="Math.round(zoomLevel*100)<=10"
+            name="search-minus"
+            @click="decreaseZoom"
+        />
+        <d-column no-padding>
+          <d-card-title
+              :glow="{active: true, central: true}"
+              class="font-size-medium pa-1"
+              width="100px"
+              @click="resetZoom"
+          >
+            {{ Math.round(zoomLevel * 100) }}%
+          </d-card-title>
+        </d-column>
+        <d-icon-button
+            :disabled="Math.round(zoomLevel*100)>=300"
+            name="search-plus"
+            @click="increaseZoom"
+        />
+        <d-divider
+            block
+            class="my-3"
+            vertical
+        />
+        <d-icon-button
+            name="times"
+            @click="closeDialog"
+        />
+      </d-row>
+    </d-row>
+  </d-dialog>
 </template>
 
 <script setup lang="ts">
+import {ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import defaultProps from "../../mixins/DefaultProps";
-import {ref} from "vue";
+import {BlurAmount} from "../../types";
+import {DColumn, DDialog, DDivider, DIconButton} from "../../ComponentImport";
 
 const wrapper = ref(null);
-defineExpose({wrapper});
+const dialogImage = ref(null);
+defineExpose({wrapper, dialogImage});
 
 const props = defineProps({
   src: {type: String, required: true},
@@ -19,9 +107,34 @@ const props = defineProps({
   ...defaultProps
 })
 
+const dialogOpen = ref<boolean>(false);
+
+function openDialog() {
+  dialogOpen.value = true;
+}
+
+function closeDialog() {
+  dialogOpen.value = false;
+}
+
+const zoomLevel = ref<number>(1);
+
+function increaseZoom() {
+  zoomLevel.value += .1;
+}
+
+function decreaseZoom() {
+  zoomLevel.value -= .1;
+}
+
+function resetZoom() {
+  zoomLevel.value = 1;
+}
 </script>
 
 <style scoped lang="scss">
+@import "../../styles/variables";
+
 .d-image {
   overflow: hidden;
 
@@ -30,5 +143,24 @@ const props = defineProps({
   background-position: center;
   width: inherit;
   height: inherit;
+
+  &__dialog {
+    &__container {
+      overflow: auto;
+
+      &__image {
+        transition: transform .2s;
+        transform: scale(v-bind(zoomLevel));
+        background-position: top left;
+        object-fit: v-bind(fit);
+      }
+    }
+
+    &__actionbar {
+      position: absolute;
+      bottom: $gap;
+      font-family: monospace;
+    }
+  }
 }
 </style>
