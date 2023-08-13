@@ -4,7 +4,7 @@
     root-tag="button"
     :classes="['d-button', size, {filled, block, glow}]"
     v-bind="{...$props, ...$attrs}"
-    :elevation="typeof $props.glow === 'undefined' && !filled && !flat ? 2 : $props.elevation || 0"
+    :elevation="typeof $props.glow === 'undefined' && !filled && !flat ? 1 : $props.elevation || 0"
     @click.capture="$emit('click')"
   >
     <span

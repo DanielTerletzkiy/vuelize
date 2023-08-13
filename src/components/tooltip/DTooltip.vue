@@ -62,8 +62,8 @@ defineExpose({wrapper});
 const slots = useSlots()
 
 const props = defineProps({
+  //fontColor: String, TODO
   filled: Boolean,
-  fontColor: String,
   stay: Boolean,
   simpleFade: Boolean,
   inactive: Boolean,
@@ -137,7 +137,7 @@ const stylesObject = computed(() => {
 
 const transitionComponent = computed(() => {
   return TransitionFade;
-  /*if (props.simpleFade) {
+  /*if (props.simpleFade) { TODO
     return TransitionFade;
   }
   switch (props.position) {

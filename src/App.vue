@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {BlurAmount, ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
-import {Position, Rounded} from "./types/Vuelize";
+import {Position, PositionHorizontal, PositionVertical, Rounded, State} from "./types/Vuelize";
 import {Size} from "./types/components/DButton";
 import DCard from "./components/card/DCard.vue";
 import DCardTitle from "./components/card/text/DCardTitle.vue";
@@ -10,10 +10,62 @@ import DTooltip from "./components/tooltip/DTooltip.vue";
 import DImage from "./components/image/DImage.vue";
 import DImageDiffuse from "./components/image/DImageDiffuse.vue";
 import DRow from "./components/flex/DRow.vue";
+import DCardContent from "./components/card/content/DCardContent.vue";
+import DColumn from "./components/flex/DColumn.vue";
+import {useVuelizeNotifications} from "./stores";
 
 const navOpen = ref(true);
 
 const dialog = ref(false);
+
+const notifications = useVuelizeNotifications()
+const {notify} = notifications;
+
+onMounted(() => {
+    notify('Test', 'test', State.success)
+    setTimeout(() => {
+
+        notify('Test2', 'test2', State.success, {
+            horizontal: PositionHorizontal.center,
+            vertical: PositionVertical.bottom
+        })
+        setTimeout(() => {
+
+            notify('Test3', 'test3', State.info, {
+                horizontal: PositionHorizontal.center,
+                vertical: PositionVertical.bottom
+            })
+            setTimeout(() => {
+
+                notify('Test4', 'test4', State.warning, {
+                    horizontal: PositionHorizontal.left,
+                    vertical: PositionVertical.bottom
+                })
+                setTimeout(() => {
+
+                    notify('Test5', 'test5', State.info, {
+                        horizontal: PositionHorizontal.center,
+                        vertical: PositionVertical.top
+                    }, true)
+                    setTimeout(() => {
+
+                        notify('Test6', 'test6', State.error, {
+                            horizontal: PositionHorizontal.center,
+                            vertical: PositionVertical.bottom
+                        })
+                        setTimeout(() => {
+
+                            notify('Test7', 'test7', State.error, {
+                                horizontal: PositionHorizontal.right,
+                                vertical: PositionVertical.top
+                            })
+                        }, 1000)
+                    }, 1000)
+                }, 1000)
+            }, 1000)
+        }, 1000)
+    }, 1000)
+})
 </script>
 
 <template>
@@ -212,26 +264,50 @@ const dialog = ref(false);
       </d-card>
     </d-card>
     <d-column
-      gap
-      block
+      :outlined="{offset: '1px'}"
+      no-padding
+      width="max-content"
+      class="ma-4"
     >
       <d-row
         v-for="x in ['','n']"
-        gap
       >
         <d-card
-          v-for="e in 30"
+          width="100px"
+          height="100px"
+          :rounded="Rounded.none"
+          :glow="{central: true}"
+        >
+          Default
+        </d-card>
+        <d-card
+          v-for="e in 10"
           :glow="{central: true}"
           :elevation="`${x}${e}`"
           width="100px"
-          height="50px"
-          :outlined="{offset: '1px'}"
-          :rounded="Rounded.pill"
+          height="100px"
+          :rounded="Rounded.none"
         >
-          {{ e }}
+          {{ `${x}${e}` }}
         </d-card>
       </d-row>
     </d-column>
+    <d-card
+      :elevation="4"
+      class="ma-6"
+    >
+      <d-card-title>
+        Test card
+      </d-card-title>
+      <d-card-title>
+        Testing
+      </d-card-title>
+      <d-column>
+        <d-card-content :elevation="1">
+          stuff
+        </d-card-content>
+      </d-column>
+    </d-card>
     <d-tooltip
       :color="ThemeColorProperty.primary"
       stay

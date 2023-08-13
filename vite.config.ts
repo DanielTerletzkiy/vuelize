@@ -7,10 +7,16 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import dts from "vite-plugin-dts";
 // @ts-ignore
 import libCss from 'vite-plugin-libcss';
+import {resolve} from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    resolve: {dedupe: ['vue']},
+    resolve: {
+        dedupe: ['vue'], alias: [{
+            find: "@",
+            replacement: resolve(__dirname, './src/')
+        }]
+    },
     server: {port: 5656},
     css: {
         preprocessorOptions: {

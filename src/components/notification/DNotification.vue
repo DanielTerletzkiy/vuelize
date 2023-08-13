@@ -3,61 +3,62 @@
     ref="wrapper"
     :classes="['d-notification']"
     v-bind="{...$props, ...$attrs}"
-    @click="$emit('click')"
   >
     <slot
       name="default"
       :notification="notification"
     >
       <DCardContent
+        v-if="options"
         class="d-notification__content"
         :color="options.color"
-        glow
-        glowing
-        outlined="!options.color"
+        :glow="{
+          active: true
+        }"
         depressed
         min-width="100%"
         max-width="500px"
         @mouseover="hover = true"
         @mouseleave="hover = false"
       >
-        <DRow class="pa-2">
-          <DColumn no-padding>
-            <DIconButton
-              :color="(options.color)"
-              @click="onCloseClick"
-            >
-              <TransitionSlide group>
-                <DIcon
-                  v-if="hover"
-                  :size="40"
-                  name="multiply"
-                />
-                <DIcon
-                  v-else
-                  :size="40"
-                  :name="options.icon"
-                />
-              </TransitionSlide>
-            </DIconButton>
-          </DColumn>
+        <DRow
+          class="pa-2 pr-4"
+          gap
+        >
+          <DIconButton
+            :color="options.color"
+            @click="onCloseClick"
+          >
+            <TransitionSlide group>
+              <DIcon
+                v-if="hover && !isPersistent"
+                :size="40"
+                name="multiply"
+              />
+              <DIcon
+                v-else
+                :size="40"
+                :name="options.icon"
+              />
+            </TransitionSlide>
+          </DIconButton>
           <d-column
             no-padding
             style="align-self: stretch; justify-content: center; gap: 16px"
           >
             <DCardTitle
-              v-if="notification.value.title"
+              v-if="notification.title"
               class="py-0 font-size-medium"
-              :color="(options.color)"
+              :color="options.color"
             >
-              {{ notification.value.title }}
+              {{ notification.title }}
             </DCardTitle>
             <DCardSubtitle
-              v-if="notification.value.content"
+              v-if="notification.content"
               class="py-0"
-              :color="(options.color)"
+              :color="options.color"
             >
-              {{ notification.value.content }}
+              {{ notification.content }}
             </DCardSubtitle>
           </d-column>
         </DRow>
@@ -68,8 +69,8 @@
 
 <script setup lang="ts">
 import defaultProps from "../../mixins/DefaultProps";
-import type {PropType, Ref} from "vue";
-import {inject, onBeforeUnmount, onMounted, ref, watch} from "vue";
+import type {PropType} from "vue";
+import {computed, onBeforeUnmount, onMounted, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCardContent from "../card/content/DCardContent.vue";
 import DRow from "../flex/DRow.vue";
@@ -79,92 +80,109 @@ import DIcon from "../icon/DIcon.vue";
 import DCardTitle from "../card/text/DCardTitle.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 import {TransitionSlide} from "@morev/vue-transitions";
-
-import Notification from "./Notification";
+import {Notification, State, ThemeColorProperty} from "./../../types";
+import {useVuelizeNotifications} from "../../stores";
 
 const wrapper = ref(null);
-defineExpose({ wrapper });
-
-const vuelize: any = inject("vuelize");
+defineExpose({wrapper});
 
 const props = defineProps({
-  notification: {type: Object as PropType<Ref<Notification>>, required: true, ...defaultProps}
+    notification: {type: Object as PropType<Notification>, required: true, ...defaultProps}
 })
 
+const vuelizeNotifications = useVuelizeNotifications();
+const {setNotificationActive, clearTimeout, createTimeout} = vuelizeNotifications;
+
 const hover = ref<boolean>(false);
-const options = ref<Notifications.Options>({icon: '', color: '', timeout: 5000});
+const options = ref<Notification['options']>({icon: '', color: ThemeColorProperty.primary, timeout: 5000});
+
+const isPersistent = computed(()=>props.notification?.persistent)
 
 watch(hover, (state) => {
-  if (state) {
-    props.notification.value.removeTimeout();
-  } else {
-    props.notification.value.startTimeout();
-  }
+    if(!props.notification){
+        return
+    }
+    if (state) {
+        clearTimeout(props.notification?.key);
+    } else if(props.notification.options?.timeout && !isPersistent.value){
+        createTimeout(props.notification?.key,props.notification.options.timeout)
+    }
 })
 
 function onCloseClick() {
-  props.notification.value.close();
+    if(isPersistent.value){
+        return;
+    }
+    setNotificationActive(props.notification?.key, false)
 }
 
 onMounted(() => {
+    if (!options.value) {
+        return
+    }
 
-  options.value.color = vuelize.getColor(props.notification.value.type)
-  switch (props.notification.value.type) {
-    case 'success': {
-      options.value.icon = 'check'
-      break;
+    switch (props.notification.type) {
+        case State.success: {
+            options.value.icon = 'check'
+            options.value.color = ThemeColorProperty.success
+            break;
+        }
+        case State.error: {
+            options.value.icon = 'exclamation-triangle'
+            options.value.color = ThemeColorProperty.error
+            break;
+        }
+        case State.warning: {
+            options.value.icon = 'exclamation-octagon'
+            options.value.color = ThemeColorProperty.warning
+            break;
+        }
+        case State.info: {
+            options.value.icon = 'info-circle'
+            options.value.color = ThemeColorProperty.info
+            break;
+        }
+        default: {
+            options.value.icon = 'question'
+            options.value.color = ThemeColorProperty.primary
+            break;
+        }
     }
-    case 'error': {
-      options.value.icon = 'exclamation-triangle'
-      break;
-    }
-    case 'warning': {
-      options.value.icon = 'exclamation-octagon'
-      break;
-    }
-    case 'info': {
-      options.value.icon = 'info-circle'
-      break;
-    }
-    default: {
-      options.value.icon = 'question'
-      break;
-    }
-  }
 
-  if (props.notification.value.options) {
-    Object.assign(options.value, props.notification.value.options);
-  }
+    if (props.notification.options) {
+        Object.assign(options.value, props.notification.options);
+    }
 })
 
 onBeforeUnmount(() => {
-  props.notification.value.removeTimeout();
+    clearTimeout(props.notification?.key);
 })
 </script>
 
 <style scoped lang="scss">
 .d-notification {
-  min-width: auto;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease-out;
+    min-width: auto;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease-out;
+    pointer-events: auto;
 
-  &__content {
-    backdrop-filter: blur(20px);
-    padding: 0;
-  }
-
-  &__hide {
-    position: absolute;
-    display: flex;
-    right: 0;
-    padding: 0;
-    min-height: 100% !important;
-
-    button {
-      height: auto !important;
-      backdrop-filter: blur(1px);
+    &__content {
+        backdrop-filter: blur(20px);
+        padding: 0;
     }
-  }
+
+    &__hide {
+        position: absolute;
+        display: flex;
+        right: 0;
+        padding: 0;
+        min-height: 100% !important;
+
+        button {
+            height: auto !important;
+            backdrop-filter: blur(1px);
+        }
+    }
 }
 </style>

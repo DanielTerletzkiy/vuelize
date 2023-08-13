@@ -2,5 +2,5 @@ export * from "./VuelizePlugin";
 export * from "./ComponentImport"
 
 export * from "./types"
-export * from "./store"
+export * from "./stores"
 export * from "./composables"

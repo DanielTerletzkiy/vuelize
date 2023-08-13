@@ -1,16 +1,16 @@
 @import "../variables";
 
 .dark {
-  @for $i from 1 through 30 {
-    $brightness: $i;
+  @for $i from 1 through 10 {
+    $brightness: $i * 1.5;
     &.elevation-#{$i}, .elevation-dark-#{$i} {
       background: color-mix(in srgb, var(--sheet-card), #fff #{$brightness+"%"}) !important;
       //box-shadow: 2px 4px 8px -4px color-mix(in srgb, var(--sheet-card), red 100%) !important;
     }
   }
 
-  @for $i from 1 through 30 {
-    $darkness: $i * 2;
+  @for $i from 1 through 10 {
+    $darkness: $i * 8;
     &.elevation-n#{$i}, .elevation-dark-n#{$i} {
       background: color-mix(in srgb, var(--sheet-card), #000 #{$darkness+"%"}) !important;
     }

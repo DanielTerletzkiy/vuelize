@@ -1,35 +1,17 @@
-import type {App, Plugin, Ref} from "vue";
-import {ref} from 'vue';
+import type {App, Plugin} from "vue";
 import {createPinia} from "pinia";
-import {useVuelizeTheme} from './store/ThemeStore'
-import * as Components from "./ComponentImport";
-import {State} from "./types/Vuelize";
-import Notification from "./components/notification/Notification";
+import {useVuelizeTheme} from './stores'
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore no ripple types available
 import VWave from "v-wave";
 
 import '@morev/vue-transitions/styles';
-import ClickOutside from "./directive/ClickOutside";
-import {Themes} from "./types/Theme";
+import ClickOutside from "./directives/ClickOutside";
+import {Themes} from "./types";
 import {merge} from "lodash";
 import {importAll} from "./ComponentImport";
 
-class VuelizePlugin implements Vuelize {
-    app;
-    theme;
-    notifications = ref<Array<Ref<Notification>>>([]);
-
-    constructor(app: App) {
-        this.app = app;
-        this.theme = useVuelizeTheme();
-        this.notifications.value;
-    }
-
-    notify(title: string, content: string, type: State, options: Notifications.Options) {
-        this.notifications.value.push(ref<Notification>(new Notification(title, content, type, options)))
-    }
-}
 
 export const Vuelize: Plugin = {
     install(app: App, themesOptions: Partial<Themes>) {
@@ -41,12 +23,8 @@ export const Vuelize: Plugin = {
             finalOpacity: 0.2
         });
 
-        const plugin = new VuelizePlugin(app);
-
-        plugin.theme.themes = (merge(plugin.theme.themes, themesOptions));
-
-        app.config.globalProperties.$vuelize = plugin;
-        app.provide('vuelize', app.config.globalProperties.$vuelize);
+        const vuelizeTheme= useVuelizeTheme();
+        vuelizeTheme.themes = (merge(vuelizeTheme.themes, themesOptions));
 
         return importAll(app);
     }

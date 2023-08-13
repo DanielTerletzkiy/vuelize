@@ -1,43 +1,26 @@
 <template>
-  <DWrapper
-    ref="wrapper"
-    :classes="['d-notification-wrapper']"
-    v-bind="{...$props, ...$attrs}"
-    @click="$emit('click')"
+  <d-row
+    v-for="vertical in Object.keys(PositionVertical)"
+    :key="vertical"
+    class="'d-notification-wrapper__wrapper"
   >
-    <TransitionSlide>
-      <div
-        v-if="notifications.length>0"
-        class="d-notification-wrapper__content"
-      >
-        <TransitionFade
-          group
-          :duration="100"
-        >
-          <DNotification
-            v-for="notification in notifications"
-            :key="notification.value.key"
-            :notification="notification"
-          />
-        </TransitionFade>
-      </div>
-    </TransitionSlide>
-  </DWrapper>
+    <DNotificationContainer
+      v-for="horizontal in Object.keys(PositionHorizontal)"
+      :key="horizontal"
+      :horizontal="horizontal"
+      :vertical="vertical"
+    />
+  </d-row>
 </template>
 
 <script setup lang="ts">
+import {ref} from "vue";
+import DRow from "@/components/flex/DRow.vue";
+import {PositionHorizontal, PositionVertical} from "../../types";
+import DNotificationContainer from "@/components/notification/DNotificationContainer.vue";
+
 const wrapper = ref(null);
 defineExpose({wrapper});
-import type {Ref} from "vue";
-import {computed, inject, ref} from "vue";
-import DWrapper from "../DWrapper.vue";
-import DNotification from "./DNotification.vue";
-import {TransitionFade, TransitionSlide} from "@morev/vue-transitions";
-import Notification from "./Notification";
-
-const vuelize: Vuelize = inject('vuelize') as Vuelize;
-
-const notifications = computed<Array<Ref<Notification>>>(() => vuelize.notifications.value.filter((notification) => notification.value.active))
 
 </script>
 
@@ -45,26 +28,9 @@ const notifications = computed<Array<Ref<Notification>>>(() => vuelize.notificat
 @import "../../styles/variables";
 
 .d-notification-wrapper {
-  position: absolute;
-  z-index: 10;
-  bottom: 0;
-  right: 0;
-
-  margin: 12px;
-
-  &.permanent {
-    position: relative;
-    overflow-x: hidden !important;
-    padding: 4px !important;
-    margin: 0;
-  }
-
-  &__content > span {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
+    &__wrapper {
+        pointer-events: none;
+    }
 }
 
 </style>

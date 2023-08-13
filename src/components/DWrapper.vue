@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import {useVuelizeTheme} from "../store/ThemeStore";
+import {useVuelizeTheme} from "../stores/ThemeStore";
 import {computed, nextTick, onMounted, ref, watch} from "vue";
 import defaultProps from "../mixins/DefaultProps";
 import {storeToRefs} from "pinia";
@@ -54,7 +54,7 @@ const glowClasses = computed(() => {
     return {}
   }
   const isObject = typeof props.glow === "object";
-  
+
   const glowActive = isObject && props.glow.active;
   const glowCentral = isObject && props.glow.central;
   const glowSelectable = isObject && props.glow.selectable;
