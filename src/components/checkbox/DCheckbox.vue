@@ -21,7 +21,7 @@
           :key="icon"
           :name="icon"
           :size="size"
-          :color="'currentColor'"
+          :color="currentColor"
         />
       </TransitionSlide>
     </div>
@@ -35,15 +35,17 @@
 </template>
 
 <script setup lang="ts">
-const wrapper = ref(null);
-defineExpose({wrapper});
-import {computed, inject, ref} from "vue";
+import {useVuelizeTheme} from "../../stores";
+import {computed, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DIcon from "../icon/DIcon.vue";
 import {TransitionSlide} from '@morev/vue-transitions';
 import defaultProps from "../../mixins/DefaultProps";
+import {storeToRefs} from "pinia";
+import {ThemeColorProperty} from "@";
 
-const vuelize: any = inject('vuelize');
+const wrapper = ref(null);
+defineExpose({wrapper});
 
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
@@ -55,11 +57,15 @@ const props = defineProps({
   ...defaultProps
 })
 
+const vuelizeTheme = useVuelizeTheme()
+const {mode} = storeToRefs(vuelizeTheme);
+
 function click() {
   emit('update:modelValue', !props.modelValue)
 }
 
 const icon = computed(() => props.modelValue ? props.onIcon : props.offIcon)
+const currentColor = computed(()=>props.modelValue ? props.color : ThemeColorProperty.secondary)
 
 const size = ref(props.size + 'px');
 //const color = ref(props.modelValue ? vuelize.getColor(props.color, props.tint) : vuelize.getColor('currentColor'));
@@ -68,10 +74,9 @@ const classes = computed(() => {
     'd-checkbox--checked': props.modelValue,
     'elevation-2': props.modelValue,
     'elevation-light-n6 elevation-dark-4': !props.modelValue,
-    'light': !vuelize.theme.dark,
     'glow': true,
     'glow--active': props.modelValue,
-    [vuelize.theme.dark ? 'dark' : 'light']: true
+    [mode.value]: true
   }
 })
 </script>

@@ -2,7 +2,7 @@
   <DWrapper
     ref="wrapper"
     root-tag="button"
-    :classes="['d-icon-button', {glow: true, 'glow--active': props.active}]"
+    :classes="['d-icon-button', {glow: true, 'glowActive': props.active}]"
     v-bind="{...$props, ...$attrs}"
     @click="$emit('click')"
   >

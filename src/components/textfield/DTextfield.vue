@@ -118,7 +118,7 @@ const classesObject = computed(() => {
     'd-text-field--active': (hover.value || selected.value),
     'd-text-field--placeholder': placeholderActive,
     'd-text-field--outlined outlined depressed elevation': props.outlined,
-    'd-text-field--filled glow glow--active': props.filled,
+    'd-text-field--filled glow glowActive': props.filled,
     'd-text-field--solo': props.solo,
   }
 });
@@ -141,8 +141,6 @@ const labelClassesObject = computed(() => {
 
 const textFieldStylesObject = computed(() => {
   return {
-    //color: (hover.value || selected.value) ? vuelize.getColor(props.color, props.tint) : null,
-    //caretColor: (hover.value || selected.value) ? vuelize.getColor(props.color, props.tint) : null,
     width: props.width,
     'min-width': props.fullWidth ? '100%' : 'unset',
   }
@@ -189,6 +187,10 @@ function removeFocus() {
   display: flex;
   align-items: center;
   cursor: text;
+
+  &:not(&--active){
+    color: unset !important;
+  }
 
   &__input, :deep(.d-text-field__input__autocomplete), :deep(.d-text-field__input) {
     position: relative;

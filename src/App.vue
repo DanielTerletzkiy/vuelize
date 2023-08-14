@@ -13,6 +13,8 @@ import DRow from "./components/flex/DRow.vue";
 import DCardContent from "./components/card/content/DCardContent.vue";
 import DColumn from "./components/flex/DColumn.vue";
 import {useVuelizeNotifications} from "./stores";
+import DTextfield from "@/components/textfield/DTextfield.vue";
+import DCheckbox from "@/components/checkbox/DCheckbox.vue";
 
 const navOpen = ref(true);
 
@@ -249,11 +251,10 @@ onMounted(() => {
         :color="{
           map: [
             {
-              color: null,
+              color: '',
               property: ThemeSheetProperty.card
             },
             {
-
               color: ThemeColorProperty.warning,
               property: ThemeSheetProperty.glow
             }
@@ -332,6 +333,12 @@ onMounted(() => {
         test
       </template>
     </d-tooltip>
+    <d-textfield class="ma-8" filled :color="ThemeColorProperty.primary" solo placeholder="Test">
+
+    </d-textfield>
+    <d-checkbox v-model="navOpen" :color="ThemeColorProperty.primary" off-icon="times">
+      test
+    </d-checkbox>
   </DRoot>
 </template>
 
