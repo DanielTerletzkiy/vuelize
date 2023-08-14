@@ -16,7 +16,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "build:rollup": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
-    "build:publish": "np --yolo --no-yarn --any-branch --branch next",
+    "build:publish": "npm run build && np --yolo --no-yarn --any-branch --branch next",
     "publish:dev": "npm publish --tag=develop",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
