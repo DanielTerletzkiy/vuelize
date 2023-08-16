@@ -23,6 +23,14 @@ const dialog = ref(false);
 const notifications = useVuelizeNotifications()
 const {notify} = notifications;
 
+const items = ref(Array.from(Array(1000).keys()).map((value)=>{
+    return {
+        value
+    }
+}))
+
+const selected = ref(0);
+
 onMounted(() => {
     notify('Test', 'test', State.success)
     setTimeout(() => {
@@ -93,6 +101,23 @@ onMounted(() => {
     <template #notifications>
       <DNotificationWrapper />
     </template>
+      <d-textfield
+          v-model="selected"
+          filled
+          :color="ThemeColorProperty.primary"
+          solo
+          placeholder="Test"
+          select
+          search
+          :items="items"
+      >
+          <template #label="{item}">
+              {{ item.value }}
+          </template>
+          <template #item="{item}">
+              {{ item.value }}
+          </template>
+      </d-textfield>
     <d-row gap>
       <d-image
         :rounded="Rounded.none"
@@ -333,10 +358,11 @@ onMounted(() => {
         test
       </template>
     </d-tooltip>
-    <d-textfield class="ma-8" filled :color="ThemeColorProperty.primary" solo placeholder="Test">
-
-    </d-textfield>
-    <d-checkbox v-model="navOpen" :color="ThemeColorProperty.primary" off-icon="times">
+    <d-checkbox
+      v-model="navOpen"
+      :color="ThemeColorProperty.primary"
+      off-icon="times"
+    >
       test
     </d-checkbox>
   </DRoot>

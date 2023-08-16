@@ -31,8 +31,6 @@ import {Wrapper} from "../../types/components/Wrapper";
 
 const wrapper = ref<Wrapper>();
 defineExpose({wrapper});
-
-const vuelize: any = inject('vuelize');
 const updateList: any = inject('updateList');
 const parentProps: any = inject('parentProps');
 
@@ -94,11 +92,13 @@ onMounted(() => {
 <style scoped lang="scss">
 @import "../../styles/variables";
 
+$height: 40px;
+
 .d-list__item {
   position: relative;
 
   border-radius: inherit;
-  min-height: 36px;
+  min-height: $height;
   cursor: pointer;
 
   list-style: none;
@@ -133,7 +133,7 @@ onMounted(() => {
 
   &__content {
     width: 100%;
-    height: inherit;
+    min-height: $height;
 
     padding: 6px 12px;
     display: flex;

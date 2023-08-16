@@ -38,6 +38,7 @@ import DRadioGroup from './components/radio/DRadioGroup.vue'
 import DRadioItem from './components/radio/DRadioItem.vue'
 import DRating from './components/rating/DRating.vue'
 import DRoot from './components/root/DRoot.vue'
+import DLazy from './components/DLazy.vue'
 import DWrapper from './components/DWrapper.vue'
 import {App} from "vue/dist/vue";
 
@@ -82,6 +83,7 @@ export {
     DRating,
     DProgressbar,
     DRoot,
+    DLazy,
     DWrapper,
 }
 
@@ -123,6 +125,7 @@ export function importAll(app: App) {
     app.component("DPagination", DPagination)
     app.component("DSelectMenu", DSelectMenu)
     app.component("DTooltip", DTooltip)
+    app.component("DLazy", DLazy)
     app.component("DWrapper", DWrapper)
     app.component("DNotificationWrapper", DNotificationWrapper)
     app.component("DNotification", DNotification)

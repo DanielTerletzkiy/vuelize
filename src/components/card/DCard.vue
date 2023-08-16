@@ -14,10 +14,8 @@
 const wrapper = ref(null);
 defineExpose({wrapper});
 import DWrapper from "../DWrapper.vue";
-import {inject, ref} from "vue";
+import {ref} from "vue";
 import defaultProps from "../../mixins/DefaultProps";
-
-const vuelize: any = inject('vuelize');
 
 const props = defineProps({
   block: {type: Boolean},
