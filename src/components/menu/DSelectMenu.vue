@@ -4,13 +4,13 @@
     :classes="['d-select-menu']"
     @keyup.esc="hideSelectMenu"
   >
-    <TransitionSlide :duration="80">
+    <TransitionSlide :duration="150">
       <DCard
         v-if="open && items"
         v-click-outside="hideSelectMenu"
         v-bind="{...$props, ...$attrs}"
         class="d-select-menu__dropdown pa-0"
-        elevation="4"
+        :blur="BlurAmount.strong"
       >
         <DList
           :model-value="modelValue"
@@ -19,24 +19,30 @@
           :color="color"
           class="d-select-menu__dropdown__list pa-0"
           rounded="none"
-          @update:modelValue="onInput"
+          @update:model-value="onInput"
         >
-          <DListItem
+          <DLazy
             v-for="(item, index) in items"
             v-show="item._show"
             :key="item[indexKey] || index"
-            ref="item"
-            :color="item.color || 'currentColor'"
-            :tabindex="0"
+            :min-height="40"
+            un-render
           >
-            <slot
-              name="item"
-              :item="item"
-              :index="index"
+            <DListItem
+              :key="item[indexKey] || index"
+              ref="item"
+              :color="item.color || 'currentColor'"
+              :tabindex="0"
             >
-              {{ item }}
-            </slot>
-          </DListItem>
+              <slot
+                name="item"
+                :item="item"
+                :index="index"
+              >
+                {{ item }}
+              </slot>
+            </DListItem>
+          </DLazy>
         </DList>
       </DCard>
     </TransitionSlide>
@@ -44,8 +50,7 @@
 </template>
 
 <script setup lang="ts">
-const wrapper = ref(null);
-defineExpose({ wrapper });
+import DLazy from "@/components/DLazy.vue";
 import {ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
@@ -53,74 +58,78 @@ import DList from "../list/DList.vue";
 import DListItem from "../list/DListItem.vue";
 import {TransitionSlide} from "@morev/vue-transitions";
 import defaultProps from "../../mixins/DefaultProps";
+import {BlurAmount} from "@";
+
+const wrapper = ref(null);
+defineExpose({wrapper});
 
 const emit = defineEmits(['update:modelValue', 'update:open']);
 
 const props = defineProps({
-  modelValue: [Number, String, Array],
-  open: {type: Boolean},
-  items: {type: Array},
-  indexKey: {type: String},
-  multiple: {type: Boolean},
-  mandatory: {type: Boolean},
-  ...defaultProps
+    modelValue: {type: [Number, String, Array], required: true},
+    open: {type: Boolean},
+    items: {type: Array, required: true},
+    indexKey: {type: String, required: true},
+    multiple: {type: Boolean},
+    mandatory: {type: Boolean},
+    ...defaultProps
 })
 
 const currentItem = ref(-1);
 
 watch(() => props.open, (state) => {
-  if (state) {
-    currentItem.value = -1
-  }
+    if (state) {
+        currentItem.value = -1
+    }
 })
 
 watch(() => props.items, () => {
-  currentItem.value = -1
+    currentItem.value = -1
 })
 
 function hideSelectMenu() {
-  if (!props.multiple) {
-    emit('update:open', false)
-  }
+    if (!props.multiple) {
+        emit('update:open', false)
+    }
 }
 
 function onInput(e: number | Array<number>) {
-  emit('update:modelValue', e)
-  hideSelectMenu()
+    emit('update:modelValue', e)
+    hideSelectMenu()
 }
 </script>
 
 <style scoped lang="scss">
 .d-select-menu {
-  border: none !important;
+    border: none !important;
 
-  &__dropdown {
-    position: absolute;
-    z-index: 1;
+    &__dropdown {
+        position: absolute;
+        z-index: 1;
 
-    box-sizing: inherit;
-    min-width: 100%;
-    max-height: calc(54px * 5);
-    overflow: auto;
+        box-sizing: inherit;
+        min-width: 100%;
+        max-height: calc(54px * 5);
+        overflow: auto;
 
-    top: calc(100% + 6px);
-    left: 0;
+        top: calc(100% + 6px);
+        left: 0;
 
-    &__list {
-      gap: 0 !important;
-    }
-  }
-
-  .d-list > li {
-    border-radius: 0 !important;
-
-    &:first-child {
-      border-radius: 8px 8px 0 0 !important;
+        &__list {
+            gap: 0 !important;
+        }
     }
 
-    &:last-child {
-      border-radius: 0 0 8px 8px !important;
+    .d-list > li {
+        border-radius: 0 !important;
+
+        &:first-child {
+            border-radius: 8px 8px 0 0 !important;
+        }
+
+        &:last-child {
+            border-radius: 0 0 8px 8px !important;
+        }
     }
-  }
 }
 </style>

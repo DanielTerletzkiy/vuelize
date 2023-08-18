@@ -43,14 +43,12 @@
 const wrapper = ref(null);
 defineExpose({ wrapper });
 import type {PropType} from "vue";
-import {getCurrentInstance, inject, ref} from "vue";
+import {getCurrentInstance, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import {TransitionFade} from "@morev/vue-transitions";
 import {Style} from "vue3-unicons/types/Unicon"
 import defaultProps from "../../mixins/DefaultProps";
 import Unicon from "vue3-unicons/src/components/Unicon.vue"
-
-const vuelize: any = inject('vuelize');
 
 defineProps({
   name: {type: String, required: true},

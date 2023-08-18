@@ -46,7 +46,6 @@ import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
 import {TransitionFade} from "@morev/vue-transitions";
 
-const vuelize: any = inject('vuelize');
 const updateList: any = inject('updateList');
 const parentProps: any = inject('parentProps');
 

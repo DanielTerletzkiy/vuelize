@@ -5,10 +5,10 @@
     v-bind="{...$props, ...$attrs}"
     tabindex="0"
     @keyup.esc="dropdownOpen = false"
+    @keyup.enter="dropdownOpen = true"
     @focusin="focusIn"
     @focusout="focusOut"
     @click.self="toggleDropdown"
-    @keypress.enter="dropdownOpen = true"
   >
     <span
       v-if="search ? !dropdownOpen : true"
@@ -36,15 +36,15 @@
       tabindex="-1"
       @click="toggleDropdown"
     >
-      <SlideYDownTransition
+      <TransitionSlide
+        :duration="100"
         group
-        :duration="150"
       >
         <DIcon
           :name="angleIcon"
           color="currentColor"
         />
-      </SlideYDownTransition>
+      </TransitionSlide>
     </DIconButton>
     <DSelectMenu
       v-model:open="dropdownOpen"
@@ -54,14 +54,14 @@
       :multiple="false"
       :index-key="indexKey"
       :color="$props.color"
-      @update:modelValue="onInput"
+      @update:model-value="onInput"
     >
       <template #item="props">
         <slot
           name="item"
           v-bind="props"
         >
-          <span class="d-text-field__select__default">{{ props.value }}</span>
+          <span class="d-text-field__select__default">{{ modelValue }}</span>
         </slot>
       </template>
     </DSelectMenu>
@@ -75,17 +75,21 @@ import {computed, nextTick, onBeforeMount, ref, watch} from "vue";
 import DSelectMenu from "../../menu/DSelectMenu.vue";
 import DIconButton from "../../button/DIconButton.vue";
 import DIcon from "../../icon/DIcon.vue";
+import {TransitionSlide} from "@morev/vue-transitions";
 import defaultProps from "../../../mixins/DefaultProps";
 
 const emit = defineEmits(['update:modelValue', 'removeFocus', 'focusout', 'focusin'])
 const props = defineProps({
-  modelValue: [Number, String],
-  items: Array,
-  indexKey: {type: String},
-  mandatory: {type: Boolean},
-  search: {type: Boolean},
-  searchKey: {type: String, default: 'value'},
-  ...defaultProps
+    modelValue: {
+        type: [Number, String],
+        required: true,
+    },
+    items: {type: Array, required: true},
+    indexKey: {type: [String]},
+    mandatory: {type: Boolean},
+    search: {type: Boolean},
+    searchKey: {type: String, default: 'value'},
+    ...defaultProps
 })
 
 const itemsCopy = ref(props.items);
@@ -97,50 +101,53 @@ watch(searchInput, mapItems)
 watch(() => props.items, mapItems)
 
 function mapItems() {
-  itemsCopy.value = props.items;
-  if (!itemsCopy.value || !props.items) {
-    return;
-  }
-  itemsCopy.value = props.items.map((item: any, i: number) => {
-    if (!item[props.searchKey] || !searchInput.value.toLowerCase()) {
-      return {...item, _show: true};
+    itemsCopy.value = props.items;
+    if (!itemsCopy.value || !props.items) {
+        return;
     }
-    item = {...item, _show: item[props.searchKey].toString().toLowerCase().includes(searchInput.value.toLowerCase())};
-    return item;
-  });
+    itemsCopy.value = props.items.map((item: any) => {
+        if (!item[props.searchKey] || !searchInput.value.toLowerCase()) {
+            return {...item, _show: true};
+        }
+        item = {
+            ...item,
+            _show: item[props.searchKey].toString().toLowerCase().includes(searchInput.value.toLowerCase())
+        };
+        return item;
+    });
 }
 
 const dropdownOpen = ref(false);
 
 function toggleDropdown() {
-  dropdownOpen.value = !dropdownOpen.value;
+    dropdownOpen.value = !dropdownOpen.value;
 }
 
 watch(dropdownOpen, (value) => {
-  if (value) {
-    nextTick(() => {
-      if (searchBox.value) {
-        searchBox.value.focus();
-      }
-    })
-  }
+    if (value) {
+        nextTick(() => {
+            if (searchBox.value) {
+                searchBox.value.focus();
+            }
+        })
+    }
 })
 
-function onInput(val: any) {
-  emit('update:modelValue', val)
-  emit('removeFocus')
+function onInput(val: number | string) {
+    emit('update:modelValue', val)
+    emit('removeFocus')
 }
 
 function focusOut() {
-  emit('focusout');
+    emit('focusout');
 }
 
 function focusIn() {
-  emit('focusin');
+    emit('focusin');
 }
 
 const angleIcon = computed(() => {
-  return dropdownOpen.value ? 'times' : 'angle-down'
+    return dropdownOpen.value ? 'times' : 'angle-down'
 })
 
 onBeforeMount(mapItems)
@@ -148,32 +155,32 @@ onBeforeMount(mapItems)
 
 <style scoped lang="scss">
 :deep(.d-select-menu__dropdown) {
-  left: -1.2em;
-  width: calc(100% + (1.2em * 2));
+    left: -1.2em;
+    width: calc(100% + (1.2em * 2));
 }
 
 .d-select-label {
-  width: 100%;
-  display: flex;
+    width: 100%;
+    display: flex;
 }
 
 .d-text-field__input {
-  cursor: pointer;
-  user-select: none;
-  position: relative;
-  margin-top: 0.5em !important;
-  margin-bottom: 0.5em !important;
-  display: flex;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+    display: flex;
 
-  &__search {
-    margin-left: 0 !important;
-    cursor: text;
-  }
+    &__search {
+        margin-left: 0 !important;
+        cursor: text;
+    }
 
-  &__icon {
-    margin-left: auto;
-    margin-right: -8px;
-    align-self: center;
-  }
+    &__icon {
+        margin-left: auto;
+        margin-right: -8px;
+        align-self: center;
+    }
 }
 </style>

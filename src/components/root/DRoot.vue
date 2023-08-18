@@ -37,15 +37,13 @@
 
 <script setup lang="ts">
 import {Theme, ThemeColorProperty, ThemeSheetProperty, ThemeTextProperty} from "../../types/Theme";
-import {inject, onMounted, ref, watch} from "vue";
+import {onMounted, ref, watch} from "vue";
 import {useSetColor} from "../../composables/Color.composable";
 import {useVuelizeTheme} from "@/stores/ThemeStore";
 import {storeToRefs} from "pinia";
 
 const wrapper = ref<HTMLElement | null>(null);
 defineExpose({wrapper});
-
-const vuelize: any = inject('vuelize');
 
 const themeStore = useVuelizeTheme();
 const {mode, themes, currentTheme} = storeToRefs(themeStore);

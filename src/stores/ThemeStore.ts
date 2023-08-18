@@ -10,7 +10,7 @@ export const useVuelizeTheme = defineStore('vuelizeTheme', () => {
         dark: {
             colors: {
                 primary: '#A8B2FF',
-                secondary: '#5b5b5b',
+                secondary: '#858585',
                 accent: '#8080BD',
                 success: '#74ec38',
                 error: '#ff6b6b',

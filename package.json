@@ -1,7 +1,7 @@
 {
   "name": "vuelize",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "email": "danielterletzkiy@gmail.com",
     "name": "Daniel Terletzkiy"
@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@morev/vue-transitions": "^2.3.6",
+    "@vueuse/components": "^10.3.0",
     "focus-trap-vue": "^3.3.1",
     "lodash": "^4.17.21",
     "pinia": "^2.0.14",
