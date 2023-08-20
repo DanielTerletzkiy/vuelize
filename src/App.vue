@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import {BlurAmount, ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
-import {Position, PositionHorizontal, PositionVertical, Rounded, State} from "./types/Vuelize";
+import {Position, Rounded} from "./types/Vuelize";
 import {Size} from "./types/components/DButton";
 import DCard from "./components/card/DCard.vue";
 import DCardTitle from "./components/card/text/DCardTitle.vue";
@@ -15,6 +15,10 @@ import DColumn from "./components/flex/DColumn.vue";
 import {useVuelizeNotifications} from "./stores";
 import DTextfield from "@/components/textfield/DTextfield.vue";
 import DCheckbox from "@/components/checkbox/DCheckbox.vue";
+import DTypography from "@/components/typography/DTypography.vue";
+import {Opacity, Weight} from "./types";
+import DNotificationWrapper from "@/components/notification/DNotificationWrapper.vue";
+import DNavigationBar from "@/components/app/navigation/DNavigationBar.vue";
 
 const navOpen = ref(true);
 
@@ -23,59 +27,13 @@ const dialog = ref(false);
 const notifications = useVuelizeNotifications()
 const {notify} = notifications;
 
-const items = ref(Array.from(Array(1000).keys()).map((value)=>{
+const items = ref(Array.from(Array(1000).keys()).map((value) => {
     return {
         value
     }
 }))
 
 const selected = ref(0);
-
-onMounted(() => {
-    notify('Test', 'test', State.success)
-    setTimeout(() => {
-
-        notify('Test2', 'test2', State.success, {
-            horizontal: PositionHorizontal.center,
-            vertical: PositionVertical.bottom
-        })
-        setTimeout(() => {
-
-            notify('Test3', 'test3', State.info, {
-                horizontal: PositionHorizontal.center,
-                vertical: PositionVertical.bottom
-            })
-            setTimeout(() => {
-
-                notify('Test4', 'test4', State.warning, {
-                    horizontal: PositionHorizontal.left,
-                    vertical: PositionVertical.bottom
-                })
-                setTimeout(() => {
-
-                    notify('Test5', 'test5', State.info, {
-                        horizontal: PositionHorizontal.center,
-                        vertical: PositionVertical.top
-                    }, true)
-                    setTimeout(() => {
-
-                        notify('Test6', 'test6', State.error, {
-                            horizontal: PositionHorizontal.center,
-                            vertical: PositionVertical.bottom
-                        })
-                        setTimeout(() => {
-
-                            notify('Test7', 'test7', State.error, {
-                                horizontal: PositionHorizontal.right,
-                                vertical: PositionVertical.top
-                            })
-                        }, 1000)
-                    }, 1000)
-                }, 1000)
-            }, 1000)
-        }, 1000)
-    }, 1000)
-})
 </script>
 
 <template>
@@ -101,23 +59,30 @@ onMounted(() => {
     <template #notifications>
       <DNotificationWrapper />
     </template>
-      <d-textfield
-          v-model="selected"
-          filled
-          :color="ThemeColorProperty.primary"
-          solo
-          placeholder="Test"
-          select
-          search
-          :items="items"
-      >
-          <template #label="{item}">
-              {{ item.value }}
-          </template>
-          <template #item="{item}">
-              {{ item.value }}
-          </template>
-      </d-textfield>
+    <d-typography
+      :opacity="Opacity.low"
+      :weight="Weight.w500"
+      color="white"
+    >
+      this is a nice text
+    </d-typography>
+    <d-textfield
+      v-model="selected"
+      filled
+      :color="ThemeColorProperty.primary"
+      solo
+      placeholder="Test"
+      select
+      search
+      :items="items"
+    >
+      <template #label="{item}">
+        {{ item.value }}
+      </template>
+      <template #item="{item}">
+        {{ item.value }}
+      </template>
+    </d-textfield>
     <d-row gap>
       <d-image
         :rounded="Rounded.none"

@@ -1,3 +1,4 @@
+import {App} from "vue/dist/vue";
 import DAccordion from './components/accordion/DAccordion.vue'
 import DNavigationBar from './components/app/navigation/DNavigationBar.vue'
 import DToolbar from './components/app/toolbar/DToolbar.vue'
@@ -29,7 +30,6 @@ import DSelectMenu from './components/menu/DSelectMenu.vue'
 import DNotification from './components/notification/DNotification.vue'
 import DNotificationWrapper from './components/notification/DNotificationWrapper.vue'
 import DPagination from './components/pagination/DPagination.vue'
-import DProgressBar from './components/progress/DProgressbar.vue'
 import DProgressbar from './components/progress/DProgressbar.vue'
 import DTable from './components/table/DTable.vue'
 import DTooltip from './components/tooltip/DTooltip.vue'
@@ -40,7 +40,7 @@ import DRating from './components/rating/DRating.vue'
 import DRoot from './components/root/DRoot.vue'
 import DLazy from './components/DLazy.vue'
 import DWrapper from './components/DWrapper.vue'
-import {App} from "vue/dist/vue";
+import DTypography from "./components/typography/DTypography.vue";
 
 export {
     DAccordion,
@@ -74,7 +74,6 @@ export {
     DNotification,
     DNotificationWrapper,
     DPagination,
-    DProgressBar,
     DTable,
     DTooltip,
     DTextfield,
@@ -83,6 +82,7 @@ export {
     DRating,
     DProgressbar,
     DRoot,
+    DTypography,
     DLazy,
     DWrapper,
 }
@@ -117,7 +117,6 @@ export function importAll(app: App) {
     app.component("DRoot", DRoot)
     app.component("DTable", DTable)
     app.component("DNavigationBar", DNavigationBar)
-    app.component("DProgressBar", DProgressBar)
     app.component("DRating", DRating)
     app.component("DSpacer", DSpacer)
     app.component("DTextfield", DTextfield)
@@ -130,5 +129,6 @@ export function importAll(app: App) {
     app.component("DNotificationWrapper", DNotificationWrapper)
     app.component("DNotification", DNotification)
     app.component("DProgressbar", DProgressbar)
+    app.component("DTypography", DTypography)
     return app;
 }
