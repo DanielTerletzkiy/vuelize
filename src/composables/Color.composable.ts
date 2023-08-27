@@ -5,7 +5,7 @@ import {
     ThemeAllPropertyType,
     ThemeColorProperty,
     ThemeTextProperty
-} from "../types/Theme";
+} from "../types";
 import {nextTick} from "vue";
 
 export function useColor(ref: HTMLElement, colorProperty: ThemeAllPropertyType | string) {
@@ -20,13 +20,19 @@ export function useColorStatic(ref: HTMLElement, colorProperty?: ThemeAllPropert
 }
 
 export function useContrastTextColor(ref: HTMLElement): string {
-    const rgb = useColorStatic(ref);
+    let rgb = useColorStatic(ref);
+
+    if (rgb.includes('srgb')) {
+        rgb = hexToRgb(useColorStatic(ref, ThemeColorProperty.current));
+    }
 
     const regex = /rgb\((\d+, \d+, \d+)\)/;
     const match = RegExp(regex).exec(rgb);
 
     if (!match) {
-        return "white";
+        const color = "rgb(0, 0, 0)";
+        ref.style.setProperty(`--${ThemeTextProperty.contrast}`, color)
+        return color;
     }
 
     const [r, g, b] = match[1].split(",") as unknown as number[];
@@ -45,7 +51,7 @@ export function useContrastTextColor(ref: HTMLElement): string {
 
     // Calculate the relative luminance
     const L = 0.2126 * r2 + 0.7152 * g2 + 0.0722 * b2;
-    const color = (L > 0.179) ? 'black' : 'white';
+    const color = (L > 0.179) ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)';
 
     ref.style.setProperty(`--${ThemeTextProperty.contrast}`, color)
 
@@ -67,8 +73,10 @@ export function useSetColor(ref: HTMLElement, color: string | null, colorPropert
         } else if (typeof color === "string") {
             color = hasProperty(color) ? `var(--${color})` : color;
             ref.style.setProperty(`color`, color)
-
         }
+
+        ref.style.setProperty(`--${ThemeAllPropertyEnum.current}`, color)
+
     } catch (e) {
         console.error({e, ref, color, colorProperty})
     }
@@ -113,6 +121,13 @@ export function useClearColors(ref: HTMLElement) {
         ref.style.removeProperty(`--${property}`)
     }
     ref.style.removeProperty(`color`)
+}
+
+function hexToRgb(hex: string) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ?
+        `rgb(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)})`
+        : hex;
 }
 
 /*const getMatchedCSSRules = (el: HTMLElement, css = el.ownerDocument.styleSheets) =>

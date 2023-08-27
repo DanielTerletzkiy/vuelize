@@ -28,7 +28,7 @@
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import {onMounted, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DRow from "../flex/DRow.vue";

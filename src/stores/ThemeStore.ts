@@ -24,7 +24,7 @@ export const useVuelizeTheme = defineStore('vuelizeTheme', () => {
             },
             text: {
                 header: "#eaeaea",
-                card: "#949494",
+                card: "#ffffff",
                 contrast: "currentColor"
             }
         },
@@ -45,7 +45,7 @@ export const useVuelizeTheme = defineStore('vuelizeTheme', () => {
             },
             text: {
                 header: "#020202",
-                card: "#363636",
+                card: "#000000",
                 contrast: "currentColor"
             }
         },

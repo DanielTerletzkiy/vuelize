@@ -33,6 +33,7 @@ export enum ThemeColorProperty {
     error = 'color-error',
     warning = 'color-warning',
     info = 'color-info',
+    current = 'color-current',
 }
 
 export enum ThemeSheetProperty {

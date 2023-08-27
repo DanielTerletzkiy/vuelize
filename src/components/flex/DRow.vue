@@ -12,8 +12,8 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import DWrapper from "../DWrapper.vue";
-import defaultProps from "../../mixins/DefaultProps";
-import flexProps, {flexClasses} from "../../mixins/FlexProps";
+import defaultProps from "@/props/default.props";
+import flexProps, {flexClasses} from "@/props/flex.props";
 
 const wrapper = ref(null);
 defineExpose({ wrapper });

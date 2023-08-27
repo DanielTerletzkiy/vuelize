@@ -35,9 +35,8 @@
               :glow="{disabled: filled, active: true}"
               :color="props.color"
             >
-              <DCardSubtitle class="pa-0 d-tooltip__wrapper__content__text">
-                <slot name="tooltip" />
-              </DCardSubtitle>
+                {{props.color}}
+              <slot name="tooltip" />
             </DLabel>
           </slot>
         </div>
@@ -49,10 +48,9 @@
 <script setup lang="ts">
 import type {PropType} from "vue";
 import {computed, nextTick, reactive, ref, useSlots, watch} from "vue";
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import DWrapper from "../DWrapper.vue";
 import DLabel from "../label/DLabel.vue";
-import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 import {TransitionFade} from "@morev/vue-transitions";
 import {Position} from "../../types/Vuelize";
 
@@ -62,98 +60,98 @@ defineExpose({wrapper});
 const slots = useSlots()
 
 const props = defineProps({
-  //fontColor: String, TODO
-  filled: Boolean,
-  stay: Boolean,
-  simpleFade: Boolean,
-  inactive: Boolean,
-  padding: {type: String, default: '4px'},
-  position: {
-    type: String as PropType<Position>,
-    default: Position.bottom,
-  },
-  ...defaultProps
+    //fontColor: String, TODO
+    filled: Boolean,
+    stay: Boolean,
+    simpleFade: Boolean,
+    inactive: Boolean,
+    padding: {type: String, default: '4px'},
+    position: {
+        type: String as PropType<Position>,
+        default: Position.bottom,
+    },
+    ...defaultProps
 });
 
 const hoverState = ref(false);
 const offset = reactive({
-  top: 'initial',
-  right: 'initial',
-  bottom: 'initial',
-  left: 'initial',
+    top: 'initial',
+    right: 'initial',
+    bottom: 'initial',
+    left: 'initial',
 })
 
 let trigger = ref<HTMLElement | null>(null);
 let tooltip = ref<HTMLElement | null>(null);
 
 watch([() => hoverState.value, () => slots.tooltip ? slots.tooltip() : null], () => {
-  nextTick().then(() => onHover())
+    nextTick().then(() => onHover())
 }, {
-  deep: true
+    deep: true
 })
 
 function onHoverOver() {
-  if (props.inactive) return;
-  hoverState.value = true;
+    if (props.inactive) return;
+    hoverState.value = true;
 }
 
 function onHoverLeave() {
-  hoverState.value = false;
+    hoverState.value = false;
 }
 
 async function onHover() {
-  if (!(hoverState.value && tooltip.value) || !trigger.value) {
-    return;
-  }
-  const triggerRect = trigger.value.getBoundingClientRect();
-  const tooltipRect = tooltip.value.getBoundingClientRect();
-  switch (props.position) {
-    case Position.top: {
-      offset.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
-      offset.top = (triggerRect.top - (tooltipRect.height)) + 'px';
-      break;
+    if (!(hoverState.value && tooltip.value) || !trigger.value) {
+        return;
     }
-    case Position.bottom: {
-      offset.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
-      offset.top = (triggerRect.top + (triggerRect.height)) + 'px';
-      break;
+    const triggerRect = trigger.value.getBoundingClientRect();
+    const tooltipRect = tooltip.value.getBoundingClientRect();
+    switch (props.position) {
+        case Position.top: {
+            offset.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
+            offset.top = (triggerRect.top - (tooltipRect.height)) + 'px';
+            break;
+        }
+        case Position.bottom: {
+            offset.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
+            offset.top = (triggerRect.top + (triggerRect.height)) + 'px';
+            break;
+        }
+        case Position.right: {
+            offset.left = (triggerRect.left + triggerRect.width) + 'px';
+            offset.top = (triggerRect.top + ((triggerRect.height / 2) - tooltipRect.height / 2)) + 'px';
+            break;
+        }
+        case Position.left: {
+            offset.left = (triggerRect.left - tooltipRect.width) + 'px';
+            offset.top = (triggerRect.top + ((triggerRect.height / 2) - tooltipRect.height / 2)) + 'px';
+            break;
+        }
     }
-    case Position.right: {
-      offset.left = (triggerRect.left + triggerRect.width) + 'px';
-      offset.top = (triggerRect.top + ((triggerRect.height / 2) - tooltipRect.height / 2)) + 'px';
-      break;
-    }
-    case Position.left: {
-      offset.left = (triggerRect.left - tooltipRect.width) + 'px';
-      offset.top = (triggerRect.top + ((triggerRect.height / 2) - tooltipRect.height / 2)) + 'px';
-      break;
-    }
-  }
 }
 
 const stylesObject = computed(() => {
-  return offset
+    return offset
 })
 
 const transitionComponent = computed(() => {
-  return TransitionFade;
-  /*if (props.simpleFade) { TODO
     return TransitionFade;
-  }
-  switch (props.position) {
-    case Position.Top: {
-      return SlideYDownTransition;
+    /*if (props.simpleFade) { TODO
+      return TransitionFade;
     }
-    case Position.Bottom: {
-      return SlideYUpTransition;
-    }
-    case Position.Right: {
-      return SlideXLeftTransition;
-    }
-    case Position.Left: {
-      return SlideXRightTransition;
-    }
-  }*/
+    switch (props.position) {
+      case Position.Top: {
+        return SlideYDownTransition;
+      }
+      case Position.Bottom: {
+        return SlideYUpTransition;
+      }
+      case Position.Right: {
+        return SlideXLeftTransition;
+      }
+      case Position.Left: {
+        return SlideXRightTransition;
+      }
+    }*/
 })
 
 /*const useFontColor = computed(() => {
@@ -166,50 +164,49 @@ const transitionComponent = computed(() => {
 </script>
 
 <style lang="scss">
-@import "../../styles/variables";
 
 .d-tooltip {
-  position: relative;
-  width: max-content;
+    position: relative;
+    width: max-content;
 
-  &.stay {
-    .d-tooltip__wrapper {
-      pointer-events: all;
+    &.stay {
+        .d-tooltip__wrapper {
+            pointer-events: all;
+        }
     }
-  }
 
-  &__wrapper {
-    z-index: 12;
-    padding: v-bind(padding);
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    border-radius: inherit;
-    pointer-events: none;
+    &__wrapper {
+        z-index: 12;
+        padding: v-bind(padding);
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        border-radius: inherit;
+        pointer-events: none;
 
-    &__content {
-      position: relative;
-      width: auto;
-      height: max-content;
-      border-radius: inherit;
-      padding: 0;
+        &__content {
+            position: relative;
+            width: auto;
+            height: max-content;
+            border-radius: inherit;
+            padding: 0;
 
-      &:not(.filled) {
-        background: transparent !important;
-        backdrop-filter: saturate(120%) blur(10px);
+            &:not(.filled) {
+                background: transparent !important;
+                backdrop-filter: saturate(120%) blur(10px);
 
-      }
+            }
 
-      &:not(.filled) &__text {
-        color: var(--text-card) !important;
-      }
+            &:not(.filled) &__text {
+                //color: var(--text-card) !important;
+            }
 
-      word-break: keep-all;
+            word-break: keep-all;
 
-      &__text {
-        color: var(--text-contrast) !important;
-      }
+            &__text {
+                //color: var(--text-contrast) !important;
+            }
+        }
     }
-  }
 }
 </style>

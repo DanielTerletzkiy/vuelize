@@ -1,7 +1,7 @@
 <template>
   <DWrapper
     ref="wrapper"
-    :classes="['d-title']"
+    :classes="['d-card-title']"
     v-bind="{...$props, ...$attrs}"
   >
     <slot />
@@ -11,42 +11,36 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import DWrapper from "../../DWrapper.vue";
-import defaultProps from "../../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
+import typographyProps from "@/props/typography.props";
 
 const wrapper = ref(null);
-defineExpose({ wrapper });
+defineExpose({wrapper});
 
 defineProps({
-  ...defaultProps
+    ...defaultProps,
+    ...typographyProps
 })
 </script>
 
 <style lang="scss">
 @import "../../../styles/variables";
 
-.d-title {
-  font-size: 36px;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  &.dark {
-    color: $dark_card_text;
-  }
-
-  &.light {
-    color: $light_card_text;
-  }
+.d-card-title {
+    font-size: 36px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .d-card {
-  .d-title {
-    width: auto;
-  }
+    .d-card-title {
+        width: auto;
+    }
 
-  .d-title + .d-content {
-    padding-top: 0;
-  }
+    .d-card-title + .d-content {
+        padding-top: 0;
+    }
 }
 </style>

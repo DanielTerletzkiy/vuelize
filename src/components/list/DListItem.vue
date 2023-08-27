@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import {computed, getCurrentInstance, inject, onMounted, ref} from "vue";
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import DWrapper from "../DWrapper.vue";
 import {Wrapper} from "../../types/components/Wrapper";
 

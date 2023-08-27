@@ -27,7 +27,7 @@ defineExpose({ wrapper });
 //todo add user click select rating
 import DWrapper from "../DWrapper.vue";
 import DRow from "../flex/DRow.vue";
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import {computed, ref} from "vue";
 import {Style} from "vue3-unicons/types/Unicon";
 import DIconButton from "../button/DIconButton.vue";

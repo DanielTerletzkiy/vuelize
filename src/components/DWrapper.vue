@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import {useVuelizeTheme} from "../stores/ThemeStore";
 import {computed, nextTick, onMounted, ref, watch} from "vue";
-import defaultProps from "../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import {storeToRefs} from "pinia";
 import {useClearColors, useColor, useSetColors} from "../composables/Color.composable";
 import {BlurAmount} from "../types/Theme";

@@ -57,7 +57,7 @@ import DCard from "../card/DCard.vue";
 import DList from "../list/DList.vue";
 import DListItem from "../list/DListItem.vue";
 import {TransitionSlide} from "@morev/vue-transitions";
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import {BlurAmount} from "@";
 
 const wrapper = ref(null);

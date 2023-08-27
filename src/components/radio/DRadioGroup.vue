@@ -12,7 +12,7 @@
 const wrapper = ref(null);
 defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import {provide, ref} from "vue";
 
 const emits = defineEmits(['update:modelValue']);

@@ -21,13 +21,14 @@ export enum Weight {
     w100 = 100,
     w300 = 300,
     w400 = 400,
-    w500 = 500,
+    w600 = 600,
     w700 = 700,
     w900 = 900,
 }
 
 export enum Opacity {
-    low = 0.5,
-    medium = 0.8,
-    high = 1,
+    none = 0,
+    low = 40,
+    medium = 60,
+    high = 80,
 }

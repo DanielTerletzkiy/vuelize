@@ -33,7 +33,7 @@ import {ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import {TransitionFade} from "@morev/vue-transitions";
 import {FocusTrap} from "focus-trap-vue";
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 
 const wrapper = ref(null);
 defineExpose({wrapper});

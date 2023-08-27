@@ -47,7 +47,7 @@ import {getCurrentInstance, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import {TransitionFade} from "@morev/vue-transitions";
 import {Style} from "vue3-unicons/types/Unicon"
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import Unicon from "vue3-unicons/src/components/Unicon.vue"
 
 defineProps({

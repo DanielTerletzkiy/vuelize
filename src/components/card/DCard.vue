@@ -15,7 +15,7 @@ const wrapper = ref(null);
 defineExpose({wrapper});
 import DWrapper from "../DWrapper.vue";
 import {ref} from "vue";
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 
 const props = defineProps({
   block: {type: Boolean},

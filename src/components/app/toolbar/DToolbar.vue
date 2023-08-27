@@ -30,7 +30,7 @@ import DWrapper from "../../DWrapper.vue";
 import DRow from "../../flex/DRow.vue";
 import DIconButton from "../../button/DIconButton.vue";
 import DIcon from "../../icon/DIcon.vue";
-import defaultProps from "../../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import {ThemeColorProperty} from "../../../types/Theme";
 import {Rounded} from "../../../types/Vuelize";
 

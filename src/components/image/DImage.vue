@@ -93,7 +93,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import DWrapper from "../DWrapper.vue";
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import {BlurAmount} from "../../types";
 import {DColumn, DDialog, DDivider, DIconButton} from "../../ComponentImport";
 
@@ -103,7 +103,7 @@ defineExpose({wrapper, dialogImage});
 
 const props = defineProps({
   src: {type: String, required: true},
-  alt: {type: String, required: false},
+  alt: {type: String, required: true},
   fit: {type: String, required: false, default: "contain"},
   ...defaultProps
 })

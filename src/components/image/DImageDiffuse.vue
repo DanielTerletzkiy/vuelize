@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import DWrapper from "../DWrapper.vue";
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import {computed, onMounted, ref, watch} from "vue";
 
 const wrapper = ref(null);

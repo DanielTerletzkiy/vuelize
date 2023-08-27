@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import {BlurAmount, ThemeColorProperty, ThemeSheetProperty} from "./types/Theme";
+import {BlurAmount, ThemeColorProperty, ThemeSheetProperty, ThemeTextProperty} from "./types/Theme";
 import {Position, Rounded} from "./types/Vuelize";
 import {Size} from "./types/components/DButton";
 import DCard from "./components/card/DCard.vue";
@@ -15,10 +15,14 @@ import DColumn from "./components/flex/DColumn.vue";
 import {useVuelizeNotifications} from "./stores";
 import DTextfield from "@/components/textfield/DTextfield.vue";
 import DCheckbox from "@/components/checkbox/DCheckbox.vue";
-import DTypography from "@/components/typography/DTypography.vue";
 import {Opacity, Weight} from "./types";
 import DNotificationWrapper from "@/components/notification/DNotificationWrapper.vue";
 import DNavigationBar from "@/components/app/navigation/DNavigationBar.vue";
+import DToolbar from "@/components/app/toolbar/DToolbar.vue";
+import DDialog from "@/components/dialog/DDialog.vue";
+import DCardSubtitle from "@/components/card/text/DCardSubtitle.vue";
+import DRoot from "@/components/root/DRoot.vue";
+import DTypography from "@/components/typography/DTypography.vue";
 
 const navOpen = ref(true);
 
@@ -59,13 +63,26 @@ const selected = ref(0);
     <template #notifications>
       <DNotificationWrapper />
     </template>
-    <d-typography
-      :opacity="Opacity.low"
-      :weight="Weight.w500"
-      color="white"
-    >
-      this is a nice text
-    </d-typography>
+
+
+    <d-row>
+      <d-column
+        v-for="color in [ThemeColorProperty.primary, ThemeTextProperty.card]"
+        :key="color"
+        no-padding
+      >
+        <d-typography
+          v-for="opacity in Object.values(Opacity).filter((v) => !isNaN(Number(v)))"
+          :key="opacity"
+          :color="color"
+          :opacity="opacity"
+          :weight="Weight.w400"
+        >
+          this is a nice text in {{ opacity }}
+        </d-typography>
+      </d-column>
+    </d-row>
+
     <d-textfield
       v-model="selected"
       filled
@@ -83,6 +100,13 @@ const selected = ref(0);
         {{ item.value }}
       </template>
     </d-textfield>
+
+    <d-textfield
+      filled
+      :color="ThemeColorProperty.primary"
+      solo
+      placeholder="Test"
+    />
     <d-row gap>
       <d-image
         :rounded="Rounded.none"
@@ -100,6 +124,7 @@ const selected = ref(0);
         width="500px"
       />
     </d-row>
+    <DRow :align="BlurAmount.low" />
     <d-dialog v-model="dialog">
       <d-card
         :blur="{amount:BlurAmount.strong}"
@@ -262,6 +287,7 @@ const selected = ref(0);
     >
       <d-row
         v-for="x in ['','n']"
+        :key="x"
       >
         <d-card
           width="100px"
@@ -269,17 +295,22 @@ const selected = ref(0);
           :rounded="Rounded.none"
           :glow="{central: true}"
         >
-          Default
+          <d-card-subtitle>
+            Default
+          </d-card-subtitle>
         </d-card>
         <d-card
           v-for="e in 10"
+          :key="e"
           :glow="{central: true}"
           :elevation="`${x}${e}`"
           width="100px"
           height="100px"
           :rounded="Rounded.none"
         >
-          {{ `${x}${e}` }}
+          <d-card-subtitle :opacity="Opacity.low">
+            {{ `${x}${e}` }}
+          </d-card-subtitle>
         </d-card>
       </d-row>
     </d-column>
@@ -311,7 +342,7 @@ const selected = ref(0);
       </template>
     </d-tooltip>
     <d-tooltip
-      :color="ThemeColorProperty.primary"
+      :color="ThemeSheetProperty.background"
       :position="Position.top"
       filled
       stay

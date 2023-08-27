@@ -14,8 +14,10 @@
   >
     <DCardSubtitle
       class="d-label__wrapper__content pa-0"
-      :color="color"
+      :color="filled ? {map: [{color: ThemeAllPropertyEnum.contrast, property: ThemeAllPropertyEnum.contrast}]} : color"
       rounded="inherit"
+      :opacity="Opacity.none"
+      :weight="Weight.w600"
     >
       <span
         v-if="!!$slots.prefix"
@@ -37,12 +39,16 @@
 </template>
 
 <script setup lang="ts">
-const wrapper = ref(null);
-defineExpose({wrapper});
+import {Opacity, ThemeAllPropertyEnum, Weight} from "@";
 import DWrapper from "../DWrapper.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 import {ref} from "vue";
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
+
+const wrapper = ref(null);
+defineExpose({wrapper});
+
+defineEmits(['click'])
 
 const props = defineProps({
   filled: {type: Boolean},

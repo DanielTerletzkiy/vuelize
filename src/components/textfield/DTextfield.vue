@@ -85,7 +85,7 @@ defineExpose({wrapper, input});
 import DSelect from "./variant/DSelect.vue";
 //import DAutocomplete from "@/components/textfield/variant/Autocomplete.vue";
 import {computed, getCurrentInstance, onMounted, ref} from "vue";
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import DWrapper from "../DWrapper.vue";
 
 
@@ -320,13 +320,13 @@ function removeFocus() {
 
     &.dark {
         .d-text-field__input {
-            color: $dark_card_text;
+            //color: $dark_card_text;
         }
     }
 
     &.light {
         .d-text-field__input {
-            color: $light_card_text;
+            //color: $light_card_text;
         }
     }
 }

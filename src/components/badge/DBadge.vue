@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";

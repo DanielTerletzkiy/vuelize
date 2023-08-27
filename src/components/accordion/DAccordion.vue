@@ -41,7 +41,7 @@ import DCardTitle from "../card/text/DCardTitle.vue";
 import DCardContent from "../card/content/DCardContent.vue";
 import DIcon from "../icon/DIcon.vue";
 import {TransitionExpand} from '@morev/vue-transitions';
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 
 const wrapper = ref<Wrapper>();
 defineExpose({wrapper});

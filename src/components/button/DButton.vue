@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import {PropType, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
-import defaultProps from "../../mixins/DefaultProps";
+import defaultProps from "@/props/default.props";
 import {Size} from "../../types/components/DButton";
 
 const wrapper = ref(null);
