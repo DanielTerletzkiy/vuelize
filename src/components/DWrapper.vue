@@ -2,6 +2,7 @@
   <component
     :is="componentTag"
     ref="wrapper"
+    :role="role"
     class="vuelize"
     :href="link"
     :disabled="disabled"
@@ -33,6 +34,7 @@ const {mode} = storeToRefs(vuelizeTheme)
 const props = defineProps({
   classes: {type: Array},
   rootTag: {type: String},
+  role: {type: String},
   ...defaultProps
 })
 

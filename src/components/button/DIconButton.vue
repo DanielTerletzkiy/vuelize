@@ -34,13 +34,13 @@ const props = defineProps({
   name: {type: String},
   ...defaultProps
 })
-const size = computed(() => props.size + 'px');
+const sizePX = computed(() => `${props.size}px`);
 </script>
 
 <style scoped lang="scss">
 .d-icon-button {
-  height: v-bind(size);
-  width: v-bind(size);
+  height: v-bind(sizePX);
+  width: v-bind(sizePX);
 
   user-select: none;
   position: relative;

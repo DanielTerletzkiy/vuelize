@@ -67,7 +67,7 @@ function click() {
 const icon = computed(() => props.modelValue ? props.onIcon : props.offIcon)
 const currentColor = computed(()=>props.modelValue ? props.color : ThemeColorProperty.secondary)
 
-const size = ref(props.size + 'px');
+const sizePX = ref(`${props.size}px`);
 //const color = ref(props.modelValue ? vuelize.getColor(props.color, props.tint) : vuelize.getColor('currentColor'));
 const classes = computed(() => {
   return {
@@ -94,8 +94,8 @@ const classes = computed(() => {
   gap: 8px;
 
   .d-checkbox__box {
-    height: v-bind(size);
-    width: v-bind(size);
+    height: v-bind(sizePX);
+    width: v-bind(sizePX);
 
     border-radius: $gap*1.2;
     display: flex;

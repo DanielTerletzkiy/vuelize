@@ -85,7 +85,7 @@ const props = defineProps({
         required: true,
     },
     items: {type: Array, required: true},
-    indexKey: {type: [String]},
+    indexKey: {type: String},
     mandatory: {type: Boolean},
     search: {type: Boolean},
     searchKey: {type: String, default: 'value'},

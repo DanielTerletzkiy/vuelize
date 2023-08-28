@@ -23,6 +23,7 @@ import DDialog from "@/components/dialog/DDialog.vue";
 import DCardSubtitle from "@/components/card/text/DCardSubtitle.vue";
 import DRoot from "@/components/root/DRoot.vue";
 import DTypography from "@/components/typography/DTypography.vue";
+import DSwitch from "@/components/switch/DSwitch.vue";
 
 const navOpen = ref(true);
 
@@ -36,6 +37,8 @@ const items = ref(Array.from(Array(1000).keys()).map((value) => {
         value
     }
 }))
+
+const switchValue = ref(1);
 
 const selected = ref(0);
 </script>
@@ -64,6 +67,22 @@ const selected = ref(0);
       <DNotificationWrapper />
     </template>
 
+    {{ switchValue }}
+    <d-switch
+      v-model="switchValue"
+      class="ma-24"
+      :size="45"
+      :states="[{
+        color: ThemeColorProperty.primary,
+        icon: 'times',
+        value: false,
+        tooltip: 'This is false'
+      },{
+        color: ThemeColorProperty.success,
+        icon: 'power',
+        value: true,
+      }]"
+    />
 
     <d-row>
       <d-column

@@ -36,8 +36,8 @@ const wrapper = ref(null);
 defineExpose({wrapper});
 
 const props = defineProps({
-    horizontal: {type: Object as PropType<PositionHorizontal>, required: true},
-    vertical: {type: Object as PropType<PositionVertical>, required: true},
+    horizontal: {type: String as PropType<PositionHorizontal>, required: true},
+    vertical: {type: String as PropType<PositionVertical>, required: true},
 })
 
 const vuelizeNotifications = useVuelizeNotifications();

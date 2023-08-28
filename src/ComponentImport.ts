@@ -11,6 +11,7 @@ import DCardTitle from './components/card/text/DCardTitle.vue'
 import DCardSubtitle from './components/card/text/DCardSubtitle.vue'
 import DCardContent from './components/card/content/DCardContent.vue'
 import DCheckbox from './components/checkbox/DCheckbox.vue'
+import DSwitch from './components/switch/DSwitch.vue'
 import DDivider from './components/divider/DDivider.vue'
 import DDialog from './components/dialog/DDialog.vue'
 import DColumn from './components/flex/DColumn.vue'
@@ -55,6 +56,7 @@ export {
     DCardSubtitle,
     DCardContent,
     DCheckbox,
+    DSwitch,
     DDivider,
     DDialog,
     DColumn,
@@ -111,6 +113,7 @@ export function importAll(app: App) {
     app.component("DRow", DRow)
     app.component("DDialog", DDialog)
     app.component("DCheckbox", DCheckbox)
+    app.component("DSwitch",DSwitch)
     app.component("DDivider", DDivider)
     app.component("DDotLoader", DDotLoader)
     app.component("DElevationLoader", DElevationLoader)

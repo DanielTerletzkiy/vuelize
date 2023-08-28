@@ -44,7 +44,7 @@ defineProps({
   flat: {type: Boolean},
   filled: {type: Boolean},
   block: {type: Boolean},
-  size: {type: Object as PropType<Size>, default: Size.regular},
+  size: {type: String as PropType<Size>, default: Size.regular},
   ...defaultProps
 })
 </script>

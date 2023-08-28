@@ -35,7 +35,6 @@
               :glow="{disabled: filled, active: true}"
               :color="props.color"
             >
-                {{props.color}}
               <slot name="tooltip" />
             </DLabel>
           </slot>

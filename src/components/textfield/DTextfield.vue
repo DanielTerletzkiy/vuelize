@@ -93,7 +93,7 @@ const instance = getCurrentInstance();
 
 const emit = defineEmits(['update:modelValue', 'enter']);
 const props = defineProps({
-    modelValue: {type: [String, Object], required: true},
+    modelValue: {type: [String, Number, Object], required: true},
     autocomplete: {type: Boolean},
     filled: {type: Boolean},
     fullWidth: {type: Boolean},
