@@ -33,7 +33,6 @@ export enum ThemeColorProperty {
     error = 'color-error',
     warning = 'color-warning',
     info = 'color-info',
-    current = 'color-current',
 }
 
 export enum ThemeSheetProperty {
@@ -73,6 +72,7 @@ export type OutlinedSettings = {
     color?: Color,
     offset?: string,
     width?: string,
+    transparency?: number,
 }
 
 export type ElevationSettings = {

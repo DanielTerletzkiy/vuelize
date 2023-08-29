@@ -49,7 +49,7 @@ const themeStore = useVuelizeTheme();
 const {mode, themes, currentTheme} = storeToRefs(themeStore);
 
 watch([mode, themes], () => {
-  setTheme();
+    setTheme()
 }, {
   deep: true
 })
@@ -86,6 +86,8 @@ function setTheme() {
         ThemeTextProperty[key as keyof typeof ThemeTextProperty],
     )
   }
+
+  document.documentElement.style.setProperty('color-scheme', mode.value)
 }
 
 </script>

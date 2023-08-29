@@ -12,7 +12,7 @@ import DImageDiffuse from "./components/image/DImageDiffuse.vue";
 import DRow from "./components/flex/DRow.vue";
 import DCardContent from "./components/card/content/DCardContent.vue";
 import DColumn from "./components/flex/DColumn.vue";
-import {useVuelizeNotifications} from "./stores";
+import {useVuelizeNotifications, useVuelizeTheme} from "./stores";
 import DTextfield from "@/components/textfield/DTextfield.vue";
 import DCheckbox from "@/components/checkbox/DCheckbox.vue";
 import {Opacity, Weight} from "./types";
@@ -23,7 +23,8 @@ import DDialog from "@/components/dialog/DDialog.vue";
 import DCardSubtitle from "@/components/card/text/DCardSubtitle.vue";
 import DRoot from "@/components/root/DRoot.vue";
 import DTypography from "@/components/typography/DTypography.vue";
-import DSwitch from "@/components/switch/DSwitch.vue";
+import DToggle from "@/components/toggle/DToggle.vue";
+import {storeToRefs} from "pinia";
 
 const navOpen = ref(true);
 
@@ -32,13 +33,16 @@ const dialog = ref(false);
 const notifications = useVuelizeNotifications()
 const {notify} = notifications;
 
+const vuelizeTheme = useVuelizeTheme()
+const {mode} = storeToRefs(vuelizeTheme);
+
 const items = ref(Array.from(Array(1000).keys()).map((value) => {
     return {
         value
     }
 }))
 
-const switchValue = ref(1);
+const switchValue = ref(0);
 
 const selected = ref(0);
 </script>
@@ -68,22 +72,50 @@ const selected = ref(0);
     </template>
 
     {{ switchValue }}
-    <d-switch
+    <d-toggle
       v-model="switchValue"
-      class="ma-24"
+      class="ma-24 mb-2"
       :size="45"
       :states="[{
-        color: ThemeColorProperty.primary,
+        color: ThemeColorProperty.error,
         icon: 'times',
         value: false,
-        tooltip: 'This is false'
+      },{
+        color: ThemeColorProperty.secondary,
+        icon: 'line-alt',
+        value: null,
+        hidden: false
       },{
         color: ThemeColorProperty.success,
-        icon: 'power',
+        icon: 'check',
         value: true,
       }]"
     />
-
+    <d-toggle
+      v-model="switchValue"
+      class="mx-24 mb-4"
+      :size="45"
+      colored-outline
+    />
+    <d-toggle
+      v-model="switchValue"
+      class="mx-24 mb-4"
+      :size="45"
+      colored-outline
+      :states="[{
+        color: ThemeColorProperty.secondary,
+        icon: 'moon',
+        tooltip: 'Dark',
+        value: 'dark',
+      },{
+        color: ThemeColorProperty.info,
+        icon: 'sun',
+        tooltip: 'Light',
+        value: 'light',
+      },]"
+      @toggle-value="(value)=>mode = value"
+    />
+    {{ mode }}
     <d-row>
       <d-column
         v-for="color in [ThemeColorProperty.primary, ThemeTextProperty.card]"

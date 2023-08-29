@@ -23,7 +23,7 @@ export function useContrastTextColor(ref: HTMLElement): string {
     let rgb = useColorStatic(ref);
 
     if (rgb.includes('srgb')) {
-        rgb = hexToRgb(useColorStatic(ref, ThemeColorProperty.current));
+        rgb = hexToRgb(useColorStatic(ref, 'color-current'));
     }
 
     const regex = /rgb\((\d+, \d+, \d+)\)/;
@@ -75,7 +75,7 @@ export function useSetColor(ref: HTMLElement, color: string | null, colorPropert
             ref.style.setProperty(`color`, color)
         }
 
-        ref.style.setProperty(`--${ThemeAllPropertyEnum.current}`, color)
+        ref.style.setProperty(`--color-current`, color)
 
     } catch (e) {
         console.error({e, ref, color, colorProperty})

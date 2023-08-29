@@ -111,7 +111,7 @@ const outline = computed(() => {
   return {
     outlineOffset: props.outlined.offset,
     outlineWidth: props.outlined.width,
-    outlineColor: props.outlined.color && useColor(wrapper.value, props.outlined.color)
+    outlineColor: `color-mix(in srgb, ${props.outlined.color && useColor(wrapper.value, props.outlined.color)}, transparent ${props.outlined.transparency||20}%)`
   };
 })
 
