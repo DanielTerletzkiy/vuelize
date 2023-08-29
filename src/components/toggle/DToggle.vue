@@ -177,6 +177,7 @@ onMounted(() => nextTick().then(updateIndicator))
     position: relative;
     width: max-content;
     overflow: hidden;
+    cursor: pointer;
 
     &__indicator {
         position: absolute !important;

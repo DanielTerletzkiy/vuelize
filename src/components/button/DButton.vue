@@ -2,9 +2,10 @@
   <DWrapper
     ref="wrapper"
     root-tag="button"
-    :classes="['d-button', size, {filled, block, glow}]"
+    :classes="['d-button', size, {filled, block, glow, loading, progress}]"
     v-bind="{...$props, ...$attrs}"
     :elevation="typeof $props.glow === 'undefined' && !filled && !flat ? 1 : $props.elevation || 0"
+    :disabled="$props.disabled || loading"
     @click.capture="$emit('click')"
   >
     <span
@@ -30,148 +31,202 @@
 </template>
 
 <script setup lang="ts">
-import {PropType, ref} from "vue";
+import {computed, PropType, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import defaultProps from "@/props/default.props";
-import {Size} from "../../types/components/DButton";
+import {Size} from "@";
 
 const wrapper = ref(null);
 defineExpose({wrapper});
 
 defineEmits(['click'])
 
-defineProps({
-  flat: {type: Boolean},
-  filled: {type: Boolean},
-  block: {type: Boolean},
-  size: {type: String as PropType<Size>, default: Size.regular},
-  ...defaultProps
+const props = defineProps({
+    flat: {type: Boolean},
+    filled: {type: Boolean},
+    block: {type: Boolean},
+    size: {type: String as PropType<Size>, default: Size.regular},
+    loading: {type: [Boolean, Number], default: false},
+    ...defaultProps
+})
+
+const progress = computed(()=> {
+    if(typeof props.loading === "number"){
+        return `${props.loading}%`;
+    }
+    return null;
 })
 </script>
 
 <style scoped lang="scss">
 .d-button {
-  user-select: none;
-  position: relative;
-  background: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-  display: flex;
-
-  min-height: 36px;
-
-  border-radius: inherit;
-
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 0.875rem;
-  letter-spacing: 0.089em;
-
-  transition-duration: 0.1s;
-
-  &:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-  }
-
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    content: '';
-    border-radius: inherit;
-
-    background: currentColor;
-    opacity: 0;
-
-    transition-duration: 0.25s;
-  }
-
-
-  &:hover {
-    &::before {
-      opacity: 0.1;
-      transition-duration: 0.15s;
-    }
-  }
-
-  &.filled {
-    .d-button__content {
-      color: var(--text-contrast); //var(--text-card); // TODO: use color-contrast when it finally comes out!
-    }
-
-    &::before {
-      opacity: 1;
-    }
-
-    &:hover {
-      &::before {
-        opacity: 0.9;
-      }
-    }
-  }
-
-  &.glow {
-    &::before {
-      opacity: 0.1;
-    }
-
-    &:hover {
-      &::before {
-        opacity: 0.15;
-      }
-    }
-  }
-
-  &.block {
-    //noinspection CssInvalidPropertyValue
-    width: -webkit-fill-available; //Its valid...
-    //noinspection CssInvalidPropertyValue
-    width: -moz-available;
-  }
-
-  .d-button__content {
-    min-height: inherit;
-    height: 100%;
-    width: 100%;
-    border-radius: inherit;
+    overflow: hidden;
+    user-select: none;
     position: relative;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0 1rem;
-    //justify-content: center;
 
-    .prefix {
-      //margin-left: 8px;
+    min-height: 36px;
+
+    border-radius: inherit;
+
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.089em;
+
+    transition-duration: 0.1s;
+
+    &:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
     }
 
-    .center {
-      margin-left: auto;
-      margin-right: auto;
+    &::before, &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: '';
+        border-radius: inherit;
+
+        background: currentColor;
+        opacity: 0;
+
+        transition-duration: 0.25s;
     }
 
-    .suffix {
-      //margin-right: 8px;
+    &::after {
+        content: none;
     }
-  }
 
-  &.small {
-    min-height: unset;
+    &:hover {
+        &::before {
+            opacity: 0.1;
+            transition-duration: 0.15s;
+        }
+    }
+
+    &.filled {
+        .d-button__content {
+            color: var(--text-contrast); //var(--text-card); // TODO: use color-contrast when it finally comes out!
+        }
+
+        &::before {
+            opacity: 1;
+        }
+
+        &:hover {
+            &::before {
+                opacity: 0.9;
+            }
+        }
+
+        &.loading {
+            &::after {
+                filter: brightness(0.1);
+            }
+        }
+    }
+
+    &.glow {
+        &::before {
+            opacity: 0.1;
+        }
+
+        &:hover {
+            &::before {
+                opacity: 0.15;
+            }
+        }
+    }
+
+    &.block {
+        //noinspection CssInvalidPropertyValue
+        width: -webkit-fill-available; //Its valid...
+        //noinspection CssInvalidPropertyValue
+        width: -moz-available;
+    }
+
+    &.loading {
+
+        &.progress {
+            &::after {
+                animation: none;
+                opacity: 0.25;
+                width: v-bind(progress);
+                transition: width 0.2s ease-in-out;
+            }
+        }
+
+        &::after {
+            content: '';
+            opacity: 0.14;
+            animation: load 2.5s infinite ease-in-out;
+            pointer-events: none;
+            width: auto;
+        }
+
+        @keyframes load {
+            0% {
+                left: -80%;
+                right: 100%;
+            }
+
+            60% {
+                left: -80%;
+                right: 100%;
+            }
+            100% {
+                left: 100%;
+                right: -40%;
+            }
+        }
+    }
 
     .d-button__content {
-      font-size: 0.65rem;
-      padding: 0.4rem;
+        min-height: inherit;
+        height: 100%;
+        width: 100%;
+        border-radius: inherit;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0 1rem;
+        //justify-content: center;
+
+        .prefix {
+            //margin-left: 8px;
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .suffix {
+            //margin-right: 8px;
+        }
     }
-  }
 
-  &.large .d-button__content {
-    font-size: 1.4rem;
-    padding: 10px 1rem;
+    &.small {
+        min-height: unset;
 
-  }
+        .d-button__content {
+            font-size: 0.65rem;
+            padding: 0.4rem;
+        }
+    }
+
+    &.large .d-button__content {
+        font-size: 1.4rem;
+        padding: 10px 1rem;
+
+    }
 }
 </style>

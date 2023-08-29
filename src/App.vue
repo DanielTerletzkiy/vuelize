@@ -188,6 +188,16 @@ const selected = ref(0);
       </d-card>
     </d-dialog>
     <d-button
+      :loading="switchValue * 15"
+      glow
+      :color="ThemeColorProperty.warning"
+      @click="dialog = true"
+    >
+      this is a button
+    </d-button>
+    <d-button
+      loading
+      filled
       :color="ThemeColorProperty.warning"
       @click="dialog = true"
     >
