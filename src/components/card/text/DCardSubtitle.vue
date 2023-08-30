@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import DWrapper from "../../DWrapper.vue";
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../../props/default.props";
 
 const wrapper = ref(null);
 defineExpose({wrapper});

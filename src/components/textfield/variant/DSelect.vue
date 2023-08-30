@@ -76,7 +76,7 @@ import DSelectMenu from "../../menu/DSelectMenu.vue";
 import DIconButton from "../../button/DIconButton.vue";
 import DIcon from "../../icon/DIcon.vue";
 import {TransitionSlide} from "@morev/vue-transitions";
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../../props/default.props";
 
 const emit = defineEmits(['update:modelValue', 'removeFocus', 'focusout', 'focusin'])
 const props = defineProps({

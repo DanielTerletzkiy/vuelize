@@ -63,11 +63,11 @@
 
 <script setup lang="ts">
 import {ComponentPublicInstance, computed, nextTick, onMounted, PropType, ref, watch} from "vue";
-import defaultProps from "@/props/default.props";
-import {Rounded, ThemeColorProperty, ThemeSheetProperty, ToggleState, Wrapper} from "@";
+import defaultProps from "../../props/default.props";
+import {Rounded, ThemeColorProperty, ThemeSheetProperty, ToggleState, Wrapper} from "../../types";
 import DWrapper from "../DWrapper.vue";
-import DIconButton from "@/components/button/DIconButton.vue";
-import DIcon from "@/components/icon/DIcon.vue";
+import DIconButton from "../button/DIconButton.vue";
+import DIcon from "../icon/DIcon.vue";
 
 const wrapper = ref(null);
 defineExpose({wrapper});

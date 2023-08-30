@@ -24,7 +24,7 @@ defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import {computed, ref} from "vue";
 import DIcon from "../icon/DIcon.vue";
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 
 defineEmits(['click'])
 

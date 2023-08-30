@@ -7,9 +7,6 @@
     "isolatedModules": false,
     "outDir": "dist",
     "baseUrl": "./src",
-    "paths": {
-      "*": ["node_modules/*"]
-    }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "dist/types/**/*.d.ts"],
   "exclude": ["node_modules", "dist"],

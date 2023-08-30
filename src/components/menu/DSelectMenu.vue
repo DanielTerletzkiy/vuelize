@@ -50,15 +50,15 @@
 </template>
 
 <script setup lang="ts">
-import DLazy from "@/components/DLazy.vue";
+import DLazy from "../DLazy.vue";
 import {ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
 import DList from "../list/DList.vue";
 import DListItem from "../list/DListItem.vue";
 import {TransitionSlide} from "@morev/vue-transitions";
-import defaultProps from "@/props/default.props";
-import {BlurAmount} from "@";
+import defaultProps from "../../props/default.props";
+import {BlurAmount} from "../../types";
 
 const wrapper = ref(null);
 defineExpose({wrapper});

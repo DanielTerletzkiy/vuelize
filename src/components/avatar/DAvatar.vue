@@ -20,7 +20,7 @@ defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import DImage from "../image/DImage.vue";
 import {computed, ref} from "vue";
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 
 const props = defineProps({
   src: {type: String},

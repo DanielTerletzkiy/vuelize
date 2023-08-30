@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 import {computed, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 

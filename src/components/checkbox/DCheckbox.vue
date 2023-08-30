@@ -40,9 +40,9 @@ import {computed, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DIcon from "../icon/DIcon.vue";
 import {TransitionSlide} from '@morev/vue-transitions';
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 import {storeToRefs} from "pinia";
-import {ThemeColorProperty} from "@";
+import {ThemeColorProperty} from "../../types";
 
 const wrapper = ref(null);
 defineExpose({wrapper});

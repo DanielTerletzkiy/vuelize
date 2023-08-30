@@ -47,7 +47,7 @@
 <script setup lang="ts">
 import type {PropType} from "vue";
 import {computed, nextTick, reactive, ref, useSlots, watch} from "vue";
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 import DWrapper from "../DWrapper.vue";
 import DLabel from "../label/DLabel.vue";
 import {TransitionFade} from "@morev/vue-transitions";

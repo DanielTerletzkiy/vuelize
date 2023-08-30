@@ -15,9 +15,9 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
-import DRow from "@/components/flex/DRow.vue";
+import DRow from "../flex/DRow.vue";
 import {PositionHorizontal, PositionVertical} from "../../types";
-import DNotificationContainer from "@/components/notification/DNotificationContainer.vue";
+import DNotificationContainer from "../notification/DNotificationContainer.vue";
 
 const wrapper = ref(null);
 defineExpose({wrapper});

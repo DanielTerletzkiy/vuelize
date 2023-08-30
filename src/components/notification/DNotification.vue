@@ -68,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 import type {PropType} from "vue";
 import {computed, onBeforeUnmount, onMounted, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";

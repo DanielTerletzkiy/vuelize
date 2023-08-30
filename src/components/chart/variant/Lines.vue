@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import SvgLine from "@/components/chart/variant/SvgLine";
+import SvgLine from "../variant/SvgLine";
 import debounce from "lodash/debounce";
 
 import Vivus from "vivus"

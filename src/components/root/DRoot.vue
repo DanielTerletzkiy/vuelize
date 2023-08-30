@@ -39,7 +39,7 @@
 import {Theme, ThemeColorProperty, ThemeSheetProperty, ThemeTextProperty} from "../../types/Theme";
 import {onMounted, ref, watch} from "vue";
 import {useSetColor} from "../../composables/Color.composable";
-import {useVuelizeTheme} from "@/stores/ThemeStore";
+import {useVuelizeTheme} from "../../stores/ThemeStore";
 import {storeToRefs} from "pinia";
 
 const wrapper = ref<HTMLElement | null>(null);

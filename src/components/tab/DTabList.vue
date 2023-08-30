@@ -21,7 +21,7 @@ const wrapper = ref(null);
 defineExpose({wrapper});
 import type {ComputedRef} from "vue";
 import {computed, getCurrentInstance, provide, ref} from "vue";
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 import DWrapper from "../DWrapper.vue";
 import DDivider from "../divider/DDivider.vue";
 

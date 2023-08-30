@@ -12,7 +12,7 @@
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({wrapper});
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 import DWrapper from "../DWrapper.vue";
 import type {ComputedRef} from "vue";
 import {computed, provide, ref, unref} from "vue";

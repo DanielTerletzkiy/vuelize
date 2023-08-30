@@ -37,7 +37,7 @@ import DWrapper from "../../DWrapper.vue";
 import DRow from "../../flex/DRow.vue";
 import DColumn from "../../flex/DColumn.vue";
 import {TransitionSlide} from "@morev/vue-transitions";
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../../props/default.props";
 
 const wrapper = ref(null);
 defineExpose({wrapper});

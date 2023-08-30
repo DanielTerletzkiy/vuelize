@@ -75,7 +75,7 @@
 <script setup lang="ts">
 const wrapper = ref(null);
 defineExpose({ wrapper });
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 import DWrapper from "../DWrapper.vue";
 import DIconButton from "../button/DIconButton.vue";
 import DRow from "../flex/DRow.vue";

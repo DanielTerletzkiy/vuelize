@@ -1,5 +1,6 @@
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { fileURLToPath, URL } from "url";
 
 // @ts-ignore
 import tsconfigPaths from 'vite-tsconfig-paths'
@@ -12,10 +13,10 @@ import {resolve} from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
     resolve: {
-        dedupe: ['vue'], alias: [{
-            find: "@",
-            replacement: resolve(__dirname, './src/')
-        }]
+        dedupe: ['vue'],
+        alias: [
+            //{find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url))},
+        ]
     },
     server: {port: 5656},
     css: {

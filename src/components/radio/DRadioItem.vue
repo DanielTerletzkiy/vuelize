@@ -41,7 +41,7 @@
 const wrapper = ref(null);
 defineExpose({ wrapper });
 import {computed, getCurrentInstance, inject, onMounted, ref, watch} from "vue";
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
 import {TransitionFade} from "@morev/vue-transitions";

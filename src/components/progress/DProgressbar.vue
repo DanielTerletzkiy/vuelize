@@ -42,7 +42,7 @@ defineExpose({ wrapper });
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
 import {computed, ref} from "vue";
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 
 const props = defineProps({

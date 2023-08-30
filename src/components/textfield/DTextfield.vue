@@ -85,7 +85,7 @@ defineExpose({wrapper, input});
 import DSelect from "./variant/DSelect.vue";
 //import DAutocomplete from "@/components/textfield/variant/Autocomplete.vue";
 import {computed, getCurrentInstance, onMounted, ref} from "vue";
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 import DWrapper from "../DWrapper.vue";
 
 
@@ -93,18 +93,18 @@ const instance = getCurrentInstance();
 
 const emit = defineEmits(['update:modelValue', 'enter']);
 const props = defineProps({
-    modelValue: {type: [String, Number, Object], required: true},
-    autocomplete: {type: Boolean},
-    filled: {type: Boolean},
-    fullWidth: {type: Boolean},
-    solo: {type: Boolean},
-    label: {type: String},
-    placeholder: {type: String, default: ''},
-    select: {type: Boolean},
-    mandatory: {type: Boolean},
-    search: {type: Boolean},
-    searchKey: {type: String, default: 'value'},
-    ...defaultProps
+  modelValue: {type: [String, Number, Object], required: true},
+  autocomplete: {type: Boolean},
+  filled: {type: Boolean},
+  fullWidth: {type: Boolean},
+  solo: {type: Boolean},
+  label: {type: String},
+  placeholder: {type: String, default: ''},
+  select: {type: Boolean},
+  mandatory: {type: Boolean},
+  search: {type: Boolean},
+  searchKey: {type: String, default: 'value'},
+  ...defaultProps
 });
 
 const hover = ref(false);
@@ -113,68 +113,68 @@ const selected = ref(false);
 const placeholderActive = !!props.placeholder && !props.modelValue;
 
 const classesObject = computed(() => {
-    return {
-        'd-text-field--active': (hover.value || selected.value),
-        'd-text-field--placeholder': placeholderActive,
-        'd-text-field--outlined outlined depressed elevation': props.outlined,
-        'd-text-field--filled glow glowActive': props.filled,
-        'd-text-field--solo': props.solo,
-    }
+  return {
+    'd-text-field--active': (hover.value || selected.value),
+    'd-text-field--placeholder': placeholderActive,
+    'd-text-field--outlined outlined depressed elevation': props.outlined,
+    'd-text-field--filled glow glowActive': props.filled,
+    'd-text-field--solo': props.solo,
+  }
 });
 
 const componentType = computed(() => {
-    if (props.select) {
-        return DSelect
-    } else if (props.autocomplete) {
-        return 'd-autocomplete'
-    } else {
-        return 'input'
-    }
+  if (props.select) {
+    return DSelect
+  } else if (props.autocomplete) {
+    return 'd-autocomplete'
+  } else {
+    return 'input'
+  }
 })
 
 const labelClassesObject = computed(() => {
-    return {
-        'd-text-field--filled': props.filled,
-    }
+  return {
+    'd-text-field--filled': props.filled,
+  }
 });
 
 const textFieldStylesObject = computed(() => {
-    return {
-        width: props.width,
-        'min-width': props.fullWidth ? '100%' : 'unset',
-    }
+  return {
+    width: props.width,
+    'min-width': props.fullWidth ? '100%' : 'unset',
+  }
 });
 
 
 onMounted(() => {
-    hover.value = false;
-    selected.value = false;
+  hover.value = false;
+  selected.value = false;
 
-    if (!instance) {
-        return;
-    }
-    instance.proxy.$forceUpdate();
+  if (!instance) {
+    return;
+  }
+  instance.proxy.$forceUpdate();
 });
 
 function onInput(e: { target: HTMLInputElement }) {
-    emit('update:modelValue', typeof e === 'object' ? e.target.value : e)
+  emit('update:modelValue', typeof e === 'object' ? e.target.value : e)
 }
 
 function onClick() {
-    if (input.value) {
-        if (input.value?.wrapper) {
-            //input.value?.wrapper.click()
-            return;
-        }
-        input.value.focus();
+  if (input.value) {
+    if (input.value?.wrapper) {
+      //input.value?.wrapper.click()
+      return;
     }
+    input.value.focus();
+  }
 }
 
 function removeFocus() {
-    hover.value = false;
-    selected.value = false;
-    //@ts-ignore
-    document.activeElement.blur();
+  hover.value = false;
+  selected.value = false;
+  //@ts-ignore
+  document.activeElement.blur();
 }
 </script>
 
@@ -182,166 +182,159 @@ function removeFocus() {
 @import "../../styles/variables";
 
 .d-text-field {
+  position: relative;
+  width: 250px;
+  height: 3rem;
+  caret-color: currentColor;
+  display: flex;
+  align-items: center;
+  cursor: text;
+
+  &:not(&--active) {
+    color: unset !important;
+  }
+
+  &__input, :deep(.d-text-field__input__autocomplete), :deep(.d-text-field__input) {
     position: relative;
-    width: 250px;
-    height: 3rem;
-    caret-color: currentColor;
-    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    margin: 0 1.25em;
+    background: none;
     align-items: center;
+
+    color: currentColor;
+    caret-color: inherit;
+
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+  }
+
+  &__label {
+    border-radius: 50px 50px 0 0;
+    position: absolute;
+    left: 1rem;
+    top: 0.8rem;
+    margin: 0 0.5rem;
     cursor: text;
+    transition-duration: 0.2s;
+    background: inherit;
+    height: 10px;
+  }
 
-    &:not(&--active) {
-        color: unset !important;
+  &__prefix {
+    position: relative;
+    left: 0.7rem;
+    font-size: 20px;
+
+    & ~ .d-text-field__label {
+      left: 40px;
+    }
+  }
+
+  &__suffix {
+    position: relative;
+    right: 0.7rem;
+    font-size: 20px;
+  }
+
+  &--outlined {
+    background: inherit;
+    box-shadow: none;
+
+    &.d-text-field--active {
+      outline: solid 1.8px currentColor !important;
+      border-color: currentColor;
     }
 
-    &__input, :deep(.d-text-field__input__autocomplete), :deep(.d-text-field__input) {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-        border-radius: inherit;
-        font-family: inherit;
-        font-size: inherit;
-        outline: none;
-        margin: 0 1.25em;
-        background: none;
-        align-items: center;
+    &:focus-within::before {
+      transition-duration: 0.2s;
+    }
+  }
 
-        color: currentColor;
-        caret-color: inherit;
-
-        transition-duration: 0.2s;
-        transition-timing-function: ease-in;
+  &--filled {
+    &.glow--active:not(:hover):not(.d-text-field--active)::before {
+      opacity: 0.05 !important;
     }
 
-    &__label {
-        border-radius: 50px 50px 0 0;
-        position: absolute;
-        left: 1rem;
-        top: 0.8rem;
-        margin: 0 0.5rem;
-        cursor: text;
-        transition-duration: 0.2s;
-        background: inherit;
-        height: 10px;
+    height: 3.6rem;
+
+    .d-text-field__label {
+      height: auto;
+      top: 1rem;
+      font-size: 1.2rem;
     }
 
-    &__prefix {
-        position: relative;
-        left: 0.7rem;
-        font-size: 20px;
-
-        & ~ .d-text-field__label {
-            left: 40px;
-        }
+    .d-text-field__input {
+      height: calc(100% - 12px);
+      margin-top: 12px !important;
+      margin-bottom: 0 !important;
+      margin-left: 1.2em;
+      margin-right: 1.2em;
     }
 
-    &__suffix {
-        position: relative;
-        right: 0.7rem;
-        font-size: 20px;
+    &:not(.d-text-field--solo) {
+
+      .d-text-field__prefix {
+        margin-top: 12px;
+      }
+
+      .d-text-field__suffix {
+        margin-top: 12px;
+      }
+    }
+  }
+
+  &--solo {
+    height: 3rem !important;
+
+    .d-text-field__input {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
     }
 
-    &--outlined {
-        background: inherit;
-        box-shadow: none;
-
-        &.d-text-field--active {
-            outline: solid 1.8px currentColor !important;
-            border-color: currentColor;
-        }
-
-        &:focus-within::before {
-            transition-duration: 0.2s;
-        }
+    .d-text-field__label {
+      display: none;
     }
+  }
 
-    &--filled {
-        &.glow--active:not(:hover):not(.d-text-field--active)::before {
-            opacity: 0.05 !important;
-        }
+  &.d-text-field--filled.d-text-field--outlined label {
+    background: none !important;
+  }
 
-        height: 3.6rem;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    border-radius: inherit;
+  }
 
-        .d-text-field__label {
-            height: auto;
-            top: 1rem;
-            font-size: 1.2rem;
-        }
+  .d-text-field__input {
+    color: var(--text-card);
+  }
 
-        .d-text-field__input {
-            height: calc(100% - 12px);
-            margin-top: 12px !important;
-            margin-bottom: 0 !important;
-            margin-left: 1.2em;
-            margin-right: 1.2em;
-        }
-
-        &:not(.d-text-field--solo) {
-
-            .d-text-field__prefix {
-                margin-top: 12px;
-            }
-
-            .d-text-field__suffix {
-                margin-top: 12px;
-            }
-        }
-    }
-
-    &--solo {
-        height: 3rem !important;
-
-        .d-text-field__input {
-            margin-top: 0 !important;
-            margin-bottom: 0 !important;
-        }
-
-        .d-text-field__label {
-            display: none;
-        }
-    }
-
-    &.d-text-field--filled.d-text-field--outlined label {
-        background: none !important;
-    }
-
-    &::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        content: '';
-        border-radius: inherit;
-    }
-
-    &.dark {
-        .d-text-field__input {
-            //color: $dark_card_text;
-        }
-    }
-
-    &.light {
-        .d-text-field__input {
-            //color: $light_card_text;
-        }
-    }
 }
 
 .d-text-field__input:focus ~ .d-text-field__label, .d-text-field--placeholder .d-text-field__input ~ .d-text-field__label,
 .d-text-field__input:not(:placeholder-shown).d-text-field__input:not(:focus) ~ .d-text-field__label {
 
-    font-size: 0.9rem;
-    padding: 0 0.3rem;
-    top: -0.485rem;
-    left: 0.4rem;
+  font-size: 0.9rem;
+  padding: 0 0.3rem;
+  top: -0.485rem;
+  left: 0.4rem;
 
-    &.d-text-field--filled {
-        top: 0.2rem !important;
-    }
+  &.d-text-field--filled {
+    top: 0.2rem !important;
+  }
 }
 
 </style>

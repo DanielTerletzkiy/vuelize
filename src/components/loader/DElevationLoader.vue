@@ -26,7 +26,7 @@
 const wrapper = ref(null);
 defineExpose({ wrapper });
 import {Rounded} from "../../types/Vuelize";
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 import {onMounted, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DRow from "../flex/DRow.vue";

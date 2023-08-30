@@ -39,11 +39,11 @@
 </template>
 
 <script setup lang="ts">
-import {Opacity, ThemeAllPropertyEnum, Weight} from "@";
+import {Opacity, ThemeAllPropertyEnum, Weight} from "../../types";
 import DWrapper from "../DWrapper.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 import {ref} from "vue";
-import defaultProps from "@/props/default.props";
+import defaultProps from "../../props/default.props";
 
 const wrapper = ref(null);
 defineExpose({wrapper});

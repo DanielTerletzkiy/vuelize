@@ -33,8 +33,8 @@
 <script setup lang="ts">
 import {computed, PropType, ref} from "vue";
 import DWrapper from "../DWrapper.vue";
-import defaultProps from "@/props/default.props";
-import {Size} from "@";
+import defaultProps from "../../props/default.props";
+import {Size} from "../../types";
 
 const wrapper = ref(null);
 defineExpose({wrapper});

@@ -14,8 +14,8 @@ defineExpose({wrapper});
 
 import DWrapper from "../DWrapper.vue";
 import {computed, ref} from "vue";
-import typographyProps from "@/props/typography.props";
-import defaultProps from "@/props/default.props";
+import typographyProps from "../..//props/typography.props";
+import defaultProps from "../../props/default.props";
 
 const props = defineProps({
     ...typographyProps,
