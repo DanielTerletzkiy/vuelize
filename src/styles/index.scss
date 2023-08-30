@@ -51,7 +51,7 @@ button {
 
 .disabled {
   &.dark {
-    color: color-mix(in srgb,var(--color-current),transparent 40%) !important;
+    color: #606060 !important;
   }
 
   &.light {
