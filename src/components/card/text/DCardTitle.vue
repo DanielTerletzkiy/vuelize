@@ -1,10 +1,10 @@
 <template>
   <DWrapper
-    ref="wrapper"
-    :classes="['d-card-title']"
-    v-bind="{...$props, ...$attrs}"
+      ref="wrapper"
+      :classes="['d-card-title']"
+      v-bind="{...$props, ...$attrs}"
   >
-    <slot />
+    <slot/>
   </DWrapper>
 </template>
 
@@ -18,8 +18,8 @@ const wrapper = ref(null);
 defineExpose({wrapper});
 
 defineProps({
-    ...defaultProps,
-    ...typographyProps
+  ...defaultProps,
+  ...typographyProps
 })
 </script>
 
@@ -27,20 +27,21 @@ defineProps({
 @import "../../../styles/variables";
 
 .d-card-title {
-    font-size: 36px;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  font-size: 36px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-header)
 }
 
 .d-card {
-    .d-card-title {
-        width: auto;
-    }
+  .d-card-title {
+    width: auto;
+  }
 
-    .d-card-title + .d-content {
-        padding-top: 0;
-    }
+  .d-card-title + .d-content {
+    padding-top: 0;
+  }
 }
 </style>
