@@ -185,7 +185,7 @@ function removeFocus() {
   position: relative;
   width: 250px;
   height: 3rem;
-  caret-color: currentColor;
+  caret-color: var(--color-current);
   display: flex;
   align-items: center;
   cursor: text;
