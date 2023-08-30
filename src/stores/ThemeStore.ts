@@ -23,7 +23,7 @@ export const useVuelizeTheme = defineStore('vuelizeTheme', () => {
                 glow: "currentColor",
             },
             text: {
-                header: "#eaeaea",
+                header: "#bdbdbd",
                 card: "#949494",
                 contrast: "currentColor"
             }
