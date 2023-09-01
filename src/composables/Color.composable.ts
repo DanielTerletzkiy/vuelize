@@ -4,6 +4,7 @@ import {
     ThemeAllPropertyEnum,
     ThemeAllPropertyType,
     ThemeColorProperty,
+    ThemeMiscProperty,
     ThemeTextProperty
 } from "../types";
 import {nextTick} from "vue";
@@ -23,7 +24,7 @@ export function useContrastTextColor(ref: HTMLElement): string {
     let rgb = useColorStatic(ref);
 
     if (rgb.includes('srgb')) {
-        rgb = hexToRgb(useColorStatic(ref, 'color-current'));
+        rgb = hexToRgb(useColorStatic(ref, ThemeMiscProperty.current));
     }
 
     const regex = /rgb\((\d+, \d+, \d+)\)/;
@@ -60,7 +61,6 @@ export function useContrastTextColor(ref: HTMLElement): string {
 
 
 export function useSetColor(ref: HTMLElement, color: string | null, colorProperty?: ThemeAllPropertyType) {
-    //console.log()
     try {
         if (color === null && !!colorProperty) {
             const originalColor = getComputedStyle(document.documentElement).getPropertyValue(`--${colorProperty}`)
@@ -75,7 +75,7 @@ export function useSetColor(ref: HTMLElement, color: string | null, colorPropert
             ref.style.setProperty(`color`, color)
         }
 
-        ref.style.setProperty(`--color-current`, color)
+        ref.style.setProperty(`--misc-current`, color)
 
     } catch (e) {
         console.error({e, ref, color, colorProperty})

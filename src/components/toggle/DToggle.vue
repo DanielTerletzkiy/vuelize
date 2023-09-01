@@ -4,7 +4,7 @@
     :classes="['d-toggle']"
     v-bind="{...$props, ...$attrs}"
     role="toggle"
-    :outlined="{color: currentState&&coloredOutline&&currentState.color, transparency: 60,width: '2px'}"
+    :outlined="{color: currentState&&coloredOutline&&currentState.color||'', transparency: 60,width: '2px'}"
     :tabindex="disabled || !simpleToggle?-1:0"
     @keyup.enter="simpleToggle && simpleClick()"
   >

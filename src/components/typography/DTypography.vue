@@ -31,7 +31,7 @@ const opacityPercent = computed(()=>`${props.opacity}%`)
 
 .d-typography {
     font-weight: v-bind(weight);
-    color: color-mix(in srgb, var(--color-current), transparent v-bind(opacityPercent)) !important;
+    color: color-mix(in srgb, var(--misc-current), transparent v-bind(opacityPercent)) !important;
 }
 
 </style>

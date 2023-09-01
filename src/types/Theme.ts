@@ -47,10 +47,15 @@ export enum ThemeTextProperty {
     contrast = 'text-contrast',
 }
 
+export enum ThemeMiscProperty {
+    current = 'misc-current',
+}
+
 export const ThemeAllPropertyEnum = {
     ...ThemeColorProperty,
     ...ThemeSheetProperty,
-    ...ThemeTextProperty
+    ...ThemeTextProperty,
+    ...ThemeMiscProperty
 }
 export type ThemeAllPropertyType = ThemeColorProperty | ThemeSheetProperty | ThemeTextProperty
 

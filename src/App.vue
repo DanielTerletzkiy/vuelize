@@ -125,6 +125,7 @@ const selected = ref(0);
         <d-typography
           v-for="opacity in Object.values(Opacity).filter((v) => !isNaN(Number(v)))"
           :key="opacity"
+          :outlined="{disabled: true}"
           :color="color"
           :opacity="opacity"
           :weight="Weight.w400"

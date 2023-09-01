@@ -155,7 +155,7 @@ const progress = computed(() => {
   &.loading {
 
     &.disabled {
-      color: color-mix(in srgb, var(--color-current), transparent 35%) !important;
+      color: color-mix(in srgb, var(--misc-current), transparent 35%) !important;
     }
 
     &.progress {
