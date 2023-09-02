@@ -319,7 +319,7 @@ function removeFocus() {
   }
 
   .d-text-field__input {
-    color: var(--text-card);
+    color: var(--text-header);
   }
 
 }
