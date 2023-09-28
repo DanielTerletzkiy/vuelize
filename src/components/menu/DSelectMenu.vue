@@ -112,7 +112,7 @@ function onInput(e: number | Array<number>) {
         max-height: calc(54px * 5);
         overflow: auto;
 
-        top: calc(100% + 6px);
+        top: 100%;
         left: 0;
 
         &__list {

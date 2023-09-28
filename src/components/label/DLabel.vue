@@ -14,7 +14,7 @@
   >
     <DCardSubtitle
       class="d-label__wrapper__content pa-0"
-      :color="filled ? {map: [{color: ThemeAllPropertyEnum.contrast, property: ThemeAllPropertyEnum.contrast}]} : color"
+      :color="filled ? ThemeTextProperty.contrast : color"
       rounded="inherit"
       :opacity="Opacity.none"
       :weight="Weight.w600"
@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import {Opacity, ThemeAllPropertyEnum, Weight} from "../../types";
+import {Opacity, ThemeAllPropertyEnum, ThemeMiscProperty, ThemeTextProperty, Weight} from "../../types";
 import DWrapper from "../DWrapper.vue";
 import DCardSubtitle from "../card/text/DCardSubtitle.vue";
 import {ref} from "vue";

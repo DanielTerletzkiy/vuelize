@@ -159,9 +159,13 @@ onBeforeMount(mapItems)
     width: calc(100% + (1.2em * 2));
 }
 
-.d-select-label {
+.d-select{
+  height: 100%;
+
+  &-label{
     width: 100%;
     display: flex;
+  }
 }
 
 .d-text-field__input {
