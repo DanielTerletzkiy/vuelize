@@ -186,6 +186,12 @@ const selected = ref(0);
         <d-card-title>
           Hello there
         </d-card-title>
+          <d-tooltip>
+              test
+              <template v-slot:tooltip>
+                  testing
+              </template>
+          </d-tooltip>
       </d-card>
     </d-dialog>
     <d-button
@@ -394,7 +400,6 @@ const selected = ref(0);
     </d-card>
     <d-tooltip
       :color="ThemeColorProperty.primary"
-      stay
     >
       <d-button :color="ThemeColorProperty.primary">
         testtesttesttesttesttesttesttest
@@ -404,8 +409,8 @@ const selected = ref(0);
       </template>
     </d-tooltip>
     <d-tooltip
-      :color="ThemeSheetProperty.background"
-      :position="Position.top"
+      :color="ThemeColorProperty.primary"
+      :position="Position.right"
       filled
       stay
     >

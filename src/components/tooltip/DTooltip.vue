@@ -3,12 +3,12 @@
     ref="wrapper"
     :classes="['d-tooltip', position, {stay}]"
     :color="color"
-    @mouseleave="stay && onHoverLeave()"
+    @mouseleave="wrapperHoverLeave"
   >
     <div
       ref="trigger"
       class="d-tooltip__slot"
-      @mouseover="onHoverOver"
+      @mousemove="onHoverOver"
       @mouseleave="!stay && onHoverLeave()"
     >
       <slot
@@ -16,41 +16,48 @@
         v-bind="{...$props, ...$attrs}"
       />
     </div>
-    <component
-      :is="transitionComponent"
-      :duration="100"
+    <teleport
+      to="#app"
     >
-      <suspense>
-        <div
-          v-if="hoverState"
-          ref="tooltip"
-          class="d-tooltip__wrapper"
-          :style="stylesObject"
-        >
-          <slot name="tooltip-wrapper">
-            <DLabel
-              class="d-tooltip__wrapper__content"
-              v-bind="{...$props, ...$attrs}"
-              :filled="filled"
-              :glow="{disabled: filled, active: true}"
-              :color="props.color"
-            >
-              <slot name="tooltip" />
-            </DLabel>
-          </slot>
-        </div>
-      </suspense>
-    </component>
+      <component
+        :is="transitionComponent"
+        :offset="transitionSlides"
+        :duration="100"
+      >
+        <suspense>
+          <div
+            v-if="hoverState"
+            ref="tooltip"
+            class="d-tooltip__wrapper"
+            :class="[{stay}]"
+            @mousemove="onStayHoverOver"
+            @mouseleave="onStayHoverLeave"
+          >
+            <slot name="tooltip-wrapper">
+              <DLabel
+                class="d-tooltip__wrapper__content"
+                v-bind="{...$props, ...$attrs}"
+                :filled="filled"
+                :glow="{disabled: filled, active: true}"
+                :color="props.color"
+              >
+                <slot name="tooltip" />
+              </DLabel>
+            </slot>
+          </div>
+        </suspense>
+      </component>
+    </teleport>
   </DWrapper>
 </template>
 
 <script setup lang="ts">
 import type {PropType} from "vue";
-import {computed, nextTick, reactive, ref, useSlots, watch} from "vue";
+import {computed, nextTick, ref, useSlots, watch} from "vue";
 import defaultProps from "../../props/default.props";
 import DWrapper from "../DWrapper.vue";
 import DLabel from "../label/DLabel.vue";
-import {TransitionFade} from "@morev/vue-transitions";
+import {TransitionFade, TransitionSlide} from "@morev/vue-transitions";
 import {Position} from "../../types/Vuelize";
 
 const wrapper = ref(null);
@@ -64,7 +71,6 @@ const props = defineProps({
     stay: Boolean,
     simpleFade: Boolean,
     inactive: Boolean,
-    padding: {type: String, default: '4px'},
     position: {
         type: String as PropType<Position>,
         default: Position.bottom,
@@ -72,22 +78,11 @@ const props = defineProps({
     ...defaultProps
 });
 
-const hoverState = ref(false);
-const offset = reactive({
-    top: 'initial',
-    right: 'initial',
-    bottom: 'initial',
-    left: 'initial',
-})
 
 let trigger = ref<HTMLElement | null>(null);
 let tooltip = ref<HTMLElement | null>(null);
 
-watch([() => hoverState.value, () => slots.tooltip ? slots.tooltip() : null], () => {
-    nextTick().then(() => onHover())
-}, {
-    deep: true
-})
+const hoverState = ref(false);
 
 function onHoverOver() {
     if (props.inactive) return;
@@ -98,59 +93,89 @@ function onHoverLeave() {
     hoverState.value = false;
 }
 
+
+const stayHoverState = ref(false);
+
+function onStayHoverOver() {
+    stayHoverState.value = true;
+}
+
+function onStayHoverLeave() {
+    stayHoverState.value = false;
+    wrapperHoverLeave();
+}
+
+function wrapperHoverLeave() {
+    setTimeout(() => {
+        if (!(props.stay && !stayHoverState.value)) {
+            return;
+        }
+        onHoverLeave()
+    }, 150)
+}
+
 async function onHover() {
     if (!(hoverState.value && tooltip.value) || !trigger.value) {
         return;
     }
     const triggerRect = trigger.value.getBoundingClientRect();
     const tooltipRect = tooltip.value.getBoundingClientRect();
+
     switch (props.position) {
         case Position.top: {
-            offset.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
-            offset.top = (triggerRect.top - (tooltipRect.height)) + 'px';
+            tooltip.value.style.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
+            tooltip.value.style.top = (triggerRect.top - tooltipRect.height) + 'px';
             break;
         }
         case Position.bottom: {
-            offset.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
-            offset.top = (triggerRect.top + (triggerRect.height)) + 'px';
+            tooltip.value.style.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
+            tooltip.value.style.top = (triggerRect.top + triggerRect.height) + 'px';
             break;
         }
         case Position.right: {
-            offset.left = (triggerRect.left + triggerRect.width) + 'px';
-            offset.top = (triggerRect.top + ((triggerRect.height / 2) - tooltipRect.height / 2)) + 'px';
+            tooltip.value.style.left = (triggerRect.left + triggerRect.width) + 'px';
+            tooltip.value.style.top = (triggerRect.top + (triggerRect.height / 2) - tooltipRect.height / 2) + 'px';
             break;
         }
         case Position.left: {
-            offset.left = (triggerRect.left - tooltipRect.width) + 'px';
-            offset.top = (triggerRect.top + ((triggerRect.height / 2) - tooltipRect.height / 2)) + 'px';
+            tooltip.value.style.left = (triggerRect.left - tooltipRect.width) + 'px';
+            tooltip.value.style.top = (triggerRect.top + (triggerRect.height / 2) - tooltipRect.height / 2) + 'px';
             break;
         }
     }
 }
 
-const stylesObject = computed(() => {
-    return offset
+const transitionComponent = computed(() => {
+    if (props.simpleFade) {
+        return TransitionFade;
+    }
+    return TransitionSlide;
 })
 
-const transitionComponent = computed(() => {
-    return TransitionFade;
-    /*if (props.simpleFade) { TODO
-      return TransitionFade;
-    }
+const transitionSlides = computed(() => {
+    const modifier = 8;
     switch (props.position) {
-      case Position.Top: {
-        return SlideYDownTransition;
-      }
-      case Position.Bottom: {
-        return SlideYUpTransition;
-      }
-      case Position.Right: {
-        return SlideXLeftTransition;
-      }
-      case Position.Left: {
-        return SlideXRightTransition;
-      }
-    }*/
+        case Position.top: {
+            return [0, modifier];
+        }
+        case Position.bottom: {
+            return [0, -modifier];
+        }
+        case Position.left: {
+            return [modifier, 0];
+        }
+        case Position.right: {
+            return [-modifier, 0];
+        }
+        default:
+            return []
+    }
+})
+
+watch([() => hoverState.value, () => slots.tooltip ? slots.tooltip() : null], () => {
+    nextTick().then(() => onHover())
+}, {
+    deep: true
 })
 
 /*const useFontColor = computed(() => {
@@ -164,19 +189,17 @@ const transitionComponent = computed(() => {
 
 <style lang="scss">
 
-.d-tooltip {
-    position: relative;
-    width: max-content;
+.d-tooltip__wrapper.stay {
+    pointer-events: all;
+}
 
-    &.stay {
-        .d-tooltip__wrapper {
-            pointer-events: all;
-        }
-    }
+
+.d-tooltip {
+    width: max-content;
 
     &__wrapper {
         z-index: 12;
-        padding: v-bind(padding);
+        padding: 4px;
         position: fixed;
         display: flex;
         justify-content: center;
