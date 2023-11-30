@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {BlurAmount, ThemeColorProperty, ThemeSheetProperty, ThemeTextProperty} from "./types/Theme";
 import {Position, Rounded} from "./types/Vuelize";
 import {Size} from "./types/components/DButton";
@@ -46,7 +46,39 @@ const items = ref(Array.from(Array(1000).keys()).map((value) => {
 const switchValue = ref(0);
 
 const selected = ref(0);
-const test = ref("");
+const test2 = ref("normal");
+const test = ref("normal");
+
+const SerialStatesPreset =
+    [
+      {
+        name: 'Normal',
+        icon: 'solar:check-circle-line-duotone',
+        color: ThemeColorProperty.primary,
+        value: "normal",
+      },
+      {
+        name: 'Damaged',
+        icon: 'solar:shield-warning-line-duotone',
+        color: ThemeColorProperty.warning,
+        value: "damaged",
+      },
+      {
+        name: 'Lost/Stolen',
+        icon: 'solar:danger-line-duotone',
+        color: ThemeColorProperty.error,
+        value: "lost",
+      },
+    ]
+
+const model = computed({
+  get() {
+    return SerialStatesPreset.findIndex((item) => item.value === test.value)
+  },
+  set(index: number) {
+    test.value = SerialStatesPreset[index].value;
+  }
+})
 </script>
 
 <template>
@@ -72,6 +104,39 @@ const test = ref("");
     <template #notifications>
       <DNotificationWrapper />
     </template>
+
+    {{model}}
+    <d-textfield
+        v-model="model"
+        :items="SerialStatesPreset"
+        select
+        label="Status"
+        mandatory
+        full-width
+        filled
+        search-key="value"
+        :color="SerialStatesPreset[model].color"
+    >
+      <template #label="{ item }">
+        <d-row :color="item.color">
+          <Iconify
+              :name="item.icon"
+              :color="item.color"
+          />
+          <d-card-subtitle>
+            {{ item.name }}
+          </d-card-subtitle>
+        </d-row>
+      </template>
+      <template #item="{ item }">
+        <d-row :color="item.color">
+          <Iconify :name="item.icon" />
+          <d-card-subtitle>
+            {{ item.name }}
+          </d-card-subtitle>
+        </d-row>
+      </template>
+    </d-textfield>
 
     {{ switchValue }}
     <d-toggle
@@ -168,8 +233,8 @@ const test = ref("");
     <d-textfield
       filled
       :color="ThemeColorProperty.primary"
-      label="Test"
-      v-model="test"
+      label="Test2"
+      v-model="test2"
     >
       <template #prefix>
         <d-icon name="times" />
@@ -179,11 +244,11 @@ const test = ref("");
       filled
       :color="ThemeColorProperty.primary"
       solo
-      placeholder="Test"
-      v-model="test"
+      placeholder="Test2"
+      v-model="test2"
     >
       <template #prefix>
-        <d-icon name="times" />
+        <d-icon name="power" />
       </template>
     </d-textfield>
     <d-row gap>

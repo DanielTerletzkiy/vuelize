@@ -116,7 +116,8 @@ const classesObject = computed(() => {
   return {
     'd-text-field--active': (hover.value || selected.value),
     'd-text-field--placeholder': placeholderActive,
-    'd-text-field--value': (typeof (props.modelValue as string) === 'string' && (props.modelValue as string).length>0),
+    'd-text-field--value': (typeof (props.modelValue as string) === 'string' && (props.modelValue as string).length>0)
+        ||(typeof (props.modelValue as number) === 'number' && (props.modelValue as number) != null),
     'd-text-field--outlined outlined depressed elevation': props.outlined,
     'd-text-field--filled glow glowActive': props.filled,
     'd-text-field--solo': props.solo,
