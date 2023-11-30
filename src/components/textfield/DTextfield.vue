@@ -23,8 +23,8 @@
       class="d-text-field__input"
       :placeholder="placeholderActive ? placeholder : ' '"
       :model-value="modelValue"
-      @update:modelValue="onInput"
-      @removeFocus="removeFocus"
+      @update:model-value="onInput"
+      @remove-focus="removeFocus"
       @focusin="selected = true"
       @focusout="selected = false"
     >
@@ -116,6 +116,7 @@ const classesObject = computed(() => {
   return {
     'd-text-field--active': (hover.value || selected.value),
     'd-text-field--placeholder': placeholderActive,
+    'd-text-field--value': !!props.modelValue,
     'd-text-field--outlined outlined depressed elevation': props.outlined,
     'd-text-field--filled glow glowActive': props.filled,
     'd-text-field--solo': props.solo,
@@ -156,7 +157,9 @@ onMounted(() => {
   instance.proxy.$forceUpdate();
 });
 
-function onInput(e: { target: HTMLInputElement }) {
+function onInput(e: {
+  target: HTMLInputElement
+}) {
   emit('update:modelValue', typeof e === 'object' ? e.target.value : e)
 }
 
@@ -226,12 +229,14 @@ function removeFocus() {
     transition-duration: 0.2s;
     background: inherit;
     height: 10px;
+    pointer-events: none;
   }
 
   &__prefix {
     position: relative;
     left: 0.7rem;
     font-size: 20px;
+    transition-duration: 0.1s;
 
     & ~ .d-text-field__label {
       left: 40px;
@@ -242,6 +247,7 @@ function removeFocus() {
     position: relative;
     right: 0.7rem;
     font-size: 20px;
+    transition-duration: 0.1s;
   }
 
   &--outlined {
@@ -282,11 +288,11 @@ function removeFocus() {
     &:not(.d-text-field--solo) {
 
       .d-text-field__prefix {
-        margin-top: 12px;
+        //margin-top: 12px;
       }
 
       .d-text-field__suffix {
-        margin-top: 12px;
+        //margin-top: 12px;
       }
     }
   }
@@ -302,6 +308,10 @@ function removeFocus() {
     .d-text-field__label {
       display: none;
     }
+  }
+
+  &:not(.d-text-field--solo) {
+    height: 3.5rem !important;
   }
 
   &.d-text-field--filled.d-text-field--outlined label {
@@ -324,16 +334,31 @@ function removeFocus() {
 
 }
 
-.d-text-field__input:focus ~ .d-text-field__label, .d-text-field--placeholder .d-text-field__input ~ .d-text-field__label,
-.d-text-field__input:not(:placeholder-shown).d-text-field__input:not(:focus) ~ .d-text-field__label {
+.d-text-field:focus,
+.d-text-field--active,
+.d-text-field--value,
+.d-text-field--placeholder,
+.d-text-field__input:not(:placeholder-shown) {
+  .d-text-field__label {
+    font-size: 0.9rem;
+    padding: 0 0.3rem;
+    top: -0.485rem;
+    left: 0;
 
-  font-size: 0.9rem;
-  padding: 0 0.3rem;
-  top: -0.485rem;
-  left: 0.4rem;
+    &.d-text-field--filled {
+      top: 0.2rem !important;
+    }
+  }
 
-  &.d-text-field--filled {
-    top: 0.2rem !important;
+  &:not(.d-text-field--solo) {
+
+    .d-text-field__prefix {
+      margin-top: 12px !important;
+    }
+
+    .d-text-field__suffix {
+      margin-top: 12px;
+    }
   }
 }
 

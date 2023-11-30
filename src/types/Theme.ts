@@ -67,7 +67,7 @@ export type ColorSettings = {
 }
 
 export type ColorSetting = {
-    color: Color,
+    color: Color | null,
     property?: ThemeAllPropertyType,
     tint?: number,
 }

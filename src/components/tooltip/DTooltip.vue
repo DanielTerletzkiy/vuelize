@@ -66,16 +66,16 @@ defineExpose({wrapper});
 const slots = useSlots()
 
 const props = defineProps({
-    //fontColor: String, TODO
-    filled: Boolean,
-    stay: Boolean,
-    simpleFade: Boolean,
-    inactive: Boolean,
-    position: {
-        type: String as PropType<Position>,
-        default: Position.bottom,
-    },
-    ...defaultProps
+  //fontColor: String, TODO
+  filled: Boolean,
+  stay: Boolean,
+  simpleFade: Boolean,
+  inactive: Boolean,
+  position: {
+    type: String as PropType<Position>,
+    default: Position.bottom,
+  },
+  ...defaultProps
 });
 
 
@@ -85,8 +85,8 @@ let tooltip = ref<HTMLElement | null>(null);
 const hoverState = ref(false);
 
 function onHoverOver() {
-    if (props.inactive) return;
-    hoverState.value = true;
+  if (props.inactive) return;
+  hoverState.value = true;
 }
 
 function onHoverLeave() {
@@ -97,7 +97,7 @@ function onHoverLeave() {
 const stayHoverState = ref(false);
 
 function onStayHoverOver() {
-    stayHoverState.value = true;
+  stayHoverState.value = true;
 }
 
 function onStayHoverLeave() {
@@ -115,67 +115,73 @@ function wrapperHoverLeave() {
 }
 
 async function onHover() {
-    if (!(hoverState.value && tooltip.value) || !trigger.value) {
-        return;
-    }
-    const triggerRect = trigger.value.getBoundingClientRect();
-    const tooltipRect = tooltip.value.getBoundingClientRect();
+  if (!(hoverState.value && tooltip.value) || !trigger.value) {
+    return;
+  }
+  const triggerRect = trigger.value.getBoundingClientRect();
+  const tooltipRect = tooltip.value.getBoundingClientRect();
 
-    switch (props.position) {
-        case Position.top: {
-            tooltip.value.style.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
-            tooltip.value.style.top = (triggerRect.top - tooltipRect.height) + 'px';
-            break;
-        }
-        case Position.bottom: {
-            tooltip.value.style.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
-            tooltip.value.style.top = (triggerRect.top + triggerRect.height) + 'px';
-            break;
-        }
-        case Position.right: {
-            tooltip.value.style.left = (triggerRect.left + triggerRect.width) + 'px';
-            tooltip.value.style.top = (triggerRect.top + (triggerRect.height / 2) - tooltipRect.height / 2) + 'px';
-            break;
-        }
-        case Position.left: {
-            tooltip.value.style.left = (triggerRect.left - tooltipRect.width) + 'px';
-            tooltip.value.style.top = (triggerRect.top + (triggerRect.height / 2) - tooltipRect.height / 2) + 'px';
-            break;
-        }
+  switch (props.position) {
+    case Position.top: {
+      tooltip.value.style.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
+      tooltip.value.style.top = (triggerRect.top - tooltipRect.height) + 'px';
+      break;
     }
+    case Position.bottom: {
+      tooltip.value.style.left = (triggerRect.left - (tooltipRect.width / 2) + (triggerRect.width / 2)) + 'px';
+      tooltip.value.style.top = (triggerRect.top + triggerRect.height) + 'px';
+      break;
+    }
+    case Position.right: {
+      tooltip.value.style.left = (triggerRect.left + triggerRect.width) + 'px';
+      tooltip.value.style.top = (triggerRect.top + (triggerRect.height / 2) - tooltipRect.height / 2) + 'px';
+      break;
+    }
+    case Position.left: {
+      tooltip.value.style.left = (triggerRect.left - tooltipRect.width) + 'px';
+      tooltip.value.style.top = (triggerRect.top + (triggerRect.height / 2) - tooltipRect.height / 2) + 'px';
+      break;
+    }
+  }
 }
 
 const transitionComponent = computed(() => {
-    if (props.simpleFade) {
-        return TransitionFade;
-    }
-    return TransitionSlide;
+  if (props.simpleFade) {
+    return TransitionFade;
+  }
+  return TransitionSlide;
 })
 
 const transitionSlides = computed(() => {
-    const modifier = 8;
-    switch (props.position) {
-        case Position.top: {
-            return [0, modifier];
-        }
-        case Position.bottom: {
-            return [0, -modifier];
-        }
-        case Position.left: {
-            return [modifier, 0];
-        }
-        case Position.right: {
-            return [-modifier, 0];
-        }
-        default:
-            return []
+  const modifier = 8;
+  switch (props.position) {
+    case Position.top: {
+      return [0, modifier];
     }
+    case Position.bottom: {
+      return [0, -modifier];
+    }
+    case Position.left: {
+      return [modifier, 0];
+    }
+    case Position.right: {
+      return [-modifier, 0];
+    }
+    default:
+      return []
+  }
 })
 
 watch([() => hoverState.value, () => slots.tooltip ? slots.tooltip() : null], () => {
-    nextTick().then(() => onHover())
+  nextTick().then(() => onHover())
 }, {
-    deep: true
+  deep: true
+})
+
+watch(() => props.inactive, () => {
+  if (props.inactive && hoverState.value) {
+    onHoverLeave();
+  }
 })
 
 /*const useFontColor = computed(() => {
@@ -190,45 +196,45 @@ watch([() => hoverState.value, () => slots.tooltip ? slots.tooltip() : null], ()
 <style lang="scss">
 
 .d-tooltip__wrapper.stay {
-    pointer-events: all;
+  pointer-events: all;
 }
 
 
 .d-tooltip {
-    width: max-content;
+  width: max-content;
 
-    &__wrapper {
-        z-index: 12;
-        padding: 4px;
-        position: fixed;
-        display: flex;
-        justify-content: center;
-        border-radius: inherit;
-        pointer-events: none;
+  &__wrapper {
+    z-index: 12;
+    padding: 4px;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    border-radius: inherit;
+    pointer-events: none;
 
-        &__content {
-            position: relative;
-            width: auto;
-            height: max-content;
-            border-radius: inherit;
-            padding: 0;
+    &__content {
+      position: relative;
+      width: auto;
+      height: max-content;
+      border-radius: inherit;
+      padding: 0;
 
-            &:not(.filled) {
-                background: transparent !important;
-                backdrop-filter: saturate(120%) blur(10px);
+      &:not(.filled) {
+        background: transparent !important;
+        backdrop-filter: saturate(120%) blur(10px);
 
-            }
+      }
 
-            &:not(.filled) &__text {
-                //color: var(--text-card) !important;
-            }
+      &:not(.filled) &__text {
+        //color: var(--text-card) !important;
+      }
 
-            word-break: keep-all;
+      word-break: keep-all;
 
-            &__text {
-                //color: var(--text-contrast) !important;
-            }
-        }
+      &__text {
+        //color: var(--text-contrast) !important;
+      }
     }
+  }
 }
 </style>

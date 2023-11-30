@@ -1,5 +1,13 @@
 import type {PropType} from "vue";
-import {BlurSettings, ColorSettings, GlowSettings, OutlinedSettings, Rounded, ThemeColorProperty} from "../types";
+import {
+    BlurAmount,
+    BlurSettings,
+    ColorSettings,
+    GlowSettings,
+    OutlinedSettings,
+    Rounded,
+    ThemeColorProperty
+} from "../types";
 
 export default {
     link: {type: String, default: null},
@@ -14,7 +22,7 @@ export default {
     //
     glow: {type: [String, Object] as PropType<Partial<GlowSettings> | boolean>},
     //
-    blur: {type: [String, Object] as PropType<Partial<BlurSettings> | string | boolean>},
+    blur: {type: [String, Object] as PropType<Partial<BlurSettings> | BlurAmount | string | boolean>},
     //
     height: {type: String, default: ''},
     width: {type: String, default: ''},

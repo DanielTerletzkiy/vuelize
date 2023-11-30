@@ -25,6 +25,7 @@ import DRoot from "./components/root/DRoot.vue";
 import DTypography from "./components/typography/DTypography.vue";
 import DToggle from "./components/toggle/DToggle.vue";
 import {storeToRefs} from "pinia";
+import DIcon from "./components/icon/DIcon.vue";
 
 const navOpen = ref(true);
 
@@ -139,8 +140,8 @@ const selected = ref(0);
       v-model="selected"
       filled
       :color="ThemeColorProperty.primary"
-      solo
       placeholder="Test"
+      label="Test"
       select
       search
       :items="items"
@@ -156,9 +157,32 @@ const selected = ref(0);
     <d-textfield
       filled
       :color="ThemeColorProperty.primary"
+      label="Test"
+      placeholder="Test"
+    >
+      <template #prefix>
+        <d-icon name="times" />
+      </template>
+    </d-textfield>
+    <d-textfield
+      filled
+      :color="ThemeColorProperty.primary"
+      label="Test"
+    >
+      <template #prefix>
+        <d-icon name="times" />
+      </template>
+    </d-textfield>
+    <d-textfield
+      filled
+      :color="ThemeColorProperty.primary"
       solo
       placeholder="Test"
-    />
+    >
+      <template #prefix>
+        <d-icon name="times" />
+      </template>
+    </d-textfield>
     <d-row gap>
       <d-image
         :rounded="Rounded.none"
