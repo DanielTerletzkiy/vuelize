@@ -116,7 +116,7 @@ const classesObject = computed(() => {
   return {
     'd-text-field--active': (hover.value || selected.value),
     'd-text-field--placeholder': placeholderActive,
-    'd-text-field--value': !!props.modelValue,
+    'd-text-field--value': props.modelValue != null || props.modelValue != undefined,
     'd-text-field--outlined outlined depressed elevation': props.outlined,
     'd-text-field--filled glow glowActive': props.filled,
     'd-text-field--solo': props.solo,
