@@ -84,7 +84,7 @@ const input = ref<HTMLElement | null>(null);
 defineExpose({wrapper, input});
 import DSelect from "./variant/DSelect.vue";
 //import DAutocomplete from "@/components/textfield/variant/Autocomplete.vue";
-import {computed, getCurrentInstance, onMounted, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, PropType, ref} from "vue";
 import defaultProps from "../../props/default.props";
 import DWrapper from "../DWrapper.vue";
 
@@ -93,7 +93,7 @@ const instance = getCurrentInstance();
 
 const emit = defineEmits(['update:modelValue', 'enter']);
 const props = defineProps({
-  modelValue: {type: [String, Number, Object], required: true},
+  modelValue: {type: Object as PropType<any>, required: true},
   autocomplete: {type: Boolean},
   filled: {type: Boolean},
   fullWidth: {type: Boolean},
@@ -116,7 +116,7 @@ const classesObject = computed(() => {
   return {
     'd-text-field--active': (hover.value || selected.value),
     'd-text-field--placeholder': placeholderActive,
-    'd-text-field--value': props.modelValue != null || props.modelValue != undefined,
+    'd-text-field--value': (typeof (props.modelValue as string) === 'string' && (props.modelValue as string).length>0),
     'd-text-field--outlined outlined depressed elevation': props.outlined,
     'd-text-field--filled glow glowActive': props.filled,
     'd-text-field--solo': props.solo,

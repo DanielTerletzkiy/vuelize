@@ -46,6 +46,7 @@ const items = ref(Array.from(Array(1000).keys()).map((value) => {
 const switchValue = ref(0);
 
 const selected = ref(0);
+const test = ref("");
 </script>
 
 <template>
@@ -168,6 +169,7 @@ const selected = ref(0);
       filled
       :color="ThemeColorProperty.primary"
       label="Test"
+      v-model="test"
     >
       <template #prefix>
         <d-icon name="times" />
@@ -178,6 +180,7 @@ const selected = ref(0);
       :color="ThemeColorProperty.primary"
       solo
       placeholder="Test"
+      v-model="test"
     >
       <template #prefix>
         <d-icon name="times" />
