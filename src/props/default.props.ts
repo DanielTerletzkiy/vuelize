@@ -22,7 +22,7 @@ export default {
     //
     glow: {type: [String, Object] as PropType<Partial<GlowSettings> | boolean>},
     //
-    blur: {type: [String, Object] as PropType<Partial<BlurSettings> | BlurAmount | string | boolean>},
+    blur: {type: [String, Object] as PropType<Partial<BlurSettings | BlurAmount> | string | boolean>},
     //
     height: {type: String, default: ''},
     width: {type: String, default: ''},

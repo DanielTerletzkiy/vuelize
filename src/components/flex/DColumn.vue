@@ -1,12 +1,12 @@
 <template>
-  <DWrapper
-    ref="wrapper"
-    :classes="['d-column', flexClasses($props), noPadding ? 'pa-0' : 'pa-1']"
-    v-bind="{...$props, ...$attrs}"
-    @click="$emit('click')"
-  >
-    <slot />
-  </DWrapper>
+    <DWrapper
+        ref="wrapper"
+        :classes="['d-column', flexClasses($props), noPadding ? 'pa-0' : 'pa-1']"
+        v-bind="{...$props, ...$attrs}"
+        @click="$emit('click')"
+    >
+        <slot/>
+    </DWrapper>
 </template>
 
 <script setup lang="ts">
@@ -18,16 +18,24 @@ import flexProps, {flexClasses} from "../../props/flex.props";
 const wrapper = ref(null);
 defineExpose({wrapper});
 
-defineProps({noPadding: {type: Boolean}, ...flexProps, ...defaultProps})
+defineProps({
+    align: {type: String, default: 'unset'},
+    justify: {type: String, default: 'unset'},
+    noPadding: {type: Boolean},
+    ...flexProps,
+    ...defaultProps
+})
 </script>
 
 <style scoped lang="scss">
 .d-column {
-  display: flex;
-  flex-direction: column;
+    align-items: v-bind(align);
+    justify-content: v-bind(justify);
+    display: flex;
+    flex-direction: column;
 
-  :deep(> .d-column) {
-    padding: 0;
-  }
+    :deep(> .d-column) {
+        padding: 0;
+    }
 }
 </style>

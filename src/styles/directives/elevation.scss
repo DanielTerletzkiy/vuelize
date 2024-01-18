@@ -5,10 +5,13 @@
     $brightness: $i * 1.5;
     &.elevation-#{$i}, .elevation-dark-#{$i} {
       background: color-mix(in srgb, var(--sheet-card), #fff #{$brightness+"%"}) !important;
-      box-shadow: 0 2px 12px -4px  color-mix(in srgb, var(--sheet-card), #000 #{$brightness*1.5+"%"}) !important;
+      box-shadow: 0 2px 12px -4px color-mix(in srgb, var(--sheet-card), #000 #{$brightness*1.5+"%"}) !important;
     }
   }
 
+}
+
+.dark {
   @for $i from 1 through 10 {
     $darkness: $i * 8;
     &.elevation-n#{$i}, .elevation-dark-n#{$i} {

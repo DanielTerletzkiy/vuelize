@@ -1,16 +1,16 @@
 @import "../variables";
 
-.dark {
+.dark, .light {
   .blur {
-    background: color-mix(in srgb, var(--sheet-card), transparent 35%) !important;
+    background: color-mix(in srgb, var(--sheet-card), transparent 50%) !important;
     &--low{
-      backdrop-filter: blur(2px);
-    }
-    &--medium{
       backdrop-filter: blur(10px);
     }
+    &--medium{
+      backdrop-filter: blur(35px);
+    }
     &--strong{
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(100px);
     }
   }
 }

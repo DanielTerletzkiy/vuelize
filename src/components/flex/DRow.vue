@@ -19,8 +19,8 @@ const wrapper = ref(null);
 defineExpose({ wrapper });
 
 defineProps({
-  align: {type: String, default: 'center'},
-  justify: {type: String, default: 'unset'},
+    align: {type: String, default: 'center'},
+    justify: {type: String, default: 'unset'},
   ...flexProps,
   ...defaultProps,
 })
