@@ -16,11 +16,18 @@
       @click="toggleDropdown"
     >
       <slot
+        v-if="modelValue>=0"
         name="label"
         :item="itemsCopy[modelValue]"
         :index="modelValue"
       >
         <span class="d-text-field__input__default">{{ itemsCopy[modelValue].value }}</span>
+      </slot>
+      <slot
+        v-else
+        name="empty"
+      >
+        <span class="d-text-field__input__default">Please Select</span>
       </slot>
     </span>
     <input

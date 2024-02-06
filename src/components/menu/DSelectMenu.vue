@@ -2,6 +2,14 @@
   <DWrapper
     ref="wrapper"
     :classes="['d-select-menu']"
+    :color="{
+      map: [
+        {
+          color: null,
+          property: ThemeSheetProperty.card
+        },
+      ]
+    }"
     @keyup.esc="hideSelectMenu"
   >
     <TransitionSlide :duration="150">
@@ -58,7 +66,7 @@ import DList from "../list/DList.vue";
 import DListItem from "../list/DListItem.vue";
 import {TransitionSlide} from "@morev/vue-transitions";
 import defaultProps from "../../props/default.props";
-import {BlurAmount} from "../../types";
+import {BlurAmount, ThemeSheetProperty} from "../../types";
 
 const wrapper = ref(null);
 defineExpose({wrapper});
