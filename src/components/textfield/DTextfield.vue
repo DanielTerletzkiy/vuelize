@@ -29,7 +29,6 @@
       @focusout="selected = false"
     >
       <template
-        v-if="componentType !== 'input'"
         #label="props"
       >
         <slot
@@ -38,12 +37,18 @@
         />
       </template>
       <template
-        v-if="componentType !== 'input'"
         #item="props"
       >
         <slot
           name="item"
           v-bind="props"
+        />
+      </template>
+      <template
+        #empty
+      >
+        <slot
+          name="empty"
         />
       </template>
     </component>

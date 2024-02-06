@@ -218,6 +218,9 @@ const model = computed({
       <template #item="{item}">
         {{ item.value }}
       </template>
+      <template #empty>
+        empty!!
+      </template>
     </d-textfield>
 
     <d-textfield
