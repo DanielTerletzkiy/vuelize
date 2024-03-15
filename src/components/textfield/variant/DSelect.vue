@@ -16,12 +16,12 @@
       @click="toggleDropdown"
     >
       <slot
-        v-if="modelValue>=0"
+        v-if="!!selectedItem"
         name="label"
-        :item="itemsCopy[modelValue]"
+        :item="selectedItem"
         :index="modelValue"
       >
-        <span class="d-text-field__input__default">{{ itemsCopy[modelValue].value }}</span>
+        <span class="d-text-field__input__default">{{ selectedItem?.value }}</span>
       </slot>
       <slot
         v-else
@@ -76,10 +76,10 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T, A">
 const wrapper = ref(null);
 defineExpose({wrapper});
-import {computed, nextTick, onBeforeMount, ref, watch} from "vue";
+import {computed, nextTick, onBeforeMount, PropType, ref, watch} from "vue";
 import DSelectMenu from "../../menu/DSelectMenu.vue";
 import DIconButton from "../../button/DIconButton.vue";
 import DIcon from "../../icon/DIcon.vue";
@@ -88,19 +88,19 @@ import defaultProps from "../../../props/default.props";
 
 const emit = defineEmits(['update:modelValue', 'removeFocus', 'focusout', 'focusin'])
 const props = defineProps({
-  modelValue: {
-    type: [Number, String],
-    required: true,
-  },
-  items: {type: Array, required: true},
-  indexKey: {type: String},
-  mandatory: {type: Boolean},
-  search: {type: Boolean},
-  searchKey: {type: String, default: 'value'},
-  ...defaultProps
+    modelValue: {
+        type: Object as PropType<T>,
+        required: true,
+    },
+    items: {type: Array as PropType<A[]>, required: true},
+    indexKey: {type: String},
+    mandatory: {type: Boolean},
+    search: {type: Boolean},
+    searchKey: {type: String, default: 'value'},
+    ...defaultProps
 })
 
-const itemsCopy = ref(props.items);
+const itemsCopy = ref<A[]>(props.items);
 
 const searchBox = ref<HTMLElement | null>(null);
 const searchInput = ref("");
@@ -109,53 +109,62 @@ watch(searchInput, mapItems)
 watch(() => props.items, mapItems)
 
 function mapItems() {
-  itemsCopy.value = props.items;
-  if (!itemsCopy.value || !props.items) {
-    return;
-  }
-  itemsCopy.value = props.items.map((item: any) => {
-    if (!item[props.searchKey] || !searchInput.value.toLowerCase()) {
-      return {...item, _show: true};
+    itemsCopy.value = props.items;
+    if (!itemsCopy.value || !props.items) {
+        return;
     }
-    item = {
-      ...item,
-      _show: item[props.searchKey].toString().toLowerCase().includes(searchInput.value.toLowerCase())
-    };
-    return item;
-  });
+    itemsCopy.value = props.items.map((item: any) => {
+        if (!item[props.searchKey] || !searchInput.value.toLowerCase()) {
+            return {...item, _show: true};
+        }
+        item = {
+            ...item,
+            _show: item[props.searchKey].toString().toLowerCase().includes(searchInput.value.toLowerCase())
+        };
+        return item;
+    });
 }
 
 const dropdownOpen = ref(false);
 
 function toggleDropdown() {
-  dropdownOpen.value = !dropdownOpen.value;
+    dropdownOpen.value = !dropdownOpen.value;
 }
 
 watch(dropdownOpen, (value) => {
-  if (value) {
-    nextTick(() => {
-      if (searchBox.value) {
-        searchBox.value.focus();
-      }
-    })
-  }
+    if (value) {
+        nextTick(() => {
+            if (searchBox.value) {
+                searchBox.value.focus();
+            }
+        })
+    }
 })
 
 function onInput(val: number | string) {
-  emit('update:modelValue', val)
-  emit('removeFocus')
+    emit('update:modelValue', val)
+    emit('removeFocus')
 }
 
 function focusOut() {
-  emit('focusout');
+    emit('focusout');
 }
 
 function focusIn() {
-  emit('focusin');
+    emit('focusin');
 }
 
 const angleIcon = computed(() => {
-  return dropdownOpen.value ? 'times' : 'angle-down'
+    return dropdownOpen.value ? 'times' : 'angle-down'
+})
+
+const selectedItem = computed<A>(() => {
+    if (props.indexKey) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        return itemsCopy.value.find((item) => item[props.indexKey] === props.modelValue) as A
+    }
+    return itemsCopy.value[props.modelValue] as A;
 })
 
 onBeforeMount(mapItems)
@@ -163,36 +172,36 @@ onBeforeMount(mapItems)
 
 <style scoped lang="scss">
 :deep(.d-select-menu__dropdown) {
-  left: -1.2em;
-  width: calc(100% + (1.2em * 2));
+    left: -1.2em;
+    width: calc(100% + (1.2em * 2));
 }
 
 .d-select {
-  height: 100% !important;
+    height: 100% !important;
 
-  &-label {
-    width: 100%;
-    display: flex;
-  }
+    &-label {
+        width: 100%;
+        display: flex;
+    }
 }
 
 .d-text-field__input {
-  cursor: pointer;
-  user-select: none;
-  position: relative;
-  margin-top: 0.5em !important;
-  margin-bottom: 0.5em !important;
-  display: flex;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+    display: flex;
 
-  &__search {
-    margin-left: 0 !important;
-    cursor: text;
-  }
+    &__search {
+        margin-left: 0 !important;
+        cursor: text;
+    }
 
-  &__icon {
-    margin-left: auto;
-    margin-right: -8px;
-    align-self: center;
-  }
+    &__icon {
+        margin-left: auto;
+        margin-right: -8px;
+        align-self: center;
+    }
 }
 </style>

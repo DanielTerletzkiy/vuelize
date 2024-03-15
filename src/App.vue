@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {ref} from "vue";
 import {BlurAmount, ThemeColorProperty, ThemeSheetProperty, ThemeTextProperty} from "./types/Theme";
 import {Position, Rounded} from "./types/Vuelize";
 import {Size} from "./types/components/DButton";
@@ -47,7 +47,7 @@ const switchValue = ref(0);
 
 const selected = ref(0);
 const test2 = ref("normal");
-const test = ref("normal");
+const test = ref(-1);
 
 const SerialStatesPreset =
     [
@@ -71,14 +71,7 @@ const SerialStatesPreset =
       },
     ]
 
-const model = computed({
-  get() {
-    return SerialStatesPreset.findIndex((item) => item.value === test.value)
-  },
-  set(index: number) {
-    test.value = SerialStatesPreset[index].value;
-  }
-})
+
 </script>
 
 <template>
@@ -105,23 +98,23 @@ const model = computed({
       <DNotificationWrapper />
     </template>
 
-    {{model}}
+    {{ test }}
     <d-textfield
-        v-model="model"
-        :items="SerialStatesPreset"
-        select
-        label="Status"
-        mandatory
-        full-width
-        filled
-        search-key="value"
-        :color="SerialStatesPreset[model].color"
+      v-model="test"
+      :items="SerialStatesPreset"
+      select
+      label="Status"
+      mandatory
+      full-width
+      filled
+      search-key="value"
+      index-key="color"
     >
       <template #label="{ item }">
         <d-row :color="item.color">
           <Iconify
-              :name="item.icon"
-              :color="item.color"
+            :name="item.icon"
+            :color="item.color"
           />
           <d-card-subtitle>
             {{ item.name }}
@@ -234,21 +227,21 @@ const model = computed({
       </template>
     </d-textfield>
     <d-textfield
+      v-model="test2"
       filled
       :color="ThemeColorProperty.primary"
       label="Test2"
-      v-model="test2"
     >
       <template #prefix>
         <d-icon name="times" />
       </template>
     </d-textfield>
     <d-textfield
+      v-model="test2"
       filled
       :color="ThemeColorProperty.primary"
       solo
       placeholder="Test2"
-      v-model="test2"
     >
       <template #prefix>
         <d-icon name="power" />
@@ -281,12 +274,12 @@ const model = computed({
         <d-card-title>
           Hello there
         </d-card-title>
-          <d-tooltip>
-              test
-              <template v-slot:tooltip>
-                  testing
-              </template>
-          </d-tooltip>
+        <d-tooltip>
+          test
+          <template #tooltip>
+            testing
+          </template>
+        </d-tooltip>
       </d-card>
     </d-dialog>
     <d-button

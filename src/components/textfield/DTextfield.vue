@@ -109,6 +109,7 @@ const props = defineProps({
   mandatory: {type: Boolean},
   search: {type: Boolean},
   searchKey: {type: String, default: 'value'},
+  indexKey: {type: String},
   ...defaultProps
 });
 
