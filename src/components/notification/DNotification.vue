@@ -33,7 +33,7 @@
               <DIcon
                 v-if="hover && !isPersistent"
                 :size="40"
-                name="multiply"
+                name="solar:close-circle-line-duotone"
               />
               <DIcon
                 v-else

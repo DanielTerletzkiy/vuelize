@@ -7,13 +7,12 @@
     <DRow disabled>
       <DIconButton
         v-for="star in stars"
-        :key="star"
+        :key="star.value"
         :color="color"
         :size="size"
       >
         <DIcon
           :name="star.icon"
-          :icon-style="star.iconType"
           :size="size"
         />
       </DIconButton>
@@ -42,7 +41,7 @@ const props = defineProps({
 
 type Star = {
   icon: string,
-  iconType: Style,
+  //iconType: string,
   value: number
 }
 
@@ -59,10 +58,11 @@ const stars = computed<Star[]>(() => {
 
     const isHalve = mapped < position + 1 && mapped > position;
     let icon = isHalve ? 'star-half-alt' : 'star';
-    let iconType = mapped <= position ? Style.LINE : isHalve ? Style.MONO : Style.SOLID;
+    //TODO find good star icons
+    //let iconType = mapped <= position ? Style.LINE : isHalve ? Style.MONO : Style.SOLID;
     array.push({
       icon,
-      iconType,
+      //iconType,
       value: position
     })
   }

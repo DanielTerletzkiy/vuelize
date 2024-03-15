@@ -14,6 +14,7 @@
       width="max-width"
       :glow="{disabled: !simpleToggle}"
       :color="currentState&&currentState.color"
+      :wrap="false"
       @click="simpleToggle && simpleClick()"
     >
       <d-card
@@ -82,11 +83,11 @@ const props = defineProps({
     type: Array as PropType<ToggleState[]>, default: () => [
       {
         color: ThemeColorProperty.error,
-        icon: 'times',
+        icon: 'solar:close-circle-line-duotone',
         value: false,
       }, {
         color: ThemeColorProperty.success,
-        icon: 'check',
+        icon: 'solar:check-read-line-duotone',
         value: true,
       }
     ]

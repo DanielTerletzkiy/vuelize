@@ -23,7 +23,7 @@
       >
         <d-spacer />
         <d-icon
-          name="eye"
+          name="solar:eye-line-duotone"
           size="30"
         />
         <d-spacer />

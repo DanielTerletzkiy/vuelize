@@ -155,7 +155,7 @@ function focusIn() {
 }
 
 const angleIcon = computed(() => {
-    return dropdownOpen.value ? 'times' : 'angle-down'
+    return dropdownOpen.value ? 'solar:close-circle-line-duotone' : 'solar:alt-arrow-down-linear'
 })
 
 const selectedItem = computed<A>(() => {

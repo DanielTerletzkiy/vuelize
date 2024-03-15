@@ -8,86 +8,88 @@
     v-bind="{...$props, ...$attrs}"
     @click="openDialog"
   />
-  <d-dialog
-    v-model="dialogOpen"
-    class="d-image__dialog"
-  >
-    <d-card
-      :blur="BlurAmount.strong"
-      class="d-image__dialog__container"
-      height="80vh"
-      width="80vw"
+  <teleport to="main">
+    <d-dialog
+      v-model="dialogOpen"
+      class="d-image__dialog"
     >
-      <DWrapper
-        ref="dialogImage"
-        :classes="['d-image__dialog__container__image']"
-        :src="src"
-        download="test.png"
-        draggable="false"
-        height="99%"
-        root-tag="img"
-        width="100%"
-      />
-    </d-card>
-    <d-row
-      class="d-image__dialog__actionbar"
-      gap
-      justify="center"
-      width="80vw"
-    >
-      <d-row
-        :wrap="false"
-        blur
-        class="px-4"
-        gap
-        outlined
-        rounded="pill"
-        width="max-content"
+      <d-card
+        :blur="BlurAmount.strong"
+        class="d-image__dialog__container"
+        height="80vh"
+        width="80vw"
       >
-        <d-icon-button
-          :download="alt || 'downloaded-file'"
-          :href="src"
-          name="cloud-download"
-          root-tag="a"
-          target="_blank"
+        <DWrapper
+          ref="dialogImage"
+          :classes="['d-image__dialog__container__image']"
+          :src="src"
+          download="test.png"
+          draggable="false"
+          height="99%"
+          root-tag="img"
+          width="100%"
         />
-        <d-divider
-          block
-          class="my-3"
-          vertical
-        />
-        <d-icon-button
-          :disabled="Math.round(zoomLevel*100)<=10"
-          name="search-minus"
-          @click="decreaseZoom"
-        />
-        <d-column no-padding>
-          <d-card-title
-            :glow="{active: true, central: true}"
-            class="font-size-medium pa-1"
-            width="100px"
-            @click="resetZoom"
-          >
-            {{ Math.round(zoomLevel * 100) }}%
-          </d-card-title>
-        </d-column>
-        <d-icon-button
-          :disabled="Math.round(zoomLevel*100)>=300"
-          name="search-plus"
-          @click="increaseZoom"
-        />
-        <d-divider
-          block
-          class="my-3"
-          vertical
-        />
-        <d-icon-button
-          name="times"
-          @click="closeDialog"
-        />
+      </d-card>
+      <d-row
+        class="d-image__dialog__actionbar"
+        gap
+        justify="center"
+        width="80vw"
+      >
+        <d-row
+          :wrap="false"
+          blur
+          class="px-4"
+          gap
+          outlined
+          rounded="pill"
+          width="max-content"
+        >
+          <d-icon-button
+            :download="alt || 'downloaded-file'"
+            :href="src"
+            name="solar:cloud-download-line-duotone"
+            root-tag="a"
+            target="_blank"
+          />
+          <d-divider
+            block
+            class="my-3"
+            vertical
+          />
+          <d-icon-button
+            :disabled="Math.round(zoomLevel*100)<=10"
+            name="solar:magnifer-zoom-out-line-duotone"
+            @click="decreaseZoom"
+          />
+          <d-column no-padding>
+            <d-card-title
+              :glow="{active: true, central: true}"
+              class="font-size-medium pa-1"
+              width="100px"
+              @click="resetZoom"
+            >
+              {{ Math.round(zoomLevel * 100) }}%
+            </d-card-title>
+          </d-column>
+          <d-icon-button
+            :disabled="Math.round(zoomLevel*100)>=300"
+            name="solar:minimalistic-magnifer-zoom-in-line-duotone"
+            @click="increaseZoom"
+          />
+          <d-divider
+            block
+            class="my-3"
+            vertical
+          />
+          <d-icon-button
+            name="solar:close-circle-line-duotone"
+            @click="closeDialog"
+          />
+        </d-row>
       </d-row>
-    </d-row>
-  </d-dialog>
+    </d-dialog>
+  </teleport>
 </template>
 
 <script setup lang="ts">

@@ -51,7 +51,7 @@ const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
   modelValue: {type: Boolean},
   size: {type: Number, default: 30},
-  onIcon: {type: String, default: 'check'},
+  onIcon: {type: String, default: 'solar:check-read-line-duotone'},
   offIcon: {type: String, default: ''},
   flexDirection: {type: String, default: 'row'},
   ...defaultProps
