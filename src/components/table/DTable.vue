@@ -135,7 +135,7 @@ const sort = reactive({
 })
 
 const sortIcon = computed(() => {
-  return sort.reverse ? 'angle-down' : 'angle-up'
+  return sort.reverse ? 'solar:alt-arrow-down-linear' : 'solar:alt-arrow-up-linear'
 })
 
 function handleSorting(key: string) {

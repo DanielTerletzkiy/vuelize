@@ -57,9 +57,9 @@
   </DWrapper>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 import DLazy from "../DLazy.vue";
-import {ref, watch} from "vue";
+import {PropType, ref, watch} from "vue";
 import DWrapper from "../DWrapper.vue";
 import DCard from "../card/DCard.vue";
 import DList from "../list/DList.vue";
@@ -76,7 +76,7 @@ const emit = defineEmits(['update:modelValue', 'update:open']);
 const props = defineProps({
     modelValue: {type: [Number, String, Array], required: true},
     open: {type: Boolean},
-    items: {type: Array, required: true},
+    items: {type: Array as PropType<T[]>, required: true},
     indexKey: {type: String, required: true},
     multiple: {type: Boolean},
     mandatory: {type: Boolean},

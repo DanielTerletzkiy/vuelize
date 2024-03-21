@@ -64,7 +64,7 @@ watch(() => props.modelValue, () => {
 })
 
 const angleIcon = computed((): string => {
-  return props.disabled ? 'ban' : open.value ? 'angle-up' : 'angle-down'
+  return props.disabled ? 'solar:forbidden-circle-line-duotone' : open.value ? 'solar:alt-arrow-up-linear' : 'solar:alt-arrow-down-linear'
 })
 
 const open = computed((): boolean | number => {

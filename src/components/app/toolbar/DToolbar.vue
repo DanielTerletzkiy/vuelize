@@ -17,7 +17,7 @@
         :color="ThemeColorProperty.primary"
         @click="onHamburgerClick"
       >
-        <DIcon name="bars" />
+        <DIcon name="solar:hamburger-menu-linear" />
       </DIconButton>
       <slot />
     </DRow>
