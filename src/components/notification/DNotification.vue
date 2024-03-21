@@ -123,27 +123,27 @@ onMounted(() => {
 
     switch (props.notification.type) {
         case State.success: {
-            options.value.icon = 'check'
+            options.value.icon = 'solar:check-read-line-duotone'
             options.value.color = ThemeColorProperty.success
             break;
         }
         case State.error: {
-            options.value.icon = 'exclamation-triangle'
+            options.value.icon = 'solar:danger-line-duotone'
             options.value.color = ThemeColorProperty.error
             break;
         }
         case State.warning: {
-            options.value.icon = 'exclamation-octagon'
+            options.value.icon = 'solar:shield-warning-line-duotone'
             options.value.color = ThemeColorProperty.warning
             break;
         }
         case State.info: {
-            options.value.icon = 'info-circle'
+            options.value.icon = 'solar:info-circle-line-duotone'
             options.value.color = ThemeColorProperty.info
             break;
         }
         default: {
-            options.value.icon = 'question'
+            options.value.icon = 'solar:question-circle-line-duotone'
             options.value.color = ThemeColorProperty.primary
             break;
         }
